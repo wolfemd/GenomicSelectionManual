@@ -1,0 +1,16 @@
+preamble
+outline
+download-training-data
+cassavabase-download
+example-dataset
+prepare-training-data
+read-db-data
+group-and-select-trials-to-analyze
+traits-and-trait-abbreviations
+qc-trait-values
+post-qc-composite-traits
+season-wide-mean-disease-severity
+fresh-root-yield-fyld
+check-genotype-to-phenotype-matches
+check-detect-experimental-designs
+checklist-and-kpi

@@ -1,0 +1,6 @@
+"Date of Download: 2021-11-24_13:10:44"
+"Search Parameters: metadata"
+
+"studyDbId","studyName","studyDescription","trialType","breedingProgramDbId","breedingProgramName","breedingProgramDescription","studyYear","studyDesign","locationDbId","locationName","plantingDate","harvestDate","plotWidth","plotLength","plantsPerPlot","numberBlocks","numberReps","fieldSize","fieldTrialIsPlannedToBeGenotyped","fieldTrialIsPlannedToCross","folderDbId","folderName","folderDescription","managementFactors"
+"436","13.GS.C1.CE.864.IB","Genomic selection, cycle one (C1) Clonal Evaluation Trial in Ibadan 2013/2014","Clonal Evaluation","162","IITA","IITA cassava breeding program, Ibadan, Nigeria","2013","Augmented","3","Ibadan","2013-September-29","2014-June-29","1","2.5","","1","1","0.216","","","1894","13_Ibadan",""," No ManagementFactor: "
+"443","13geneticgainIB","Genetic gain (724 clones) in Ibadan 2013/2014 Breeding Season","Clonal Evaluation","162","IITA","IITA cassava breeding program, Ibadan, Nigeria","2013","Augmented","3","Ibadan","2013-June-03","2014-June-02","1","8","","1","1","0.5792","","","1894","13_Ibadan",""," No ManagementFactor: "

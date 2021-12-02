@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Chapter 4 Traits and Trait Abbreviations | Genomic Prediction and Selection Manual</title>
+
+    <meta name="author" content="Marnin Wolfe" />
+  
+   <meta name="description" content="<p>Training resources and examples of standard procedures for
+genomic selection-related computation.</p>" />
+   <meta name="generator" content="placeholder" />
+  <meta property="og:title" content="Chapter 4 Traits and Trait Abbreviations | Genomic Prediction and Selection Manual" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://wolfemd.github.io/GenomicSelectionManual" />
+  
+  <meta property="og:description" content="<p>Training resources and examples of standard procedures for
+genomic selection-related computation.</p>" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Traits and Trait Abbreviations | Genomic Prediction and Selection Manual" />
+  
+  <meta name="twitter:description" content="<p>Training resources and examples of standard procedures for
+genomic selection-related computation.</p>" />
+  
+  <!-- JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script>
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet" />
+    <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script>
+    <script src="libs/bs3compat-0.3.1/transition.js"></script>
+    <script src="libs/bs3compat-0.3.1/tabs.js"></script>
+    <script src="libs/bs3compat-0.3.1/bs3compat.js"></script>
+    <link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet" />
+    <script src="libs/bs4_book-1.0.0/bs4_book.js"></script>
+    <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+    <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script>
+
+  <!-- CSS -->
+    <link rel="stylesheet" href="bs4_style.css" />
+  
+</head>
+
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book">
+    <a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Genomic Prediction and Selection Manual</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+      </form>
+
+      <nav aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <div id="book-toc"></div>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="#">View book source <i class="fab fa-github"></i></a></li></p>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="col-sm-12 col-md-9 col-lg-7" id="content">
+<div id="traits-and-trait-abbreviations" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Traits and Trait Abbreviations</h1>
+<p>Cassavabase downloads use very long column-names corresponding to the <a href="https://cropontology.org/ontology/CO_334">full trait-ontology name</a>. For convenience, I replace these names with abbreviations, documented here. For eventual upload of analysis results, names will need to be restored to ontology terms.</p>
+<p>I also use this opportunity to subselect traits.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="traits-and-trait-abbreviations.html#cb3-1" aria-hidden="true" tabindex="-1"></a>traitabbrevs<span class="ot">&lt;-</span><span class="fu">tribble</span>(<span class="sc">~</span>TraitAbbrev,<span class="sc">~</span>TraitName,</span>
+<span id="cb3-2"><a href="traits-and-trait-abbreviations.html#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;CMD1S&quot;</span>,<span class="st">&quot;cassava.mosaic.disease.severity.1.month.evaluation.CO_334.0000191&quot;</span>,</span>
+<span id="cb3-3"><a href="traits-and-trait-abbreviations.html#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;CMD3S&quot;</span>,<span class="st">&quot;cassava.mosaic.disease.severity.3.month.evaluation.CO_334.0000192&quot;</span>,</span>
+<span id="cb3-4"><a href="traits-and-trait-abbreviations.html#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;CMD6S&quot;</span>,<span class="st">&quot;cassava.mosaic.disease.severity.6.month.evaluation.CO_334.0000194&quot;</span>,</span>
+<span id="cb3-5"><a href="traits-and-trait-abbreviations.html#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;DM&quot;</span>,<span class="st">&quot;dry.matter.content.percentage.CO_334.0000092&quot;</span>,</span>
+<span id="cb3-6"><a href="traits-and-trait-abbreviations.html#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;RTWT&quot;</span>,<span class="st">&quot;fresh.storage.root.weight.per.plot.CO_334.0000012&quot;</span>,</span>
+<span id="cb3-7"><a href="traits-and-trait-abbreviations.html#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot;NOHAV&quot;</span>,<span class="st">&quot;plant.stands.harvested.counting.CO_334.0000010&quot;</span>)</span>
+<span id="cb3-8"><a href="traits-and-trait-abbreviations.html#cb3-8" aria-hidden="true" tabindex="-1"></a>traitabbrevs <span class="sc">%&gt;%</span> rmarkdown<span class="sc">::</span><span class="fu">paged_table</span>()</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["TraitAbbrev"],"name":[1],"type":["chr"],"align":["left"]},{"label":["TraitName"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"CMD1S","2":"cassava.mosaic.disease.severity.1.month.evaluation.CO_334.0000191"},{"1":"CMD3S","2":"cassava.mosaic.disease.severity.3.month.evaluation.CO_334.0000192"},{"1":"CMD6S","2":"cassava.mosaic.disease.severity.6.month.evaluation.CO_334.0000194"},{"1":"DM","2":"dry.matter.content.percentage.CO_334.0000092"},{"1":"RTWT","2":"fresh.storage.root.weight.per.plot.CO_334.0000012"},{"1":"NOHAV","2":"plant.stands.harvested.counting.CO_334.0000010"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Run function <code>renameAndSelectCols()</code> to rename columns and remove unselected traits.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="traits-and-trait-abbreviations.html#cb4-1" aria-hidden="true" tabindex="-1"></a>dbdata<span class="ot">&lt;-</span><span class="fu">renameAndSelectCols</span>(traitabbrevs,</span>
+<span id="cb4-2"><a href="traits-and-trait-abbreviations.html#cb4-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">indata=</span>dbdata,</span>
+<span id="cb4-3"><a href="traits-and-trait-abbreviations.html#cb4-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">customColsToKeep =</span> <span class="fu">c</span>(<span class="st">&quot;observationUnitName&quot;</span>))</span>
+<span id="cb4-4"><a href="traits-and-trait-abbreviations.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in mask$eval_all_mutate(quo): NAs introduced by</span></span>
+<span id="cb4-5"><a href="traits-and-trait-abbreviations.html#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; coercion</span></span>
+<span id="cb4-6"><a href="traits-and-trait-abbreviations.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Joining, by = &quot;TraitName&quot;</span></span></code></pre></div>
+<div id="qc-trait-values" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> QC Trait Values</h2>
+<p>At this point in the pipeline, we should check the all trait values are in allowable ranges.
+Different ways to approach this. Feel free to make some plots of your data!</p>
+<p>The database also has mechanisms to ensure trait values are only within allowable ranges.
+Nevertheless, as a habit, I have an simple <em>ad hoc</em> approach to this:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="traits-and-trait-abbreviations.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># comment out the traits not present in this dataset</span></span>
+<span id="cb5-2"><a href="traits-and-trait-abbreviations.html#cb5-2" aria-hidden="true" tabindex="-1"></a>dbdata<span class="ot">&lt;-</span>dbdata <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="traits-and-trait-abbreviations.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">CMD1S=</span><span class="fu">ifelse</span>(CMD1S<span class="sc">&lt;</span><span class="dv">1</span> <span class="sc">|</span> CMD1S<span class="sc">&gt;</span><span class="dv">5</span>,<span class="cn">NA</span>,CMD1S),</span>
+<span id="cb5-4"><a href="traits-and-trait-abbreviations.html#cb5-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">CMD3S=</span><span class="fu">ifelse</span>(CMD3S<span class="sc">&lt;</span><span class="dv">1</span> <span class="sc">|</span> CMD3S<span class="sc">&gt;</span><span class="dv">5</span>,<span class="cn">NA</span>,CMD3S),</span>
+<span id="cb5-5"><a href="traits-and-trait-abbreviations.html#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">CMD6S=</span><span class="fu">ifelse</span>(CMD6S<span class="sc">&lt;</span><span class="dv">1</span> <span class="sc">|</span> CMD6S<span class="sc">&gt;</span><span class="dv">5</span>,<span class="cn">NA</span>,CMD6S), </span>
+<span id="cb5-6"><a href="traits-and-trait-abbreviations.html#cb5-6" aria-hidden="true" tabindex="-1"></a>         <span class="co">#CMD9S=ifelse(CMD9S&lt;1 | CMD9S&gt;5,NA,CMD9S),</span></span>
+<span id="cb5-7"><a href="traits-and-trait-abbreviations.html#cb5-7" aria-hidden="true" tabindex="-1"></a>         <span class="co"># CGM=ifelse(CGM&lt;1 | CGM&gt;5,NA,CGM),</span></span>
+<span id="cb5-8"><a href="traits-and-trait-abbreviations.html#cb5-8" aria-hidden="true" tabindex="-1"></a>         <span class="co"># CGMS1=ifelse(CGMS1&lt;1 | CGMS1&gt;5,NA,CGMS1),</span></span>
+<span id="cb5-9"><a href="traits-and-trait-abbreviations.html#cb5-9" aria-hidden="true" tabindex="-1"></a>         <span class="co"># CGMS2=ifelse(CGMS2&lt;1 | CGMS2&gt;5,NA,CGMS2),</span></span>
+<span id="cb5-10"><a href="traits-and-trait-abbreviations.html#cb5-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">DM=</span><span class="fu">ifelse</span>(DM<span class="sc">&gt;</span><span class="dv">100</span> <span class="sc">|</span> DM<span class="sc">&lt;=</span><span class="dv">0</span>,<span class="cn">NA</span>,DM),</span>
+<span id="cb5-11"><a href="traits-and-trait-abbreviations.html#cb5-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">RTWT=</span><span class="fu">ifelse</span>(RTWT<span class="sc">==</span><span class="dv">0</span> <span class="sc">|</span> NOHAV<span class="sc">==</span><span class="dv">0</span> <span class="sc">|</span> <span class="fu">is.na</span>(NOHAV),<span class="cn">NA</span>,RTWT),</span>
+<span id="cb5-12"><a href="traits-and-trait-abbreviations.html#cb5-12" aria-hidden="true" tabindex="-1"></a>         <span class="co"># SHTWT=ifelse(SHTWT==0 | NOHAV==0 | is.na(NOHAV),NA,SHTWT),</span></span>
+<span id="cb5-13"><a href="traits-and-trait-abbreviations.html#cb5-13" aria-hidden="true" tabindex="-1"></a>         <span class="co"># RTNO=ifelse(RTNO==0 | NOHAV==0 | is.na(NOHAV),NA,RTNO),</span></span>
+<span id="cb5-14"><a href="traits-and-trait-abbreviations.html#cb5-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">NOHAV=</span><span class="fu">ifelse</span>(NOHAV<span class="sc">==</span><span class="dv">0</span>,<span class="cn">NA</span>,NOHAV),</span>
+<span id="cb5-15"><a href="traits-and-trait-abbreviations.html#cb5-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">NOHAV=</span><span class="fu">ifelse</span>(NOHAV<span class="sc">&gt;</span><span class="dv">42</span>,<span class="cn">NA</span>,NOHAV)</span>
+<span id="cb5-16"><a href="traits-and-trait-abbreviations.html#cb5-16" aria-hidden="true" tabindex="-1"></a>         <span class="co">#RTNO=ifelse(!RTNO %in% 1:10000,NA,RTNO)</span></span>
+<span id="cb5-17"><a href="traits-and-trait-abbreviations.html#cb5-17" aria-hidden="true" tabindex="-1"></a>         )</span></code></pre></div>
+</div>
+<div id="post-qc-composite-traits" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Post-QC: composite traits</h2>
+<p>Now that component traits are QC’d, it’s time to compute any composite traits.</p>
+<p>By composite traits, I mean traits computed from combinations of other traits.</p>
+<p>Examples for cassava: season-wide mean disease severity, harvest index, and fresh root yield.</p>
+</div>
+<div id="season-wide-mean-disease-severity" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Season-wide mean disease severity</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="traits-and-trait-abbreviations.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># [NEW AS OF APRIL 2021]</span></span>
+<span id="cb6-2"><a href="traits-and-trait-abbreviations.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## VERSION with vs. without CBSD</span></span>
+<span id="cb6-3"><a href="traits-and-trait-abbreviations.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Impervious to particular timepoints between 1, 3, 6 and 9 scores</span></span>
+<span id="cb6-4"><a href="traits-and-trait-abbreviations.html#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="traits-and-trait-abbreviations.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Without CBSD (West Africa)</span></span>
+<span id="cb6-6"><a href="traits-and-trait-abbreviations.html#cb6-6" aria-hidden="true" tabindex="-1"></a>dbdata<span class="ot">&lt;-</span>dbdata <span class="sc">%&gt;%</span> </span>
+<span id="cb6-7"><a href="traits-and-trait-abbreviations.html#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MCMDS=</span><span class="fu">rowMeans</span>(.[,<span class="fu">colnames</span>(.) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;CMD1S&quot;</span>,<span class="st">&quot;CMD3S&quot;</span>,<span class="st">&quot;CMD6S&quot;</span>,<span class="st">&quot;CMD9S&quot;</span>)], <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-8"><a href="traits-and-trait-abbreviations.html#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">any_of</span>(<span class="fu">c</span>(<span class="st">&quot;CMD1S&quot;</span>,<span class="st">&quot;CMD3S&quot;</span>,<span class="st">&quot;CMD6S&quot;</span>,<span class="st">&quot;CMD9S&quot;</span>)))</span>
+<span id="cb6-9"><a href="traits-and-trait-abbreviations.html#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="traits-and-trait-abbreviations.html#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># With CBSD (East Africa)</span></span>
+<span id="cb6-11"><a href="traits-and-trait-abbreviations.html#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># dbdata&lt;-dbdata %&gt;% </span></span>
+<span id="cb6-12"><a href="traits-and-trait-abbreviations.html#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(MCMDS=rowMeans(.[,colnames(.) %in% c(&quot;CMD1S&quot;,&quot;CMD3S&quot;,&quot;CMD6S&quot;,&quot;CMD9S&quot;)], na.rm = T),</span></span>
+<span id="cb6-13"><a href="traits-and-trait-abbreviations.html#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#          MCBSDS=rowMeans(.[,colnames(.) %in% c(&quot;CBSD1S&quot;,&quot;CBSD3S&quot;,&quot;CBSD6S&quot;,&quot;CBSD9S&quot;)], na.rm = T)) %&gt;% </span></span>
+<span id="cb6-14"><a href="traits-and-trait-abbreviations.html#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(-any_of(c(&quot;CMD1S&quot;,&quot;CMD3S&quot;,&quot;CMD6S&quot;,&quot;CMD9S&quot;,&quot;CBSD1S&quot;,&quot;CBSD3S&quot;,&quot;CBSD6S&quot;,&quot;CBSD9S&quot;)))</span></span></code></pre></div>
+</div>
+<div id="fresh-root-yield-fyld" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Fresh root yield (FYLD)</h2>
+<p><strong>RTWT</strong> (fresh root weight per plot in kg) –&gt; <strong>FYLD</strong> (fresh root yield in tons per hectare)</p>
+<p><span class="math display">\[FYLD = \frac{RTWT_{kg / plot}}{MaxHarvestedPlantsPerPlot \times PlantSpacing}\times10 \]</span></p>
+<p><strong>NOTE:</strong> <em>MaxHarvestedPlantsPerPlot</em> in formula above is to distinguish from the <em>plantsPerPlot</em> meta-data field, in case that a net-plot harvest is used. In other words, the value should be the total number of plants intended for harvest in a plot.</p>
+<p><em>PlantSpacing</em> is the area in <span class="math inline">\(m^2\)</span> per plant.</p>
+<p>In the example trial data, we the <code>plantsPerPlot</code> meta-data field is empty. Luckily, since there are only two trials, we make a quick summary of the NOHAV data, to determine the correct values.</p>
+<p><strong>RECOMMEND INPUTING plantsPerPlot meta-data to cassavabase</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="traits-and-trait-abbreviations.html#cb7-1" aria-hidden="true" tabindex="-1"></a>dbdata <span class="sc">%&gt;%</span> <span class="fu">count</span>(studyYear,studyName,studyDesign,plotWidth,plotLength)</span>
+<span id="cb7-2"><a href="traits-and-trait-abbreviations.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 6</span></span>
+<span id="cb7-3"><a href="traits-and-trait-abbreviations.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   studyYear studyName studyDesign plotWidth plotLength     n</span></span>
+<span id="cb7-4"><a href="traits-and-trait-abbreviations.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;           &lt;int&gt;      &lt;dbl&gt; &lt;int&gt;</span></span>
+<span id="cb7-5"><a href="traits-and-trait-abbreviations.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1      2013 13.GS.C1… Augmented           1        2.5   864</span></span>
+<span id="cb7-6"><a href="traits-and-trait-abbreviations.html#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2      2013 13geneti… Augmented           1        8     749</span></span></code></pre></div>
+<p>So the GS.C1 trial has 2.5 <span class="math inline">\(m^2\)</span> plots, the GeneticGain trial has 8 <span class="math inline">\(m^2\)</span>.</p>
+<p>A quick density plot reveals that the GeneticGain trial was likely planted with 10 plants/plot, and the GS.C1.CE 5 plants/plot. (<em>Disclosure:</em> I know this is true from experience.)</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="traits-and-trait-abbreviations.html#cb8-1" aria-hidden="true" tabindex="-1"></a>dbdata <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="traits-and-trait-abbreviations.html#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">ggplot</span>(.,<span class="fu">aes</span>(<span class="at">x=</span>NOHAV, <span class="at">fill=</span>studyName)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.75</span>)</span>
+<span id="cb8-3"><a href="traits-and-trait-abbreviations.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Removed 71 rows containing non-finite values</span></span>
+<span id="cb8-4"><a href="traits-and-trait-abbreviations.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (stat_density).</span></span></code></pre></div>
+<p><img src="02-trainingDataQC_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="traits-and-trait-abbreviations.html#cb9-1" aria-hidden="true" tabindex="-1"></a>dbdata <span class="sc">%&lt;&gt;%</span> </span>
+<span id="cb9-2"><a href="traits-and-trait-abbreviations.html#cb9-2" aria-hidden="true" tabindex="-1"></a>     <span class="co"># plot area in meters squared</span></span>
+<span id="cb9-3"><a href="traits-and-trait-abbreviations.html#cb9-3" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">plotArea=</span>plotWidth<span class="sc">*</span>plotLength,</span>
+<span id="cb9-4"><a href="traits-and-trait-abbreviations.html#cb9-4" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Number of plants per plot</span></span>
+<span id="cb9-5"><a href="traits-and-trait-abbreviations.html#cb9-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">plantsPerPlot=</span><span class="fu">ifelse</span>(studyName<span class="sc">==</span><span class="st">&quot;13geneticgainIB&quot;</span>,<span class="dv">10</span>,<span class="dv">5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="traits-and-trait-abbreviations.html#cb10-1" aria-hidden="true" tabindex="-1"></a>dbdata <span class="sc">%&lt;&gt;%</span> </span>
+<span id="cb10-2"><a href="traits-and-trait-abbreviations.html#cb10-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">PlantSpacing=</span>plotArea<span class="sc">/</span>plantsPerPlot,</span>
+<span id="cb10-3"><a href="traits-and-trait-abbreviations.html#cb10-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">FYLD=</span>RTWT<span class="sc">/</span>(plantsPerPlot<span class="sc">*</span>PlantSpacing)<span class="sc">*</span><span class="dv">10</span>)</span>
+<span id="cb10-4"><a href="traits-and-trait-abbreviations.html#cb10-4" aria-hidden="true" tabindex="-1"></a>dbdata <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(.,<span class="fu">aes</span>(<span class="at">x=</span>FYLD,<span class="at">fill=</span>studyName)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.75</span>)</span>
+<span id="cb10-5"><a href="traits-and-trait-abbreviations.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Removed 89 rows containing non-finite values</span></span>
+<span id="cb10-6"><a href="traits-and-trait-abbreviations.html#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (stat_density).</span></span></code></pre></div>
+<p><img src="02-trainingDataQC_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Additional things to compute:</p>
+<ol style="list-style-type: decimal">
+<li>log-transform yield traits: this is a habit based on experience. Linear mixed-models should have normally distributed homoskedastic residuals, if they don’t log-transform the response variable often helps. For FYLD and related traits, I always log-transform.</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="traits-and-trait-abbreviations.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># I log transform yield traits </span></span>
+<span id="cb11-2"><a href="traits-and-trait-abbreviations.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># to satisfy homoskedastic residuals assumption </span></span>
+<span id="cb11-3"><a href="traits-and-trait-abbreviations.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of linear mixed models</span></span>
+<span id="cb11-4"><a href="traits-and-trait-abbreviations.html#cb11-4" aria-hidden="true" tabindex="-1"></a>dbdata <span class="sc">%&lt;&gt;%</span> </span>
+<span id="cb11-5"><a href="traits-and-trait-abbreviations.html#cb11-5" aria-hidden="true" tabindex="-1"></a>     <span class="fu">mutate</span>(<span class="at">DYLD=</span>FYLD<span class="sc">*</span>(DM<span class="sc">/</span><span class="dv">100</span>),</span>
+<span id="cb11-6"><a href="traits-and-trait-abbreviations.html#cb11-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">logFYLD=</span><span class="fu">log</span>(FYLD),</span>
+<span id="cb11-7"><a href="traits-and-trait-abbreviations.html#cb11-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">logDYLD=</span><span class="fu">log</span>(DYLD),</span>
+<span id="cb11-8"><a href="traits-and-trait-abbreviations.html#cb11-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">PropNOHAV=</span>NOHAV<span class="sc">/</span>plantsPerPlot) </span>
+<span id="cb11-9"><a href="traits-and-trait-abbreviations.html#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># remove non transformed / per-plot (instead of per area) traits</span></span>
+<span id="cb11-10"><a href="traits-and-trait-abbreviations.html#cb11-10" aria-hidden="true" tabindex="-1"></a>dbdata <span class="sc">%&lt;&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>RTWT,<span class="sc">-</span>FYLD,<span class="sc">-</span>DYLD)</span>
+<span id="cb11-11"><a href="traits-and-trait-abbreviations.html#cb11-11" aria-hidden="true" tabindex="-1"></a>dbdata <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(.,<span class="fu">aes</span>(<span class="at">x=</span>logFYLD,<span class="at">fill=</span>studyName)) <span class="sc">+</span> <span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.75</span>)</span>
+<span id="cb11-12"><a href="traits-and-trait-abbreviations.html#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Removed 89 rows containing non-finite values</span></span>
+<span id="cb11-13"><a href="traits-and-trait-abbreviations.html#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (stat_density).</span></span></code></pre></div>
+<p><img src="02-trainingDataQC_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Debatable whether this is better. Let’s not dwell on it. Onward!</p>
+</div>
+<div id="check-genotype-to-phenotype-matches" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Check genotype-to-phenotype matches</h2>
+<p>In this step, in the past (see <a href="https://wolfemd.github.io/IITA_2021GS/01-cleanTPdata.html#%5BUser_input%5D_Assign_genos_to_phenos">here</a> for an example), I have had to use multiple external flat files and custom code, built over time, to figure out which DNA samples, if any, match eatch field plot.</p>
+<p>With both genotypes and phenotypes derived from the database, this should not be an issue for this tutorial.</p>
+</div>
+<div id="check-detect-experimental-designs" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> Check / “detect” experimental designs?</h2>
+<p>In this step, in the past, I have not been certain of the experimental designs of the trials I had downloaded. I was also not certain how the designs were represented in the column-names. For this reason, I developed another <em>ad hoc</em> custom code to “detect” the designs. I built the <code>genomicMateSelectR</code> function <code>detectExptDesigns()</code>. See an example <a href="https://wolfemd.github.io/IITA_2021GS/01-cleanTPdata.html#Detect_experimental_designs">here</a>.</p>
+<p>Should not be necessary for the example dataset. However, let’s check:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="traits-and-trait-abbreviations.html#cb12-1" aria-hidden="true" tabindex="-1"></a>dbdata <span class="sc">%&gt;%</span> <span class="fu">count</span>(studyName,studyDesign, numberBlocks,replicate, blockNumber, entryType)</span>
+<span id="cb12-2"><a href="traits-and-trait-abbreviations.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 7</span></span>
+<span id="cb12-3"><a href="traits-and-trait-abbreviations.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   studyName   studyDesign numberBlocks replicate blockNumber</span></span>
+<span id="cb12-4"><a href="traits-and-trait-abbreviations.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;              &lt;int&gt;     &lt;int&gt;       &lt;int&gt;</span></span>
+<span id="cb12-5"><a href="traits-and-trait-abbreviations.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 13.GS.C1.C… Augmented              1         1           1</span></span>
+<span id="cb12-6"><a href="traits-and-trait-abbreviations.html#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 13.GS.C1.C… Augmented              1         1           1</span></span>
+<span id="cb12-7"><a href="traits-and-trait-abbreviations.html#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 13geneticg… Augmented              1         1           1</span></span>
+<span id="cb12-8"><a href="traits-and-trait-abbreviations.html#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 13geneticg… Augmented              1         1           1</span></span>
+<span id="cb12-9"><a href="traits-and-trait-abbreviations.html#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 2 more variables: entryType &lt;chr&gt;, n &lt;int&gt;</span></span></code></pre></div>
+</div>
+<div id="checklist-and-kpi" class="section level2" number="4.7">
+<h2><span class="header-section-number">4.7</span> Checklist and KPI</h2>
+<ul>
+<li>[ ]</li>
+</ul>
+
+</div>
+</div>
+  </main>
+
+  <div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page">
+      <h2>On this page</h2>
+      <div id="book-on-this-page"></div>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          <li><a id="book-source" href="#">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="#">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5">
+  <div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2021-12-02.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+<script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+
+</html>
