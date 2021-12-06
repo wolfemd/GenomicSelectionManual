@@ -1,7 +1,7 @@
 --- 
 title: "Genomic Prediction and Selection Manual"
 author: "Marnin Wolfe"
-date: "2021-12-02"
+date: "2021-12-05"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [refs.bib, book.bib, packages.bib]
@@ -36,7 +36,7 @@ Students also may further need/want to learn the statistical and quantitative ge
 # Outline
 
 1.  **[Download training data]**: Download training data using BreedBase, including: phenotypes, genotypes, pedigree
-2.  QC and format field trial data.
+2.  [**QC and format field trial data**][Prepare training data].
 3.  
 
 

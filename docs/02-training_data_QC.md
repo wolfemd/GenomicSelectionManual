@@ -25,7 +25,7 @@ dbdata<-readDBdata(phenotypeFile = here::here("data","phenotype.csv"),
 #> Joining, by = c("studyYear", "programDbId", "programName", "programDescription", "studyDbId", "studyName", "studyDescription", "studyDesign", "plotWidth", "plotLength", "fieldSize", "fieldTrialIsPlannedToBeGenotyped", "fieldTrialIsPlannedToCross", "plantingDate", "harvestDate", "locationDbId", "locationName")
 ```
 
-**HINT:** At any point in the manual, if I reference or use a custom function in the `genomicMateSelectR`, I encourage you to check out the reference page for that function, e.g. [`readDBdata()`](https://wolfemd.github.io/genomicMateSelectR/reference/readDBdata.html). Or look at the code yourself by typing e.g. `readDBdata` at the R console.
+**HINT:** At any point in the manual, if I reference or use a custom function in the `genomicMateSelectR`, I encourage you to check out the reference page for that function, e.g. [`readDBdata()`](https://wolfemd.github.io/genomicMateSelectR/reference/readDBdata.html). Or look at the code yourself by typing e.g. `readDBdata` at the R console or heading to the GitHub repo.
 
 ## Group and select trials to analyze
 
@@ -53,12 +53,12 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
 ```
 
 ```{=html}
-<div id="ytnkuyalol" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="csyvgbtwtr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ytnkuyalol .gt_table {
+#csyvgbtwtr .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -83,7 +83,7 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   border-left-color: #D3D3D3;
 }
 
-#ytnkuyalol .gt_heading {
+#csyvgbtwtr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -95,7 +95,7 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   border-right-color: #D3D3D3;
 }
 
-#ytnkuyalol .gt_title {
+#csyvgbtwtr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -105,7 +105,7 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   border-bottom-width: 0;
 }
 
-#ytnkuyalol .gt_subtitle {
+#csyvgbtwtr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -115,13 +115,13 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   border-top-width: 0;
 }
 
-#ytnkuyalol .gt_bottom_border {
+#csyvgbtwtr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ytnkuyalol .gt_col_headings {
+#csyvgbtwtr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -136,7 +136,7 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   border-right-color: #D3D3D3;
 }
 
-#ytnkuyalol .gt_col_heading {
+#csyvgbtwtr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -156,7 +156,7 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   overflow-x: hidden;
 }
 
-#ytnkuyalol .gt_column_spanner_outer {
+#csyvgbtwtr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -168,15 +168,15 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   padding-right: 4px;
 }
 
-#ytnkuyalol .gt_column_spanner_outer:first-child {
+#csyvgbtwtr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ytnkuyalol .gt_column_spanner_outer:last-child {
+#csyvgbtwtr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ytnkuyalol .gt_column_spanner {
+#csyvgbtwtr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -188,7 +188,7 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   width: 100%;
 }
 
-#ytnkuyalol .gt_group_heading {
+#csyvgbtwtr .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -210,7 +210,7 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   vertical-align: middle;
 }
 
-#ytnkuyalol .gt_empty_group_heading {
+#csyvgbtwtr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -225,15 +225,15 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   vertical-align: middle;
 }
 
-#ytnkuyalol .gt_from_md > :first-child {
+#csyvgbtwtr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ytnkuyalol .gt_from_md > :last-child {
+#csyvgbtwtr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ytnkuyalol .gt_row {
+#csyvgbtwtr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -252,7 +252,7 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   overflow-x: hidden;
 }
 
-#ytnkuyalol .gt_stub {
+#csyvgbtwtr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -264,7 +264,7 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   padding-left: 12px;
 }
 
-#ytnkuyalol .gt_summary_row {
+#csyvgbtwtr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -274,7 +274,7 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   padding-right: 5px;
 }
 
-#ytnkuyalol .gt_first_summary_row {
+#csyvgbtwtr .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -284,7 +284,7 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   border-top-color: #D3D3D3;
 }
 
-#ytnkuyalol .gt_grand_summary_row {
+#csyvgbtwtr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -294,7 +294,7 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   padding-right: 5px;
 }
 
-#ytnkuyalol .gt_first_grand_summary_row {
+#csyvgbtwtr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -304,11 +304,11 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   border-top-color: #D3D3D3;
 }
 
-#ytnkuyalol .gt_striped {
+#csyvgbtwtr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ytnkuyalol .gt_table_body {
+#csyvgbtwtr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -317,7 +317,7 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   border-bottom-color: #D3D3D3;
 }
 
-#ytnkuyalol .gt_footnotes {
+#csyvgbtwtr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -331,13 +331,13 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   border-right-color: #D3D3D3;
 }
 
-#ytnkuyalol .gt_footnote {
+#csyvgbtwtr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ytnkuyalol .gt_sourcenotes {
+#csyvgbtwtr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -351,41 +351,41 @@ traitabbrevs %>% gt::gt()#rmarkdown::paged_table()
   border-right-color: #D3D3D3;
 }
 
-#ytnkuyalol .gt_sourcenote {
+#csyvgbtwtr .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ytnkuyalol .gt_left {
+#csyvgbtwtr .gt_left {
   text-align: left;
 }
 
-#ytnkuyalol .gt_center {
+#csyvgbtwtr .gt_center {
   text-align: center;
 }
 
-#ytnkuyalol .gt_right {
+#csyvgbtwtr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ytnkuyalol .gt_font_normal {
+#csyvgbtwtr .gt_font_normal {
   font-weight: normal;
 }
 
-#ytnkuyalol .gt_font_bold {
+#csyvgbtwtr .gt_font_bold {
   font-weight: bold;
 }
 
-#ytnkuyalol .gt_font_italic {
+#csyvgbtwtr .gt_font_italic {
   font-style: italic;
 }
 
-#ytnkuyalol .gt_super {
+#csyvgbtwtr .gt_super {
   font-size: 65%;
 }
 
-#ytnkuyalol .gt_footnote_marks {
+#csyvgbtwtr .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -424,8 +424,6 @@ Run function `renameAndSelectCols()` to rename columns and remove unselected tra
 dbdata<-renameAndSelectCols(traitabbrevs,
                             indata=dbdata,
                             customColsToKeep = c("observationUnitName"))
-#> Warning in mask$eval_all_mutate(quo): NAs introduced by
-#> coercion
 #> Joining, by = "TraitName"
 ```
 
@@ -441,9 +439,9 @@ Nevertheless, as a habit, I have an simple _ad hoc_ approach to this:
 ```r
 # comment out the traits not present in this dataset
 dbdata<-dbdata %>% 
-  mutate(CMD1S=ifelse(CMD1S<1 | CMD1S>5,NA,CMD1S),
+  dplyr::mutate(CMD1S=ifelse(CMD1S<1 | CMD1S>5,NA,CMD1S),
          CMD3S=ifelse(CMD3S<1 | CMD3S>5,NA,CMD3S),
-         CMD6S=ifelse(CMD6S<1 | CMD6S>5,NA,CMD6S), 
+         #CMD6S=ifelse(CMD6S<1 | CMD6S>5,NA,CMD6S), 
          #CMD9S=ifelse(CMD9S<1 | CMD9S>5,NA,CMD9S),
          # CGM=ifelse(CGM<1 | CGM>5,NA,CGM),
          # CGMS1=ifelse(CGMS1<1 | CGMS1>5,NA,CGMS1),
@@ -503,11 +501,18 @@ In the example trial data, we the `plantsPerPlot` meta-data field is empty. Luck
 
 ```r
 dbdata %>% count(studyYear,studyName,studyDesign,plotWidth,plotLength)
-#> # A tibble: 2 × 6
+#> # A tibble: 9 × 6
 #>   studyYear studyName studyDesign plotWidth plotLength     n
 #>       <int> <chr>     <chr>           <int>      <dbl> <int>
-#> 1      2013 13.GS.C1… Augmented           1        2.5   864
-#> 2      2013 13geneti… Augmented           1        8     749
+#> 1      2019 19.GS.C1… Alpha               4        4     125
+#> 2      2019 19.GS.C2… Alpha               4        4      68
+#> 3      2019 19.GS.C2… Alpha               4        4      72
+#> 4      2019 19.GS.C2… RCBD                4        4      66
+#> 5      2019 19.GS.C2… Alpha               4        4      72
+#> 6      2019 19.GS.C4… Alpha               2        4     270
+#> 7      2019 19.GS.C4… Alpha               3        2.5   273
+#> 8      2019 19.GS.C4… RCBD                1        2.5   777
+#> 9      2019 19geneti… Augmented           1        2.5   810
 ```
 
 So the GS.C1 trial has 2.5 $m^2$ plots, the GeneticGain trial has 8 $m^2$. 
@@ -517,11 +522,11 @@ A quick density plot reveals that the GeneticGain trial was likely planted with 
 ```r
 dbdata %>% 
      ggplot(.,aes(x=NOHAV, fill=studyName)) + geom_density(alpha=0.75)
-#> Warning: Removed 71 rows containing non-finite values
+#> Warning: Removed 921 rows containing non-finite values
 #> (stat_density).
 ```
 
-<img src="02-trainingDataQC_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="02-training_data_QC_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 
 ```r
@@ -538,11 +543,11 @@ dbdata %<>%
      mutate(PlantSpacing=plotArea/plantsPerPlot,
             FYLD=RTWT/(plantsPerPlot*PlantSpacing)*10)
 dbdata %>% ggplot(.,aes(x=FYLD,fill=studyName)) + geom_density(alpha=0.75)
-#> Warning: Removed 89 rows containing non-finite values
+#> Warning: Removed 943 rows containing non-finite values
 #> (stat_density).
 ```
 
-<img src="02-trainingDataQC_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="02-training_data_QC_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
 Additional things to compute:
 
@@ -561,11 +566,11 @@ dbdata %<>%
 # remove non transformed / per-plot (instead of per area) traits
 dbdata %<>% select(-RTWT,-FYLD,-DYLD)
 dbdata %>% ggplot(.,aes(x=logFYLD,fill=studyName)) + geom_density(alpha=0.75)
-#> Warning: Removed 89 rows containing non-finite values
+#> Warning: Removed 943 rows containing non-finite values
 #> (stat_density).
 ```
 
-<img src="02-trainingDataQC_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="02-training_data_QC_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 Debatable whether this is better. Let's not dwell on it. Onward!
 
@@ -585,14 +590,21 @@ Should not be necessary for the example dataset. However, let's check:
 
 ```r
 dbdata %>% count(studyName,studyDesign, numberBlocks,replicate, blockNumber, entryType)
-#> # A tibble: 4 × 7
-#>   studyName   studyDesign numberBlocks replicate blockNumber
-#>   <chr>       <chr>              <int>     <int>       <int>
-#> 1 13.GS.C1.C… Augmented              1         1           1
-#> 2 13.GS.C1.C… Augmented              1         1           1
-#> 3 13geneticg… Augmented              1         1           1
-#> 4 13geneticg… Augmented              1         1           1
-#> # … with 2 more variables: entryType <chr>, n <int>
+#> # A tibble: 224 × 7
+#>    studyName  studyDesign numberBlocks replicate blockNumber
+#>    <chr>      <chr>              <int>     <int>       <int>
+#>  1 19.GS.C1.… Alpha                 NA         1           1
+#>  2 19.GS.C1.… Alpha                 NA         1           1
+#>  3 19.GS.C1.… Alpha                 NA         2           2
+#>  4 19.GS.C1.… Alpha                 NA         2           2
+#>  5 19.GS.C1.… Alpha                 NA         3           3
+#>  6 19.GS.C1.… Alpha                 NA         3           3
+#>  7 19.GS.C2.… Alpha                  6         1           1
+#>  8 19.GS.C2.… Alpha                  6         1           1
+#>  9 19.GS.C2.… Alpha                  6         1           2
+#> 10 19.GS.C2.… Alpha                  6         1           2
+#> # … with 214 more rows, and 2 more variables:
+#> #   entryType <chr>, n <int>
 ```
 
 ## Checklist and KPI

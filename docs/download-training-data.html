@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 3 Download training data | Genomic Prediction and Selection Manual</title>
 <meta name="author" content="Marnin Wolfe">
-<meta name="description" content="3.1 Cassavabase download Go to Cassavabase or your favorite alternative BreedBase. Login. Go to the Search &gt; Wizard   3.2 Example dataset For the sake of example, I will choose a small, but real...">
+<meta name="description" content="Go to Cassavabase or your favorite alternative BreedBase. Login. Go to the Search &gt; Wizard  3.1 Example dataset For the sake of example, I will choose a small, but real dataset that I think will...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Download training data | Genomic Prediction and Selection Manual">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://wolfemd.github.io/GenomicSelectionManual/download-training-data.html">
-<meta property="og:description" content="3.1 Cassavabase download Go to Cassavabase or your favorite alternative BreedBase. Login. Go to the Search &gt; Wizard   3.2 Example dataset For the sake of example, I will choose a small, but real...">
+<meta property="og:description" content="Go to Cassavabase or your favorite alternative BreedBase. Login. Go to the Search &gt; Wizard  3.1 Example dataset For the sake of example, I will choose a small, but real dataset that I think will...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 Download training data | Genomic Prediction and Selection Manual">
-<meta name="twitter:description" content="3.1 Cassavabase download Go to Cassavabase or your favorite alternative BreedBase. Login. Go to the Search &gt; Wizard   3.2 Example dataset For the sake of example, I will choose a small, but real...">
+<meta name="twitter:description" content="Go to Cassavabase or your favorite alternative BreedBase. Login. Go to the Search &gt; Wizard  3.1 Example dataset For the sake of example, I will choose a small, but real dataset that I think will...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -48,7 +48,7 @@
 </ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/wolfemd/GenomicSelectionManual/">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="https://github.com/wolfemd/GenomicSelectionManual">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
@@ -56,67 +56,63 @@
 <h1>
 <span class="header-section-number">3</span> Download training data<a class="anchor" aria-label="anchor" href="#download-training-data"><i class="fas fa-link"></i></a>
 </h1>
-<div id="cassavabase-download" class="section level2" number="3.1">
-<h2>
-<span class="header-section-number">3.1</span> Cassavabase download<a class="anchor" aria-label="anchor" href="#cassavabase-download"><i class="fas fa-link"></i></a>
-</h2>
 <p>Go to <a href="https://www.cassavabase.org/">Cassavabase</a> or your favorite alternative BreedBase.</p>
 <p>Login.</p>
 <p>Go to the <strong>Search &gt; Wizard</strong></p>
 <div class="inline-figure"><img src="images/search_wizard.png" width="300"></div>
-</div>
-<div id="example-dataset" class="section level2" number="3.2">
+<div id="example-dataset" class="section level2" number="3.1">
 <h2>
-<span class="header-section-number">3.2</span> Example dataset<a class="anchor" aria-label="anchor" href="#example-dataset"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1</span> Example dataset<a class="anchor" aria-label="anchor" href="#example-dataset"><i class="fas fa-link"></i></a>
 </h2>
 <p>For the sake of example, I will choose a small, but real dataset that I think will exemplify how data should be stored on the DB. Further, I choose data that have key features, including pedigree relationship and a high-proportion of genotyped accessions.</p>
+<div id="create-trial-list" class="section level3" number="3.1.1">
+<h3>
+<span class="header-section-number">3.1.1</span> Create trial list<a class="anchor" aria-label="anchor" href="#create-trial-list"><i class="fas fa-link"></i></a>
+</h3>
+<p>Create a list of trials using the “Wizard”</p>
+<div class="inline-figure"><img src="images/wizard_create_trial_list.png"></div>
+<p>IITA trials at Ibadan and Ubiaja locations, planted in 2019. Further chose key trial types and specific trials as seen in screenshot.</p>
+<p>Create list: <strong>IITA_ExampleGStrials_2021Dec04</strong></p>
+</div>
+<div id="download-related-trial-data" class="section level3" number="3.1.2">
+<h3>
+<span class="header-section-number">3.1.2</span> Download related trial data<a class="anchor" aria-label="anchor" href="#download-related-trial-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>Clear Wizard panes</p>
+<p>Start from the new list of trials created: <strong>“IITA_ExampleGStrials_2021Dec04”</strong></p>
+<p>Download <strong>“Related Trial Metadata”</strong> and <strong>“Related Trial Phenotypes”</strong></p>
+<div class="inline-figure"><img src="images/wizard_dl_related_trial_metadata.png"></div>
+<div class="inline-figure"><img src="images/wizard_dl_related_trial_phenotypes.png"></div>
+<p>Exports .csv files <code>phenotype.csv</code> and <code>metadata.csv</code>.</p>
+<p>Store in <code>data/</code> sub-directory for current project.</p>
+</div>
+<div id="make-an-accession-list" class="section level3" number="3.1.3">
+<h3>
+<span class="header-section-number">3.1.3</span> Make an accession list<a class="anchor" aria-label="anchor" href="#make-an-accession-list"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong><span class="math display">\[NEW + EXPTL\]</span></strong> Choose:<br><strong>Genotyping Protocol:</strong> “IITA DArT-GBS 08 Aug 2021,” <em>then</em><br><strong>Accessions:</strong> “Select All”<br></p>
+<p>Create list <strong>“IITA_ExampleGSaccessions_2021Dec05”</strong>.</p>
+<div class="inline-figure"><img src="images/wizard_make_accession_list_genotypingprotocolfirst.png"></div>
+</div>
+<div id="download-related-trial-genotype-data" class="section level3" number="3.1.4">
+<h3>
+<span class="header-section-number">3.1.4</span> Download related trial genotype data<a class="anchor" aria-label="anchor" href="#download-related-trial-genotype-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>Download <strong>“Related Trial Genotype Data,”</strong> choosing both available formats: VCF and Dosage Matrix (.tsv).<br><img src="images/wizard_dl_related_genotype_data.png" width="485"><br><strong>NOTE:</strong> This probably will take a while and usually times out. However, Cassavabase will complete preparation of the file and have it ready-to-go when you return, when ready, it should begin downloading immediately.</p>
+</div>
+<div id="download-pedigree" class="section level3" number="3.1.5">
+<h3>
+<span class="header-section-number">3.1.5</span> Download Pedigree<a class="anchor" aria-label="anchor" href="#download-pedigree"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>(on hold / blocked)</strong></p>
+<p>Go to “Manage &gt; <a href="https://www.cassavabase.org/breeders/download">Download</a> &gt; Download Pedigree”</p>
+<div class="inline-figure"><img src="images/manage_download_dropdown.png" width="226"></div>
+<div class="inline-figure"><img src="images/download_pedigree.png"></div>
 <ul>
-<li><p>Use Wizard (Breeding Program: IITA &gt; Years: 2013 &gt; Locations: Ibadan &gt;</p></li>
-<li><p>Choose 2 trials <code>13geneticgainIB</code> and <code>13.GS.C1.CE.864.IB</code> –&gt; create list <strong>“ExampleIITAtrials”</strong></p></li>
-<li><p>Clear Wizard panes</p></li>
-<li>
-<p>Start from new list <strong>“ExampleIITAtrials” &gt;</strong> Accessions: “Select All” –&gt; create list <strong>“ExampleIITAaccesions”</strong></p>
-<div class="inline-figure"><img src="images/createExampleAccessionsList.png"></div>
-</li>
-<li><p>Genotyping Protocols &gt; <strong>“West Africa Clones Dart-GBS 2020”</strong></p></li>
-<li>
-<p><strong>Download Genotypes, Phenotypes and Metadata (</strong>Bottom right on Search Wizard page)</p>
-<ul>
-<li>
-<p><strong>“Related Genotype Data”</strong></p>
-<ul>
-<li>Download genotypes (“VCF File Format”)</li>
-</ul>
-<!-- --><ul>
-<li>This is going to take a while….. it timed out when my compute went to sleep, but when I came back and refreshed the site, the file was ready-to-go and downloaded right away.</li>
-</ul>
-</li>
-<li><p><strong>“Related Trial Metadata”</strong> –&gt; exports a .csv named “phenotypes.csv,” which is awkward….</p></li>
-<li>
-<p><strong>“Related Trial Phenotypes”</strong> –&gt; exports a .csv also named “phenotypes.csv” so auto-changed to “phenotype (1).csv”</p>
-<ul>
-<li>
-<strong>Manually rename and store here:</strong> <code>data/phenotype.csv</code> and <code>data/metadata.csv</code>
+<li>Same issue currently has been brought up from MusaBase: <a href="https://github.com/solgenomics/sgn/issues/3865" class="uri">https://github.com/solgenomics/sgn/issues/3865</a>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Download Pedigree</strong> (on hold / blocked)</p>
-<ul>
-<li><p>Download &gt; Download Pedigree</p></li>
-<li>
-<p>“ExampleIITAaccessions” list &gt; Direct parents only</p>
-<ul>
-<li><p>… list failed to validate….</p></li>
-<li><p>Click “lists” in top right &gt; Click the “Validate” checkmark on the row for the list of accessions….. “Working…..” –&gt; says list passed validation…</p></li>
-<li><p>Working with DB team…</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -126,14 +122,21 @@
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#download-training-data"><span class="header-section-number">3</span> Download training data</a></li>
-<li><a class="nav-link" href="#cassavabase-download"><span class="header-section-number">3.1</span> Cassavabase download</a></li>
-<li><a class="nav-link" href="#example-dataset"><span class="header-section-number">3.2</span> Example dataset</a></li>
+<li>
+<a class="nav-link" href="#example-dataset"><span class="header-section-number">3.1</span> Example dataset</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#create-trial-list"><span class="header-section-number">3.1.1</span> Create trial list</a></li>
+<li><a class="nav-link" href="#download-related-trial-data"><span class="header-section-number">3.1.2</span> Download related trial data</a></li>
+<li><a class="nav-link" href="#make-an-accession-list"><span class="header-section-number">3.1.3</span> Make an accession list</a></li>
+<li><a class="nav-link" href="#download-related-trial-genotype-data"><span class="header-section-number">3.1.4</span> Download related trial genotype data</a></li>
+<li><a class="nav-link" href="#download-pedigree"><span class="header-section-number">3.1.5</span> Download Pedigree</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/wolfemd/GenomicSelectionManual//blob/master/01-trainingDataDownload.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/wolfemd/GenomicSelectionManual//edit/master/01-trainingDataDownload.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/wolfemd/GenomicSelectionManual/blob/master/01-download.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/wolfemd/GenomicSelectionManual/edit/master/01-download.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -145,7 +148,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2021-12-02.</p>
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2021-12-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

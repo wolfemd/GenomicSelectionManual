@@ -1,8 +1,12 @@
 preamble
 outline
 download-training-data
-cassavabase-download
 example-dataset
+create-trial-list
+download-related-trial-data
+make-an-accession-list
+download-related-trial-genotype-data
+download-pedigree
 prepare-training-data
 read-db-data
 group-and-select-trials-to-analyze

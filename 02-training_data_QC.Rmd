@@ -21,8 +21,34 @@ I built a function `readDBdata` that simply wraps around `read.csv`, reads and m
 dbdata<-readDBdata(phenotypeFile = here::here("data","phenotype.csv"),
                    metadataFile = here::here("data","metadata.csv"))
 ```
+```{r}
+dbdata %>% count(studyName,studyDesign,trialType)
+```
 
-**HINT:** At any point in the manual, if I reference or use a custom function in the `genomicMateSelectR`, I encourage you to check out the reference page for that function, e.g. [`readDBdata()`](https://wolfemd.github.io/genomicMateSelectR/reference/readDBdata.html). Or look at the code yourself by typing e.g. `readDBdata` at the R console.
+```{r}
+dbdata %>% colnames
+# dbdata %>% count(studyName, studyDesign,plotWidth,plotLength) 
+# dbdata %>% filter(studyDesign=="Augmented") %>% count(replicate,blockNumber)
+# dbdata %>% filter(studyDesign=="Augmented") %>% count(rowNumber,colNumber)
+# summary(dbdata$plantsPerPlot)
+# dbdata %>% filter(studyDesign=="Alpha") %>% count(studyName,entryType) %>% spread(entryType,n)
+# dbdata %>% filter(studyDesign=="Alpha") %>% count(studyName,blockNumber,replicate) %>% spread(blockNumber,n)
+# dbdata %>% filter(studyName=="19.GS.C4C.CE.822.IB") %>% count(replicate,blockNumber) %>% spread(blockNumber,n)
+
+```
+```{r}
+dbdata %>% 
+     select(studyName,studyDesign,numberReps,numberBlocks,plotWidth,plotLength,trialType) %>% 
+     distinct
+```
+
+How to analyze:
+
+- No numberReps, numberBlocks metdata --> exclude
+Alpha, nReps
+
+
+**HINT:** At any point in the manual, if I reference or use a custom function in the `genomicMateSelectR`, I encourage you to check out the reference page for that function, e.g. [`readDBdata()`](https://wolfemd.github.io/genomicMateSelectR/reference/readDBdata.html). Or look at the code yourself by typing e.g. `readDBdata` at the R console or heading to the GitHub repo.
 
 ## Group and select trials to analyze
 
@@ -65,9 +91,9 @@ Nevertheless, as a habit, I have an simple _ad hoc_ approach to this:
 ```{r}
 # comment out the traits not present in this dataset
 dbdata<-dbdata %>% 
-  mutate(CMD1S=ifelse(CMD1S<1 | CMD1S>5,NA,CMD1S),
+  dplyr::mutate(CMD1S=ifelse(CMD1S<1 | CMD1S>5,NA,CMD1S),
          CMD3S=ifelse(CMD3S<1 | CMD3S>5,NA,CMD3S),
-         CMD6S=ifelse(CMD6S<1 | CMD6S>5,NA,CMD6S), 
+         #CMD6S=ifelse(CMD6S<1 | CMD6S>5,NA,CMD6S), 
          #CMD9S=ifelse(CMD9S<1 | CMD9S>5,NA,CMD9S),
          # CGM=ifelse(CGM<1 | CGM>5,NA,CGM),
          # CGMS1=ifelse(CGMS1<1 | CGMS1>5,NA,CGMS1),
