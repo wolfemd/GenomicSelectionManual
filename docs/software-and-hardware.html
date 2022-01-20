@@ -4,20 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 1 Preamble | Genomic Prediction and Selection Manual</title>
+<title>Chapter 3 Software and hardware | Genomic Prediction and Selection Manual</title>
 <meta name="author" content="Marnin Wolfe">
-<meta name="description" content="&lt;p&gt;Training resources and examples of standard procedures for
-genomic selection-related computation.&lt;/p&gt;">
+<meta name="description" content="3.1 Software to install R Rstudio Packages tidyverse genomicMateSelectR Bioinformatics tools vcftools bcftools   3.2 Hardware  3.2.1 High performance computing">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 1 Preamble | Genomic Prediction and Selection Manual">
+<meta property="og:title" content="Chapter 3 Software and hardware | Genomic Prediction and Selection Manual">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://wolfemd.github.io/GenomicSelectionManual">
-<meta property="og:description" content="&lt;p&gt;Training resources and examples of standard procedures for
-genomic selection-related computation.&lt;/p&gt;">
+<meta property="og:url" content="https://wolfemd.github.io/GenomicSelectionManual/software-and-hardware.html">
+<meta property="og:description" content="3.1 Software to install R Rstudio Packages tidyverse genomicMateSelectR Bioinformatics tools vcftools bcftools   3.2 Hardware  3.2.1 High performance computing">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 Preamble | Genomic Prediction and Selection Manual">
-<meta name="twitter:description" content="&lt;p&gt;Training resources and examples of standard procedures for
-genomic selection-related computation.&lt;/p&gt;">
+<meta name="twitter:title" content="Chapter 3 Software and hardware | Genomic Prediction and Selection Manual">
+<meta name="twitter:description" content="3.1 Software to install R Rstudio Packages tidyverse genomicMateSelectR Bioinformatics tools vcftools bcftools   3.2 Hardware  3.2.1 High performance computing">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -43,14 +40,13 @@ genomic selection-related computation.&lt;/p&gt;">
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html"><span class="header-section-number">1</span> Preamble</a></li>
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Preamble</a></li>
 <li><a class="" href="outline.html"><span class="header-section-number">2</span> Outline</a></li>
-<li><a class="" href="using-this-manual.html"><span class="header-section-number">3</span> Using this manual</a></li>
-<li><a class="" href="create_project.html"><span class="header-section-number">4</span> Create a project</a></li>
+<li><a class="active" href="software-and-hardware.html"><span class="header-section-number">3</span> Software and hardware</a></li>
+<li><a class="" href="create_project.html"><span class="header-section-number">4</span> Create a (workflowR) project</a></li>
 <li><a class="" href="download-training-data.html"><span class="header-section-number">5</span> Download training data</a></li>
 <li><a class="" href="prepare-phenotype-data.html"><span class="header-section-number">6</span> Prepare phenotype data</a></li>
 <li><a class="" href="prepare-genotypic-data.html"><span class="header-section-number">7</span> Prepare genotypic data</a></li>
-<li><a class="" href="preliminary-field-trial-analysis.html"><span class="header-section-number">8</span> Preliminary field trial analysis</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -59,32 +55,60 @@ genomic selection-related computation.&lt;/p&gt;">
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="preamble" class="section level1" number="1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="software-and-hardware" class="section level1" number="3">
 <h1>
-<span class="header-section-number">1</span> Preamble<a class="anchor" aria-label="anchor" href="#preamble"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3</span> Software and hardware<a class="anchor" aria-label="anchor" href="#software-and-hardware"><i class="fas fa-link"></i></a>
 </h1>
-<p>This manual aims at providing a training on the implementation of genomics-enabled decision support for <a href="http://www.nextgencassava.org">NextGen Cassava Breeding Project</a> and its community of practice partnerships.</p>
-<p>Associated with this manual we will provide a codebase and standard operating procedures for a reproducible BreedBase-integrated workflow.</p>
-<p>Two major sections are currently planned:</p>
-<ol style="list-style-type: decimal">
-<li><p><strong>Genomic (Mate) Selection Workflow Example:</strong> Using an example dataset from <a href="https://www.cassavabase.org/">Cassavabase</a>, work hands-on, with demos, over the full workflow. Provide skeleton for each pipeline segment: purpose, SOP, checklist, template, necessary inputs, KPI and outputs.</p></li>
-<li><p><strong>Data wrangling and reproducibility:</strong> Intro and hands-on with the computing and data environment / manipulation side of things. Learning resources/links. No excel! R, Tidyverse, functions, loops, bash / command line, genomic data manipulation programs.</p></li>
-</ol>
-<p>Collectively these two components should support learning <strong>Genomic prediction and selection: in practice</strong>.</p>
-<p><strong>Genomic prediction and selection: in theory</strong></p>
-<p>Students also may further need/want to learn the statistical and quantitative genetic theory. An additional section is planned that, at a minimum will provide guidance and access to reading and other learning resources. For starters, <span class="citation">(Lynch and Walsh 1998; Falconer and FALCONER 2003; Isik <em>et al.</em> 2017; Bernardo 2020)</span>!</p>
+<div id="software-to-install" class="section level2" number="3.1">
+<h2>
+<span class="header-section-number">3.1</span> Software to install<a class="anchor" aria-label="anchor" href="#software-to-install"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>R</li>
+<li>Rstudio</li>
+<li>Packages
+<ul>
+<li>tidyverse</li>
+<li><code>genomicMateSelectR</code></li>
+</ul>
+</li>
+<li>Bioinformatics tools
+<ul>
+<li><code>vcftools</code></li>
+<li><code>bcftools</code></li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="hardware" class="section level2" number="3.2">
+<h2>
+<span class="header-section-number">3.2</span> Hardware<a class="anchor" aria-label="anchor" href="#hardware"><i class="fas fa-link"></i></a>
+</h2>
+<div id="high-performance-computing" class="section level3" number="3.2.1">
+<h3>
+<span class="header-section-number">3.2.1</span> High performance computing<a class="anchor" aria-label="anchor" href="#high-performance-computing"><i class="fas fa-link"></i></a>
+</h3>
+
+</div>
+</div>
 </div>
   <div class="chapter-nav">
-<div class="empty"></div>
-<div class="next"><a href="outline.html"><span class="header-section-number">2</span> Outline</a></div>
+<div class="prev"><a href="outline.html"><span class="header-section-number">2</span> Outline</a></div>
+<div class="next"><a href="create_project.html"><span class="header-section-number">4</span> Create a (workflowR) project</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#preamble"><span class="header-section-number">1</span> Preamble</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#software-and-hardware"><span class="header-section-number">3</span> Software and hardware</a></li>
+<li><a class="nav-link" href="#software-to-install"><span class="header-section-number">3.1</span> Software to install</a></li>
+<li>
+<a class="nav-link" href="#hardware"><span class="header-section-number">3.2</span> Hardware</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#high-performance-computing"><span class="header-section-number">3.2.1</span> High performance computing</a></li></ul>
+</li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/wolfemd/GenomicSelectionManual/blob/master/index.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/wolfemd/GenomicSelectionManual/edit/master/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/wolfemd/GenomicSelectionManual/blob/master/00a-software.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/wolfemd/GenomicSelectionManual/edit/master/00a-software.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -96,7 +120,7 @@ genomic selection-related computation.&lt;/p&gt;">
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-01-13.</p>
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-01-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

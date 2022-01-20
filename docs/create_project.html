@@ -4,20 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 1 Preamble | Genomic Prediction and Selection Manual</title>
+<title>Chapter 4 Create a project | Genomic Prediction and Selection Manual</title>
 <meta name="author" content="Marnin Wolfe">
-<meta name="description" content="&lt;p&gt;Training resources and examples of standard procedures for
-genomic selection-related computation.&lt;/p&gt;">
+<meta name="description" content="4.1 Create a workflowR project   4.2 Using Rmarkdown  4.2.1 Code chunks   4.3 Hotkeys  CMD+Option+I = create chunk Shift+CMD+M = %&gt;% pipe operator  4.4 Tidyverse functions   4.5 Using Git   4.6...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 1 Preamble | Genomic Prediction and Selection Manual">
+<meta property="og:title" content="Chapter 4 Create a project | Genomic Prediction and Selection Manual">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://wolfemd.github.io/GenomicSelectionManual">
-<meta property="og:description" content="&lt;p&gt;Training resources and examples of standard procedures for
-genomic selection-related computation.&lt;/p&gt;">
+<meta property="og:url" content="https://wolfemd.github.io/GenomicSelectionManual/create_project.html">
+<meta property="og:description" content="4.1 Create a workflowR project   4.2 Using Rmarkdown  4.2.1 Code chunks   4.3 Hotkeys  CMD+Option+I = create chunk Shift+CMD+M = %&gt;% pipe operator  4.4 Tidyverse functions   4.5 Using Git   4.6...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 Preamble | Genomic Prediction and Selection Manual">
-<meta name="twitter:description" content="&lt;p&gt;Training resources and examples of standard procedures for
-genomic selection-related computation.&lt;/p&gt;">
+<meta name="twitter:title" content="Chapter 4 Create a project | Genomic Prediction and Selection Manual">
+<meta name="twitter:description" content="4.1 Create a workflowR project   4.2 Using Rmarkdown  4.2.1 Code chunks   4.3 Hotkeys  CMD+Option+I = create chunk Shift+CMD+M = %&gt;% pipe operator  4.4 Tidyverse functions   4.5 Using Git   4.6...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -43,10 +40,10 @@ genomic selection-related computation.&lt;/p&gt;">
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html"><span class="header-section-number">1</span> Preamble</a></li>
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Preamble</a></li>
 <li><a class="" href="outline.html"><span class="header-section-number">2</span> Outline</a></li>
 <li><a class="" href="using-this-manual.html"><span class="header-section-number">3</span> Using this manual</a></li>
-<li><a class="" href="create_project.html"><span class="header-section-number">4</span> Create a project</a></li>
+<li><a class="active" href="create_project.html"><span class="header-section-number">4</span> Create a project</a></li>
 <li><a class="" href="download-training-data.html"><span class="header-section-number">5</span> Download training data</a></li>
 <li><a class="" href="prepare-phenotype-data.html"><span class="header-section-number">6</span> Prepare phenotype data</a></li>
 <li><a class="" href="prepare-genotypic-data.html"><span class="header-section-number">7</span> Prepare genotypic data</a></li>
@@ -59,32 +56,80 @@ genomic selection-related computation.&lt;/p&gt;">
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="preamble" class="section level1" number="1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="create_project" class="section level1" number="4">
 <h1>
-<span class="header-section-number">1</span> Preamble<a class="anchor" aria-label="anchor" href="#preamble"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4</span> Create a project<a class="anchor" aria-label="anchor" href="#create_project"><i class="fas fa-link"></i></a>
 </h1>
-<p>This manual aims at providing a training on the implementation of genomics-enabled decision support for <a href="http://www.nextgencassava.org">NextGen Cassava Breeding Project</a> and its community of practice partnerships.</p>
-<p>Associated with this manual we will provide a codebase and standard operating procedures for a reproducible BreedBase-integrated workflow.</p>
-<p>Two major sections are currently planned:</p>
-<ol style="list-style-type: decimal">
-<li><p><strong>Genomic (Mate) Selection Workflow Example:</strong> Using an example dataset from <a href="https://www.cassavabase.org/">Cassavabase</a>, work hands-on, with demos, over the full workflow. Provide skeleton for each pipeline segment: purpose, SOP, checklist, template, necessary inputs, KPI and outputs.</p></li>
-<li><p><strong>Data wrangling and reproducibility:</strong> Intro and hands-on with the computing and data environment / manipulation side of things. Learning resources/links. No excel! R, Tidyverse, functions, loops, bash / command line, genomic data manipulation programs.</p></li>
-</ol>
-<p>Collectively these two components should support learning <strong>Genomic prediction and selection: in practice</strong>.</p>
-<p><strong>Genomic prediction and selection: in theory</strong></p>
-<p>Students also may further need/want to learn the statistical and quantitative genetic theory. An additional section is planned that, at a minimum will provide guidance and access to reading and other learning resources. For starters, <span class="citation">(Lynch and Walsh 1998; Falconer and FALCONER 2003; Isik <em>et al.</em> 2017; Bernardo 2020)</span>!</p>
+<div id="create-a-workflowr-project" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Create a <code>workflowR</code> project<a class="anchor" aria-label="anchor" href="#create-a-workflowr-project"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="using-rmarkdown" class="section level2" number="4.2">
+<h2>
+<span class="header-section-number">4.2</span> Using Rmarkdown<a class="anchor" aria-label="anchor" href="#using-rmarkdown"><i class="fas fa-link"></i></a>
+</h2>
+<div id="code-chunks" class="section level3" number="4.2.1">
+<h3>
+<span class="header-section-number">4.2.1</span> Code chunks<a class="anchor" aria-label="anchor" href="#code-chunks"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+</div>
+<div id="hotkeys" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Hotkeys<a class="anchor" aria-label="anchor" href="#hotkeys"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>
+<code>CMD+Option+I</code> = create chunk</li>
+<li>
+<code>Shift+CMD+M</code> = <code>%&gt;%</code> pipe operator</li>
+</ul>
+</div>
+<div id="tidyverse-functions" class="section level2" number="4.4">
+<h2>
+<span class="header-section-number">4.4</span> Tidyverse functions<a class="anchor" aria-label="anchor" href="#tidyverse-functions"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="using-git" class="section level2" number="4.5">
+<h2>
+<span class="header-section-number">4.5</span> Using Git<a class="anchor" aria-label="anchor" href="#using-git"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="publishing-on-github-pages" class="section level2" number="4.6">
+<h2>
+<span class="header-section-number">4.6</span> Publishing on GitHub (Pages)<a class="anchor" aria-label="anchor" href="#publishing-on-github-pages"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="project-organization-recommendations" class="section level2" number="4.7">
+<h2>
+<span class="header-section-number">4.7</span> Project Organization Recommendations<a class="anchor" aria-label="anchor" href="#project-organization-recommendations"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
 </div>
   <div class="chapter-nav">
-<div class="empty"></div>
-<div class="next"><a href="outline.html"><span class="header-section-number">2</span> Outline</a></div>
+<div class="prev"><a href="using-this-manual.html"><span class="header-section-number">3</span> Using this manual</a></div>
+<div class="next"><a href="download-training-data.html"><span class="header-section-number">5</span> Download training data</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#preamble"><span class="header-section-number">1</span> Preamble</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#create_project"><span class="header-section-number">4</span> Create a project</a></li>
+<li><a class="nav-link" href="#create-a-workflowr-project"><span class="header-section-number">4.1</span> Create a workflowR project</a></li>
+<li>
+<a class="nav-link" href="#using-rmarkdown"><span class="header-section-number">4.2</span> Using Rmarkdown</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#code-chunks"><span class="header-section-number">4.2.1</span> Code chunks</a></li></ul>
+</li>
+<li><a class="nav-link" href="#hotkeys"><span class="header-section-number">4.3</span> Hotkeys</a></li>
+<li><a class="nav-link" href="#tidyverse-functions"><span class="header-section-number">4.4</span> Tidyverse functions</a></li>
+<li><a class="nav-link" href="#using-git"><span class="header-section-number">4.5</span> Using Git</a></li>
+<li><a class="nav-link" href="#publishing-on-github-pages"><span class="header-section-number">4.6</span> Publishing on GitHub (Pages)</a></li>
+<li><a class="nav-link" href="#project-organization-recommendations"><span class="header-section-number">4.7</span> Project Organization Recommendations</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/wolfemd/GenomicSelectionManual/blob/master/index.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/wolfemd/GenomicSelectionManual/edit/master/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/wolfemd/GenomicSelectionManual/blob/master/01-create_repo.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/wolfemd/GenomicSelectionManual/edit/master/01-create_repo.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

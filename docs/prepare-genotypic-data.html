@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 7 Prepare genotypic data | Genomic Prediction and Selection Manual</title>
+<meta name="author" content="Marnin Wolfe">
+<meta name="description" content="Context and Purpose: Depending on whether parent- vs. mate-selection are intended, there are several formats to-be-constructed / computed from the downloaded genotypic data. Potentially, do...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 7 Prepare genotypic data | Genomic Prediction and Selection Manual">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://wolfemd.github.io/GenomicSelectionManual/prepare-genotypic-data.html">
+<meta property="og:description" content="Context and Purpose: Depending on whether parent- vs. mate-selection are intended, there are several formats to-be-constructed / computed from the downloaded genotypic data. Potentially, do...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 7 Prepare genotypic data | Genomic Prediction and Selection Manual">
+<meta name="twitter:description" content="Context and Purpose: Depending on whether parent- vs. mate-selection are intended, there are several formats to-be-constructed / computed from the downloaded genotypic data. Potentially, do...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Genomic Prediction and Selection Manual</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Preamble</a></li>
+<li><a class="" href="outline.html"><span class="header-section-number">2</span> Outline</a></li>
+<li><a class="" href="using-this-manual.html"><span class="header-section-number">3</span> Using this manual</a></li>
+<li><a class="" href="create_project.html"><span class="header-section-number">4</span> Create a project</a></li>
+<li><a class="" href="download-training-data.html"><span class="header-section-number">5</span> Download training data</a></li>
+<li><a class="" href="prepare-phenotype-data.html"><span class="header-section-number">6</span> Prepare phenotype data</a></li>
+<li><a class="active" href="prepare-genotypic-data.html"><span class="header-section-number">7</span> Prepare genotypic data</a></li>
+<li><a class="" href="preliminary-field-trial-analysis.html"><span class="header-section-number">8</span> Preliminary field trial analysis</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/wolfemd/GenomicSelectionManual">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="prepare-genotypic-data" class="section level1" number="7">
+<h1>
+<span class="header-section-number">7</span> Prepare genotypic data<a class="anchor" aria-label="anchor" href="#prepare-genotypic-data"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li>
+<p><strong>Context and Purpose:</strong></p>
+<ul>
+<li>Depending on whether parent- vs. mate-selection are intended, there are several formats to-be-constructed / computed from the downloaded genotypic data.</li>
+<li>Potentially, do exploratory / preliminary assessment of population structure, esp. any divergence between “training” samples and selection candidates (“test”).</li>
+</ul>
+</li>
+<li><p><strong>Upstream:</strong> Section <a href="prepare-phenotype-data.html#prepare-phenotype-data">6</a> - quality control steps for phenotype data</p></li>
+<li><p><strong>Downstream:</strong> All analyses relying on genotypic data</p></li>
+<li>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li><p>For parent selection: An imputed allele-dosage matrix downloaded from BreedBase (<code>data/BreedBaseGenotypesDownload.tsv</code>)</p></li>
+<li>
+<p>For mate selection:</p>
+<ul>
+<li><p>An imputed variant call format (VCF) file downloaded from BreedBase (<code>data/BreedBaseGenotypesDownload.vcf</code>)</p></li>
+<li><p>A centimorgan-scale genetic map with positions on the same reference genome version as the VCF. Can be sourced from the Cassavabase FTP, FTP archive, or another alternative.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Expected outputs:</strong></p>
+<ul>
+<li><p>For parent selection: a MAF filtered, dosage matrix, possibly with some samples removed relative to the database download.</p></li>
+<li>
+<p>For mate selection:</p>
+<ul>
+<li><p>a haplotype matrix extracted from the VCF</p></li>
+<li><p>a dosage matrix (computed from the haplotype matrix)</p></li>
+<li><p>a filtered SNP list</p></li>
+<li><p>Interpolated genetic map, a cM position for each SNP</p></li>
+</ul>
+</li>
+<li><p>For parent and mate selection: genomic relationship matrices (GRMs, aka kinship matrices), possibly both additive <em>and</em> dominance relationship matrices, constructed based on the dosage matrix.</p></li>
+</ul>
+</li>
+</ul>
+<div id="parent-vs.-mate-selection" class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Parent vs. Mate Selection?<a class="anchor" aria-label="anchor" href="#parent-vs.-mate-selection"><i class="fas fa-link"></i></a>
+</h2>
+<p>The following sections will exemplify the <strong>genomic mate selection</strong> as opposed to the somewhat simpler <strong>genomic parent selection</strong> pathway along the process map. This chapter can be simplified / mostly avoided if parent selection is sufficient.</p>
+</div>
+<div id="check-the-vcf" class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Check the VCF<a class="anchor" aria-label="anchor" href="#check-the-vcf"><i class="fas fa-link"></i></a>
+</h2>
+<p>Check the VCF ‘manually.’</p>
+<ul>
+<li>Are the number of samples and sites what you expected?</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="prepare-genotypic-data.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--vcf</span> data/BreedBaseGenotypesDownload.vcf</span>
+<span id="cb22-2"><a href="prepare-genotypic-data.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># VCFtools - 0.1.16</span></span>
+<span id="cb22-3"><a href="prepare-genotypic-data.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (C) Adam Auton and Anthony Marcketta 2009</span></span>
+<span id="cb22-4"><a href="prepare-genotypic-data.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb22-5"><a href="prepare-genotypic-data.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters as interpreted:</span></span>
+<span id="cb22-6"><a href="prepare-genotypic-data.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   --vcf data/BreedBaseGenotypesDownload.vcf</span></span>
+<span id="cb22-7"><a href="prepare-genotypic-data.html#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb22-8"><a href="prepare-genotypic-data.html#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 1207 out of 1207 Individuals</span></span>
+<span id="cb22-9"><a href="prepare-genotypic-data.html#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 61239 out of a possible 61239 Sites</span></span>
+<span id="cb22-10"><a href="prepare-genotypic-data.html#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Time = 16.00 seconds</span></span></code></pre></div>
+<ul>
+<li>Are the data phased?</li>
+<li>What FORMAT fields are present? At a minimum, should include GT field.</li>
+<li>Do the column-names after FORMAT (should be sample names) look right / make sense?</li>
+<li>Do the SNP IDs in the “ID” field make sense?</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="prepare-genotypic-data.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the header of the VCF file</span></span>
+<span id="cb23-2"><a href="prepare-genotypic-data.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># print the "top-left" corner of the file</span></span>
+<span id="cb23-3"><a href="prepare-genotypic-data.html#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> data/BreedBaseGenotypesDownload.vcf <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n50</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-c1-100</span></span></code></pre></div>
+</div>
+<div id="subset-vcf" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Subset VCF<a class="anchor" aria-label="anchor" href="#subset-vcf"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>There <em>may</em> be multiple imputed DNA samples corresponding to a single unique ‘germplasmName.’ For matching to the phenotypic observations in downstream analyses, a single entry in the VCF file must be chosen per ‘germplasmName.’</li>
+<li>Remove extraneous samples, if any.</li>
+<li>
+<strong>For example / tutorial purposes ONLY:</strong> randomly sample and subset the number of SNPs to only a few thousand, for quick, local computations.</li>
+</ul>
+<div id="remove-duplicate-samples" class="section level3" number="7.3.1">
+<h3>
+<span class="header-section-number">7.3.1</span> Remove duplicate samples<a class="anchor" aria-label="anchor" href="#remove-duplicate-samples"><i class="fas fa-link"></i></a>
+</h3>
+<p>Cassavabase returned multiple columns in the VCF file with the same column-name, because of multiple tissue_samples per germplasmName.
+This prevents using certain tools, e.g. <code>bcftools</code> which errors.</p>
+<p><strong>Manual solution required:</strong></p>
+<p>Write just the column-names of the VCF to disk. Here’s a one-liner:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="prepare-genotypic-data.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">egrep</span> <span class="st">"^#CHROM"</span> data/BreedBaseGenotypesDownload.vcf <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n1</span> <span class="op">&gt;</span> data/vcf_colnames.txt</span>
+<span id="cb24-2"><a href="prepare-genotypic-data.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># egrep "^##SynonymsOfAccessions=" data/BreedBaseGenotypesDownload.vcf | head -n1 &gt; data/vcf_synonyms.txt</span></span></code></pre></div>
+<p>Read the column-names-file to R. Exclude the first 9 elements as they are standard VCF columns, not “germplasmName”</p>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">vcf_sample_names</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"data/vcf_colnames.txt"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">.</span>,<span class="st">"\t"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="va">.</span><span class="op">[</span><span class="fl">10</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">]</span>
+<span class="co"># Check how many sample names are duplicated?</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">vcf_sample_names</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; FALSE  TRUE </span>
+<span class="co">#&gt;   963   244</span></code></pre></div>
+<p>Quite a few duplicates.</p>
+<p>Next, I (1) create unique names for each sample column in the VCF file, (2) write the “unique_names_for_vcf.txt” to disk and (3) use it to replace the current sample column names in the VCF. Finally, I (4) subset the VCF to only one unique instance of each name.</p>
+<p>First, manipulate names using <strong>R</strong>.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># create unique names for each VCF</span>
+<span class="va">unique_names_for_vcf</span><span class="op">&lt;-</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>vcfName<span class="op">=</span><span class="va">vcf_sample_names</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># create an overall index to ensure I can recover the original column order</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>vcfIndex<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># now for each vcfName create an sub-index, to distinguish among duplicates</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">vcfName</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># sub-index</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>vcfNameIndex<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,
+            <span class="co"># For the first (or only) instance of each unique vcfName</span>
+            vcfName_Unique<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">vcfNameIndex</span><span class="op">==</span><span class="fl">1</span>,
+                                  <span class="co"># return the original name</span>
+                                  <span class="va">vcfName</span>,
+                                  <span class="co"># for all subsequent (duplicate) names, </span>
+                                  <span class="co">#put a unique-ified name by pasting the sub-index</span>
+                                  <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">vcfName</span>,<span class="st">"."</span>,<span class="va">vcfNameIndex</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co"># Write the "unique_names_for_vcf.txt" to disk</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">unique_names_for_vcf</span><span class="op">$</span><span class="va">vcfName_Unique</span>,file <span class="op">=</span> <span class="st">"data/unique_names_for_vcf.txt"</span>,
+            row.names <span class="op">=</span> <span class="cn">F</span>, col.names <span class="op">=</span> <span class="cn">F</span>, quote <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+<span class="co"># Create also a list containing only one instance of each unique name, the first instance </span>
+<span class="va">subset_unique_names_for_vcf</span><span class="op">&lt;-</span><span class="va">unique_names_for_vcf</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">vcfNameIndex</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/exposition.html">%$%</a></span>
+     <span class="va">vcfName_Unique</span>
+<span class="co"># Write that list to disk for subsetting the VCF downstream</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">subset_unique_names_for_vcf</span>,file <span class="op">=</span> <span class="st">"data/subset_unique_names_for_vcf.txt"</span>,
+            row.names <span class="op">=</span> <span class="cn">F</span>, col.names <span class="op">=</span> <span class="cn">F</span>, quote <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
+<p>Now in the command line:</p>
+<p><code>bcftools reheader</code> to replace the sample names in the VCF with the unique ones.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="prepare-genotypic-data.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace sample names in original VCF with unique ones (creates a new VCF)</span></span>
+<span id="cb27-2"><a href="prepare-genotypic-data.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> reheader <span class="at">--samples</span> data/unique_names_for_vcf.txt data/BreedBaseGenotypesDownload.vcf <span class="op">&gt;</span> data/BreedBaseGenotypesDownload_1.vcf<span class="kw">;</span> </span>
+<span id="cb27-3"><a href="prepare-genotypic-data.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># overwrite the original VCF with the new  that has unique names</span></span>
+<span id="cb27-4"><a href="prepare-genotypic-data.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> data/BreedBaseGenotypesDownload_1.vcf data/BreedBaseGenotypesDownload.vcf<span class="kw">;</span></span>
+<span id="cb27-5"><a href="prepare-genotypic-data.html#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># check that the names are now unique by printing sample list</span></span>
+<span id="cb27-6"><a href="prepare-genotypic-data.html#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> query <span class="at">--list-samples</span> data/BreedBaseGenotypesDownload.vcf</span></code></pre></div>
+<p>Now subset the VCF to only a single instance of each “germplasmName” with <code>vcftools</code>.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="prepare-genotypic-data.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--vcf</span> data/BreedBaseGenotypesDownload.vcf <span class="at">--keep</span> data/subset_unique_names_for_vcf.txt <span class="at">--recode</span> <span class="at">--stdout</span> <span class="kw">|</span> <span class="ex">bgzip</span> <span class="at">-c</span> <span class="op">&gt;</span> data/BreedBaseGenotypes_subset.vcf.gz</span>
+<span id="cb28-2"><a href="prepare-genotypic-data.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># uses stdout and bgzip to output a gzipped vcf file; saves disk space!</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="prepare-genotypic-data.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--gzvcf</span> data/BreedBaseGenotypes_subset.vcf.gz</span>
+<span id="cb29-2"><a href="prepare-genotypic-data.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#VCFtools - 0.1.16</span></span>
+<span id="cb29-3"><a href="prepare-genotypic-data.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#(C) Adam Auton and Anthony Marcketta 2009</span></span>
+<span id="cb29-4"><a href="prepare-genotypic-data.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters as interpreted:</span></span>
+<span id="cb29-5"><a href="prepare-genotypic-data.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   --gzvcf data/BreedBaseGenotypes_subset.vcf.gz</span></span>
+<span id="cb29-6"><a href="prepare-genotypic-data.html#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb29-7"><a href="prepare-genotypic-data.html#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Using zlib version: 1.2.11</span></span>
+<span id="cb29-8"><a href="prepare-genotypic-data.html#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 963 out of 963 Individuals</span></span>
+<span id="cb29-9"><a href="prepare-genotypic-data.html#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 61239 out of a possible 61239 Sites</span></span>
+<span id="cb29-10"><a href="prepare-genotypic-data.html#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Time = 2.00 seconds</span></span></code></pre></div>
+</div>
+<div id="check-genotype-to-phenotype-matches" class="section level3" number="7.3.2">
+<h3>
+<span class="header-section-number">7.3.2</span> Check genotype-to-phenotype matches<a class="anchor" aria-label="anchor" href="#check-genotype-to-phenotype-matches"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Do the number of unique <strong>germplasmName</strong> (in the [cleaned phenos from the previous step][save_cleaned_phenos]) matching samples in the VCF make sense? Are there as many as expected? If not, you will need to figure out why not.</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">phenos</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"phenotypes_cleaned.rds"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># vector of the unique germplasmName in the field trial data</span>
+<span class="va">germplasm_with_phenos</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">phenos</span><span class="op">$</span><span class="va">germplasmName</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">germplasm_with_phenos</span><span class="op">)</span> 
+<span class="co">#&gt; [1] 1002</span></code></pre></div>
+<p>How many matches to the VCF?</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">germplasm_with_phenos</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">subset_unique_names_for_vcf</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; FALSE  TRUE </span>
+<span class="co">#&gt;   652   350</span></code></pre></div>
+<p>350 matches.
+Does that make sense?
+Yes. We ended up excluding the “genetic gain” trial from the phenotypes b/c actually there were no trait scores.</p>
+<p>To be sure, I look at the names of:
+(1) the genotyped <em>and</em> phenotyped, (2) the genotyped <em>but not</em> phenotyped, (3) the phenotyped <em>but not</em> genotyped.</p>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># geno and pheno</span>
+<span class="va">subset_unique_names_for_vcf</span><span class="op">[</span><span class="va">subset_unique_names_for_vcf</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">germplasm_with_phenos</span><span class="op">]</span>
+<span class="co"># pheno not geno</span>
+<span class="va">germplasm_with_phenos</span><span class="op">[</span><span class="op">!</span><span class="va">germplasm_with_phenos</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">subset_unique_names_for_vcf</span><span class="op">]</span>
+<span class="co"># geno not pheno</span>
+<span class="va">subset_unique_names_for_vcf</span><span class="op">[</span><span class="op">!</span><span class="va">subset_unique_names_for_vcf</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">germplasm_with_phenos</span><span class="op">]</span></code></pre></div>
+<p>To diagnose some the phenotyped-but-not-genotyped, I actually resorted to searching a few on Cassavabase to verify that there were non-genotyped lines in the trials I downloaded.</p>
+<p>For the genotyped-but-not-phenotyped, indeed the names are all “genetic gain” population clones.</p>
+<p><strong>Probably the details above will change if I go back and choose better example trials.</strong></p>
+<p><strong>The checklist and approach to verifying it all should stay the same.</strong></p>
+</div>
+<div id="subset-snps-for-tutorial-purposes" class="section level3" number="7.3.3">
+<h3>
+<span class="header-section-number">7.3.3</span> Subset SNPs (for tutorial purposes)<a class="anchor" aria-label="anchor" href="#subset-snps-for-tutorial-purposes"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>For example / tutorial purposes ONLY:</strong> randomly sample and subset the number of SNPs to only a few thousand, for quick, local computations.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="prepare-genotypic-data.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write the positions list</span></span>
+<span id="cb33-2"><a href="prepare-genotypic-data.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># first two columns (chrom. and position) of the VCF </span></span>
+<span id="cb33-3"><a href="prepare-genotypic-data.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ignoring the header rows</span></span>
+<span id="cb33-4"><a href="prepare-genotypic-data.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> data/BreedBaseGenotypesDownload.vcf <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">"^#"</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f1-2</span> <span class="op">&gt;</span> data/BreedBaseGenotypesDownload.positions</span></code></pre></div>
+<p>Read into R, sample 4000 at random</p>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"BreedBaseGenotypesDownload.positions"</span><span class="op">)</span>, 
+           header <span class="op">=</span> <span class="cn">F</span>, stringsAsFactors <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">4000</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">V1</span>,<span class="va">V2</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">.</span>,file <span class="op">=</span> <span class="st">"data/BreedBaseGenotypes_subset.positions"</span>,
+                 row.names <span class="op">=</span> <span class="cn">F</span>, col.names <span class="op">=</span> <span class="cn">F</span>, quote <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
+<p>Subset the VCF using the randomly sampled list of positions.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="prepare-genotypic-data.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--vcf</span> data/BreedBaseGenotypesDownload.vcf <span class="dt">\</span></span>
+<span id="cb35-2"><a href="prepare-genotypic-data.html#cb35-2" aria-hidden="true" tabindex="-1"></a>--keep data/subset_unique_names_for_vcf.txt <span class="dt">\</span></span>
+<span id="cb35-3"><a href="prepare-genotypic-data.html#cb35-3" aria-hidden="true" tabindex="-1"></a>--positions data/BreedBaseGenotypes_subset.positions <span class="dt">\</span></span>
+<span id="cb35-4"><a href="prepare-genotypic-data.html#cb35-4" aria-hidden="true" tabindex="-1"></a>--recode <span class="at">--stdout</span> <span class="kw">|</span> <span class="ex">bgzip</span> <span class="at">-c</span> <span class="op">&gt;</span> data/BreedBaseGenotypes_subset.vcf.gz</span>
+<span id="cb35-5"><a href="prepare-genotypic-data.html#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co"># VCFtools - 0.1.16</span></span>
+<span id="cb35-6"><a href="prepare-genotypic-data.html#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co"># (C) Adam Auton and Anthony Marcketta 2009</span></span>
+<span id="cb35-7"><a href="prepare-genotypic-data.html#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb35-8"><a href="prepare-genotypic-data.html#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters as interpreted:</span></span>
+<span id="cb35-9"><a href="prepare-genotypic-data.html#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   --vcf data/BreedBaseGenotypesDownload.vcf</span></span>
+<span id="cb35-10"><a href="prepare-genotypic-data.html#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   --keep data/subset_unique_names_for_vcf.txt</span></span>
+<span id="cb35-11"><a href="prepare-genotypic-data.html#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   --positions data/BreedBaseGenotypes_subset.positions</span></span>
+<span id="cb35-12"><a href="prepare-genotypic-data.html#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   --recode</span></span>
+<span id="cb35-13"><a href="prepare-genotypic-data.html#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   --stdout</span></span>
+<span id="cb35-14"><a href="prepare-genotypic-data.html#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb35-15"><a href="prepare-genotypic-data.html#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Keeping individuals in 'keep' list</span></span>
+<span id="cb35-16"><a href="prepare-genotypic-data.html#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 963 out of 1207 Individuals</span></span>
+<span id="cb35-17"><a href="prepare-genotypic-data.html#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputting VCF file...</span></span>
+<span id="cb35-18"><a href="prepare-genotypic-data.html#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 4000 out of a possible 61239 Sites</span></span>
+<span id="cb35-19"><a href="prepare-genotypic-data.html#cb35-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Time = 8.00 seconds</span></span></code></pre></div>
+</div>
+<div id="ld-prunning-snps-for-computational-savings" class="section level3" number="7.3.4">
+<h3>
+<span class="header-section-number">7.3.4</span> LD-prunning SNPs (for computational savings)<a class="anchor" aria-label="anchor" href="#ld-prunning-snps-for-computational-savings"><i class="fas fa-link"></i></a>
+</h3>
+<p><strong>NOT DEMONSTRATED HERE, YET.</strong> In practice, when predicting cross-variances, it can still be very computationally intensive with large numbers of markers. <a href="https://wolfemd.github.io/IITA_2021GS/04-PreprocessDataFiles.html#Variant_filters">Previously</a>, I used <code>plink --indep-pairwise</code> to prune markers based on linkage disequilibrium. I <a href="https://wolfemd.github.io/IITA_2021GS/07-Results.html#Prediction_accuracy_estimates">found an LD-prunned subset that had similar accuracy to the full set</a>, but less than half the markers. Subsequently, I used the full set to predict cross means, but the LD-pruned marker subset for the cross variances <a href="https://wolfemd.github.io/IITA_2021GS/07-Results.html#Genomic_Predictions">predictions of &gt;250K crosses of 719 candidate parents in IITA’s 2021 crossing block</a>.</p>
+</div>
+</div>
+<div id="haplotype-matrix-from-vcf" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Haplotype matrix from VCF<a class="anchor" aria-label="anchor" href="#haplotype-matrix-from-vcf"><i class="fas fa-link"></i></a>
+</h2>
+<p>Extract haplotypes from VCF with <code>bcftools convert --hapsample</code></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb36-1"><a href="prepare-genotypic-data.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> convert <span class="at">--hapsample</span> data/BreedBaseGenotypes_subset data/BreedBaseGenotypes_subset.vcf.gz</span>
+<span id="cb36-2"><a href="prepare-genotypic-data.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Hap file: data/BreedBaseGenotypes_subset.hap.gz</span></span>
+<span id="cb36-3"><a href="prepare-genotypic-data.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample file: data/BreedBaseGenotypes_subset.samples</span></span>
+<span id="cb36-4"><a href="prepare-genotypic-data.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># [W::vcf_parse_format] FORMAT 'NT' at 1:652699 is not defined in the header, assuming Type=String</span></span>
+<span id="cb36-5"><a href="prepare-genotypic-data.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 4000 records written, 0 skipped: 0/0/0 no-ALT/non-biallelic/filtered</span></span></code></pre></div>
+<p>Read haps to R and format them.</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'data.table'</span>
+<span class="co">#&gt; The following objects are masked from 'package:dplyr':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     between, first, last</span>
+<span class="co">#&gt; The following object is masked from 'package:purrr':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     transpose</span>
+<span class="va">vcfName</span><span class="op">&lt;-</span><span class="st">"BreedBaseGenotypes_subset"</span>
+<span class="va">haps</span><span class="op">&lt;-</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"data/"</span>,<span class="va">vcfName</span>,<span class="st">".hap.gz"</span><span class="op">)</span>,
+            stringsAsFactors <span class="op">=</span> <span class="cn">F</span>,header <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+  <span class="va">as.data.frame</span>
+<span class="va">sampleids</span><span class="op">&lt;-</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"data/"</span>,<span class="va">vcfName</span>,<span class="st">".samples"</span><span class="op">)</span>,
+                 stringsAsFactors <span class="op">=</span> <span class="cn">F</span>,header <span class="op">=</span> <span class="cn">F</span>,skip <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+  <span class="va">as.data.frame</span></code></pre></div>
+<p>Add sample ID’s.</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">hapids</span><span class="op">&lt;-</span><span class="va">sampleids</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">V1</span>,<span class="va">V2</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>SampleIndex<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>HapA<span class="op">=</span><span class="va">V1</span>,HapB<span class="op">=</span><span class="va">V2</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">HapA</span>,<span class="va">HapB</span><span class="op">)</span>,
+                  names_to <span class="op">=</span> <span class="st">"Haplo"</span>,values_to <span class="op">=</span> <span class="st">"SampleID"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>HapID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">SampleID</span>,<span class="st">"_"</span>,<span class="va">Haplo</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">SampleIndex</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">haps</span><span class="op">)</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Chr"</span>,<span class="st">"HAP_ID"</span>,<span class="st">"Pos"</span>,<span class="st">"REF"</span>,<span class="st">"ALT"</span>,<span class="va">hapids</span><span class="op">$</span><span class="va">HapID</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">haps</span><span class="op">)</span>
+<span class="co">#&gt; [1] 4000 1931</span></code></pre></div>
+<p>Format, transpose, convert to matrix.</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">haps</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/compound.html">%&lt;&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>HAP_ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">":"</span>,<span class="st">"_"</span>,<span class="va">HAP_ID</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"HAP_ID"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Chr</span>,<span class="op">-</span><span class="va">Pos</span>,<span class="op">-</span><span class="va">REF</span>,<span class="op">-</span><span class="va">ALT</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="dosage-matrix-from-haps" class="section level2" number="7.5">
+<h2>
+<span class="header-section-number">7.5</span> Dosage matrix from haps<a class="anchor" aria-label="anchor" href="#dosage-matrix-from-haps"><i class="fas fa-link"></i></a>
+</h2>
+<p>To ensure consistency in allele counting, create dosage from haps manually.</p>
+<p>The counted allele in the dosage matrix, which will be used downstream to construct kinship matrices and estimate marker effects, should be the ALT allele. This will ensure a match to the haplotype matrix, where a “1” indicates the presence of the ALT allele.</p>
+<p>Here’s my tidyverse-based approach, using <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> plus <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> to sum the two haplotypes for each individual across all loci.</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dosages</span><span class="op">&lt;-</span><span class="va">haps</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span>
+     <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"GID"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">GID</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SampleID"</span>,<span class="st">"Haplo"</span><span class="op">)</span>,<span class="st">"_Hap"</span>,remove <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Haplo</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">SampleID</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>,<span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"SampleID"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="va">as.matrix</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># preserve same order as in haps</span>
+     <span class="va">.</span><span class="op">[</span><span class="va">sampleids</span><span class="op">$</span><span class="va">V1</span>,<span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">dosages</span><span class="op">)</span>
+<span class="co">#&gt; [1]  963 4000</span>
+<span class="co"># [1]  963 4000</span>
+
+<span class="va">dosages</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>
+<span class="co">#&gt;                    1_652699_G_C 1_868970_G_T 1_943129_T_A</span>
+<span class="co">#&gt; IITA-TMS-IBA30572             1            0            0</span>
+<span class="co">#&gt; IITA-TMS-IBA940237            0            0            1</span>
+<span class="co">#&gt; IITA-TMS-IBA961642            1            1            0</span>
+<span class="co">#&gt; IITA-TMS-ONN920168            0            0            0</span>
+<span class="co">#&gt; IITA-TMS-WAR4080              1            0            0</span>
+<span class="co">#&gt;                    1_1132830_A_T 1_1310706_A_T</span>
+<span class="co">#&gt; IITA-TMS-IBA30572              1             0</span>
+<span class="co">#&gt; IITA-TMS-IBA940237             1             1</span>
+<span class="co">#&gt; IITA-TMS-IBA961642             2             0</span>
+<span class="co">#&gt; IITA-TMS-ONN920168             0             0</span>
+<span class="co">#&gt; IITA-TMS-WAR4080               1             0</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">haps</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>
+<span class="co">#&gt;                         1_652699_G_C 1_868970_G_T</span>
+<span class="co">#&gt; IITA-TMS-IBA30572_HapA             1            0</span>
+<span class="co">#&gt; IITA-TMS-IBA30572_HapB             0            0</span>
+<span class="co">#&gt; IITA-TMS-IBA940237_HapA            0            0</span>
+<span class="co">#&gt; IITA-TMS-IBA940237_HapB            0            0</span>
+<span class="co">#&gt; IITA-TMS-IBA961642_HapA            1            0</span>
+<span class="co">#&gt; IITA-TMS-IBA961642_HapB            0            1</span>
+<span class="co">#&gt; IITA-TMS-ONN920168_HapA            0            0</span>
+<span class="co">#&gt; IITA-TMS-ONN920168_HapB            0            0</span>
+<span class="co">#&gt; IITA-TMS-WAR4080_HapA              0            0</span>
+<span class="co">#&gt; IITA-TMS-WAR4080_HapB              1            0</span>
+<span class="co">#&gt;                         1_943129_T_A 1_1132830_A_T</span>
+<span class="co">#&gt; IITA-TMS-IBA30572_HapA             0             1</span>
+<span class="co">#&gt; IITA-TMS-IBA30572_HapB             0             0</span>
+<span class="co">#&gt; IITA-TMS-IBA940237_HapA            0             0</span>
+<span class="co">#&gt; IITA-TMS-IBA940237_HapB            1             1</span>
+<span class="co">#&gt; IITA-TMS-IBA961642_HapA            0             1</span>
+<span class="co">#&gt; IITA-TMS-IBA961642_HapB            0             1</span>
+<span class="co">#&gt; IITA-TMS-ONN920168_HapA            0             0</span>
+<span class="co">#&gt; IITA-TMS-ONN920168_HapB            0             0</span>
+<span class="co">#&gt; IITA-TMS-WAR4080_HapA              0             0</span>
+<span class="co">#&gt; IITA-TMS-WAR4080_HapB              0             1</span>
+<span class="co">#&gt;                         1_1310706_A_T</span>
+<span class="co">#&gt; IITA-TMS-IBA30572_HapA              0</span>
+<span class="co">#&gt; IITA-TMS-IBA30572_HapB              0</span>
+<span class="co">#&gt; IITA-TMS-IBA940237_HapA             0</span>
+<span class="co">#&gt; IITA-TMS-IBA940237_HapB             1</span>
+<span class="co">#&gt; IITA-TMS-IBA961642_HapA             0</span>
+<span class="co">#&gt; IITA-TMS-IBA961642_HapB             0</span>
+<span class="co">#&gt; IITA-TMS-ONN920168_HapA             0</span>
+<span class="co">#&gt; IITA-TMS-ONN920168_HapB             0</span>
+<span class="co">#&gt; IITA-TMS-WAR4080_HapA               0</span>
+<span class="co">#&gt; IITA-TMS-WAR4080_HapB               0</span></code></pre></div>
+</div>
+<div id="variant-filters" class="section level2" number="7.6">
+<h2>
+<span class="header-section-number">7.6</span> Variant filters<a class="anchor" aria-label="anchor" href="#variant-filters"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this case, simple: keep only positions with &gt;1% minor allele frequency.</p>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># use function built into genomicMateSelectR</span>
+<span class="va">dosages</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/maf_filter.html">maf_filter</a></span><span class="op">(</span><span class="va">dosages</span>,thresh <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">dosages</span><span class="op">)</span>
+<span class="co">#&gt; [1]  963 3986</span>
+<span class="co"># subset haps to match</span>
+<span class="va">haps</span><span class="op">&lt;-</span><span class="va">haps</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dosages</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<div id="save-dosages-and-haps" class="section level3" number="7.6.1">
+<h3>
+<span class="header-section-number">7.6.1</span> Save dosages and haps<a class="anchor" aria-label="anchor" href="#save-dosages-and-haps"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">dosages</span>,file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"dosages.rds"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">haps</span>,file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"haplotypes.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+</div>
+<div id="genomic-relationship-matrices-grms" class="section level2" number="7.7">
+<h2>
+<span class="header-section-number">7.7</span> Genomic Relationship Matrices (GRMs)<a class="anchor" aria-label="anchor" href="#genomic-relationship-matrices-grms"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the example below, I use the <code>genomicMateSelectR</code> function <code><a href="https://rdrr.io/pkg/genomicMateSelectR/man/kinship.html">kinship()</a></code> to construct <strong>additive</strong> (A) and <strong>dominance</strong> (D) relationship matrices.</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">A</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/kinship.html">kinship</a></span><span class="op">(</span><span class="va">dosages</span>,type<span class="op">=</span><span class="st">"add"</span><span class="op">)</span>
+<span class="va">D</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/kinship.html">kinship</a></span><span class="op">(</span><span class="va">dosages</span>,type<span class="op">=</span><span class="st">"domGenotypic"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">A</span>,file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"kinship_add.rds"</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">D</span>,file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"kinship_dom.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>For more information on the models to-be-implemented downstream, see <a href="https://wolfemd.github.io/genomicMateSelectR/articles/non_additive_models.html#genetic-models-implemented-1">this vignette for <strong>genomicMateSelectR</strong></a>, the references cited therein.</p>
+</div>
+<div id="recombination-frequency-matrix" class="section level2" number="7.8">
+<h2>
+<span class="header-section-number">7.8</span> Recombination Frequency Matrix<a class="anchor" aria-label="anchor" href="#recombination-frequency-matrix"><i class="fas fa-link"></i></a>
+</h2>
+<p>Matrix need for cross-variance predictions.</p>
+<div id="source-a-genetic-map" class="section level3" number="7.8.1">
+<h3>
+<span class="header-section-number">7.8.1</span> Source a genetic map<a class="anchor" aria-label="anchor" href="#source-a-genetic-map"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Must match the reference genome of the marker set to be used in prediction</li>
+<li>Not necessarily the exact markerset, but overlap is ideal</li>
+</ul>
+<p>I source a single genome-wide file representing the ICGMC concensus genetic map on the V6 Cassava Reference genome. The file is on the Cassavabase FTP-archive, <a href="https://cassavabase.org/ftp/marnin_datasets/NGC_BigData/CassavaGeneticMap/cassava_cM_pred.v6.allchr.txt">here</a>.</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">genmap</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"https://cassavabase.org/ftp/marnin_datasets/NGC_BigData/CassavaGeneticMap/cassava_cM_pred.v6.allchr.txt"</span>,
+                   header <span class="op">=</span> <span class="cn">F</span>, sep<span class="op">=</span><span class="st">';'</span>, stringsAsFactors <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>SNP_ID<span class="op">=</span><span class="va">V1</span>,Pos<span class="op">=</span><span class="va">V2</span>,cM<span class="op">=</span><span class="va">V3</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+  <span class="va">as_tibble</span>
+<span class="va">genmap</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="va">dim</span>
+<span class="co">#&gt; [1] 120979      3</span></code></pre></div>
+<p>120K positions.</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">genmap</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="va">head</span>
+<span class="co">#&gt; # A tibble: 6 × 3</span>
+<span class="co">#&gt;   SNP_ID     Pos    cM</span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 S1_26576 26576   2.7</span>
+<span class="co">#&gt; 2 S1_26624 26624   2.7</span>
+<span class="co">#&gt; 3 S1_26659 26659   2.7</span>
+<span class="co">#&gt; 4 S1_27720 27720   2.7</span>
+<span class="co">#&gt; 5 S1_27739 27739   2.7</span>
+<span class="co">#&gt; 6 S1_27746 27746   2.7</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">snps_genmap</span><span class="op">&lt;-</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>DoseSNP_ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dosages</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">DoseSNP_ID</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Chr"</span>,<span class="st">"Pos"</span>,<span class="st">"Ref"</span>,<span class="st">"Alt"</span><span class="op">)</span>,remove <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>SNP_ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"S"</span>,<span class="va">Chr</span>,<span class="st">"_"</span>,<span class="va">Pos</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">genmap</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">SNP_ID</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Chr"</span>,<span class="st">"POS"</span><span class="op">)</span>,<span class="st">"_"</span>,remove <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">POS</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Chr<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"S"</span>,<span class="st">""</span>,<span class="va">Chr</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>,<span class="va">as.character</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Joining, by = c("Chr", "Pos", "SNP_ID")</span>
+<span class="va">snps_genmap</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">Pos</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span><span class="op">/</span><span class="fl">1000</span>,y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">cM</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">Chr</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 1567 rows containing missing values</span>
+<span class="co">#&gt; (geom_point).</span></code></pre></div>
+<div class="inline-figure"><img src="04-prep_genos_files/figure-html/unnamed-chunk-26-1.png" width="672"></div>
+</div>
+<div id="interpolate-genetic-map" class="section level3" number="7.8.2">
+<h3>
+<span class="header-section-number">7.8.2</span> Interpolate genetic map<a class="anchor" aria-label="anchor" href="#interpolate-genetic-map"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">interpolate_genmap</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">{</span>
+  <span class="co"># for each chromosome map</span>
+  <span class="co"># find and _decrements_ in the genetic map distance</span>
+  <span class="co"># fix them to the cumulative max to force map to be only increasing</span>
+  <span class="co"># fit a spline for each chromosome</span>
+  <span class="co"># Use it to predict values for positions not previously on the map</span>
+  <span class="co"># fix them AGAIN (in case) to the cumulative max, forcing map to only increase</span>
+  <span class="va">data_forspline</span><span class="op">&lt;-</span><span class="va">data</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">cM</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cumMax<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cummax</a></span><span class="op">(</span><span class="va">cM</span><span class="op">)</span>,
+           cumIncrement<span class="op">=</span><span class="va">cM</span><span class="op">-</span><span class="va">cumMax</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cumIncrement</span><span class="op">&gt;=</span><span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">cumMax</span>,<span class="op">-</span><span class="va">cumIncrement</span><span class="op">)</span>
+  
+  <span class="va">spline</span><span class="op">&lt;-</span><span class="va">data_forspline</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/exposition.html">%$%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/smooth.spline.html">smooth.spline</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Pos</span>,y<span class="op">=</span><span class="va">cM</span>,spar <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span>
+  
+  <span class="va">splinemap</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">spline</span>,x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">Pos</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Pos<span class="op">=</span><span class="va">x</span>,cM<span class="op">=</span><span class="va">y</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cumMax<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cummax</a></span><span class="op">(</span><span class="va">cM</span><span class="op">)</span>,
+           cumIncrement<span class="op">=</span><span class="va">cM</span><span class="op">-</span><span class="va">cumMax</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cM<span class="op">=</span><span class="va">cumMax</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">cumMax</span>,<span class="op">-</span><span class="va">cumIncrement</span><span class="op">)</span>
+  
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">splinemap</span><span class="op">)</span> 
+<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">splined_snps_genmap</span><span class="op">&lt;-</span><span class="va">snps_genmap</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">cM</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Pos<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Pos</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">snps_genmap</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">Pos</span>,<span class="va">cM</span><span class="op">)</span>,<span class="va">as.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">Chr</span>,<span class="va">Pos</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+              <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span><span class="op">(</span><span class="op">-</span><span class="va">Chr</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+              <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>data<span class="op">=</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">data</span>,<span class="va">interpolate_genmap</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+              <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+  <span class="va">distinct</span>
+<span class="co">#&gt; Warning: All elements of `...` must be named.</span>
+<span class="co">#&gt; Did you want `data = c(DoseSNP_ID, Pos, Ref, Alt, SNP_ID, cM)`?</span>
+<span class="co">#&gt; Joining, by = c("Chr", "Pos")</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dosages</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">splined_snps_genmap</span><span class="op">$</span><span class="va">DoseSNP_ID</span><span class="op">)</span>
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">splined_snps_genmap</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">DoseSNP_ID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dosages</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Map<span class="op">=</span><span class="st">"Spline"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">snps_genmap</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">DoseSNP_ID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dosages</span><span class="op">)</span>,
+                           <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">cM</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">Pos</span>,<span class="va">cM</span><span class="op">)</span>,<span class="va">as.numeric</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">Chr</span>,<span class="va">Pos</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Map<span class="op">=</span><span class="st">"Data"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Pos</span><span class="op">/</span><span class="fl">1000</span><span class="op">/</span><span class="fl">1000</span>,y<span class="op">=</span><span class="va">cM</span>,color<span class="op">=</span><span class="va">Map</span>, shape<span class="op">=</span><span class="va">Map</span><span class="op">)</span>,alpha<span class="op">=</span><span class="fl">0.3</span>,size<span class="op">=</span><span class="fl">0.75</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">Chr</span><span class="op">)</span>, scales<span class="op">=</span><span class="st">'free_x'</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure">
+<img src="04-prep_genos_files/figure-html/unnamed-chunk-30-1.png" width="672">
+Save the interpolated map, just for the marker loci to-be-used downstream.</div>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">splined_snps_genmap</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">DoseSNP_ID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dosages</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">.</span>,file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"interpolated_genmap.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="recomb.-freq.-matrix" class="section level3" number="7.8.3">
+<h3>
+<span class="header-section-number">7.8.3</span> Recomb. freq. matrix<a class="anchor" aria-label="anchor" href="#recomb.-freq.-matrix"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">genmap</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span>file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"interpolated_genmap.rds"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">m</span><span class="op">&lt;-</span><span class="va">genmap</span><span class="op">$</span><span class="va">cM</span>;
+<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">&lt;-</span><span class="va">genmap</span><span class="op">$</span><span class="va">DoseSNP_ID</span>
+<span class="va">recombFreqMat</span><span class="op">&lt;-</span><span class="fl">1</span><span class="op">-</span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/genmap2recombfreq.html">genmap2recombfreq</a></span><span class="op">(</span><span class="va">m</span>,nChr <span class="op">=</span> <span class="fl">18</span><span class="op">)</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">recombFreqMat</span>,file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"recombFreqMat_1minus2c.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>See also, <a href="https://wolfemd.github.io/genomicMateSelectR/articles/start_here.html#recombination-frequency-matrix-1"><strong>genomicMateSelectR</strong> vignette</a>.</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="prepare-phenotype-data.html"><span class="header-section-number">6</span> Prepare phenotype data</a></div>
+<div class="next"><a href="preliminary-field-trial-analysis.html"><span class="header-section-number">8</span> Preliminary field trial analysis</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#prepare-genotypic-data"><span class="header-section-number">7</span> Prepare genotypic data</a></li>
+<li><a class="nav-link" href="#parent-vs.-mate-selection"><span class="header-section-number">7.1</span> Parent vs. Mate Selection?</a></li>
+<li><a class="nav-link" href="#check-the-vcf"><span class="header-section-number">7.2</span> Check the VCF</a></li>
+<li>
+<a class="nav-link" href="#subset-vcf"><span class="header-section-number">7.3</span> Subset VCF</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#remove-duplicate-samples"><span class="header-section-number">7.3.1</span> Remove duplicate samples</a></li>
+<li><a class="nav-link" href="#check-genotype-to-phenotype-matches"><span class="header-section-number">7.3.2</span> Check genotype-to-phenotype matches</a></li>
+<li><a class="nav-link" href="#subset-snps-for-tutorial-purposes"><span class="header-section-number">7.3.3</span> Subset SNPs (for tutorial purposes)</a></li>
+<li><a class="nav-link" href="#ld-prunning-snps-for-computational-savings"><span class="header-section-number">7.3.4</span> LD-prunning SNPs (for computational savings)</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#haplotype-matrix-from-vcf"><span class="header-section-number">7.4</span> Haplotype matrix from VCF</a></li>
+<li><a class="nav-link" href="#dosage-matrix-from-haps"><span class="header-section-number">7.5</span> Dosage matrix from haps</a></li>
+<li>
+<a class="nav-link" href="#variant-filters"><span class="header-section-number">7.6</span> Variant filters</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#save-dosages-and-haps"><span class="header-section-number">7.6.1</span> Save dosages and haps</a></li></ul>
+</li>
+<li><a class="nav-link" href="#genomic-relationship-matrices-grms"><span class="header-section-number">7.7</span> Genomic Relationship Matrices (GRMs)</a></li>
+<li>
+<a class="nav-link" href="#recombination-frequency-matrix"><span class="header-section-number">7.8</span> Recombination Frequency Matrix</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#source-a-genetic-map"><span class="header-section-number">7.8.1</span> Source a genetic map</a></li>
+<li><a class="nav-link" href="#interpolate-genetic-map"><span class="header-section-number">7.8.2</span> Interpolate genetic map</a></li>
+<li><a class="nav-link" href="#recomb.-freq.-matrix"><span class="header-section-number">7.8.3</span> Recomb. freq. matrix</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/wolfemd/GenomicSelectionManual/blob/master/04-prep_genos.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/wolfemd/GenomicSelectionManual/edit/master/04-prep_genos.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-01-13.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
