@@ -1,28 +1,31 @@
 
-get_blups<-function(fixedFormula,randFormula,rcovFormula,...){
+get_blups<-function(fixedFormula,randFormula,rcovFormula,METdata,
+                    removeOutliers=TRUE,...){
      # Run model first time
      mmer_output<-mmer(fixed = as.formula(fixedFormula),
                        random = as.formula(randFormula),
                        rcov= as.formula(rcovFormula),
                        data=METdata, 
                        getPEV = T)
-     # Outlier Detection and Removal
-     ## index observations that are defined as outliers
-     outliers<-which(abs(scale(mmer_output$residuals))>3.3)
-     
-     # remove outliers, if any
-     if(length(outliers)>0){ 
-          x<-METdata[-outliers,] 
-          # Refit the model
-          starttime<-proc.time()[3]
-          mmer_output<-mmer(fixed = as.formula(fixedFormula),
-                            random = as.formula(randFormula),
-                            rcov= as.formula(rcovFormula),
-                            data=x, 
-                            getPEV = T)
-          stoptime<-proc.time()[3]; elapsed<-stoptime-starttime; elapsed/60
+     if(removeOutliers==TRUE){
+          # Outlier Detection and Removal
+          ## index observations that are defined as outliers
+          outliers<-which(abs(scale(mmer_output$residuals))>3.3)
+          
+          # remove outliers, if any
+          if(length(outliers)>0){ 
+               x<-METdata[-outliers,] 
+               # Refit the model
+               starttime<-proc.time()[3]
+               mmer_output<-mmer(fixed = as.formula(fixedFormula),
+                                 random = as.formula(randFormula),
+                                 rcov= as.formula(rcovFormula),
+                                 data=x, 
+                                 getPEV = T)
+               stoptime<-proc.time()[3]; elapsed<-stoptime-starttime; elapsed/60
+          }
      }
-     if(length(outliers)==0){ outliers<-NULL }
+     if(length(outliers)==0 | removeOutliers==FALSE){ outliers<-NULL }
      
      # log likelihood of the model, AIC, convergence T/F
      modelfit<-summary(mmer_output)$logo
