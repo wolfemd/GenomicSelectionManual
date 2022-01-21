@@ -1,6 +1,8 @@
 # Preliminary field trial analysis
 
-
+```{r setup, include=F, echo=F}
+library(tidyverse); library(genomicMateSelectR); library(sommer); library(gt)
+```
 
 -   **Context and Purpose:**
 
@@ -34,30 +36,21 @@ Conduct weighted cross-validation and genomic prediction analyses using **`de-re
 
 ## Set-up training datasets
 
-
-```r
+```{r}
 phenos<-readRDS(here::here("output","phenotypes_cleaned.rds"))
 ```
 
 The pipeline version of this analysis will use the `TRUE/FALSE` values of **`CompleteBlocks`** and **`IncompleteBlocks`** ([Preliminary analysis of trial data](#detect_designs) ).
 
-
-```r
+```{r}
 phenos %>% 
      count(CompleteBlocks,IncompleteBlocks,locationName) %>% 
      spread(locationName,n)
-#> # A tibble: 3 × 4
-#>   CompleteBlocks IncompleteBlocks Ibadan Ubiaja
-#>   <lgl>          <lgl>             <int>  <int>
-#> 1 FALSE          TRUE                777     NA
-#> 2 TRUE           FALSE                NA    125
-#> 3 TRUE           TRUE                407    414
 ```
 
 Convert the data to "long format" . Remove missing values. "Nest" the data by Trait.
 
-
-```r
+```{r}
 traits<-c("DM","MCMDS","logFYLD","logDYLD")
 phenos<-phenos %>% 
      # Convert the data to "long format" 
@@ -69,13 +62,6 @@ phenos<-phenos %>%
      nest(METdata=c(-Trait))
 phenos %>% 
      mutate(N_plots=map_dbl(METdata,nrow))
-#> # A tibble: 4 × 3
-#>   Trait   METdata               N_plots
-#>   <chr>   <list>                  <dbl>
-#> 1 DM      <tibble [1,448 × 35]>    1448
-#> 2 MCMDS   <tibble [1,436 × 35]>    1436
-#> 3 logFYLD <tibble [1,590 × 35]>    1590
-#> 4 logDYLD <tibble [1,443 × 35]>    1443
 ```
 
 Where previously there was one row per plot and a large number of columns, now things are simple and tidy.
@@ -84,16 +70,9 @@ One row per trait. The actual plot-basis data are now contained within **METdata
 
 To demonstrate, check the contents of row 1 of the **METdata** column:
 
-
-```r
+```{r}
 phenos$METdata[[1]] %>% head %>% rmarkdown::paged_table()
 ```
-
-<div data-pagedtable="false">
-  <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["studyYear"],"name":[1],"type":["int"],"align":["right"]},{"label":["programName"],"name":[2],"type":["chr"],"align":["left"]},{"label":["locationName"],"name":[3],"type":["chr"],"align":["left"]},{"label":["studyName"],"name":[4],"type":["chr"],"align":["left"]},{"label":["studyDesign"],"name":[5],"type":["chr"],"align":["left"]},{"label":["plotWidth"],"name":[6],"type":["int"],"align":["right"]},{"label":["plotLength"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["fieldSize"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["plantingDate"],"name":[9],"type":["chr"],"align":["left"]},{"label":["harvestDate"],"name":[10],"type":["chr"],"align":["left"]},{"label":["germplasmName"],"name":[11],"type":["chr"],"align":["left"]},{"label":["observationUnitDbId"],"name":[12],"type":["int"],"align":["right"]},{"label":["replicate"],"name":[13],"type":["int"],"align":["right"]},{"label":["blockNumber"],"name":[14],"type":["int"],"align":["right"]},{"label":["plotNumber"],"name":[15],"type":["int"],"align":["right"]},{"label":["rowNumber"],"name":[16],"type":["int"],"align":["right"]},{"label":["colNumber"],"name":[17],"type":["int"],"align":["right"]},{"label":["entryType"],"name":[18],"type":["chr"],"align":["left"]},{"label":["trialType"],"name":[19],"type":["chr"],"align":["left"]},{"label":["numberBlocks"],"name":[20],"type":["int"],"align":["right"]},{"label":["numberReps"],"name":[21],"type":["int"],"align":["right"]},{"label":["observationUnitName"],"name":[22],"type":["chr"],"align":["left"]},{"label":["CompleteBlocks"],"name":[23],"type":["lgl"],"align":["right"]},{"label":["IncompleteBlocks"],"name":[24],"type":["lgl"],"align":["right"]},{"label":["yearInLoc"],"name":[25],"type":["chr"],"align":["left"]},{"label":["trialInLocYr"],"name":[26],"type":["chr"],"align":["left"]},{"label":["repInTrial"],"name":[27],"type":["chr"],"align":["left"]},{"label":["blockInRep"],"name":[28],"type":["chr"],"align":["left"]},{"label":["NOHAV"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["plotArea"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["MaxNOHAV"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["plantsPerPlot"],"name":[32],"type":["dbl"],"align":["right"]},{"label":["PlantSpacing"],"name":[33],"type":["dbl"],"align":["right"]},{"label":["PropNOHAV"],"name":[34],"type":["dbl"],"align":["right"]},{"label":["Value"],"name":[35],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"IITA-TMS-IBA000070","12":"1929317","13":"1","14":"1","15":"112","16":"1","17":"12","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-IITA-TMS-IBA000070_112","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"30.7"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"IITA-TMS-IBA30572","12":"1929280","13":"1","14":"1","15":"119","16":"1","17":"10","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-IITA-TMS-IBA30572_119","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"32.6"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"IITA-TMS-IBA980581","12":"1929212","13":"1","14":"1","15":"128","16":"1","17":"1","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-IITA-TMS-IBA980581_128","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"31.8"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"IITA-TMS-IBA982101","12":"1929309","13":"1","14":"1","15":"138","16":"1","17":"10","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-IITA-TMS-IBA982101_138","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"8","30":"16","31":"10","32":"10","33":"1.6","34":"0.8","35":"26.8"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"TMEB419","12":"1929213","13":"1","14":"1","15":"116","16":"1","17":"13","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-TMEB419_116","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"32.1"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"TMS13F1109P0009","12":"1929227","13":"1","14":"1","15":"140","16":"1","17":"12","18":"test","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-TMS13F1109P0009_140","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"28.2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
 
 ## Considerations before modeling
 
@@ -154,8 +133,7 @@ What follows is a demonstration, not a complete evaluation of the options, but i
 
 Pick out the first chunk of **`METdata`**.
 
-
-```r
+```{r}
 # grab just one chunk of the data to "experiment" on
 METdata<-phenos$METdata[[1]] %>% 
      # sommer doesn't recognize logical T/F variables
@@ -173,8 +151,7 @@ Not all trials (**`studyName`**s) have complete and/or incomplete blocking struc
 
 The following code block implements 4 different models, each will execute in the background and at the same time.
 
-
-```r
+```{r, eval=F}
 library(future);
 plan(multisession)
 
@@ -206,8 +183,7 @@ simple_het_error_model %<-% { mmer(Value~yearInLoc,
                                    verbose = FALSE) }
 ```
 
-
-```r
+```{r, eval=F}
 # Save output of above so the above models don't need to be re-run
 ## if and when I reformat or otherwise re-knit this doc to HTML
 save(conv_model,conv_het_error_model,simple_model,simple_het_error_model,
@@ -216,8 +192,7 @@ save(conv_model,conv_het_error_model,simple_model,simple_het_error_model,
 
 ### Model comparisons
 
-
-```r
+```{r}
 # load the output from the models from where I stored it
 load(here::here("output","models_compared.Rdata"))
 ```
@@ -226,397 +201,16 @@ Which model fits best? How to compare?
 
 `sommer` provides `anova()` for pairwise comparisons of models using a likelihood ratio test *and* by AIC, BIC.
 
-
-```r
+```{r}
 anova(conv_model,conv_het_error_model)
-#> Likelihood ratio test for mixed models
-#> ==============================================================
-#>      Df      AIC      BIC     loLik    Chisq ChiDf
-#> mod2 17 652.6920 663.2478 -324.3460               
-#> mod1 10 701.9414 712.4973 -348.9707 49.24947     7
-#>                      PrChisq
-#> mod2                        
-#> mod1 2.0273987089018e-08 ***
-#> ==============================================================
-#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-#>      Df      AIC      BIC     loLik    Chisq ChiDf
-#> mod2 17 652.6920 663.2478 -324.3460               
-#> mod1 10 701.9414 712.4973 -348.9707 49.24947     7
-#>                      PrChisq
-#> mod2                        
-#> mod1 2.0273987089018e-08 ***
 ```
 
 Here's a very not-pretty not-high-throughput way to set-up a table comparing the AIC for all 4 models.
 
-
-```r
+```{r}
 tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_error_model"),
        AIC=c(conv_model$AIC,conv_het_error_model$AIC,simple_model$AIC,simple_het_error_model$AIC)) %>% 
      arrange(AIC) %>% gt::gt()
-```
-
-```{=html}
-<div id="tgtvueatdz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#tgtvueatdz .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#tgtvueatdz .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#tgtvueatdz .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#tgtvueatdz .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#tgtvueatdz .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#tgtvueatdz .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#tgtvueatdz .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#tgtvueatdz .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#tgtvueatdz .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#tgtvueatdz .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#tgtvueatdz .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#tgtvueatdz .gt_group_heading {
-  padding: 8px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#tgtvueatdz .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#tgtvueatdz .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#tgtvueatdz .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#tgtvueatdz .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#tgtvueatdz .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 12px;
-}
-
-#tgtvueatdz .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#tgtvueatdz .gt_first_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-}
-
-#tgtvueatdz .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#tgtvueatdz .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#tgtvueatdz .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#tgtvueatdz .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#tgtvueatdz .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#tgtvueatdz .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding: 4px;
-}
-
-#tgtvueatdz .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#tgtvueatdz .gt_sourcenote {
-  font-size: 90%;
-  padding: 4px;
-}
-
-#tgtvueatdz .gt_left {
-  text-align: left;
-}
-
-#tgtvueatdz .gt_center {
-  text-align: center;
-}
-
-#tgtvueatdz .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#tgtvueatdz .gt_font_normal {
-  font-weight: normal;
-}
-
-#tgtvueatdz .gt_font_bold {
-  font-weight: bold;
-}
-
-#tgtvueatdz .gt_font_italic {
-  font-style: italic;
-}
-
-#tgtvueatdz .gt_super {
-  font-size: 65%;
-}
-
-#tgtvueatdz .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 65%;
-}
-</style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Model</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">AIC</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">simple_het_error_model</td>
-<td class="gt_row gt_right">645.9093</td></tr>
-    <tr><td class="gt_row gt_left">conv_het_error_model</td>
-<td class="gt_row gt_right">652.6920</td></tr>
-    <tr><td class="gt_row gt_left">simple_model</td>
-<td class="gt_row gt_right">695.2303</td></tr>
-    <tr><td class="gt_row gt_left">conv_model</td>
-<td class="gt_row gt_right">701.9414</td></tr>
-  </tbody>
-  
-  
-</table>
-</div>
 ```
 
 The "simple" heterogeneous error model fits the data best, I'll go ahead and use it for this demonstration.
@@ -660,16 +254,8 @@ Below, I'll take the time to illustrate a tidy way to set-up and then execute th
 
 In short, we have four data chunks set-up in the tibble `phenos`
 
-
-```r
+```{r}
 phenos
-#> # A tibble: 4 × 2
-#>   Trait   METdata              
-#>   <chr>   <list>               
-#> 1 DM      <tibble [1,448 × 35]>
-#> 2 MCMDS   <tibble [1,436 × 35]>
-#> 3 logFYLD <tibble [1,590 × 35]>
-#> 4 logDYLD <tibble [1,443 × 35]>
 ```
 
 Let's go step-by-step to build a good understanding of a programming workflow. We'll use similar procedures in many of the analyses and data processes we do downstream.
@@ -681,8 +267,7 @@ Let's go step-by-step to build a good understanding of a programming workflow. W
 
 Here's how we want our call to `mmer()` to fit the mixed-model to look like:
 
-
-```r
+```{r, eval=F}
 # DON"T RUN
 simple_het_error_model<-mmer(fixed = Value~yearInLoc,
                              random=~germplasmName + repInTrial + blockInRep,
@@ -694,8 +279,7 @@ To build a function around this, we want to be able to input different values of
 
 Note that in this case, the only actual difference among traits in our example is going to be an added fixed effect for the yield traits, the **`PropNOHAV`**.
 
-
-```r
+```{r set input args}
 # Input arguments for the function:
 Trait<-phenos$Trait[[1]] 
 # input for "data="
@@ -712,8 +296,7 @@ rcovFormula="~vs(ds(studyName),units)"
 
 Here's how we can call `mmer()` inside another function, using the variables in the above code chunk as input arguments:
 
-
-```r
+```{r fit mmer model,cache=T, eval=F}
 starttime<-proc.time()[3]
 mmer_output<-mmer(fixed = as.formula(fixedFormula),
                   random = as.formula(randFormula),
@@ -742,16 +325,14 @@ Took 5 whole minutes to fit that, yikes.
 
 For the sake of a simple, quick example, the demonstration below, will just do one round removing outliers.
 
-
-```r
+```{r outlier detection, cache=T, eval=F}
 # index observations that are defined as outliers
 outliers<-which(abs(scale(mmer_output$residuals))>3.3)
 length(outliers) # How many?
 # [1] 6
 ```
 
-
-```r
+```{r remove outliers and refit, cache=T, eval=F}
 # remove outliers, if any
 if(length(outliers)>0){ 
      x<-METdata[-outliers,] 
@@ -792,8 +373,7 @@ In the chunk below, I extract and compute a number of things:
 
 In a few sections ([see here](#de-regression-explained)), I'll break down what these are and how they are used.
 
-
-```r
+```{r tidy outputs}
 load(here::here("output","mmer_output_example_during_stage1.Rdata"))
 
 # summary(mmer_output)
@@ -850,8 +430,7 @@ I combined the code chunks above into a function **`get_blups()`**. To spare the
 
 Finally, we are ready to source the function we built and execute the full analysis on all traits with it.
 
-
-```r
+```{r}
 source(here::here("code","get_blups.R"))
 phenos %<>% 
      mutate(fixedFormula=ifelse(Trait %in% c("logDYLD","logFYLD","logRTNO","logTOPYLD"),
@@ -863,8 +442,7 @@ phenos %<>%
 
 The next chunk uses the function `future_pmap()` from the `furrr` package to exectute the `get_blups()` function across all four traits in parallel.
 
-
-```r
+```{r, cache=T, eval=F}
 starttime<-proc.time()[3]
 require(furrr); plan(multisession, workers = 4)
 blups<-phenos %>%
@@ -881,8 +459,7 @@ Took 17 minutes to run on my laptop :(
 
 ### Why is MCMDS heritability 0?
 
-
-```r
+```{r}
 blups<-readRDS(here::here("output","blups.rds"))
 # blups %>% rmarkdown::paged_table()
 blups %>% 
@@ -893,12 +470,6 @@ blups %>%
      rmarkdown::paged_table()
 ```
 
-<div data-pagedtable="false">
-  <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Trait"],"name":[1],"type":["chr"],"align":["left"]},{"label":["H2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["meanHetVarE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["meanNreps"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["outliers"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"DM","2":"0.578","3":"6.0863897","4":"1.785","5":"6"},{"1":"MCMDS","2":"0.000","3":"0.2048047","4":"1.520","5":"33"},{"1":"logFYLD","2":"0.300","3":"0.1289105","4":"1.719","5":"9"},{"1":"logDYLD","2":"0.347","3":"0.1119542","4":"1.784","5":"4"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-
 Why is the H2 for **MCMDS** 0? Aside from this being an unfortunate result, knowing that it is unusual / atypical requires knowledge of cassava genetic architecture.
 
 The heritablity of **DM**, **logFYLD** and **logDYLD** are both pretty much in line with "typical" results, *but* MCMDS in most cassava populations is a pretty heritable trait.
@@ -907,23 +478,17 @@ I notice there were 33 outliers for MCMDS.
 
 Let's look at the distribution of MCMDS in the raw data:
 
-
-```r
+```{r}
 blups$METdata[[2]] %>% ggplot(.,aes(x=Value)) + 
      geom_density()
 ```
-
-<img src="05-getBLUPs_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 This is actually often how MCMDS scores look like.
 
 Which are the observations that were removed as outliers?
 
-
-```r
+```{r}
 blups$METdata[[2]][blups$outliers[[2]],] %$% summary(Value)
-#>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#>    3.50    4.00    4.00    4.03    4.00    5.00
 ```
 
 They are exclusively high scores.
@@ -932,8 +497,7 @@ I wonder if removing them was a mistake:
 
 To find out, let's re-run the analysis just for MCMDS, this time turning outlier removal off. I actually added an `removeOutliers=T/F` argument and a few lines of code to the `get_blups()` function to make this happen:
 
-
-```r
+```{r, cache=T, eval=F}
 source(here::here("code","get_blups.R"))
 blups_mcmds_noRemoveOut<-phenos %>%
      filter(Trait=="MCMDS") %>% 
@@ -943,8 +507,7 @@ save(blups_mcmds_noRemoveOut,
      file=here::here("output","blups_mcmds_noRemoveOut.Rdata"))
 ```
 
-
-```r
+```{r}
 load(here::here("output","blups_mcmds_noRemoveOut.Rdata"))
 blups_mcmds_noRemoveOut %>% 
      dplyr::select(Trait,H2,meanHetVarE,meanNreps,outliers) %>% 
@@ -954,37 +517,9 @@ blups_mcmds_noRemoveOut %>%
      rmarkdown::paged_table()
 ```
 
-<div data-pagedtable="false">
-  <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Trait"],"name":[1],"type":["chr"],"align":["left"]},{"label":["H2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["meanHetVarE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["meanNreps"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["outliers"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"MCMDS","2":"0","3":"0.7744563","4":"1.52","5":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-
-
-```r
+```{r}
 blups_mcmds_noRemoveOut$blups[[1]] %>% 
      summary(across(~summary(.)))
-#>  germplasmName           BLUP           
-#>  Length:945         Min.   :-3.112e-26  
-#>  Class :character   1st Qu.:-1.212e-27  
-#>  Mode  :character   Median :-8.745e-28  
-#>                     Mean   : 2.747e-29  
-#>                     3rd Qu.:-3.398e-28  
-#>                     Max.   : 1.143e-25  
-#>       PEV                 REL           
-#>  Min.   :2.301e-27   Min.   :0.000e+00  
-#>  1st Qu.:2.301e-27   1st Qu.:0.000e+00  
-#>  Median :2.301e-27   Median :0.000e+00  
-#>  Mean   :2.301e-27   Mean   :1.096e-11  
-#>  3rd Qu.:2.301e-27   3rd Qu.:0.000e+00  
-#>  Max.   :2.301e-27   Max.   :4.742e-10  
-#>     drgBLUP                 WT           
-#>  Min.   :      -Inf   Min.   :0.000e+00  
-#>  1st Qu.:      -Inf   1st Qu.:0.000e+00  
-#>  Median :      -Inf   Median :0.000e+00  
-#>  Mean   :       NaN   Mean   :2.426e+15  
-#>  3rd Qu.:-6.563e-17   3rd Qu.:0.000e+00  
-#>  Max.   :       Inf   Max.   :1.050e+17
 ```
 
 **DECLARING MCMDS A LOSS** You can see from the summary, MCMDS *in this dataset* have essentially no genetic variance / reliability. For the sake of moving on with the example, I will exclude MCMDS from further consideration.
@@ -1010,8 +545,7 @@ So if a de-regressed BLUP is defined as $\frac{BLUP}{r^{2}}$ you can see that fo
 
 Below is a density plot showing the distribution of the original data compared to the **`BLUP`** and the **`drgBLUP`**. This is meant to show how shrinkage and unshrinkage effect the data. Since BLUPs and drgBLUPs are centered on the mean, I added back the grand mean for comparison to the original data.
 
-
-```{.r .fold-hide}
+```{r class.source = 'fold-hide'}
 popMean<-mean(blups$METdata[[1]]$Value)
 blups$METdata[[1]] %>% 
      dplyr::select(observationUnitDbId,Value) %>% 
@@ -1025,12 +559,9 @@ blups$METdata[[1]] %>%
      geom_vline(xintercept = popMean)
 ```
 
-<img src="05-getBLUPs_files/figure-html/unnamed-chunk-21-1.png" width="672" />
-
 Next, I grab the blups from only the **germplasmName** with the two highest and the two lowest **REL**. In all cases, the de-regressed BLUP should shift away from the mean, but proportional to the reliability. Below, I devised a plot to show that:
 
-
-```{.r .fold-hide}
+```{r class.source = 'fold-hide'}
 library(ggrepel)
 blups$blups[[1]] %>% 
      slice_max(order_by = REL,n = 2) %>%
@@ -1047,8 +578,6 @@ blups$blups[[1]] %>%
      geom_vline(xintercept = 0) 
 ```
 
-<img src="05-getBLUPs_files/figure-html/unnamed-chunk-22-1.png" width="672" />
-
 The de-regressed BLUP will be used as a response variable in downstream genomic prediction.
 
 We can account for the differential reliability among genotypes downstream using a weighted analysis. We will compute our weights according to @Garrick2009. Using `sommer::mmer()`, weights can be supplied through the `weights=` argument (see the [sommer::mmer documentation](https://cran.r-project.org/web/packages/sommer/sommer.pdf) for details). The values supplied will be weight the error term proportional to $\frac{1}{\sqrt{WT}}$, meaning drgBLUP with higher WT have smaller error; more effect on the prediction.
@@ -1060,45 +589,34 @@ $$WT = \frac{1-H^{2}}{0.1+\frac{1-r^{2}}{r^{r}} \times H^{2}}$$
 -   $H^{2}$ is the broad-sense heritability (H2).
 -   $r^{2}$ is reliability (REL).
 
-
-```{.r .fold-hide}
+```{r class.source = 'fold-hide'}
 REL<-H2<-seq(from=0.1,to=0.9,by=0.05)
 expand.grid(REL=REL,H2=H2) %>% 
      mutate(WT=(1-H2)/((0.1 + (1-REL)/REL)*H2)) %>% 
      ggplot(.,aes(x=REL,y=WT,color=H2, group=H2)) + geom_line() 
 ```
 
-<img src="05-getBLUPs_files/figure-html/unnamed-chunk-23-1.png" width="672" />
-
 I made a plot showing how **`WT`** varies across a range of **`H2`** and **`REL`**. This is to show how the weighting behaves. As we see, **`WT`** scales with **`REL`** and **`H2`**. **`H2`** conditions the overall variability among individuals in their weight in the analysis. This works such that if heritability is low, there is a greater relative premium (weight) placed on individuals with high quality data (high **`REL`**), usually those with high numbers of observations, e.g. check-genotypes. If heritability is high, **`WT`**s are low and there isn't much difference between low and high **`REL`**.
 
 Here's a plot that shows from the actual `blups`, how the **`WT`** scales with the number of observations-per-genotype.
 
-
-```r
+```{r}
 blups$blups[[1]] %>% 
      # Count the number of plots per clone in the raw data and merge to the BlUPs
      left_join(blups$METdata[[1]] %>% count(germplasmName,name = "Nplots")) %>% 
      ggplot(.,aes(x=Nplots,y=WT)) + geom_point()
-#> Joining, by = "germplasmName"
 ```
-
-<img src="05-getBLUPs_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 Next, I plot the **`BLUP`**s again the de-regressed BLUPs and scale point-size (**`WT`**) and color (**`REL`**). The red line has a slope of 1. You can see clearly how high reliability predictions don't change much (close to the red line). You can also see that the farther the **`BLUP`** from the mean, the more the de-regression (the more the original shrinkage).
 
-
-```r
+```{r}
 blups$blups[[1]] %>% 
      # Count the number of plots per clone in the raw data and merge to the BlUPs
      left_join(blups$METdata[[1]] %>% count(germplasmName,name = "Nplots")) %>% 
      ggplot(.,aes(x=BLUP,y=drgBLUP,color=REL,size=WT)) + 
      geom_point() + geom_vline(xintercept = 0) + geom_hline(yintercept = 0) +
      geom_abline(slope=1, color='darkred')
-#> Joining, by = "germplasmName"
 ```
-
-<img src="05-getBLUPs_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 ### Computing H2 for weights
 
