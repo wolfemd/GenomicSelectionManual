@@ -105,7 +105,7 @@ Before doing that, a few considerations.
 
 ### Mixed-model software
 
-In the past, I have used both `lmer()` (`lme4` R package) and `asreml()` (the R package interface for the `asreml` software) for this sort of analysis. `lmer()` is limited to homogenous error variance structures and only certain design models / variance structures. `asreml()` is fast, flexible and industry standard *BUT* proprietary.
+In the past, I have used both `lmer()` (`lme4` R package) and `asreml()` (the R package interface for the `asreml` software) for this sort of analysis. `lmer()` is limited to homogeneous error variance structures and only certain design models / variance structures. `asreml()` is fast, flexible and industry standard *BUT* proprietary.
 
 The `sommer` package is fully open-source. The `sommer::mmer()` function is designed to fit almost any model `asreml` can, using a very similar syntax... but it is much more memory intensive and relatively slow. `sommer` uses direct-inversion of matrices, which have to be held in-memory in R.
 
@@ -257,12 +257,12 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
 ```
 
 ```{=html}
-<div id="tgtvueatdz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rrqzbvutyk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#tgtvueatdz .gt_table {
+#rrqzbvutyk .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -287,7 +287,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-left-color: #D3D3D3;
 }
 
-#tgtvueatdz .gt_heading {
+#rrqzbvutyk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -299,7 +299,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-right-color: #D3D3D3;
 }
 
-#tgtvueatdz .gt_title {
+#rrqzbvutyk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -309,7 +309,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-bottom-width: 0;
 }
 
-#tgtvueatdz .gt_subtitle {
+#rrqzbvutyk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -319,13 +319,13 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-top-width: 0;
 }
 
-#tgtvueatdz .gt_bottom_border {
+#rrqzbvutyk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tgtvueatdz .gt_col_headings {
+#rrqzbvutyk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -340,7 +340,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-right-color: #D3D3D3;
 }
 
-#tgtvueatdz .gt_col_heading {
+#rrqzbvutyk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -360,7 +360,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   overflow-x: hidden;
 }
 
-#tgtvueatdz .gt_column_spanner_outer {
+#rrqzbvutyk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -372,15 +372,15 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   padding-right: 4px;
 }
 
-#tgtvueatdz .gt_column_spanner_outer:first-child {
+#rrqzbvutyk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tgtvueatdz .gt_column_spanner_outer:last-child {
+#rrqzbvutyk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tgtvueatdz .gt_column_spanner {
+#rrqzbvutyk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -392,7 +392,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   width: 100%;
 }
 
-#tgtvueatdz .gt_group_heading {
+#rrqzbvutyk .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -414,7 +414,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   vertical-align: middle;
 }
 
-#tgtvueatdz .gt_empty_group_heading {
+#rrqzbvutyk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -429,15 +429,15 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   vertical-align: middle;
 }
 
-#tgtvueatdz .gt_from_md > :first-child {
+#rrqzbvutyk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tgtvueatdz .gt_from_md > :last-child {
+#rrqzbvutyk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tgtvueatdz .gt_row {
+#rrqzbvutyk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -456,7 +456,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   overflow-x: hidden;
 }
 
-#tgtvueatdz .gt_stub {
+#rrqzbvutyk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -468,7 +468,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   padding-left: 12px;
 }
 
-#tgtvueatdz .gt_summary_row {
+#rrqzbvutyk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -478,7 +478,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   padding-right: 5px;
 }
 
-#tgtvueatdz .gt_first_summary_row {
+#rrqzbvutyk .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -488,7 +488,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-top-color: #D3D3D3;
 }
 
-#tgtvueatdz .gt_grand_summary_row {
+#rrqzbvutyk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -498,7 +498,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   padding-right: 5px;
 }
 
-#tgtvueatdz .gt_first_grand_summary_row {
+#rrqzbvutyk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -508,11 +508,11 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-top-color: #D3D3D3;
 }
 
-#tgtvueatdz .gt_striped {
+#rrqzbvutyk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tgtvueatdz .gt_table_body {
+#rrqzbvutyk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -521,7 +521,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-bottom-color: #D3D3D3;
 }
 
-#tgtvueatdz .gt_footnotes {
+#rrqzbvutyk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -535,13 +535,13 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-right-color: #D3D3D3;
 }
 
-#tgtvueatdz .gt_footnote {
+#rrqzbvutyk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#tgtvueatdz .gt_sourcenotes {
+#rrqzbvutyk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -555,41 +555,41 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-right-color: #D3D3D3;
 }
 
-#tgtvueatdz .gt_sourcenote {
+#rrqzbvutyk .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#tgtvueatdz .gt_left {
+#rrqzbvutyk .gt_left {
   text-align: left;
 }
 
-#tgtvueatdz .gt_center {
+#rrqzbvutyk .gt_center {
   text-align: center;
 }
 
-#tgtvueatdz .gt_right {
+#rrqzbvutyk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tgtvueatdz .gt_font_normal {
+#rrqzbvutyk .gt_font_normal {
   font-weight: normal;
 }
 
-#tgtvueatdz .gt_font_bold {
+#rrqzbvutyk .gt_font_bold {
   font-weight: bold;
 }
 
-#tgtvueatdz .gt_font_italic {
+#rrqzbvutyk .gt_font_italic {
   font-style: italic;
 }
 
-#tgtvueatdz .gt_super {
+#rrqzbvutyk .gt_super {
   font-size: 65%;
 }
 
-#tgtvueatdz .gt_footnote_marks {
+#rrqzbvutyk .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;

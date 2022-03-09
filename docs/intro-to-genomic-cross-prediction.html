@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 12 Intro to Genomic Cross Prediction | Genomic Prediction and Selection Manual</title>
+<meta name="author" content="Marnin Wolfe">
+<meta name="description" content="Genomic prediction of the mean, variance and usefulness of crosses can be accomplished with genomicMateSelectR functions.  12.1 Understanding mate selection Click Here for a google slides...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 12 Intro to Genomic Cross Prediction | Genomic Prediction and Selection Manual">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://wolfemd.github.io/GenomicSelectionManual/intro-to-genomic-cross-prediction.html">
+<meta property="og:description" content="Genomic prediction of the mean, variance and usefulness of crosses can be accomplished with genomicMateSelectR functions.  12.1 Understanding mate selection Click Here for a google slides...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 12 Intro to Genomic Cross Prediction | Genomic Prediction and Selection Manual">
+<meta name="twitter:description" content="Genomic prediction of the mean, variance and usefulness of crosses can be accomplished with genomicMateSelectR functions.  12.1 Understanding mate selection Click Here for a google slides...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Genomic Prediction and Selection Manual</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Preamble</a></li>
+<li><a class="" href="outline.html"><span class="header-section-number">2</span> Outline</a></li>
+<li><a class="" href="using-this-manual.html"><span class="header-section-number">3</span> Using this manual</a></li>
+<li><a class="" href="create_project.html"><span class="header-section-number">4</span> Create a project</a></li>
+<li><a class="" href="download-training-data.html"><span class="header-section-number">5</span> Download training data</a></li>
+<li><a class="" href="prepare-phenotype-data.html"><span class="header-section-number">6</span> Prepare phenotype data</a></li>
+<li><a class="" href="prepare-genotypic-data.html"><span class="header-section-number">7</span> Prepare genotypic data</a></li>
+<li><a class="" href="preliminary-field-trial-analysis.html"><span class="header-section-number">8</span> Preliminary field trial analysis</a></li>
+<li><a class="" href="intro-to-genomic-prediction.html"><span class="header-section-number">9</span> Intro to Genomic Prediction</a></li>
+<li><a class="" href="standard-k-fold-cross-validation.html"><span class="header-section-number">10</span> Standard K-fold Cross-validation</a></li>
+<li><a class="" href="references.html">References</a></li>
+<li><a class="" href="predict-parental-breeding-values.html"><span class="header-section-number">11</span> Predict parental breeding values</a></li>
+<li><a class="active" href="intro-to-genomic-cross-prediction.html"><span class="header-section-number">12</span> Intro to Genomic Cross Prediction</a></li>
+<li><a class="" href="accuracy-of-cross-prediction.html"><span class="header-section-number">13</span> Accuracy of cross prediction?</a></li>
+<li><a class="" href="predict-crosses.html"><span class="header-section-number">14</span> Predict crosses</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/wolfemd/GenomicSelectionManual">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="intro-to-genomic-cross-prediction" class="section level1" number="12">
+<h1>
+<span class="header-section-number">12</span> Intro to Genomic Cross Prediction<a class="anchor" aria-label="anchor" href="#intro-to-genomic-cross-prediction"><i class="fas fa-link"></i></a>
+</h1>
+<p>Genomic prediction of the mean, variance and usefulness of crosses can be accomplished with <code>genomicMateSelectR</code> functions.</p>
+<div id="understanding-mate-selection" class="section level2" number="12.1">
+<h2>
+<span class="header-section-number">12.1</span> Understanding mate selection<a class="anchor" aria-label="anchor" href="#understanding-mate-selection"><i class="fas fa-link"></i></a>
+</h2>
+<p><a href="https://docs.google.com/presentation/d/1PW9OUOhk1ng1F2KXAO3FEq5sT1l_ioKYSiCEWY0rAkE/edit?usp=sharing"><strong>Click Here</strong></a> for a google slides presentation entitled “Genomic mate selection in outbred species: predicting cross usefulness with additive and total genetic covariance matrices” where I introduce the concepts.</p>
+<p>The theory / formulae are summarized as part of <a href="https://wolfemd.github.io/genomicMateSelectR/articles/non_additive_models.html#cross-predictions-with-genomicmateselectr-1">this <code>genomicMateSelectR</code> vignette</a></p>
+<div id="literature" class="section level3" number="12.1.1">
+<h3>
+<span class="header-section-number">12.1.1</span> Literature<a class="anchor" aria-label="anchor" href="#literature"><i class="fas fa-link"></i></a>
+</h3>
+<p>Here are some recommended articles to read regarding genomic mate selection (full citations will be at bottom): <span class="citation">(Bonk <em>et al.</em> 2016; Lehermeier <em>et al.</em> 2017; Neyhart and Smith 2019; Neyhart <em>et al.</em> 2019; Bijma <em>et al.</em> 2020; Werner <em>et al.</em> 2020; Wolfe <em>et al.</em> 2021)</span></p>
+<p>In particular, read these:</p>
+<ol style="list-style-type: decimal">
+<li>Wolfe et a. 2021.Genomic mating in outbred species: predicting cross usefulness with additive and total genetic covariance matrices. <a href="https://doi.org/10.1093/genetics/iyab122" class="uri">https://doi.org/10.1093/genetics/iyab122</a>.</li>
+<li>Werner et al. 2020. Genomic selection strategies for clonally propagated crops. <a href="https://doi.org/10.1101/2020.06.15.152017" class="uri">https://doi.org/10.1101/2020.06.15.152017</a>.</li>
+</ol>
+<p>You may very well need/want to read the literature that are referenced in these articles. If you do that, you’ll have a solid foundation for understanding prediction of cross performance.</p>
+</div>
+<div id="tutorial" class="section level3" number="12.1.2">
+<h3>
+<span class="header-section-number">12.1.2</span> Tutorial<a class="anchor" aria-label="anchor" href="#tutorial"><i class="fas fa-link"></i></a>
+</h3>
+<p>For an a tutorial on how to execute these predictions using <code>genomicMateSelectR</code> functions, see this <a href="https://wolfemd.github.io/genomicMateSelectR/articles/start_here.html">“Getting started predicting crosses vignette”</a>.</p>
+</div>
+</div>
+<div id="non-additive-effects" class="section level2" number="12.2">
+<h2>
+<span class="header-section-number">12.2</span> Non-additive effects<a class="anchor" aria-label="anchor" href="#non-additive-effects"><i class="fas fa-link"></i></a>
+</h2>
+<p>Up until now, we have used an additive-effects only model (<code>modelType="A"</code>), which gives us access to predictions of <strong>GEBV</strong>.</p>
+<p>In addition, <code>genomicMateSelectR</code> enables two types of non-additive effects models to be implemented: an <strong>additive plus dominance</strong> model (<code>modelType="AD"</code>) and a directional dominance model that allows for an inbreeding depression (or heterotic) effect (<code>modelType="DirDom"</code>).</p>
+<div id="literature-1" class="section level3" number="12.2.1">
+<h3>
+<span class="header-section-number">12.2.1</span> Literature<a class="anchor" aria-label="anchor" href="#literature-1"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>
+<p>For the basic quantitative genetics concepts of additive and dominance effects:</p>
+<ul>
+<li>
+<a href="https://htmlpreview.github.io/?https://github.com/lfelipe-ferrao/lfelipe-ferrao.github.io/blob/master/class/survey/1.Introduction.html">Intro to Quantitative Genetics</a>, part of Felipe Ferrão’s “Survey of Breeding Tools and (Genomic Selection) Methods.”</li>
+<li>See also the list of <a href="recommended-literature">Recommended Literature</a> provided in the previous chapter <a href="intro-to-genomic-prediction">Intro to Genomic Prediction</a>
+</li>
+</ul>
+</li>
+<li><p>See my summary of the additive and non-additive <a href="https://wolfemd.github.io/genomicMateSelectR/articles/non_additive_models.html#genetic-models-implemented-1">“genomic prediction models implemented”</a> as part of the 2nd <code>genomicMateSelectR</code> vignette. See <em>also</em> the references to the literature, which are cited there.</p></li>
+<li>
+<p>Two good papers to start studying genomic prediction with non-additive effects are:</p>
+<ul>
+<li><p>Vitezica et al. 2013. “On the Additive and Dominant Variance and Covariance of Individuals Within the Genomic Selection Scope.” <em>Genetics</em> 195 (4): 1223–30. <a href="https://doi.org/10.1534/genetics.113.155176" class="uri">https://doi.org/10.1534/genetics.113.155176</a></p></li>
+<li><p>Varona et al. 2013. “Non-Additive Effects in Genomic Selection.” <em>Frontiers in Genetics</em> 9 (March). <a href="https://doi.org/10.3389/fgene.2018.00078" class="uri">https://doi.org/10.3389/fgene.2018.00078</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="tutorial-1" class="section level3" number="12.2.2">
+<h3>
+<span class="header-section-number">12.2.2</span> Tutorial<a class="anchor" aria-label="anchor" href="#tutorial-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>The vignette in <code>genomicMateSelectR</code> entitled <a href="https://wolfemd.github.io/genomicMateSelectR/articles/non_additive_models.html"><strong>“Genomic prediction with non-additive effects”</strong></a>provides a complete tutorial on how to execute these models <em>and</em> predicting cross-performance with them.</p>
+</div>
+</div>
+<div id="parent-wise-cross-validation" class="section level2" number="12.3">
+<h2>
+<span class="header-section-number">12.3</span> Parent-wise Cross-validation<a class="anchor" aria-label="anchor" href="#parent-wise-cross-validation"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>How can we estimate the accuracy of predicting previously untested crosses?</strong></p>
+<p>In the mate selection article, <span class="citation">Wolfe <em>et al.</em> (2021)</span> I devised a cross-validation strategy that uses a pedigree -based approach, which I called “parent-wise cross-validation.” The approach is described in detail in the manuscript. It is illustrated starting on <a href="https://docs.google.com/presentation/d/1PW9OUOhk1ng1F2KXAO3FEq5sT1l_ioKYSiCEWY0rAkE/edit?usp=sharing">Slide 50 of <em>this</em> gSlides presentation</a>.</p>
+<p><code>genomicMateSelectR</code> provides a function <code><a href="https://rdrr.io/pkg/genomicMateSelectR/man/runParentWiseCrossVal.html">runParentWiseCrossVal()</a></code> (<a href="https://wolfemd.github.io/genomicMateSelectR/reference/runParentWiseCrossVal.html">see here for the documentation / details</a>) to implement this kind of cross-validation.</p>
+<p>An example of it’s implementation in-practice is part of the <a href="https://wolfemd.github.io/IITA_2021GS/05-CrossValidation.html#Parent-wise_cross-validation">IITA 2021 Genomic Selection documentation here</a>.</p>
+<p>In the next section, I will attempt a smaller example using the data we have been working with in this manual.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="predict-parental-breeding-values.html"><span class="header-section-number">11</span> Predict parental breeding values</a></div>
+<div class="next"><a href="accuracy-of-cross-prediction.html"><span class="header-section-number">13</span> Accuracy of cross prediction?</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#intro-to-genomic-cross-prediction"><span class="header-section-number">12</span> Intro to Genomic Cross Prediction</a></li>
+<li>
+<a class="nav-link" href="#understanding-mate-selection"><span class="header-section-number">12.1</span> Understanding mate selection</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#literature"><span class="header-section-number">12.1.1</span> Literature</a></li>
+<li><a class="nav-link" href="#tutorial"><span class="header-section-number">12.1.2</span> Tutorial</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#non-additive-effects"><span class="header-section-number">12.2</span> Non-additive effects</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#literature-1"><span class="header-section-number">12.2.1</span> Literature</a></li>
+<li><a class="nav-link" href="#tutorial-1"><span class="header-section-number">12.2.2</span> Tutorial</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#parent-wise-cross-validation"><span class="header-section-number">12.3</span> Parent-wise Cross-validation</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/wolfemd/GenomicSelectionManual/blob/master/09-intro_to_gms.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/wolfemd/GenomicSelectionManual/edit/master/09-intro_to_gms.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

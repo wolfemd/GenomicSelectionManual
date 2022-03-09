@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 4 Create a project | Genomic Prediction and Selection Manual</title>
 <meta name="author" content="Marnin Wolfe">
-<meta name="description" content="4.1 Create a workflowR project   4.2 Using Rmarkdown  4.2.1 Code chunks   4.3 Hotkeys  CMD+Option+I = create chunk Shift+CMD+M = %&gt;% pipe operator  4.4 Tidyverse functions   4.5 Using Git   4.6...">
+<meta name="description" content="4.1 Create a workflowR project   4.2 Using Rmarkdown  4.2.1 Code chunks   4.3 Hotkeys Pretty critical to learn a few of these, especially these: CMD+Option+I = create chunk Shift+CMD+M = %&gt;% pipe...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 4 Create a project | Genomic Prediction and Selection Manual">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://wolfemd.github.io/GenomicSelectionManual/create_project.html">
-<meta property="og:description" content="4.1 Create a workflowR project   4.2 Using Rmarkdown  4.2.1 Code chunks   4.3 Hotkeys  CMD+Option+I = create chunk Shift+CMD+M = %&gt;% pipe operator  4.4 Tidyverse functions   4.5 Using Git   4.6...">
+<meta property="og:description" content="4.1 Create a workflowR project   4.2 Using Rmarkdown  4.2.1 Code chunks   4.3 Hotkeys Pretty critical to learn a few of these, especially these: CMD+Option+I = create chunk Shift+CMD+M = %&gt;% pipe...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 4 Create a project | Genomic Prediction and Selection Manual">
-<meta name="twitter:description" content="4.1 Create a workflowR project   4.2 Using Rmarkdown  4.2.1 Code chunks   4.3 Hotkeys  CMD+Option+I = create chunk Shift+CMD+M = %&gt;% pipe operator  4.4 Tidyverse functions   4.5 Using Git   4.6...">
+<meta name="twitter:description" content="4.1 Create a workflowR project   4.2 Using Rmarkdown  4.2.1 Code chunks   4.3 Hotkeys Pretty critical to learn a few of these, especially these: CMD+Option+I = create chunk Shift+CMD+M = %&gt;% pipe...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -49,7 +49,13 @@
 <li><a class="" href="prepare-phenotype-data.html"><span class="header-section-number">6</span> Prepare phenotype data</a></li>
 <li><a class="" href="prepare-genotypic-data.html"><span class="header-section-number">7</span> Prepare genotypic data</a></li>
 <li><a class="" href="preliminary-field-trial-analysis.html"><span class="header-section-number">8</span> Preliminary field trial analysis</a></li>
+<li><a class="" href="intro-to-genomic-prediction.html"><span class="header-section-number">9</span> Intro to Genomic Prediction</a></li>
+<li><a class="" href="standard-k-fold-cross-validation.html"><span class="header-section-number">10</span> Standard K-fold Cross-validation</a></li>
 <li><a class="" href="references.html">References</a></li>
+<li><a class="" href="predict-parental-breeding-values.html"><span class="header-section-number">11</span> Predict parental breeding values</a></li>
+<li><a class="" href="intro-to-genomic-cross-prediction.html"><span class="header-section-number">12</span> Intro to Genomic Cross Prediction</a></li>
+<li><a class="" href="accuracy-of-cross-prediction.html"><span class="header-section-number">13</span> Accuracy of cross prediction?</a></li>
+<li><a class="" href="predict-crosses.html"><span class="header-section-number">14</span> Predict crosses</a></li>
 </ul>
 
         <div class="book-extra">
@@ -80,17 +86,21 @@
 <h2>
 <span class="header-section-number">4.3</span> Hotkeys<a class="anchor" aria-label="anchor" href="#hotkeys"><i class="fas fa-link"></i></a>
 </h2>
+<p>Pretty critical to learn a few of these, especially these:</p>
 <ul>
 <li>
 <code>CMD+Option+I</code> = create chunk</li>
 <li>
 <code>Shift+CMD+M</code> = <code>%&gt;%</code> pipe operator</li>
+<li>
+<code>CMD+Enter</code> = submit (run) lines of code in your Rmd or R script to the console.</li>
 </ul>
 </div>
 <div id="tidyverse-functions" class="section level2" number="4.4">
 <h2>
 <span class="header-section-number">4.4</span> Tidyverse functions<a class="anchor" aria-label="anchor" href="#tidyverse-functions"><i class="fas fa-link"></i></a>
 </h2>
+<p>There are <em>lots</em> of great resources online for learning the basic “tidyverse” functions.</p>
 </div>
 <div id="using-git" class="section level2" number="4.5">
 <h2>
@@ -106,7 +116,12 @@
 <h2>
 <span class="header-section-number">4.7</span> Project Organization Recommendations<a class="anchor" aria-label="anchor" href="#project-organization-recommendations"><i class="fas fa-link"></i></a>
 </h2>
-
+<p>Assuming you are using <code>workflowR</code>:</p>
+<ol style="list-style-type: decimal">
+<li>Setting up your <strong>“index.Rmd”</strong>
+</li>
+<li>Setting up your navigation bar **“analysis/_site.yml”**</li>
+</ol>
 </div>
 </div>
   <div class="chapter-nav">
@@ -142,7 +157,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-01-20.</p>
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

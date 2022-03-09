@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 14 Predict crosses | Genomic Prediction and Selection Manual</title>
+<meta name="author" content="Marnin Wolfe">
+<meta name="description" content="Context and Purpose: Upstream: Section @ref() - Downstream: Inputs: Expected outputs: We are finally (almost) ready to predict the performance of potential crosses. We have a few inputs to set-up....">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 14 Predict crosses | Genomic Prediction and Selection Manual">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://wolfemd.github.io/GenomicSelectionManual/predict-crosses.html">
+<meta property="og:description" content="Context and Purpose: Upstream: Section @ref() - Downstream: Inputs: Expected outputs: We are finally (almost) ready to predict the performance of potential crosses. We have a few inputs to set-up....">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 14 Predict crosses | Genomic Prediction and Selection Manual">
+<meta name="twitter:description" content="Context and Purpose: Upstream: Section @ref() - Downstream: Inputs: Expected outputs: We are finally (almost) ready to predict the performance of potential crosses. We have a few inputs to set-up....">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Genomic Prediction and Selection Manual</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Preamble</a></li>
+<li><a class="" href="outline.html"><span class="header-section-number">2</span> Outline</a></li>
+<li><a class="" href="using-this-manual.html"><span class="header-section-number">3</span> Using this manual</a></li>
+<li><a class="" href="create_project.html"><span class="header-section-number">4</span> Create a project</a></li>
+<li><a class="" href="download-training-data.html"><span class="header-section-number">5</span> Download training data</a></li>
+<li><a class="" href="prepare-phenotype-data.html"><span class="header-section-number">6</span> Prepare phenotype data</a></li>
+<li><a class="" href="prepare-genotypic-data.html"><span class="header-section-number">7</span> Prepare genotypic data</a></li>
+<li><a class="" href="preliminary-field-trial-analysis.html"><span class="header-section-number">8</span> Preliminary field trial analysis</a></li>
+<li><a class="" href="intro-to-genomic-prediction.html"><span class="header-section-number">9</span> Intro to Genomic Prediction</a></li>
+<li><a class="" href="standard-k-fold-cross-validation.html"><span class="header-section-number">10</span> Standard K-fold Cross-validation</a></li>
+<li><a class="" href="references.html">References</a></li>
+<li><a class="" href="predict-parental-breeding-values.html"><span class="header-section-number">11</span> Predict parental breeding values</a></li>
+<li><a class="" href="intro-to-genomic-cross-prediction.html"><span class="header-section-number">12</span> Intro to Genomic Cross Prediction</a></li>
+<li><a class="" href="accuracy-of-cross-prediction.html"><span class="header-section-number">13</span> Accuracy of cross prediction?</a></li>
+<li><a class="active" href="predict-crosses.html"><span class="header-section-number">14</span> Predict crosses</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/wolfemd/GenomicSelectionManual">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="predict-crosses" class="section level1" number="14">
+<h1>
+<span class="header-section-number">14</span> Predict crosses<a class="anchor" aria-label="anchor" href="#predict-crosses"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li><p><strong>Context and Purpose:</strong></p></li>
+<li><p><strong>Upstream:</strong> Section @ref() -</p></li>
+<li><p><strong>Downstream:</strong></p></li>
+<li><p><strong>Inputs:</strong></p></li>
+<li><p><strong>Expected outputs:</strong></p></li>
+</ul>
+<p>We are finally (almost) ready to predict the performance of potential crosses. We have a few inputs to set-up.</p>
+<div id="load-inputs-and-set-up-1" class="section level2" number="14.1">
+<h2>
+<span class="header-section-number">14.1</span> Load inputs and set-up<a class="anchor" aria-label="anchor" href="#load-inputs-and-set-up-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Much the same as in the section on <a href="parent-wise-cross-validation">parent-wise cross-validation</a>.</p>
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># GENOMIC RELATIONSHIP MATRIX</span>
+<span class="va">grms</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>A<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span>file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"kinship_add.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># BLUPs</span>
+<span class="va">blups</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"blups.rds"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># based on cross-validation, decided to exclude MCMDS from this analysis</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Trait</span> <span class="op">!=</span> <span class="st">"MCMDS"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># need to rename the "blups" list to comply with the runCrossVal function</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>TrainingData<span class="op">=</span><span class="va">blups</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Trait</span>,<span class="va">TrainingData</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># need also to remove phenotyped-but-not-genotyped lines</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>TrainingData<span class="op">=</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">TrainingData</span>,
+                             <span class="op">~</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">.</span>,<span class="va">germplasmName</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">grms</span><span class="op">$</span><span class="va">A</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                                  <span class="co"># rename the germplasmName column to GID</span>
+                                  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>GID<span class="op">=</span><span class="va">germplasmName</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># DOSAGE MATRIX</span>
+<span class="co">## Dosages are also needed for runGenomicPredictions() when getMarkEffs=TRUE</span>
+<span class="co">## Reason is that they are used to extra SNP effects from GBLUP models</span>
+<span class="va">dosages</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"dosages.rds"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># SELECTION INDEX</span>
+<span class="va">SIwts</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>DM<span class="op">=</span><span class="fl">15</span>,
+         logFYLD<span class="op">=</span><span class="fl">20</span>,
+         logDYLD<span class="op">=</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="get-marker-effects" class="section level2" number="14.2">
+<h2>
+<span class="header-section-number">14.2</span> Get marker effects<a class="anchor" aria-label="anchor" href="#get-marker-effects"><i class="fas fa-link"></i></a>
+</h2>
+<p>First, in the <a href="predict-parental-breeding-values">chapter where we predicted GEBV</a>, we used the <code><a href="https://rdrr.io/pkg/genomicMateSelectR/man/runGenomicPredictions.html">runGenomicPredictions()</a></code> function, which implements a <strong>GBLUP</strong> model, to predict <strong>GEBV</strong>.</p>
+<p>We need to re-run <code><a href="https://rdrr.io/pkg/genomicMateSelectR/man/runGenomicPredictions.html">runGenomicPredictions()</a></code>, this time using the <code>getMarkEffs=TRUE</code> option, this will “backsolve” the RR-BLUP marker effect solutions from the GBLUP solutions, using the <code><a href="https://rdrr.io/pkg/genomicMateSelectR/man/backsolveSNPeff.html">backsolveSNPeff()</a></code> function under-the-hood.</p>
+<p>Refer to the <a href="https://wolfemd.github.io/genomicMateSelectR/reference/runGenomicPredictions.html"><code>runGenomicPredictions()</code> documentation here</a> and <a href="https://wolfemd.github.io/genomicMateSelectR/articles/non_additive_models.html#returning-marker-effects-with-getmarkeffs-true">this section of the vignette</a> for more details.</p>
+<p>The output SNP-effects will be formatted ready to be input into the <code><a href="https://rdrr.io/pkg/genomicMateSelectR/man/predictCrosses.html">predictCrosses()</a></code> function.</p>
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gpreds_withMarkEffs</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/runGenomicPredictions.html">runGenomicPredictions</a></span><span class="op">(</span>modelType <span class="op">=</span> <span class="st">"A"</span>, 
+                                           selInd <span class="op">=</span> <span class="cn">T</span>, SIwts <span class="op">=</span> <span class="va">SIwts</span>,
+                                           getMarkEffs <span class="op">=</span> <span class="cn">TRUE</span>,
+                                           dosages <span class="op">=</span> <span class="va">dosages</span>,
+                                           blups <span class="op">=</span> <span class="va">blups</span>, 
+                                           grms <span class="op">=</span> <span class="va">grms</span>,
+                                           ncores<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<p>Save the results</p>
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">gpreds_withMarkEffs</span>,file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"genomicPredictions_withMarkEffs.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gpreds_withMarkEffs</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"genomicPredictions_withMarkEffs.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Notice that there is now a additional list-type column with the label <strong>“allelesubsnpeff”</strong> indicating that, because we ran an additive-only model, these SNP-effects represent predictions of allele substitution effects.</p>
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gpreds_withMarkEffs</span><span class="op">$</span><span class="va">genomicPredOut</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
+<span class="co">#&gt; # A tibble: 3 × 5</span>
+<span class="co">#&gt;   Trait   gblups       varcomps   fixeffs    allelesubsnpeff</span>
+<span class="co">#&gt;   &lt;chr&gt;   &lt;list&gt;       &lt;list&gt;     &lt;list&gt;     &lt;list&gt;         </span>
+<span class="co">#&gt; 1 DM      &lt;tibble [96… &lt;df [2 × … &lt;df [1 × … &lt;dbl [3,986 × …</span>
+<span class="co">#&gt; 2 logFYLD &lt;tibble [96… &lt;df [2 × … &lt;df [1 × … &lt;dbl [3,986 × …</span>
+<span class="co">#&gt; 3 logDYLD &lt;tibble [96… &lt;df [2 × … &lt;df [1 × … &lt;dbl [3,986 × …</span></code></pre></div>
+<p>Just to show, they are a single column matrix with rownames labelling each marker.</p>
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gpreds_withMarkEffs</span><span class="op">$</span><span class="va">genomicPredOut</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">allelesubsnpeff</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="op">]</span>
+<span class="co">#&gt;  1_652699_G_C  1_868970_G_T  1_943129_T_A 1_1132830_A_T </span>
+<span class="co">#&gt; -0.0019610837 -0.0016106918 -0.0008841766 -0.0017600501 </span>
+<span class="co">#&gt; 1_1310706_A_T </span>
+<span class="co">#&gt; -0.0012963110</span></code></pre></div>
+</div>
+<div id="crosses-to-predict" class="section level2" number="14.3">
+<h2>
+<span class="header-section-number">14.3</span> Crosses-to-predict<a class="anchor" aria-label="anchor" href="#crosses-to-predict"><i class="fas fa-link"></i></a>
+</h2>
+<p>The <code><a href="https://rdrr.io/pkg/genomicMateSelectR/man/predictCrosses.html">predictCrosses()</a></code> function will also need a <strong>data.frame</strong> indicating what pairs of parents we want to predict crosses for.</p>
+<p>As a convenience, we can use the <code><a href="https://rdrr.io/pkg/genomicMateSelectR/man/crosses2predict.html">crosses2predict()</a></code> function to make such a <strong>data.frame</strong> from a vector of genotype ID’s.</p>
+<p>A realistic approach, is to choose a set of parents based on their <strong>GEBV</strong>, but more than we’d actually like to actually make crosses with.</p>
+<p>It is still somewhat computationally intensive to predict the variances and covariances of traits for each cross, so we can’t quite predict <em>all possible pairwise crosses</em>… definitely not on our laptops for this example.</p>
+<p>Here, as an example, picking the top 10 candidate parents:</p>
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Access the predicted GEBV</span>
+<span class="va">top10parents</span><span class="op">&lt;-</span><span class="va">gpreds_withMarkEffs</span><span class="op">$</span><span class="va">gblups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># Arrange in descending order based on the SELIND</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">SELIND</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># I'll pick the top 10 parents</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/exposition.html">%$%</a></span>
+     <span class="co"># And extract their GID to a vector</span>
+     <span class="va">GID</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">CrossesToPredict</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/crosses2predict.html">crosses2predict</a></span><span class="op">(</span><span class="va">top10parents</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">CrossesToPredict</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="va">head</span>
+<span class="co">#&gt; # A tibble: 6 × 2</span>
+<span class="co">#&gt;   sireID          damID          </span>
+<span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;          </span>
+<span class="co">#&gt; 1 TMS13F1307P0008 TMS13F1307P0008</span>
+<span class="co">#&gt; 2 TMS13F1307P0008 TMS14F1035P0004</span>
+<span class="co">#&gt; 3 TMS13F1307P0008 TMS14F1262P0002</span>
+<span class="co">#&gt; 4 TMS13F1307P0008 TMS19F1091P0065</span>
+<span class="co">#&gt; 5 TMS13F1307P0008 TMS14F1303P0012</span>
+<span class="co">#&gt; 6 TMS13F1307P0008 TMS14F1312P0003</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">CrossesToPredict</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] 55</span></code></pre></div>
+<p>So we have 55 crosses of the top 10 parents to make predictions for.</p>
+</div>
+<div id="run-predictcrosses" class="section level2" number="14.4">
+<h2>
+<span class="header-section-number">14.4</span> Run <code>predictCrosses()</code><a class="anchor" aria-label="anchor" href="#run-predictcrosses"><i class="fas fa-link"></i></a>
+</h2>
+<p>Additional inputs we will need: “haplotype matrix” and “recombination frequency matrix.”</p>
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># HAPLOTYPE MATRIX</span>
+<span class="co">## keep only haplos for candidate parents we want to predict crosses for</span>
+<span class="co">## those which will be used in prediction, saves memory</span>
+<span class="va">haploMat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span>file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"haplotypes.rds"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">parenthaps</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">top10parents</span>,<span class="st">"_HapA"</span><span class="op">)</span>,
+                   <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">top10parents</span>,<span class="st">"_HapB"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">haploMat</span><span class="op">&lt;-</span><span class="va">haploMat</span><span class="op">[</span><span class="va">parenthaps</span>,<span class="op">]</span>
+
+<span class="co"># RECOMBINATION FREQUENCY MATRIX</span>
+<span class="va">recombFreqMat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span>file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"recombFreqMat_1minus2c.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>Let’s go!</p>
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">starttime</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>
+<span class="va">crossPreds</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/predictCrosses.html">predictCrosses</a></span><span class="op">(</span>modelType<span class="op">=</span><span class="st">"A"</span>,
+                           selInd <span class="op">=</span> <span class="cn">T</span>, SIwts <span class="op">=</span> <span class="va">SIwts</span>,
+                           CrossesToPredict<span class="op">=</span><span class="va">CrossesToPredict</span>,
+                           snpeffs<span class="op">=</span><span class="va">gpreds_withMarkEffs</span><span class="op">$</span><span class="va">genomicPredOut</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, 
+                           haploMat<span class="op">=</span><span class="va">haploMat</span>,
+                           dosages <span class="op">=</span> <span class="va">dosages</span><span class="op">[</span><span class="va">top10parents</span>,<span class="op">]</span>,
+                           recombFreqMat<span class="op">=</span><span class="va">recombFreqMat</span>,
+                           ncores<span class="op">=</span><span class="fl">10</span><span class="op">)</span>
+<span class="va">elapsed</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">-</span><span class="va">starttime</span>; <span class="va">elapsed</span><span class="op">/</span><span class="fl">60</span></code></pre></div>
+<div id="save-results-1" class="section level3" number="14.4.1">
+<h3>
+<span class="header-section-number">14.4.1</span> Save results<a class="anchor" aria-label="anchor" href="#save-results-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">crossPreds</span>,file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"predictedCrosses.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+</div>
+<div id="select-crosses-to-make" class="section level2" number="14.5">
+<h2>
+<span class="header-section-number">14.5</span> Select crosses to make<a class="anchor" aria-label="anchor" href="#select-crosses-to-make"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">crossPreds</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"predictedCrosses.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">crossPreds</span>
+<span class="co">#&gt; # A tibble: 1 × 2</span>
+<span class="co">#&gt;   tidyPreds          rawPreds        </span>
+<span class="co">#&gt;   &lt;list&gt;             &lt;list&gt;          </span>
+<span class="co">#&gt; 1 &lt;tibble [220 × 9]&gt; &lt;named list [2]&gt;</span></code></pre></div>
+<p>Output of <code><a href="https://rdrr.io/pkg/genomicMateSelectR/man/predictCrosses.html">predictCrosses()</a></code> is a <strong>tibble</strong>. Two columns, 1 row. Column 1 (<strong>tidyPreds</strong>) has cleaned-up “tidy” predictions. Column 2 (<strong>rawPreds</strong>) has more detailed output.</p>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">crossPreds</span><span class="op">$</span><span class="va">tidyPreds</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="va">str</span>
+<span class="co">#&gt; tibble [220 × 9] (S3: tbl_df/tbl/data.frame)</span>
+<span class="co">#&gt;  $ sireID        : chr [1:220] "TMS13F1307P0008" "TMS13F1307P0008" "TMS13F1307P0008" "TMS13F1307P0008" ...</span>
+<span class="co">#&gt;  $ damID         : chr [1:220] "TMS13F1307P0008" "TMS13F1307P0008" "TMS13F1307P0008" "TMS13F1307P0008" ...</span>
+<span class="co">#&gt;  $ Nsegsnps      : int [1:220] 1281 1281 1281 1281 2048 2048 2048 2048 1762 1762 ...</span>
+<span class="co">#&gt;  $ predOf        : chr [1:220] "BV" "BV" "BV" "BV" ...</span>
+<span class="co">#&gt;  $ Trait         : chr [1:220] "SELIND" "DM" "logFYLD" "logDYLD" ...</span>
+<span class="co">#&gt;  $ predMean      : num [1:220] 16.48943 1.04623 -0.00208 0.04188 16.39717 ...</span>
+<span class="co">#&gt;  $ predVar       : num [1:220] 6.732467 0.025773 0.000276 0.000279 8.111941 ...</span>
+<span class="co">#&gt;  $ predSD        : num [1:220] 2.5947 0.1605 0.0166 0.0167 2.8481 ...</span>
+<span class="co">#&gt;  $ predUsefulness: num [1:220] 23.4173 1.4749 0.0423 0.0864 24.0017 ...</span></code></pre></div>
+<p>Remember that the “usefulness” (<strong>predUsefulness</strong>) here, or <strong>UC</strong> for short, is equal to a prediction of the expected mean of the top fraction of progeny from each cross <span class="math inline">\(\hat{UC} = \hat{\mu} + i \times \hat{\sigma}\)</span>. This is also called the “superior progeny mean” in the literature. Actually, the user has the option to modify the expected, standardized selection intensity (<span class="math inline">\(\boldsymbol{i}\)</span>) either in advance with the <code>stdSelInt=</code> argument to <code><a href="https://rdrr.io/pkg/genomicMateSelectR/man/predictCrosses.html">predictCrosses()</a></code> or after-the-fact; the default is a value of 2.67, corresponding to selecting the top 1% of offspring for the cross you will be making.</p>
+<p>So let’s say you want to make only the top 10 of the 55 predicted crosses:</p>
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">top10crosses</span><span class="op">&lt;-</span><span class="va">crossPreds</span><span class="op">$</span><span class="va">tidyPreds</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Trait</span><span class="op">==</span><span class="st">"SELIND"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">predVar</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">predUsefulness</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>
+<span class="va">top10crosses</span>
+<span class="co">#&gt; # A tibble: 10 × 8</span>
+<span class="co">#&gt;    sireID     damID    Nsegsnps predOf Trait predMean predSD</span>
+<span class="co">#&gt;    &lt;chr&gt;      &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 TMS14F103… TMS14F1…     1429 BV     SELI…     16.3   3.08</span>
+<span class="co">#&gt;  2 TMS13F130… TMS14F1…     2048 BV     SELI…     16.4   2.85</span>
+<span class="co">#&gt;  3 TMS13F130… TMS13F1…     1281 BV     SELI…     16.5   2.59</span>
+<span class="co">#&gt;  4 TMS14F103… TMS14F1…     2099 BV     SELI…     15.2   2.87</span>
+<span class="co">#&gt;  5 TMS13F130… TMS14F1…     1762 BV     SELI…     15.3   2.62</span>
+<span class="co">#&gt;  6 TMS14F103… TMS19F1…     2013 BV     SELI…     14.3   2.86</span>
+<span class="co">#&gt;  7 TMS14F103… TMS14F1…     2260 BV     SELI…     14.2   2.83</span>
+<span class="co">#&gt;  8 TMS13F130… TMS19F1…     1934 BV     SELI…     14.4   2.60</span>
+<span class="co">#&gt;  9 TMS13F130… TMS14F1…     2136 BV     SELI…     14.3   2.57</span>
+<span class="co">#&gt; 10 TMS14F126… TMS14F1…     1118 BV     SELI…     14.1   2.65</span>
+<span class="co">#&gt; # … with 1 more variable: predUsefulness &lt;dbl&gt;</span></code></pre></div>
+<p>And thus we have a crossing plan! Congratulations!</p>
+</div>
+<div id="non-additive-effects-models" class="section level2" number="14.6">
+<h2>
+<span class="header-section-number">14.6</span> Non-additive effects models<a class="anchor" aria-label="anchor" href="#non-additive-effects-models"><i class="fas fa-link"></i></a>
+</h2>
+<p>Links to information on these models are provided in the previous section <a href="intro-to-genomic-cross-prediction">introducing genomic mate selection</a>.</p>
+<p>The vignette in <code>genomicMateSelectR</code> entitled <a href="https://wolfemd.github.io/genomicMateSelectR/articles/non_additive_models.html"><strong>“Genomic prediction with non-additive effects”</strong></a>provides a complete tutorial on how to execute these models <em>and</em> predicting cross-performance with them.</p>
+
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-bernardo2020breeding" class="csl-entry">
+Bernardo R. N., 2020 <em>Breeding for quantitative traits in plants</em>. Stemma Press.
+</div>
+<div id="ref-Bijma2020" class="csl-entry">
+Bijma P., Y. C. J. Wientjes, and M. P. L. Calus, 2020 Breeding Top Genotypes and Accelerating Response to Recurrent Selection by Selecting Parents with Greater Gametic Variance. Genetics 214: 91–107. <a href="https://doi.org/10.1534/genetics.119.302643">https://doi.org/10.1534/genetics.119.302643</a>
+</div>
+<div id="ref-Bonk2016" class="csl-entry">
+Bonk S., M. Reichelt, F. Teuscher, D. Segelke, and N. Reinsch, 2016 Mendelian sampling covariability of marker effects and genetic values. Genetics Selection Evolution 48. <a href="https://doi.org/10.1186/s12711-016-0214-0">https://doi.org/10.1186/s12711-016-0214-0</a>
+</div>
+<div id="ref-falconer2003introduction" class="csl-entry">
+Falconer D. S., and M. FALCONER, 2003 <em>Introduction to quantitative genetics</em>. Textbook Publishers.
+</div>
+<div id="ref-Garrick2009" class="csl-entry">
+Garrick D. J., J. F. Taylor, and R. L. Fernando, 2009 Deregressing estimated breeding values and weighting information for genomic regression analyses. Genetics Selection Evolution 41. <a href="https://doi.org/10.1186/1297-9686-41-55">https://doi.org/10.1186/1297-9686-41-55</a>
+</div>
+<div id="ref-isik2017genetic" class="csl-entry">
+Isik F., J. Holland, and C. Maltecca, 2017 <em>Genetic data analysis for plant and animal breeding</em>. Springer International Publishing.
+</div>
+<div id="ref-Lehermeier2017" class="csl-entry">
+Lehermeier C., S. Teyssèdre, and C.-C. Schön, 2017 Genetic Gain Increases by Applying the Usefulness Criterion with Improved Variance Prediction in Selection of Crosses. Genetics 207: 1651–1661. <a href="https://doi.org/10.1534/genetics.117.300403">https://doi.org/10.1534/genetics.117.300403</a>
+</div>
+<div id="ref-lynch1998genetics" class="csl-entry">
+Lynch M., and B. Walsh, 1998 <em>Genetics and analysis of quantitative traits</em>. Sinauer.
+</div>
+<div id="ref-neyhart2019" class="csl-entry">
+Neyhart J. L., and K. P. Smith, 2019 Validating Genomewide Predictions of Genetic Variance in a Contemporary Breeding Program. Crop Science 59: 1062–1072. <a href="https://doi.org/10.2135/cropsci2018.11.0716">https://doi.org/10.2135/cropsci2018.11.0716</a>
+</div>
+<div id="ref-Neyhart2019" class="csl-entry">
+Neyhart J. L., A. J. Lorenz, and K. P. Smith, 2019 Multi-trait Improvement by Predicting Genetic Correlations in Breeding Crosses. G3 Genes|Genomes|Genetics 9: 3153–3165. <a href="https://doi.org/10.1534/g3.119.400406">https://doi.org/10.1534/g3.119.400406</a>
+</div>
+<div id="ref-vanraden2008" class="csl-entry">
+VanRaden P. M., 2008 Efficient Methods to Compute Genomic Predictions. Journal of Dairy Science 91: 4414–4423. <a href="https://doi.org/10.3168/jds.2007-0980">https://doi.org/10.3168/jds.2007-0980</a>
+</div>
+<div id="ref-Vitezica2013" class="csl-entry">
+Vitezica Z. G., L. Varona, and A. Legarra, 2013 On the Additive and Dominant Variance and Covariance of Individuals Within the Genomic Selection Scope. Genetics 195: 1223–1230. <a href="https://doi.org/10.1534/genetics.113.155176">https://doi.org/10.1534/genetics.113.155176</a>
+</div>
+<div id="ref-werner2020" class="csl-entry">
+Werner C. R., R. C. Gaynor, D. J. Sargent, A. Lillo, G. Gorjanc, <em>et al.</em>, 2020 Genomic selection strategies for clonally propagated crops
+</div>
+<div id="ref-wolfe2021" class="csl-entry">
+Wolfe M. D., A. W. Chan, P. Kulakow, I. Rabbi, and J.-L. Jannink, 2021 Genomic mating in outbred species: predicting cross usefulness with additive and total genetic covariance matrices. Genetics 219. <a href="https://doi.org/10.1093/genetics/iyab122">https://doi.org/10.1093/genetics/iyab122</a>
+</div>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="accuracy-of-cross-prediction.html"><span class="header-section-number">13</span> Accuracy of cross prediction?</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#predict-crosses"><span class="header-section-number">14</span> Predict crosses</a></li>
+<li><a class="nav-link" href="#load-inputs-and-set-up-1"><span class="header-section-number">14.1</span> Load inputs and set-up</a></li>
+<li><a class="nav-link" href="#get-marker-effects"><span class="header-section-number">14.2</span> Get marker effects</a></li>
+<li><a class="nav-link" href="#crosses-to-predict"><span class="header-section-number">14.3</span> Crosses-to-predict</a></li>
+<li>
+<a class="nav-link" href="#run-predictcrosses"><span class="header-section-number">14.4</span> Run predictCrosses()</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#save-results-1"><span class="header-section-number">14.4.1</span> Save results</a></li></ul>
+</li>
+<li><a class="nav-link" href="#select-crosses-to-make"><span class="header-section-number">14.5</span> Select crosses to make</a></li>
+<li><a class="nav-link" href="#non-additive-effects-models"><span class="header-section-number">14.6</span> Non-additive effects models</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/wolfemd/GenomicSelectionManual/blob/master/11-predictCrosses.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/wolfemd/GenomicSelectionManual/edit/master/11-predictCrosses.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-09.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

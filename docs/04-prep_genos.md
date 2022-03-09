@@ -331,6 +331,8 @@ To ensure consistency in allele counting, create dosage from haps manually.
 
 The counted allele in the dosage matrix, which will be used downstream to construct kinship matrices and estimate marker effects, should be the ALT allele. This will ensure a match to the haplotype matrix, where a "1" indicates the presence of the ALT allele.
 
+The BreedBase system currently (as of Jan. 2022) gives dosages that count the REF allele and we need to fix this.
+
 Here's my tidyverse-based approach, using `group_by()` plus `summarise()` to sum the two haplotypes for each individual across all loci. 
 
 
@@ -402,7 +404,7 @@ haps[1:10,1:5]
 #> IITA-TMS-WAR4080_HapA               0
 #> IITA-TMS-WAR4080_HapB               0
 ```
-## Variant filters
+## Variant filters {#filter-variants}
 
 In this case, simple: keep only positions with >1% minor allele frequency.
 
@@ -423,7 +425,7 @@ saveRDS(dosages,file=here::here("data","dosages.rds"))
 saveRDS(haps,file=here::here("data","haplotypes.rds"))
 ```
 
-## Genomic Relationship Matrices (GRMs)
+## Genomic Relationship Matrices (GRMs) {#construct-grms}
 
 In the example below, I use the `genomicMateSelectR` function `kinship()` to construct **additive** (A) and **dominance** (D) relationship matrices. 
 
@@ -437,9 +439,9 @@ saveRDS(D,file=here::here("output","kinship_dom.rds"))
 
 For more information on the models to-be-implemented downstream, see [this vignette for **genomicMateSelectR**](https://wolfemd.github.io/genomicMateSelectR/articles/non_additive_models.html#genetic-models-implemented-1), the references cited therein.
 
-## Recombination Frequency Matrix
+## Recombination Frequency Matrix {#recomb-freq-mat}
 
-Matrix need for cross-variance predictions.
+Matrix needed for cross-variance predictions.
 
 ### Source a genetic map
 

@@ -84,7 +84,7 @@ Before doing that, a few considerations.
 
 ### Mixed-model software
 
-In the past, I have used both `lmer()` (`lme4` R package) and `asreml()` (the R package interface for the `asreml` software) for this sort of analysis. `lmer()` is limited to homogenous error variance structures and only certain design models / variance structures. `asreml()` is fast, flexible and industry standard *BUT* proprietary.
+In the past, I have used both `lmer()` (`lme4` R package) and `asreml()` (the R package interface for the `asreml` software) for this sort of analysis. `lmer()` is limited to homogeneous error variance structures and only certain design models / variance structures. `asreml()` is fast, flexible and industry standard *BUT* proprietary.
 
 The `sommer` package is fully open-source. The `sommer::mmer()` function is designed to fit almost any model `asreml` can, using a very similar syntax... but it is much more memory intensive and relatively slow. `sommer` uses direct-inversion of matrices, which have to be held in-memory in R.
 

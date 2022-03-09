@@ -65,3 +65,9 @@ library(gt) # just for the nice looking tables
     -   `bcftools`
 
 ## High performance and remote computing
+
+The example in this manual is designed to work on a laptop... at least a new one. I've got 16-cores and 64GB RAM on the machine I developed it on. 
+
+In practice, with the large number of plots, clones and SNPs that we _actually_ work with, we will not use a laptop for these computations.
+
+At some point, perhaps at the end of the pipeline run-through we will want to cover the (remote) use of high performance computing machines to facilitate.

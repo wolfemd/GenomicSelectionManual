@@ -1,0 +1,98 @@
+# Predict parental breeding values
+
+
+```{r setup, include=F, echo=F}
+library(tidyverse); library(genomicMateSelectR); library(sommer); library(gt)
+```
+
+Now that we tested genomic prediction accuracy using cross-validation, we can run genomic predictions.
+
+In the previous section where we [introduced genomic prediction](intro-to-genomic-prediction), we learned how to use the `mmer()` function in `library(sommer)` to run GBLUP models and also rrBLUP models.
+
+For the actual predictions, we can use the function build into `library(genomicMateSelectR)`, `runGenomicPredictions()`. You can find the documentation for that function by [clicking here](https://wolfemd.github.io/genomicMateSelectR/reference/runGenomicPredictions.html).
+
+`runGenomicPredictions()` is a wrapper that uses `mmer()` under-the-hood. It expects de-regressed BLUPs and weights as input.
+
+
+## Set-up for the predictions
+
+Similar set-up to what we did for cross-validation.
+
+Load the BLUps and the kinship matrix.
+```{r}
+blups<-readRDS(here::here("output","blups.rds"))
+A<-readRDS(file=here::here("output","kinship_add.rds"))
+```
+
+```{r}
+blups %<>% 
+     # based on cross-validation, decided to exclude MCMDS from this analysis
+     filter(Trait != "MCMDS") %>% 
+     # need to rename the "blups" list to comply with the runCrossVal function
+     rename(TrainingData=blups) %>% 
+     dplyr::select(Trait,TrainingData) %>% 
+     # need also to remove phenotyped-but-not-genotyped lines
+     mutate(TrainingData=map(TrainingData,
+                             ~filter(.,germplasmName %in% rownames(A)) %>% 
+                                  # rename the germplasmName column to GID
+                                  rename(GID=germplasmName)))
+
+blups
+```
+
+Selection index:
+```{r}
+SIwts<-c(DM=15,
+         #MCMDS=-10,
+         logFYLD=20,
+         logDYLD=20)
+SIwts
+```
+
+Only difference: _do not_ subset the kinship matrix. Or more precisely, keep any genotypes meant to be either in the training set (phenotyped-and-genotyped) and those that are selection candidates (not-necessarily-genotyped).
+
+In this example, simply leave all lines in the kinship matrix.
+
+## Run genomic predictions
+```{r}
+gpreds<-runGenomicPredictions(modelType="A",
+                              selInd=TRUE, SIwts=SIwts,
+                              blups=blups,
+                              grms=list(A=A),
+                              ncores=3)
+```
+
+## Extract GEBV
+Let's look at the output.
+```{r}
+gpreds
+```
+We have a single-row `tibble`. 
+
+To access a simple table listing GEBV for each trait _and_ the selection index:
+```{r}
+gpreds$gblups[[1]]
+```
+At this point, you can use the **SELIND** predictions directly to rank and select parents. 
+
+Example: sort by SELIND and pick the top 10...
+
+```{r}
+gpreds$gblups[[1]] %>% 
+     arrange(desc(SELIND)) %>% 
+     slice(1:10)
+```
+For more detailed output, including variance component estimates:
+```{r}
+gpreds$genomicPredOut[[1]]
+```
+
+```{r}
+gpreds$genomicPredOut[[1]]$varcomps[[1]]
+```
+
+## Save the results
+```{r}
+saveRDS(gpreds,file = here::here("output","genomicPredictions.rds"))
+```
+
