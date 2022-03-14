@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 4 Create a project | Genomic Prediction and Selection Manual</title>
+<title>Chapter 5 Create a project | Genomic Prediction and Selection Manual</title>
 <meta name="author" content="Marnin Wolfe">
-<meta name="description" content="4.1 Create a workflowR project   4.2 Using Rmarkdown  4.2.1 Code chunks   4.3 Hotkeys Pretty critical to learn a few of these, especially these: CMD+Option+I = create chunk Shift+CMD+M = %&gt;% pipe...">
+<meta name="description" content="5.1 Create a workflowR project   5.2 Using Rmarkdown  5.2.1 Code chunks   5.3 Tidyverse functions There are lots of great resources online for learning the basic “tidyverse” functions.  5.4 Using...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 4 Create a project | Genomic Prediction and Selection Manual">
+<meta property="og:title" content="Chapter 5 Create a project | Genomic Prediction and Selection Manual">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://wolfemd.github.io/GenomicSelectionManual/create_project.html">
-<meta property="og:description" content="4.1 Create a workflowR project   4.2 Using Rmarkdown  4.2.1 Code chunks   4.3 Hotkeys Pretty critical to learn a few of these, especially these: CMD+Option+I = create chunk Shift+CMD+M = %&gt;% pipe...">
+<meta property="og:description" content="5.1 Create a workflowR project   5.2 Using Rmarkdown  5.2.1 Code chunks   5.3 Tidyverse functions There are lots of great resources online for learning the basic “tidyverse” functions.  5.4 Using...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 4 Create a project | Genomic Prediction and Selection Manual">
-<meta name="twitter:description" content="4.1 Create a workflowR project   4.2 Using Rmarkdown  4.2.1 Code chunks   4.3 Hotkeys Pretty critical to learn a few of these, especially these: CMD+Option+I = create chunk Shift+CMD+M = %&gt;% pipe...">
+<meta name="twitter:title" content="Chapter 5 Create a project | Genomic Prediction and Selection Manual">
+<meta name="twitter:description" content="5.1 Create a workflowR project   5.2 Using Rmarkdown  5.2.1 Code chunks   5.3 Tidyverse functions There are lots of great resources online for learning the basic “tidyverse” functions.  5.4 Using...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -42,20 +42,21 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Preamble</a></li>
-<li><a class="" href="outline.html"><span class="header-section-number">2</span> Outline</a></li>
+<li><a class="" href="overview-process-map.html"><span class="header-section-number">2</span> Overview Process Map</a></li>
 <li><a class="" href="using-this-manual.html"><span class="header-section-number">3</span> Using this manual</a></li>
-<li><a class="active" href="create_project.html"><span class="header-section-number">4</span> Create a project</a></li>
-<li><a class="" href="download-training-data.html"><span class="header-section-number">5</span> Download training data</a></li>
-<li><a class="" href="prepare-phenotype-data.html"><span class="header-section-number">6</span> Prepare phenotype data</a></li>
-<li><a class="" href="prepare-genotypic-data.html"><span class="header-section-number">7</span> Prepare genotypic data</a></li>
-<li><a class="" href="preliminary-field-trial-analysis.html"><span class="header-section-number">8</span> Preliminary field trial analysis</a></li>
-<li><a class="" href="intro-to-genomic-prediction.html"><span class="header-section-number">9</span> Intro to Genomic Prediction</a></li>
-<li><a class="" href="standard-k-fold-cross-validation.html"><span class="header-section-number">10</span> Standard K-fold Cross-validation</a></li>
+<li><a class="" href="process-maps.html"><span class="header-section-number">4</span> Process maps</a></li>
+<li><a class="active" href="create_project.html"><span class="header-section-number">5</span> Create a project</a></li>
+<li><a class="" href="download-training-data.html"><span class="header-section-number">6</span> Download training data</a></li>
+<li><a class="" href="prepare-phenotype-data.html"><span class="header-section-number">7</span> Prepare phenotype data</a></li>
+<li><a class="" href="prepare-genotypic-data.html"><span class="header-section-number">8</span> Prepare genotypic data</a></li>
+<li><a class="" href="preliminary-field-trial-analysis.html"><span class="header-section-number">9</span> Preliminary field trial analysis</a></li>
+<li><a class="" href="intro-to-genomic-prediction.html"><span class="header-section-number">10</span> Intro to Genomic Prediction</a></li>
+<li><a class="" href="standard-k-fold-cross-validation.html"><span class="header-section-number">11</span> Standard K-fold Cross-validation</a></li>
+<li><a class="" href="predict-parental-breeding-values.html"><span class="header-section-number">12</span> Predict parental breeding values</a></li>
+<li><a class="" href="intro-to-genomic-cross-prediction.html"><span class="header-section-number">13</span> Intro to Genomic Cross Prediction</a></li>
+<li><a class="" href="accuracy-of-cross-prediction.html"><span class="header-section-number">14</span> Accuracy of cross prediction?</a></li>
+<li><a class="" href="predict-crosses.html"><span class="header-section-number">15</span> Predict crosses</a></li>
 <li><a class="" href="references.html">References</a></li>
-<li><a class="" href="predict-parental-breeding-values.html"><span class="header-section-number">11</span> Predict parental breeding values</a></li>
-<li><a class="" href="intro-to-genomic-cross-prediction.html"><span class="header-section-number">12</span> Intro to Genomic Cross Prediction</a></li>
-<li><a class="" href="accuracy-of-cross-prediction.html"><span class="header-section-number">13</span> Accuracy of cross prediction?</a></li>
-<li><a class="" href="predict-crosses.html"><span class="header-section-number">14</span> Predict crosses</a></li>
 </ul>
 
         <div class="book-extra">
@@ -63,58 +64,44 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="create_project" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="create_project" class="section level1" number="5">
 <h1>
-<span class="header-section-number">4</span> Create a project<a class="anchor" aria-label="anchor" href="#create_project"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5</span> Create a project<a class="anchor" aria-label="anchor" href="#create_project"><i class="fas fa-link"></i></a>
 </h1>
-<div id="create-a-workflowr-project" class="section level2" number="4.1">
+<div id="create-a-workflowr-project" class="section level2" number="5.1">
 <h2>
-<span class="header-section-number">4.1</span> Create a <code>workflowR</code> project<a class="anchor" aria-label="anchor" href="#create-a-workflowr-project"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1</span> Create a <code>workflowR</code> project<a class="anchor" aria-label="anchor" href="#create-a-workflowr-project"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="using-rmarkdown" class="section level2" number="4.2">
+<div id="using-rmarkdown" class="section level2" number="5.2">
 <h2>
-<span class="header-section-number">4.2</span> Using Rmarkdown<a class="anchor" aria-label="anchor" href="#using-rmarkdown"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2</span> Using Rmarkdown<a class="anchor" aria-label="anchor" href="#using-rmarkdown"><i class="fas fa-link"></i></a>
 </h2>
-<div id="code-chunks" class="section level3" number="4.2.1">
+<div id="code-chunks" class="section level3" number="5.2.1">
 <h3>
-<span class="header-section-number">4.2.1</span> Code chunks<a class="anchor" aria-label="anchor" href="#code-chunks"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2.1</span> Code chunks<a class="anchor" aria-label="anchor" href="#code-chunks"><i class="fas fa-link"></i></a>
 </h3>
 </div>
 </div>
-<div id="hotkeys" class="section level2" number="4.3">
+<div id="tidyverse-functions" class="section level2" number="5.3">
 <h2>
-<span class="header-section-number">4.3</span> Hotkeys<a class="anchor" aria-label="anchor" href="#hotkeys"><i class="fas fa-link"></i></a>
-</h2>
-<p>Pretty critical to learn a few of these, especially these:</p>
-<ul>
-<li>
-<code>CMD+Option+I</code> = create chunk</li>
-<li>
-<code>Shift+CMD+M</code> = <code>%&gt;%</code> pipe operator</li>
-<li>
-<code>CMD+Enter</code> = submit (run) lines of code in your Rmd or R script to the console.</li>
-</ul>
-</div>
-<div id="tidyverse-functions" class="section level2" number="4.4">
-<h2>
-<span class="header-section-number">4.4</span> Tidyverse functions<a class="anchor" aria-label="anchor" href="#tidyverse-functions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.3</span> Tidyverse functions<a class="anchor" aria-label="anchor" href="#tidyverse-functions"><i class="fas fa-link"></i></a>
 </h2>
 <p>There are <em>lots</em> of great resources online for learning the basic “tidyverse” functions.</p>
 </div>
-<div id="using-git" class="section level2" number="4.5">
+<div id="using-git" class="section level2" number="5.4">
 <h2>
-<span class="header-section-number">4.5</span> Using Git<a class="anchor" aria-label="anchor" href="#using-git"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4</span> Using Git<a class="anchor" aria-label="anchor" href="#using-git"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="publishing-on-github-pages" class="section level2" number="4.6">
+<div id="publishing-on-github-pages" class="section level2" number="5.5">
 <h2>
-<span class="header-section-number">4.6</span> Publishing on GitHub (Pages)<a class="anchor" aria-label="anchor" href="#publishing-on-github-pages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5</span> Publishing on GitHub (Pages)<a class="anchor" aria-label="anchor" href="#publishing-on-github-pages"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="project-organization-recommendations" class="section level2" number="4.7">
+<div id="project-organization-recommendations" class="section level2" number="5.6">
 <h2>
-<span class="header-section-number">4.7</span> Project Organization Recommendations<a class="anchor" aria-label="anchor" href="#project-organization-recommendations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.6</span> Project Organization Recommendations<a class="anchor" aria-label="anchor" href="#project-organization-recommendations"><i class="fas fa-link"></i></a>
 </h2>
 <p>Assuming you are using <code>workflowR</code>:</p>
 <ol style="list-style-type: decimal">
@@ -125,21 +112,20 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="using-this-manual.html"><span class="header-section-number">3</span> Using this manual</a></div>
-<div class="next"><a href="download-training-data.html"><span class="header-section-number">5</span> Download training data</a></div>
+<div class="prev"><a href="process-maps.html"><span class="header-section-number">4</span> Process maps</a></div>
+<div class="next"><a href="download-training-data.html"><span class="header-section-number">6</span> Download training data</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#create_project"><span class="header-section-number">4</span> Create a project</a></li>
-<li><a class="nav-link" href="#create-a-workflowr-project"><span class="header-section-number">4.1</span> Create a workflowR project</a></li>
+<li><a class="nav-link" href="#create_project"><span class="header-section-number">5</span> Create a project</a></li>
+<li><a class="nav-link" href="#create-a-workflowr-project"><span class="header-section-number">5.1</span> Create a workflowR project</a></li>
 <li>
-<a class="nav-link" href="#using-rmarkdown"><span class="header-section-number">4.2</span> Using Rmarkdown</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#code-chunks"><span class="header-section-number">4.2.1</span> Code chunks</a></li></ul>
+<a class="nav-link" href="#using-rmarkdown"><span class="header-section-number">5.2</span> Using Rmarkdown</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#code-chunks"><span class="header-section-number">5.2.1</span> Code chunks</a></li></ul>
 </li>
-<li><a class="nav-link" href="#hotkeys"><span class="header-section-number">4.3</span> Hotkeys</a></li>
-<li><a class="nav-link" href="#tidyverse-functions"><span class="header-section-number">4.4</span> Tidyverse functions</a></li>
-<li><a class="nav-link" href="#using-git"><span class="header-section-number">4.5</span> Using Git</a></li>
-<li><a class="nav-link" href="#publishing-on-github-pages"><span class="header-section-number">4.6</span> Publishing on GitHub (Pages)</a></li>
-<li><a class="nav-link" href="#project-organization-recommendations"><span class="header-section-number">4.7</span> Project Organization Recommendations</a></li>
+<li><a class="nav-link" href="#tidyverse-functions"><span class="header-section-number">5.3</span> Tidyverse functions</a></li>
+<li><a class="nav-link" href="#using-git"><span class="header-section-number">5.4</span> Using Git</a></li>
+<li><a class="nav-link" href="#publishing-on-github-pages"><span class="header-section-number">5.5</span> Publishing on GitHub (Pages)</a></li>
+<li><a class="nav-link" href="#project-organization-recommendations"><span class="header-section-number">5.6</span> Project Organization Recommendations</a></li>
 </ul>
 
       <div class="book-extra">
@@ -157,7 +143,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-09.</p>
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -1,5 +1,11 @@
 # Download training data
 
+## Process Map
+
+![](images/download_steps_process_map.png){width=100%}
+
+## Cassavabase Login
+
 Go to [Cassavabase](https://www.cassavabase.org/) or your favorite alternative BreedBase.
 
 Login.
@@ -16,7 +22,7 @@ For the sake of example, I will choose a small, but real dataset that I think wi
 
 Create a list of trials using the "Wizard"
 
-![](images/wizard_create_trial_list.png)
+![](images/wizard_create_trial_list.png){width=100%}
 
 IITA trials at Ibadan and Ubiaja locations, planted in 2019. Further chose key trial types and specific trials as seen in screenshot.
 
@@ -30,9 +36,9 @@ Start from the new list of trials created: **"IITA_ExampleGStrials_2021Dec04"**
 
 Download **"Related Trial Metadata"** and **"Related Trial Phenotypes"**
 
-![](images/wizard_dl_related_trial_metadata.png)
+![](images/wizard_dl_related_trial_metadata.png){width=100%}
 
-![](images/wizard_dl_related_trial_phenotypes.png)
+![](images/wizard_dl_related_trial_phenotypes.png){width=100%}
 
 Exports .csv files `phenotype.csv` and `metadata.csv`.
 
@@ -46,7 +52,7 @@ Store in `data/` sub-directory for current project.
 
 Create list **"IITA_ExampleGSaccessions_2021Dec05"**.
 
-![](images/wizard_make_accession_list_genotypingprotocolfirst.png)
+![](images/wizard_make_accession_list_genotypingprotocolfirst.png){width=100%}
 
 ### Validate lists
 
@@ -60,11 +66,11 @@ Click the list name "**IITA_ExampleGSaccessions_2021Dec05**" in my case.
 
 Click the **"Validate"** button. There will be a waiting period.
 
-![](images/validate_list_from_the_lists_page.png){width="270"}
+![](images/validate_list_from_the_lists_page.png){width=100%}
 
 If the list fails, there will be some guidance provided as to the problem. Correct it if possible. Seek assistance with the database administrator or others if necessary.
 
-![](images/list_validation_failed.png){width="368"}
+![](images/list_validation_failed.png){width=100%}
 
 In my example, the list *did* fail validation.
 
@@ -83,7 +89,7 @@ I do not 100% know the consequences of the following two choices, but I will:
 ### Download related trial genotype data
 
 Download **"Related Trial Genotype Data",** choosing both available formats: VCF and Dosage Matrix (.tsv).\
-![](images/wizard_dl_related_genotype_data.png){width="485"}\
+![](images/wizard_dl_related_genotype_data.png){width=100%}\
 **NOTE:** This probably will take a while and usually times out. However, Cassavabase will complete preparation of the file even if you disconnect and have it ready-to-go when you return, when ready, it should begin downloading immediately.
 
 **NOTE ALSO that these downloads are in the range of 700Mb (VCF) and 150Mb (Dosage TSV).**

@@ -14,6 +14,10 @@ library(tidyverse); library(genomicMateSelectR); library(sommer); library(gt)
 
 -   **Expected outputs:**
 
+## Process Map
+
+![](images/get_blups_process_map.png){width=100%}
+
 ## One-stage or multi-stage?
 
 We often have very large, multi-year, multi-location, multi-trial-type (**MET**) datasets we use to train genomic prediction models. The number of plots can be in the range of 10- or even 100,000 plots with many thousands of unique genotypes observed in unbalanced fashion across heterogenous experimental designs. All that to say, the computational burden and level of expertise required to execute genomic prediction analyses directly on these data is very great.

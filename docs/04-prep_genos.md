@@ -1,6 +1,7 @@
 # Prepare genotypic data
 
 
+
 -   **Context and Purpose:**
 
     -   Depending on whether parent- vs. mate-selection are intended, there are several formats to-be-constructed / computed from the downloaded genotypic data.
@@ -36,6 +37,10 @@
 
     -   For parent and mate selection: genomic relationship matrices (GRMs, aka kinship matrices), possibly both additive *and* dominance relationship matrices, constructed based on the dosage matrix.
 
+## Process Map
+
+![](images/prepare_genotypic_data_process_map.png){width=100%}
+
 ## Parent vs. Mate Selection?
 
 The following sections will exemplify the **genomic mate selection** as opposed to the somewhat simpler **genomic parent selection** pathway along the process map. This chapter can be simplified / mostly avoided if parent selection is sufficient.
@@ -44,7 +49,7 @@ The following sections will exemplify the **genomic mate selection** as opposed 
 
 Check the VCF 'manually'.
 
-- Are the number of samples and sites what you expected?
+-   Are the number of samples and sites what you expected?
 
 
 ```bash
@@ -60,10 +65,10 @@ vcftools --vcf data/BreedBaseGenotypesDownload.vcf
 # Run Time = 16.00 seconds
 ```
 
-- Are the data phased?
-- What FORMAT fields are present? At a minimum, should include GT field. 
-- Do the column-names after FORMAT (should be sample names) look right / make sense?
-- Do the SNP IDs in the "ID" field make sense?
+-   Are the data phased?
+-   What FORMAT fields are present? At a minimum, should include GT field.
+-   Do the column-names after FORMAT (should be sample names) look right / make sense?
+-   Do the SNP IDs in the "ID" field make sense?
 
 
 ```bash
@@ -74,24 +79,26 @@ cat data/BreedBaseGenotypesDownload.vcf | head -n50 | cut -c1-100
 
 ## Subset VCF
 
-- There _may_ be multiple imputed DNA samples corresponding to a single unique ‘germplasmName’. For matching to the phenotypic observations in downstream analyses, a single entry in the VCF file must be chosen per 'germplasmName'.
-- Remove extraneous samples, if any. 
-- **For example / tutorial purposes ONLY:** randomly sample and subset the number of SNPs to only a few thousand, for quick, local computations.
+-   There *may* be multiple imputed DNA samples corresponding to a single unique 'germplasmName'. For matching to the phenotypic observations in downstream analyses, a single entry in the VCF file must be chosen per 'germplasmName'.
+-   Remove extraneous samples, if any.
+-   **For example / tutorial purposes ONLY:** randomly sample and subset the number of SNPs to only a few thousand, for quick, local computations.
 
 ### Remove duplicate samples
 
-Cassavabase returned multiple columns in the VCF file with the same column-name, because of multiple tissue_samples per germplasmName.
-This prevents using certain tools, e.g. `bcftools` which errors.
+Cassavabase returned multiple columns in the VCF file with the same column-name, because of multiple tissue_samples per germplasmName. This prevents using certain tools, e.g. `bcftools` which errors.
 
-**Manual solution required:** 
+**Manual solution required:**
 
 Write just the column-names of the VCF to disk. Here's a one-liner:
+
 
 ```bash
 egrep "^#CHROM" data/BreedBaseGenotypesDownload.vcf | head -n1 > data/vcf_colnames.txt
 # egrep "^##SynonymsOfAccessions=" data/BreedBaseGenotypesDownload.vcf | head -n1 > data/vcf_synonyms.txt
 ```
+
 Read the column-names-file to R. Exclude the first 9 elements as they are standard VCF columns, not "germplasmName"
+
 
 ```r
 vcf_sample_names<-readLines("data/vcf_colnames.txt") %>% 
@@ -103,11 +110,13 @@ table(duplicated(vcf_sample_names))
 #> FALSE  TRUE 
 #>   963   244
 ```
+
 Quite a few duplicates.
 
 Next, I (1) create unique names for each sample column in the VCF file, (2) write the "unique_names_for_vcf.txt" to disk and (3) use it to replace the current sample column names in the VCF. Finally, I (4) subset the VCF to only one unique instance of each name.
 
 First, manipulate names using **R**.
+
 
 ```r
 # create unique names for each VCF
@@ -141,6 +150,7 @@ Now in the command line:
 
 `bcftools reheader` to replace the sample names in the VCF with the unique ones.
 
+
 ```bash
 # replace sample names in original VCF with unique ones (creates a new VCF)
 bcftools reheader --samples data/unique_names_for_vcf.txt data/BreedBaseGenotypesDownload.vcf > data/BreedBaseGenotypesDownload_1.vcf; 
@@ -152,10 +162,12 @@ bcftools query --list-samples data/BreedBaseGenotypesDownload.vcf
 
 Now subset the VCF to only a single instance of each "germplasmName" with `vcftools`.
 
+
 ```bash
 vcftools --vcf data/BreedBaseGenotypesDownload.vcf --keep data/subset_unique_names_for_vcf.txt --recode --stdout | bgzip -c > data/BreedBaseGenotypes_subset.vcf.gz
 # uses stdout and bgzip to output a gzipped vcf file; saves disk space!
 ```
+
 
 ```bash
 vcftools --gzvcf data/BreedBaseGenotypes_subset.vcf.gz
@@ -172,7 +184,7 @@ vcftools --gzvcf data/BreedBaseGenotypes_subset.vcf.gz
 
 ### Check genotype-to-phenotype matches
 
-- Do the number of unique **germplasmName** (in the [cleaned phenos from the previous step][save_cleaned_phenos]) matching samples in the VCF make sense? Are there as many as expected? If not, you will need to figure out why not. 
+-   Do the number of unique **germplasmName** (in the \[cleaned phenos from the previous step\]\[save_cleaned_phenos\]) matching samples in the VCF make sense? Are there as many as expected? If not, you will need to figure out why not.
 
 
 ```r
@@ -183,7 +195,9 @@ germplasm_with_phenos<-unique(phenos$germplasmName)
 length(germplasm_with_phenos) 
 #> [1] 1002
 ```
+
 How many matches to the VCF?
+
 
 ```r
 table(germplasm_with_phenos %in% subset_unique_names_for_vcf)
@@ -191,12 +205,10 @@ table(germplasm_with_phenos %in% subset_unique_names_for_vcf)
 #> FALSE  TRUE 
 #>   652   350
 ```
-350 matches.
-Does that make sense?
-Yes. We ended up excluding the "genetic gain" trial from the phenotypes b/c actually there were no trait scores. 
 
-To be sure, I look at the names of:
-(1) the genotyped _and_ phenotyped, (2) the genotyped _but not_ phenotyped, (3) the phenotyped _but not_ genotyped. 
+350 matches. Does that make sense? Yes. We ended up excluding the "genetic gain" trial from the phenotypes b/c actually there were no trait scores.
+
+To be sure, I look at the names of: (1) the genotyped *and* phenotyped, (2) the genotyped *but not* phenotyped, (3) the phenotyped *but not* genotyped.
 
 
 ```r
@@ -207,9 +219,10 @@ germplasm_with_phenos[!germplasm_with_phenos %in% subset_unique_names_for_vcf]
 # geno not pheno
 subset_unique_names_for_vcf[!subset_unique_names_for_vcf %in% germplasm_with_phenos]
 ```
+
 To diagnose some the phenotyped-but-not-genotyped, I actually resorted to searching a few on Cassavabase to verify that there were non-genotyped lines in the trials I downloaded.
 
-For the genotyped-but-not-phenotyped, indeed the names are all "genetic gain" population clones. 
+For the genotyped-but-not-phenotyped, indeed the names are all "genetic gain" population clones.
 
 **Probably the details above will change if I go back and choose better example trials.**
 
@@ -229,6 +242,7 @@ cat data/BreedBaseGenotypesDownload.vcf | grep -v "^#" | cut -f1-2 > data/BreedB
 
 Read into R, sample 4000 at random
 
+
 ```r
 set.seed(1234)
 read.table(here::here("data","BreedBaseGenotypesDownload.positions"), 
@@ -238,7 +252,9 @@ read.table(here::here("data","BreedBaseGenotypesDownload.positions"),
      write.table(.,file = "data/BreedBaseGenotypes_subset.positions",
                  row.names = F, col.names = F, quote = F)
 ```
+
 Subset the VCF using the randomly sampled list of positions.
+
 
 ```bash
 vcftools --vcf data/BreedBaseGenotypesDownload.vcf \
@@ -264,11 +280,12 @@ vcftools --vcf data/BreedBaseGenotypesDownload.vcf \
 
 ### LD-prunning SNPs (for computational savings)
 
-**NOT DEMONSTRATED HERE, YET.** In practice, when predicting cross-variances, it can still be very computationally intensive with large numbers of markers. [Previously](https://wolfemd.github.io/IITA_2021GS/04-PreprocessDataFiles.html#Variant_filters), I used `plink --indep-pairwise` to prune markers based on linkage disequilibrium. I [found an LD-prunned subset that had similar accuracy to the full set](https://wolfemd.github.io/IITA_2021GS/07-Results.html#Prediction_accuracy_estimates), but less than half the markers. Subsequently, I used the full set to predict cross means, but the LD-pruned marker subset for the cross variances [predictions of >250K crosses of 719 candidate parents in IITA's 2021 crossing block](https://wolfemd.github.io/IITA_2021GS/07-Results.html#Genomic_Predictions).
+**NOT DEMONSTRATED HERE, YET.** In practice, when predicting cross-variances, it can still be very computationally intensive with large numbers of markers. [Previously](https://wolfemd.github.io/IITA_2021GS/04-PreprocessDataFiles.html#Variant_filters), I used `plink --indep-pairwise` to prune markers based on linkage disequilibrium. I [found an LD-prunned subset that had similar accuracy to the full set](https://wolfemd.github.io/IITA_2021GS/07-Results.html#Prediction_accuracy_estimates), but less than half the markers. Subsequently, I used the full set to predict cross means, but the LD-pruned marker subset for the cross variances [predictions of \>250K crosses of 719 candidate parents in IITA's 2021 crossing block](https://wolfemd.github.io/IITA_2021GS/07-Results.html#Genomic_Predictions).
 
 ## Haplotype matrix from VCF
 
 Extract haplotypes from VCF with `bcftools convert --hapsample`
+
 
 ```bash
 bcftools convert --hapsample data/BreedBaseGenotypes_subset data/BreedBaseGenotypes_subset.vcf.gz
@@ -277,7 +294,9 @@ bcftools convert --hapsample data/BreedBaseGenotypes_subset data/BreedBaseGenoty
 # [W::vcf_parse_format] FORMAT 'NT' at 1:652699 is not defined in the header, assuming Type=String
 # 4000 records written, 0 skipped: 0/0/0 no-ALT/non-biallelic/filtered
 ```
+
 Read haps to R and format them.
+
 
 ```r
 library(data.table)
@@ -298,7 +317,8 @@ sampleids<-fread(paste0("data/",vcfName,".samples"),
   as.data.frame
 ```
 
-Add sample ID's. 
+Add sample ID's.
+
 
 ```r
 hapids<-sampleids %>% 
@@ -315,6 +335,7 @@ dim(haps)
 ```
 
 Format, transpose, convert to matrix.
+
 
 ```r
 haps %<>% 
@@ -333,7 +354,7 @@ The counted allele in the dosage matrix, which will be used downstream to constr
 
 The BreedBase system currently (as of Jan. 2022) gives dosages that count the REF allele and we need to fix this.
 
-Here's my tidyverse-based approach, using `group_by()` plus `summarise()` to sum the two haplotypes for each individual across all loci. 
+Here's my tidyverse-based approach, using `group_by()` plus `summarise()` to sum the two haplotypes for each individual across all loci.
 
 
 ```r
@@ -367,6 +388,7 @@ dosages[1:5,1:5]
 #> IITA-TMS-ONN920168             0             0
 #> IITA-TMS-WAR4080               1             0
 ```
+
 
 ```r
 haps[1:10,1:5]
@@ -404,9 +426,10 @@ haps[1:10,1:5]
 #> IITA-TMS-WAR4080_HapA               0
 #> IITA-TMS-WAR4080_HapB               0
 ```
+
 ## Variant filters {#filter-variants}
 
-In this case, simple: keep only positions with >1% minor allele frequency.
+In this case, simple: keep only positions with \>1% minor allele frequency.
 
 
 ```r
@@ -420,6 +443,7 @@ haps<-haps[,colnames(dosages)]
 
 ### Save dosages and haps
 
+
 ```r
 saveRDS(dosages,file=here::here("data","dosages.rds"))
 saveRDS(haps,file=here::here("data","haplotypes.rds"))
@@ -427,7 +451,7 @@ saveRDS(haps,file=here::here("data","haplotypes.rds"))
 
 ## Genomic Relationship Matrices (GRMs) {#construct-grms}
 
-In the example below, I use the `genomicMateSelectR` function `kinship()` to construct **additive** (A) and **dominance** (D) relationship matrices. 
+In the example below, I use the `genomicMateSelectR` function `kinship()` to construct **additive** (A) and **dominance** (D) relationship matrices.
 
 
 ```r
@@ -445,8 +469,8 @@ Matrix needed for cross-variance predictions.
 
 ### Source a genetic map
 
-- Must match the reference genome of the marker set to be used in prediction
-- Not necessarily the exact markerset, but overlap is ideal
+-   Must match the reference genome of the marker set to be used in prediction
+-   Not necessarily the exact markerset, but overlap is ideal
 
 I source a single genome-wide file representing the ICGMC concensus genetic map on the V6 Cassava Reference genome. The file is on the Cassavabase FTP-archive, [here](https://cassavabase.org/ftp/marnin_datasets/NGC_BigData/CassavaGeneticMap/cassava_cM_pred.v6.allchr.txt).
 
@@ -459,7 +483,9 @@ genmap<-read.table("https://cassavabase.org/ftp/marnin_datasets/NGC_BigData/Cass
 genmap %>% dim
 #> [1] 120979      3
 ```
+
 120K positions.
+
 
 ```r
 genmap %>% head
@@ -473,6 +499,7 @@ genmap %>% head
 #> 5 S1_27739 27739   2.7
 #> 6 S1_27746 27746   2.7
 ```
+
 
 ```r
 snps_genmap<-tibble(DoseSNP_ID=colnames(dosages)) %>% 
@@ -496,6 +523,7 @@ snps_genmap %>%
 <img src="04-prep_genos_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 ### Interpolate genetic map
+
 
 ```r
 interpolate_genmap<-function(data){
@@ -549,6 +577,7 @@ all(colnames(dosages) %in% splined_snps_genmap$DoseSNP_ID)
 #> [1] TRUE
 ```
 
+
 ```r
 splined_snps_genmap %>% 
      filter(DoseSNP_ID %in% colnames(dosages)) %>% 
@@ -564,7 +593,9 @@ splined_snps_genmap %>%
 ```
 
 <img src="04-prep_genos_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+
 Save the interpolated map, just for the marker loci to-be-used downstream.
+
 
 ```r
 splined_snps_genmap %>% 
@@ -584,5 +615,3 @@ saveRDS(recombFreqMat,file=here::here("output","recombFreqMat_1minus2c.rds"))
 ```
 
 See also, [**genomicMateSelectR** vignette](https://wolfemd.github.io/genomicMateSelectR/articles/start_here.html#recombination-frequency-matrix-1).
-
-

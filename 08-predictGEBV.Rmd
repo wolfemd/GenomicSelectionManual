@@ -1,6 +1,5 @@
 # Predict parental breeding values
 
-
 ```{r setup, include=F, echo=F}
 library(tidyverse); library(genomicMateSelectR); library(sommer); library(gt)
 ```
@@ -13,12 +12,16 @@ For the actual predictions, we can use the function build into `library(genomicM
 
 `runGenomicPredictions()` is a wrapper that uses `mmer()` under-the-hood. It expects de-regressed BLUPs and weights as input.
 
+## Process Map
+
+![](images/predict_gebv_process_map.png){width=100%}
 
 ## Set-up for the predictions
 
 Similar set-up to what we did for cross-validation.
 
 Load the BLUps and the kinship matrix.
+
 ```{r}
 blups<-readRDS(here::here("output","blups.rds"))
 A<-readRDS(file=here::here("output","kinship_add.rds"))
@@ -41,6 +44,7 @@ blups
 ```
 
 Selection index:
+
 ```{r}
 SIwts<-c(DM=15,
          #MCMDS=-10,
@@ -49,11 +53,12 @@ SIwts<-c(DM=15,
 SIwts
 ```
 
-Only difference: _do not_ subset the kinship matrix. Or more precisely, keep any genotypes meant to be either in the training set (phenotyped-and-genotyped) and those that are selection candidates (not-necessarily-genotyped).
+Only difference: *do not* subset the kinship matrix. Or more precisely, keep any genotypes meant to be either in the training set (phenotyped-and-genotyped) and those that are selection candidates (not-necessarily-genotyped).
 
 In this example, simply leave all lines in the kinship matrix.
 
 ## Run genomic predictions
+
 ```{r}
 gpreds<-runGenomicPredictions(modelType="A",
                               selInd=TRUE, SIwts=SIwts,
@@ -63,17 +68,22 @@ gpreds<-runGenomicPredictions(modelType="A",
 ```
 
 ## Extract GEBV
+
 Let's look at the output.
+
 ```{r}
 gpreds
 ```
-We have a single-row `tibble`. 
 
-To access a simple table listing GEBV for each trait _and_ the selection index:
+We have a single-row `tibble`.
+
+To access a simple table listing GEBV for each trait *and* the selection index:
+
 ```{r}
 gpreds$gblups[[1]]
 ```
-At this point, you can use the **SELIND** predictions directly to rank and select parents. 
+
+At this point, you can use the **SELIND** predictions directly to rank and select parents.
 
 Example: sort by SELIND and pick the top 10...
 
@@ -82,7 +92,9 @@ gpreds$gblups[[1]] %>%
      arrange(desc(SELIND)) %>% 
      slice(1:10)
 ```
+
 For more detailed output, including variance component estimates:
+
 ```{r}
 gpreds$genomicPredOut[[1]]
 ```
@@ -92,7 +104,7 @@ gpreds$genomicPredOut[[1]]$varcomps[[1]]
 ```
 
 ## Save the results
+
 ```{r}
 saveRDS(gpreds,file = here::here("output","genomicPredictions.rds"))
 ```
-

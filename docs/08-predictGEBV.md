@@ -2,7 +2,6 @@
 
 
 
-
 Now that we tested genomic prediction accuracy using cross-validation, we can run genomic predictions.
 
 In the previous section where we [introduced genomic prediction](intro-to-genomic-prediction), we learned how to use the `mmer()` function in `library(sommer)` to run GBLUP models and also rrBLUP models.
@@ -11,12 +10,16 @@ For the actual predictions, we can use the function build into `library(genomicM
 
 `runGenomicPredictions()` is a wrapper that uses `mmer()` under-the-hood. It expects de-regressed BLUPs and weights as input.
 
+## Process Map
+
+![](images/predict_gebv_process_map.png){width=100%}
 
 ## Set-up for the predictions
 
 Similar set-up to what we did for cross-validation.
 
 Load the BLUps and the kinship matrix.
+
 
 ```r
 blups<-readRDS(here::here("output","blups.rds"))
@@ -48,6 +51,7 @@ blups
 
 Selection index:
 
+
 ```r
 SIwts<-c(DM=15,
          #MCMDS=-10,
@@ -58,11 +62,12 @@ SIwts
 #>      15      20      20
 ```
 
-Only difference: _do not_ subset the kinship matrix. Or more precisely, keep any genotypes meant to be either in the training set (phenotyped-and-genotyped) and those that are selection candidates (not-necessarily-genotyped).
+Only difference: *do not* subset the kinship matrix. Or more precisely, keep any genotypes meant to be either in the training set (phenotyped-and-genotyped) and those that are selection candidates (not-necessarily-genotyped).
 
 In this example, simply leave all lines in the kinship matrix.
 
 ## Run genomic predictions
+
 
 ```r
 gpreds<-runGenomicPredictions(modelType="A",
@@ -73,27 +78,29 @@ gpreds<-runGenomicPredictions(modelType="A",
 #> Loading required package: furrr
 #> Loading required package: future
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -187.325   12:44:59      0           0
-#>     2      -187.167   12:44:59      0           0
-#>     3      -187.095   12:45:0      1           0
-#>     4      -187.077   12:45:0      1           0
-#>     5      -187.075   12:45:0      1           0
-#>     6      -187.075   12:45:0      1           0
+#>     1      -187.325   17:37:54      0           0
+#>     2      -187.167   17:37:54      0           0
+#>     3      -187.095   17:37:54      0           0
+#>     4      -187.077   17:37:55      1           0
+#>     5      -187.075   17:37:55      1           0
+#>     6      -187.075   17:37:55      1           0
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -135.425   12:45:0      0           0
-#>     2      -135.406   12:45:0      0           0
-#>     3      -135.395   12:45:0      0           0
-#>     4      -135.391   12:45:0      0           0
-#>     5      -135.39   12:45:0      0           0
+#>     1      -135.425   17:37:55      1           0
+#>     2      -135.406   17:37:55      1           0
+#>     3      -135.395   17:37:55      1           0
+#>     4      -135.391   17:37:55      1           0
+#>     5      -135.39   17:37:55      1           0
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -146.037   12:45:0      0           0
-#>     2      -146.031   12:45:1      1           0
-#>     3      -146.028   12:45:1      1           0
-#>     4      -146.027   12:45:1      1           0
+#>     1      -146.037   17:37:55      0           0
+#>     2      -146.031   17:37:55      0           0
+#>     3      -146.028   17:37:55      0           0
+#>     4      -146.027   17:37:56      1           0
 ```
 
 ## Extract GEBV
+
 Let's look at the output.
+
 
 ```r
 gpreds
@@ -102,9 +109,11 @@ gpreds
 #>   <list>             <list>          
 #> 1 <tibble [963 × 6]> <tibble [3 × 4]>
 ```
-We have a single-row `tibble`. 
 
-To access a simple table listing GEBV for each trait _and_ the selection index:
+We have a single-row `tibble`.
+
+To access a simple table listing GEBV for each trait *and* the selection index:
+
 
 ```r
 gpreds$gblups[[1]]
@@ -123,7 +132,8 @@ gpreds$gblups[[1]]
 #> 10 IITA-TMS-WAR940017 GEBV   -15.3  -1.12    0.0463  0.0240 
 #> # … with 953 more rows
 ```
-At this point, you can use the **SELIND** predictions directly to rank and select parents. 
+
+At this point, you can use the **SELIND** predictions directly to rank and select parents.
 
 Example: sort by SELIND and pick the top 10...
 
@@ -146,7 +156,9 @@ gpreds$gblups[[1]] %>%
 #>  9 TMS14F1284P0019    GEBV     20.2  1.39 -0.0310  -0.00172
 #> 10 IITA-TMS-ZAR000120 GEBV     19.9  1.32 -0.0156   0.0209
 ```
+
 For more detailed output, including variance component estimates:
+
 
 ```r
 gpreds$genomicPredOut[[1]]
@@ -171,7 +183,7 @@ gpreds$genomicPredOut[[1]]$varcomps[[1]]
 
 ## Save the results
 
+
 ```r
 saveRDS(gpreds,file = here::here("output","genomicPredictions.rds"))
 ```
-

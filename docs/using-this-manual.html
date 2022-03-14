@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 3 Using this manual | Genomic Prediction and Selection Manual</title>
 <meta name="author" content="Marnin Wolfe">
-<meta name="description" content="3.1 Workflow notes Create a workflowR repository for your genomic prediction analysis, following instructions here. Follow along the following documents as templates and examples: Genomic...">
+<meta name="description" content="3.1 Suggested workflow Create a workflowR repository for your genomic prediction analysis, following instructions here. Follow along the following documents as templates and examples: Genomic...">
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
 <meta property="og:title" content="Chapter 3 Using this manual | Genomic Prediction and Selection Manual">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://wolfemd.github.io/GenomicSelectionManual/using-this-manual.html">
-<meta property="og:description" content="3.1 Workflow notes Create a workflowR repository for your genomic prediction analysis, following instructions here. Follow along the following documents as templates and examples: Genomic...">
+<meta property="og:description" content="3.1 Suggested workflow Create a workflowR repository for your genomic prediction analysis, following instructions here. Follow along the following documents as templates and examples: Genomic...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 Using this manual | Genomic Prediction and Selection Manual">
-<meta name="twitter:description" content="3.1 Workflow notes Create a workflowR repository for your genomic prediction analysis, following instructions here. Follow along the following documents as templates and examples: Genomic...">
+<meta name="twitter:description" content="3.1 Suggested workflow Create a workflowR repository for your genomic prediction analysis, following instructions here. Follow along the following documents as templates and examples: Genomic...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -42,20 +42,21 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Preamble</a></li>
-<li><a class="" href="outline.html"><span class="header-section-number">2</span> Outline</a></li>
+<li><a class="" href="overview-process-map.html"><span class="header-section-number">2</span> Overview Process Map</a></li>
 <li><a class="active" href="using-this-manual.html"><span class="header-section-number">3</span> Using this manual</a></li>
-<li><a class="" href="create_project.html"><span class="header-section-number">4</span> Create a project</a></li>
-<li><a class="" href="download-training-data.html"><span class="header-section-number">5</span> Download training data</a></li>
-<li><a class="" href="prepare-phenotype-data.html"><span class="header-section-number">6</span> Prepare phenotype data</a></li>
-<li><a class="" href="prepare-genotypic-data.html"><span class="header-section-number">7</span> Prepare genotypic data</a></li>
-<li><a class="" href="preliminary-field-trial-analysis.html"><span class="header-section-number">8</span> Preliminary field trial analysis</a></li>
-<li><a class="" href="intro-to-genomic-prediction.html"><span class="header-section-number">9</span> Intro to Genomic Prediction</a></li>
-<li><a class="" href="standard-k-fold-cross-validation.html"><span class="header-section-number">10</span> Standard K-fold Cross-validation</a></li>
+<li><a class="" href="process-maps.html"><span class="header-section-number">4</span> Process maps</a></li>
+<li><a class="" href="create_project.html"><span class="header-section-number">5</span> Create a project</a></li>
+<li><a class="" href="download-training-data.html"><span class="header-section-number">6</span> Download training data</a></li>
+<li><a class="" href="prepare-phenotype-data.html"><span class="header-section-number">7</span> Prepare phenotype data</a></li>
+<li><a class="" href="prepare-genotypic-data.html"><span class="header-section-number">8</span> Prepare genotypic data</a></li>
+<li><a class="" href="preliminary-field-trial-analysis.html"><span class="header-section-number">9</span> Preliminary field trial analysis</a></li>
+<li><a class="" href="intro-to-genomic-prediction.html"><span class="header-section-number">10</span> Intro to Genomic Prediction</a></li>
+<li><a class="" href="standard-k-fold-cross-validation.html"><span class="header-section-number">11</span> Standard K-fold Cross-validation</a></li>
+<li><a class="" href="predict-parental-breeding-values.html"><span class="header-section-number">12</span> Predict parental breeding values</a></li>
+<li><a class="" href="intro-to-genomic-cross-prediction.html"><span class="header-section-number">13</span> Intro to Genomic Cross Prediction</a></li>
+<li><a class="" href="accuracy-of-cross-prediction.html"><span class="header-section-number">14</span> Accuracy of cross prediction?</a></li>
+<li><a class="" href="predict-crosses.html"><span class="header-section-number">15</span> Predict crosses</a></li>
 <li><a class="" href="references.html">References</a></li>
-<li><a class="" href="predict-parental-breeding-values.html"><span class="header-section-number">11</span> Predict parental breeding values</a></li>
-<li><a class="" href="intro-to-genomic-cross-prediction.html"><span class="header-section-number">12</span> Intro to Genomic Cross Prediction</a></li>
-<li><a class="" href="accuracy-of-cross-prediction.html"><span class="header-section-number">13</span> Accuracy of cross prediction?</a></li>
-<li><a class="" href="predict-crosses.html"><span class="header-section-number">14</span> Predict crosses</a></li>
 </ul>
 
         <div class="book-extra">
@@ -67,18 +68,26 @@
 <h1>
 <span class="header-section-number">3</span> Using this manual<a class="anchor" aria-label="anchor" href="#using-this-manual"><i class="fas fa-link"></i></a>
 </h1>
-<div id="workflow-notes" class="section level2" number="3.1">
+<div id="suggested-workflow" class="section level2" number="3.1">
 <h2>
-<span class="header-section-number">3.1</span> Workflow notes<a class="anchor" aria-label="anchor" href="#workflow-notes"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1</span> Suggested workflow<a class="anchor" aria-label="anchor" href="#suggested-workflow"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li><p>Create a <code>workflowR</code> repository for your genomic prediction analysis, following <a href="create_project.html#create_project">instructions here</a>.</p></li>
 <li>
 <p>Follow along the following documents as templates and examples:</p>
 <ul>
-<li><strong>Genomic Selection Manual (THIS BOOK)</strong></li>
-<li><strong>GS Process Map (~TO BE LINKED HERE, AND SHOWN THROUGHOUT THE MANUAL~)</strong></li>
-<li><strong>GS Checklist (~TO BE LINKED HERE~)</strong></li>
+<li><p><strong>Genomic Selection Manual (THIS BOOK)</strong></p></li>
+<li>
+<p><strong>GS Process Maps</strong> (see <a href="process_maps">process map section below</a>, also placed strategically throughout the manual). There are four total:</p>
+<ol style="list-style-type: decimal">
+<li><p>Overview Process Map</p></li>
+<li><p>Data Download and Preparation Process Map</p></li>
+<li><p>Preliminary Analysis and Cross-validation Process Map</p></li>
+<li><p>Genomic Mate Selection Process Map</p></li>
+</ol>
+</li>
+<li><p><strong>GS Checklist (~TO BE LINKED HERE~)</strong></p></li>
 </ul>
 </li>
 <li><p>Use some variant of these documents and code examples to complete a genomic prediction analysis and develop a report on the results.</p></li>
@@ -103,62 +112,147 @@
 </li>
 </ul>
 </div>
-<div id="r-sessions-packages-to-load" class="section level2" number="3.2">
+<div id="prerequisites" class="section level2" number="3.2">
 <h2>
-<span class="header-section-number">3.2</span> R sessions, packages to load<a class="anchor" aria-label="anchor" href="#r-sessions-packages-to-load"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.2</span> Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>You need to install R, Rstudio and relevant R packages <em>in advance</em>. Instructions are in the next section.</li>
+<li>You need to know at least some R syntax. Links to learning resources are also provided in a section below. If you’ve never used R before, you are going to have trouble following the coding aspects in this manual.</li>
+</ol>
+</div>
+<div id="install-software-and-packages" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Install software and packages<a class="anchor" aria-label="anchor" href="#install-software-and-packages"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>
+<p>Install R and Rstudio</p>
+<ul>
+<li><p><a href="https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu">How to Install R on Windows, Mac OS X, and Ubuntu Tutorial</a></p></li>
+<li><p><a href="https://rstudio-education.github.io/hopr/starting.html">Installing R and RStudio</a></p></li>
+</ul>
+</li>
+<li><p>Rstudio</p></li>
+<li>
+<p>Install packages</p>
+<ul>
+<li>
+<code>tidyverse</code> (includes <code>dplyr</code>, <code>tidyr</code>, <code>ggplot2</code>, <code>magrittr</code> and other really useful ones)</li>
+<li><code>genomicMateSelectR</code></li>
+<li><code>workflowr</code></li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tidyverse"</span>,<span class="st">"workflowr"</span>, <span class="st">"sommer"</span>, <span class="st">"lme4"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"wolfemd/genomicMateSelectR"</span>, ref <span class="op">=</span> <span class="st">'master'</span><span class="op">)</span> </code></pre></div>
+<ul>
+<li>
+<p>Bioinformatics command-line software tools:</p>
+<ul>
+<li><p><a href="https://vcftools.github.io/man_latest.html"><code>vcftools</code></a></p></li>
+<li><p><a href="https://samtools.github.io/bcftools/bcftools.html"><code>bcftools</code></a></p></li>
+<li><p><a href="https://www.cog-genomics.org/plink/"><code>plink1.9</code></a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="learning-r-and-more" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> Learning R and more<a class="anchor" aria-label="anchor" href="#learning-r-and-more"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p><strong>R for Data Science (<a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a>)</strong>:<br>
+As the Rstudio / Tidyverse team recommends here (<a href="https://www.tidyverse.org/learn/" class="uri">https://www.tidyverse.org/learn/</a>), this book is “the best place to start learning the tidyverse.” Just about anyone should be able to (1) read the brief introduction and (2) look over the table of contents and quickly find a starting point that meets their level / interest. </p></li>
+<li>
+<p><strong>Data Challenge Lab (<a href="https://datalab.stanford.edu/challenge-lab" class="uri">https://datalab.stanford.edu/challenge-lab</a>)<br></strong>Where students develop their data skills by solving a progression of increasingly difficult challenges. I just discovered this. There is much here that I think is useful. Especially amongst the “Open Content” (<a href="https://dcl-docs.stanford.edu/home/" class="uri">https://dcl-docs.stanford.edu/home/</a>). For example:</p>
+<ul>
+<li><p><strong>Data Wrangling</strong><br><a href="https://dcl-wrangle.stanford.edu/manip-basics.html" class="uri">https://dcl-wrangle.stanford.edu/manip-basics.html</a></p></li>
+<li><p><strong>Functional Programming<br></strong><a href="https://dcl-prog.stanford.edu/">https://dcl-prog.stanford.edu/<br></a><a href="https://dcl-prog.stanford.edu/purrr-mutate.html" class="uri">https://dcl-prog.stanford.edu/purrr-mutate.html</a> (I’ve been told my loops using purrr package functions are confusing… check this out).<br>
+Also:<a href="https://dcl-prog.stanford.edu/purrr-parallel.html" class="uri">https://dcl-prog.stanford.edu/purrr-parallel.html</a></p></li>
+</ul>
+</li>
+<li><p><strong>Learn the tidyverse<br></strong><a href="https://www.tidyverse.org/learn/">https://www.tidyverse.org/learn/<br></a><a href="https://www.tidyverse.org/packages/" class="uri">https://www.tidyverse.org/packages/</a></p></li>
+<li><p><strong>APS 135: Introduction to Exploratory Data Analysis with R<br></strong>(<a href="https://dzchilds.github.io/eda-for-bio/" class="uri">https://dzchilds.github.io/eda-for-bio/</a>)<br>
+Has some useful intro sections on the very basics of R and Rstudio, seems to have come out of a Plant Science department, so there is that.</p></li>
+<li><p><strong>Stat545: Data wrangling, exploration, and analysis with R</strong><br><a href="https://stat545.com/" class="uri">https://stat545.com/</a></p></li>
+</ul>
+<p><a href="https://docs.google.com/document/d/1FbT_n66WvHPL9E3hwNQJenntoS-TPgkIR-7xTBW8rBk/edit?usp=sharing"><strong>Compendium of Learning Resources gDoc</strong></a>: This google doc contains all the links/references above. It contains even more, and I hope to maintain it as a growing, dynamic, more comprehensive annotated list of resources for learning R, Rstudio, data science and more.</p>
+<div id="rmarkdown-and-workflowr" class="section level3" number="3.4.1">
+<h3>
+<span class="header-section-number">3.4.1</span> Rmarkdown and <code>workflowR</code><a class="anchor" aria-label="anchor" href="#rmarkdown-and-workflowr"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/rmarkdown/vignettes/rmarkdown.html">Rmarkdown Vignette and Cheatsheet</a></li>
+<li><a href="https://workflowr.github.io/workflowr/"><code>workflowr</code>: organized + reproducible + shareable data science in R</a></li>
+</ul>
+</div>
+<div id="piping-code" class="section level3" number="3.4.2">
+<h3>
+<span class="header-section-number">3.4.2</span> Piping code <code>%&gt;%</code><a class="anchor" aria-label="anchor" href="#piping-code"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=KO35_7arizY&amp;ab_channel=RsquaredAcademy">YouTube Video Intro</a></li>
+<li><a href="https://magrittr.tidyverse.org/">magrittr package page</a></li>
+</ul>
+</div>
+<div id="hotkeys" class="section level3" number="3.4.3">
+<h3>
+<span class="header-section-number">3.4.3</span> Hotkeys<a class="anchor" aria-label="anchor" href="#hotkeys"><i class="fas fa-link"></i></a>
+</h3>
+<p>Pretty critical to learn a few of these, especially these:</p>
+<ul>
+<li>
+<code>CMD+Option+I</code> = create chunk</li>
+<li>
+<code>Shift+CMD+M</code> = <code>%&gt;%</code> pipe operator</li>
+<li>
+<code>CMD+Enter</code> = submit (run) lines of code in your Rmd or R script to the console.</li>
+</ul>
+</div>
+</div>
+<div id="r-sessions-packages-to-load" class="section level2" number="3.5">
+<h2>
+<span class="header-section-number">3.5</span> R sessions, packages to load<a class="anchor" aria-label="anchor" href="#r-sessions-packages-to-load"><i class="fas fa-link"></i></a>
 </h2>
 <p>I will use the <code>tidyverse</code> and also <code>genomicMateSelectR</code> packages throughout the pipeline.</p>
 <p>There are others that may appear.</p>
 <p>I recommend, for each pipeline segment, starting with a new R session. Begin each segment, with a step to load these R packages:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/wolfemd/genomicMateSelectR">genomicMateSelectR</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com/">gt</a></span><span class="op">)</span> <span class="co"># just for the nice looking tables</span></code></pre></div>
 </div>
-<div id="software-to-install" class="section level2" number="3.3">
+<div id="high-performance-and-remote-computing" class="section level2" number="3.6">
 <h2>
-<span class="header-section-number">3.3</span> Software to install<a class="anchor" aria-label="anchor" href="#software-to-install"><i class="fas fa-link"></i></a>
-</h2>
-<ul>
-<li><p>R</p></li>
-<li><p>Rstudio</p></li>
-<li>
-<p>Packages</p>
-<ul>
-<li>tidyverse</li>
-<li><code>genomicMateSelectR</code></li>
-</ul>
-</li>
-<li>
-<p>Bioinformatics tools</p>
-<ul>
-<li><code>vcftools</code></li>
-<li><code>bcftools</code></li>
-</ul>
-</li>
-</ul>
-</div>
-<div id="high-performance-and-remote-computing" class="section level2" number="3.4">
-<h2>
-<span class="header-section-number">3.4</span> High performance and remote computing<a class="anchor" aria-label="anchor" href="#high-performance-and-remote-computing"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.6</span> High performance and remote computing<a class="anchor" aria-label="anchor" href="#high-performance-and-remote-computing"><i class="fas fa-link"></i></a>
 </h2>
 <p>The example in this manual is designed to work on a laptop… at least a new one. I’ve got 16-cores and 64GB RAM on the machine I developed it on.</p>
 <p>In practice, with the large number of plots, clones and SNPs that we <em>actually</em> work with, we will not use a laptop for these computations.</p>
 <p>At some point, perhaps at the end of the pipeline run-through we will want to cover the (remote) use of high performance computing machines to facilitate.</p>
-
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="outline.html"><span class="header-section-number">2</span> Outline</a></div>
-<div class="next"><a href="create_project.html"><span class="header-section-number">4</span> Create a project</a></div>
+<div class="prev"><a href="overview-process-map.html"><span class="header-section-number">2</span> Overview Process Map</a></div>
+<div class="next"><a href="process-maps.html"><span class="header-section-number">4</span> Process maps</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#using-this-manual"><span class="header-section-number">3</span> Using this manual</a></li>
-<li><a class="nav-link" href="#workflow-notes"><span class="header-section-number">3.1</span> Workflow notes</a></li>
-<li><a class="nav-link" href="#r-sessions-packages-to-load"><span class="header-section-number">3.2</span> R sessions, packages to load</a></li>
-<li><a class="nav-link" href="#software-to-install"><span class="header-section-number">3.3</span> Software to install</a></li>
-<li><a class="nav-link" href="#high-performance-and-remote-computing"><span class="header-section-number">3.4</span> High performance and remote computing</a></li>
+<li><a class="nav-link" href="#suggested-workflow"><span class="header-section-number">3.1</span> Suggested workflow</a></li>
+<li><a class="nav-link" href="#prerequisites"><span class="header-section-number">3.2</span> Prerequisites</a></li>
+<li><a class="nav-link" href="#install-software-and-packages"><span class="header-section-number">3.3</span> Install software and packages</a></li>
+<li>
+<a class="nav-link" href="#learning-r-and-more"><span class="header-section-number">3.4</span> Learning R and more</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#rmarkdown-and-workflowr"><span class="header-section-number">3.4.1</span> Rmarkdown and workflowR</a></li>
+<li><a class="nav-link" href="#piping-code"><span class="header-section-number">3.4.2</span> Piping code %&gt;%</a></li>
+<li><a class="nav-link" href="#hotkeys"><span class="header-section-number">3.4.3</span> Hotkeys</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#r-sessions-packages-to-load"><span class="header-section-number">3.5</span> R sessions, packages to load</a></li>
+<li><a class="nav-link" href="#high-performance-and-remote-computing"><span class="header-section-number">3.6</span> High performance and remote computing</a></li>
 </ul>
 
       <div class="book-extra">
@@ -176,7 +270,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-09.</p>
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-14.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

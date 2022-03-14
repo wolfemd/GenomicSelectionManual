@@ -14,9 +14,14 @@
 
 We are finally (almost) ready to predict the performance of potential crosses. We have a few inputs to set-up.
 
+## Process Map
+
+![](images/predict_crosses_process_map.png){width=100%}
+
 ## Load inputs and set-up
 
 Much the same as in the section on [parent-wise cross-validation](parent-wise-cross-validation).
+
 
 ```r
 # GENOMIC RELATIONSHIP MATRIX
@@ -48,7 +53,7 @@ SIwts<-c(DM=15,
 
 ## Get marker effects
 
-First, in the [chapter where we predicted GEBV](predict-parental-breeding-values), we used the `runGenomicPredictions()` function, which implements a **GBLUP** model, to predict **GEBV**. 
+First, in the [chapter where we predicted GEBV](predict-parental-breeding-values), we used the `runGenomicPredictions()` function, which implements a **GBLUP** model, to predict **GEBV**.
 
 We need to re-run `runGenomicPredictions()`, this time using the `getMarkEffs=TRUE` option, this will "backsolve" the RR-BLUP marker effect solutions from the GBLUP solutions, using the `backsolveSNPeff()` function under-the-hood.
 
@@ -66,7 +71,9 @@ gpreds_withMarkEffs<-runGenomicPredictions(modelType = "A",
                                            grms = grms,
                                            ncores=3)
 ```
+
 Save the results
+
 
 ```r
 saveRDS(gpreds_withMarkEffs,file = here::here("output","genomicPredictions_withMarkEffs.rds"))
@@ -77,7 +84,8 @@ saveRDS(gpreds_withMarkEffs,file = here::here("output","genomicPredictions_withM
 gpreds_withMarkEffs<-readRDS(here::here("output","genomicPredictions_withMarkEffs.rds"))
 ```
 
-Notice that there is now a additional list-type column with the label **"allelesubsnpeff"** indicating that, because we ran an additive-only model, these SNP-effects represent predictions of allele substitution effects. 
+Notice that there is now a additional list-type column with the label **"allelesubsnpeff"** indicating that, because we ran an additive-only model, these SNP-effects represent predictions of allele substitution effects.
+
 
 ```r
 gpreds_withMarkEffs$genomicPredOut[[1]]
@@ -88,7 +96,9 @@ gpreds_withMarkEffs$genomicPredOut[[1]]
 #> 2 logFYLD <tibble [96… <df [2 × … <df [1 × … <dbl [3,986 × …
 #> 3 logDYLD <tibble [96… <df [2 × … <df [1 × … <dbl [3,986 × …
 ```
+
 Just to show, they are a single column matrix with rownames labelling each marker.
+
 
 ```r
 gpreds_withMarkEffs$genomicPredOut[[1]]$allelesubsnpeff[[1]][1:5,]
@@ -100,15 +110,16 @@ gpreds_withMarkEffs$genomicPredOut[[1]]$allelesubsnpeff[[1]][1:5,]
 
 ## Crosses-to-predict
 
-The `predictCrosses()` function will also need a **data.frame** indicating what pairs of parents we want to predict crosses for. 
+The `predictCrosses()` function will also need a **data.frame** indicating what pairs of parents we want to predict crosses for.
 
 As a convenience, we can use the `crosses2predict()` function to make such a **data.frame** from a vector of genotype ID's.
 
-A realistic approach, is to choose a set of parents based on their **GEBV**, but more than we'd actually like to actually make crosses with. 
+A realistic approach, is to choose a set of parents based on their **GEBV**, but more than we'd actually like to actually make crosses with.
 
-It is still somewhat computationally intensive to predict the variances and covariances of traits for each cross, so we can't quite predict _all possible pairwise crosses_... definitely not on our laptops for this example.
+It is still somewhat computationally intensive to predict the variances and covariances of traits for each cross, so we can't quite predict *all possible pairwise crosses*... definitely not on our laptops for this example.
 
 Here, as an example, picking the top 10 candidate parents:
+
 
 ```r
 # Access the predicted GEBV
@@ -126,6 +137,7 @@ top10parents<-gpreds_withMarkEffs$gblups[[1]] %>%
 CrossesToPredict<-crosses2predict(top10parents)
 ```
 
+
 ```r
 CrossesToPredict %>% head
 #> # A tibble: 6 × 2
@@ -139,15 +151,18 @@ CrossesToPredict %>% head
 #> 6 TMS13F1307P0008 TMS14F1312P0003
 ```
 
+
 ```r
 CrossesToPredict %>% nrow()
 #> [1] 55
 ```
+
 So we have 55 crosses of the top 10 parents to make predictions for.
 
 ## Run `predictCrosses()`
 
 Additional inputs we will need: "haplotype matrix" and "recombination frequency matrix".
+
 
 ```r
 # HAPLOTYPE MATRIX
@@ -164,6 +179,7 @@ recombFreqMat<-readRDS(file=here::here("output","recombFreqMat_1minus2c.rds"))
 
 Let's go!
 
+
 ```r
 starttime<-proc.time()[3]
 crossPreds<-predictCrosses(modelType="A",
@@ -176,13 +192,16 @@ crossPreds<-predictCrosses(modelType="A",
                            ncores=10)
 elapsed<-proc.time()[3]-starttime; elapsed/60
 ```
+
 ### Save results
+
 
 ```r
 saveRDS(crossPreds,file = here::here("output","predictedCrosses.rds"))
 ```
 
 ## Select crosses to make
+
 
 ```r
 crossPreds<-readRDS(here::here("output","predictedCrosses.rds"))
@@ -196,6 +215,7 @@ crossPreds
 #>   <list>             <list>          
 #> 1 <tibble [220 × 9]> <named list [2]>
 ```
+
 Output of `predictCrosses()` is a **tibble**. Two columns, 1 row. Column 1 (**tidyPreds**) has cleaned-up "tidy" predictions. Column 2 (**rawPreds**) has more detailed output.
 
 
@@ -216,6 +236,7 @@ crossPreds$tidyPreds[[1]] %>% str
 Remember that the "usefulness" (**predUsefulness**) here, or **UC** for short, is equal to a prediction of the expected mean of the top fraction of progeny from each cross $\hat{UC} = \hat{\mu} + i \times \hat{\sigma}$. This is also called the "superior progeny mean" in the literature. Actually, the user has the option to modify the expected, standardized selection intensity ($\boldsymbol{i}$) either in advance with the `stdSelInt=` argument to `predictCrosses()` or after-the-fact; the default is a value of 2.67, corresponding to selecting the top 1% of offspring for the cross you will be making.
 
 So let's say you want to make only the top 10 of the 55 predicted crosses:
+
 
 ```r
 top10crosses<-crossPreds$tidyPreds[[1]] %>% 
@@ -239,13 +260,11 @@ top10crosses
 #> 10 TMS14F126… TMS14F1…     1118 BV     SELI…     14.1   2.65
 #> # … with 1 more variable: predUsefulness <dbl>
 ```
+
 And thus we have a crossing plan! Congratulations!
 
 ## Non-additive effects models
 
-Links to information on these models are provided in the previous section [introducing genomic mate selection](intro-to-genomic-cross-prediction). 
+Links to information on these models are provided in the previous section [introducing genomic mate selection](intro-to-genomic-cross-prediction).
 
 The vignette in `genomicMateSelectR` entitled [**"Genomic prediction with non-additive effects"**](https://wolfemd.github.io/genomicMateSelectR/articles/non_additive_models.html)provides a complete tutorial on how to execute these models *and* predicting cross-performance with them.
-
-
- 

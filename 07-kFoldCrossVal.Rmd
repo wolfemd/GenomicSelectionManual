@@ -6,9 +6,9 @@ library(tidyverse); library(genomicMateSelectR); library(sommer); library(gt)
 
 -   **Context and Purpose:**
 
--   **Upstream:** Section \@ref() - 
+-   **Upstream:** Section \@ref() -
 
--   **Downstream:** 
+-   **Downstream:**
 
 -   **Inputs:**
 
@@ -16,20 +16,25 @@ library(tidyverse); library(genomicMateSelectR); library(sommer); library(gt)
 
 In this section we will run K-fold cross-validation to evaluate the accuracy of predicting the performance of candidate parents (**GEBV**) who have not been phenotyped.
 
-This is always recommended, and there are alternative kinds of predictions that could be set-up to measure this. 
+This is always recommended, and there are alternative kinds of predictions that could be set-up to measure this.
 
-Important is the distinction from analyses we will do downstream to assess the accuracy of predicting the performance of *crosses* (i.e. mates). 
+Important is the distinction from analyses we will do downstream to assess the accuracy of predicting the performance of *crosses* (i.e. mates).
 
-We will use the `runCrossVal()` function. 
+We will use the `runCrossVal()` function.
 
 We will demonstrate a few of the additional features that it provides in the process:
 
-1. Support for multiple traits
-2. Computing selection index accuracy
+1.  Support for multiple traits
+2.  Computing selection index accuracy
 
 Finally, we'll make a simple plot of the results.
 
+## Process Map
+
+![](images/kfold_crossval_process_map.png){width=100%}
+
 ## Set-up for the cross-validation
+
 ```{r}
 blups<-readRDS(here::here("output","blups.rds"))
 A<-readRDS(file=here::here("output","kinship_add.rds"))
@@ -50,7 +55,7 @@ blups %<>%
 blups
 ```
 
-The steps above set-us up almost all the way. 
+The steps above set-us up almost all the way.
 
 ```{r}
 # For fastest, lightest compute of accuracy, remove non-phenotyped from kinship
@@ -66,16 +71,15 @@ A<-A[gids,gids]
 
 Last thing: Let's include selection index weights. You can find an excellent, detailed, open-source chapter from Walsh & Lynch on Selection Index Theory by [**clicking here**](http://nitro.biosci.arizona.edu/zdownload/Volume2/Chapter23.pdf).
 
-$$SI = WT_1 \times Trait_1 + \dots + WT_t \times Trait_t$$
-Or in vector form:
+$$SI = WT_1 \times Trait_1 + \dots + WT_t \times Trait_t$$ Or in vector form:
 
 $$SI = \boldsymbol{\hat{g}b}$$
 
 $SI$ is the selection index, dimension $[n \times 1]$. $b$ is a $[t \times 1]$ vector of selection index "economic weights" designed to value each trait relative to its impact on the economic potential of changing the corresponding trait by one unit. Finally, $\boldsymbol{\hat{g}$ is a matrix $[n \times t]$ with the (in this case) **GEBV** for each trait on the columns.
 
-`runCrossVal()` will accept a named vector of selection index weights where names must match the "Trait" variable in `blups` using the `SIwts=` argument and setting `selInd=TRUE`. 
+`runCrossVal()` will accept a named vector of selection index weights where names must match the "Trait" variable in `blups` using the `SIwts=` argument and setting `selInd=TRUE`.
 
-Here are example weights, I'll use. These are _not_ to be taken as canonical. *Weights should be determined for each target population of environments and product profile!*
+Here are example weights, I'll use. These are *not* to be taken as canonical. *Weights should be determined for each target population of environments and product profile!*
 
 ```{r}
 # I chose to remove MCMDS 
@@ -88,9 +92,10 @@ SIwts<-c(DM=15,
 SIwts
 ```
 
-I'll run a meager 2 repetitions of 5-fold cross-validation, which means 10 predictions per trait overall. I've got a 16-core laptop so I can use `ncores=10` to do all 10 predictions per trait at the same time. `runCrossVal()` will process all four traits _and_ compute the selection index accuracy at the end.
+I'll run a meager 2 repetitions of 5-fold cross-validation, which means 10 predictions per trait overall. I've got a 16-core laptop so I can use `ncores=10` to do all 10 predictions per trait at the same time. `runCrossVal()` will process all four traits *and* compute the selection index accuracy at the end.
 
 ## Execute cross-validation
+
 ```{r}
 starttime<-proc.time()[3]
 standardCV<-runCrossVal(blups=blups %>% filter(Trait != "MCMDS"),
@@ -103,7 +108,9 @@ standardCV<-runCrossVal(blups=blups %>% filter(Trait != "MCMDS"),
 timeelapsed<-proc.time()[3]-starttime; 
 timeelapsed/60
 ```
+
 Save the results
+
 ```{r}
 saveRDS(standardCV,file = here::here("output","standardCV.rds"))
 ```
@@ -118,9 +125,8 @@ standardCV %>%
      geom_boxplot() + theme_bw()
 ```
 
-This result is not what I would expect. SELIND should be similar to individual trait accuracies. 
+This result is not what I would expect. SELIND should be similar to individual trait accuracies.
 
-Best guess: SELIND requires the BLUPs for each trait to be observed, so only the clones with complete data will be included. 
+Best guess: SELIND requires the BLUPs for each trait to be observed, so only the clones with complete data will be included.
 
 Your results will be different if you choose a different dataset, hopefully better.
-

@@ -12,6 +12,10 @@
 
 -   **Expected outputs:**
 
+## Process Map
+
+![](images/get_blups_process_map.png){width=100%}
+
 ## One-stage or multi-stage?
 
 We often have very large, multi-year, multi-location, multi-trial-type (**MET**) datasets we use to train genomic prediction models. The number of plots can be in the range of 10- or even 100,000 plots with many thousands of unique genotypes observed in unbalanced fashion across heterogenous experimental designs. All that to say, the computational burden and level of expertise required to execute genomic prediction analyses directly on these data is very great.
@@ -257,12 +261,12 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
 ```
 
 ```{=html}
-<div id="rrqzbvutyk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="votstxvpjc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#rrqzbvutyk .gt_table {
+#votstxvpjc .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -287,7 +291,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-left-color: #D3D3D3;
 }
 
-#rrqzbvutyk .gt_heading {
+#votstxvpjc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -299,7 +303,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-right-color: #D3D3D3;
 }
 
-#rrqzbvutyk .gt_title {
+#votstxvpjc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -309,7 +313,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-bottom-width: 0;
 }
 
-#rrqzbvutyk .gt_subtitle {
+#votstxvpjc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -319,13 +323,13 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-top-width: 0;
 }
 
-#rrqzbvutyk .gt_bottom_border {
+#votstxvpjc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#rrqzbvutyk .gt_col_headings {
+#votstxvpjc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -340,7 +344,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-right-color: #D3D3D3;
 }
 
-#rrqzbvutyk .gt_col_heading {
+#votstxvpjc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -360,7 +364,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   overflow-x: hidden;
 }
 
-#rrqzbvutyk .gt_column_spanner_outer {
+#votstxvpjc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -372,15 +376,15 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   padding-right: 4px;
 }
 
-#rrqzbvutyk .gt_column_spanner_outer:first-child {
+#votstxvpjc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rrqzbvutyk .gt_column_spanner_outer:last-child {
+#votstxvpjc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rrqzbvutyk .gt_column_spanner {
+#votstxvpjc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -392,7 +396,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   width: 100%;
 }
 
-#rrqzbvutyk .gt_group_heading {
+#votstxvpjc .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -414,7 +418,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   vertical-align: middle;
 }
 
-#rrqzbvutyk .gt_empty_group_heading {
+#votstxvpjc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -429,15 +433,15 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   vertical-align: middle;
 }
 
-#rrqzbvutyk .gt_from_md > :first-child {
+#votstxvpjc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rrqzbvutyk .gt_from_md > :last-child {
+#votstxvpjc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rrqzbvutyk .gt_row {
+#votstxvpjc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -456,7 +460,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   overflow-x: hidden;
 }
 
-#rrqzbvutyk .gt_stub {
+#votstxvpjc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -468,7 +472,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   padding-left: 12px;
 }
 
-#rrqzbvutyk .gt_summary_row {
+#votstxvpjc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -478,7 +482,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   padding-right: 5px;
 }
 
-#rrqzbvutyk .gt_first_summary_row {
+#votstxvpjc .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -488,7 +492,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-top-color: #D3D3D3;
 }
 
-#rrqzbvutyk .gt_grand_summary_row {
+#votstxvpjc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -498,7 +502,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   padding-right: 5px;
 }
 
-#rrqzbvutyk .gt_first_grand_summary_row {
+#votstxvpjc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -508,11 +512,11 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-top-color: #D3D3D3;
 }
 
-#rrqzbvutyk .gt_striped {
+#votstxvpjc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#rrqzbvutyk .gt_table_body {
+#votstxvpjc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -521,7 +525,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-bottom-color: #D3D3D3;
 }
 
-#rrqzbvutyk .gt_footnotes {
+#votstxvpjc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -535,13 +539,13 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-right-color: #D3D3D3;
 }
 
-#rrqzbvutyk .gt_footnote {
+#votstxvpjc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#rrqzbvutyk .gt_sourcenotes {
+#votstxvpjc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -555,41 +559,41 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-right-color: #D3D3D3;
 }
 
-#rrqzbvutyk .gt_sourcenote {
+#votstxvpjc .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#rrqzbvutyk .gt_left {
+#votstxvpjc .gt_left {
   text-align: left;
 }
 
-#rrqzbvutyk .gt_center {
+#votstxvpjc .gt_center {
   text-align: center;
 }
 
-#rrqzbvutyk .gt_right {
+#votstxvpjc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rrqzbvutyk .gt_font_normal {
+#votstxvpjc .gt_font_normal {
   font-weight: normal;
 }
 
-#rrqzbvutyk .gt_font_bold {
+#votstxvpjc .gt_font_bold {
   font-weight: bold;
 }
 
-#rrqzbvutyk .gt_font_italic {
+#votstxvpjc .gt_font_italic {
   font-style: italic;
 }
 
-#rrqzbvutyk .gt_super {
+#votstxvpjc .gt_super {
   font-size: 65%;
 }
 
-#rrqzbvutyk .gt_footnote_marks {
+#votstxvpjc .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;

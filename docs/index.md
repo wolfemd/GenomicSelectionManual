@@ -1,7 +1,7 @@
---- 
+---
 title: "Genomic Prediction and Selection Manual"
 author: "Marnin Wolfe"
-date: "2022-03-09"
+date: "2022-03-14"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [refs.bib, book.bib, packages.bib]
@@ -27,18 +27,16 @@ Two major sections are currently planned:
 
 2.  **Data wrangling and reproducibility:** Intro and hands-on with the computing and data environment / manipulation side of things. Learning resources/links. No excel! R, Tidyverse, functions, loops, bash / command line, genomic data manipulation programs.
 
-Collectively these two components should support learning **Genomic prediction and selection: in practice**.
+Collectively these two components will support learning **Genomic prediction and selection: in practice**.
 
 **Genomic prediction and selection: in theory**
 
 Students also may further need/want to learn the statistical and quantitative genetic theory. An additional section is planned that, at a minimum will provide guidance and access to reading and other learning resources. For starters, [@falconer2003introduction; @isik2017genetic; @bernardo2020breeding; @lynch1998genetics]!
 
-# Outline
+# Overview Process Map
 
-0. [**Create a project repository**](#create_project)
-1.  [**Download training data**][Download training data]: Download training data using BreedBase, including: phenotypes, genotypes, pedigree
-2.  [**QC and format field trial data**][Prepare phenotype data].
-3.  
+I created several "process maps" at varying levels of detail, to diagrammatically outline the orders of operations for genomic selection. Below is high-level overview process map:
 
+![](images/OverviewProcessMap.png){width=100%}
 
 

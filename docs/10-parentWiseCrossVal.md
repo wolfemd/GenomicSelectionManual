@@ -226,17 +226,22 @@ See an example implementation done in 2021 here: <https://wolfemd.github.io/IITA
 
 -   Based on work I did in *2016* (never published), declare a parent-offspring pair where: Z0\<0.313 and Z1>0.668.
 
+### Process Map
+
+![](images/validate_pedigree_process_map.png){width=100%}
+
 ### Install plink1.9 (Mac)
 
-Your results will vary. Here is how I got it installed on my mac laptop. 
+Your results will vary. Here is how I got it installed on my mac laptop.
 
-1. Downloaded it to my `~/Downloads/` folder and unzipped (double-click the **.zip** file)
-2. At the terminal: `cd ~/Downloads/plink_mac_20220305`
-3. Move the binary file (`plink`) to my command-line path: `cp ~/Downloads/plink_mac_20220305/plink /usr/local/bin/`
-4. Now typing `plink` at the command line will always engage the program
-5. However, I had to convince MacOS that it was safe by following this instruction: https://zaiste.net/os/macos/howtos/resolve-macos-cannot-be-opened-because-the-developer-cannot-be-verified-error/
+1.  Downloaded it to my `~/Downloads/` folder and unzipped (double-click the **.zip** file)
+2.  At the terminal: `cd ~/Downloads/plink_mac_20220305`
+3.  Move the binary file (`plink`) to my command-line path: `cp ~/Downloads/plink_mac_20220305/plink /usr/local/bin/`
+4.  Now typing `plink` at the command line will always engage the program
+5.  However, I had to convince MacOS that it was safe by following this instruction: <https://zaiste.net/os/macos/howtos/resolve-macos-cannot-be-opened-because-the-developer-cannot-be-verified-error/>
 
 ### Make binary plink from VCF
+
 
 ```bash
 # in the terminal change directory
@@ -248,16 +253,19 @@ plink --vcf BreedBaseGenotypes_subset.vcf.gz \
 
 ### Run plink IBD
 
+
 ```bash
 plink --bfile BreedBaseGenotypes_subset \
   --genome \
   --out ../output/BreedBaseGenotypes_subset;
 ```
+
 This creates an output file with extension `*.genome` in the `output` directory. For our 963 individual dataset, the file size is only 60M... beware, it could get huge if you have many samples.
 
 See the plink1.9 manual here: <https://www.cog-genomics.org/plink/1.9/ibd> for details on what this does and what the output means.
 
 ### Verify parent-offspring relationships
+
 
 ```r
 genome<-read.table(here::here("output/","BreedBaseGenotypes_subset.genome"),
@@ -277,11 +285,11 @@ genome %>% head
 #> #   DST <dbl>, PPC <dbl>, RATIO <dbl>
 ```
 
+
 ```r
 dim(genome)
 #> [1] 463203     14
 ```
-
 
 
 ```r
@@ -301,6 +309,7 @@ ped %>%
 #> #   Z2 <dbl>, PI_HAT <dbl>, PHE <int>, DST <dbl>,
 #> #   PPC <dbl>, RATIO <dbl>
 ```
+
 
 ```r
 # Confirm Female_Parent - Offspring Relationship
@@ -342,7 +351,9 @@ confirmed_ped<-conf_female_ped %>%
      relocate(Male_Parent,.before = "ConfirmFemaleParent")
 #> Joining, by = "Accession"
 ```
+
 So, how well supported are the pedigree relationships according to my approach?
+
 
 ```r
 confirmed_ped %>% 
@@ -357,9 +368,9 @@ confirmed_ped %>%
 #> 4 Reject              Reject               15  0.11
 ```
 
-- 78% of Accessions had both parents correct. 
-- 7% had the female but not the male correct.
-- 4% had the male but not the female
+-   78% of Accessions had both parents correct.
+-   7% had the female but not the male correct.
+-   4% had the male but not the female
 
 ### Subset to fully-validated trios
 
@@ -380,6 +391,7 @@ valid_ped<-confirmed_ped %>%
 valid_ped %>% nrow()
 #> [1] 105
 ```
+
 Leaves us with 105 validated entries in the pedigree
 
 
@@ -408,7 +420,7 @@ valid_ped %>%
 #> 16 TMS14F1255P0005      TMS13F1343P0044         2
 ```
 
-Luckily, 16 of the 18 full-sib families that have >1 entry are still here.
+Luckily, 16 of the 18 full-sib families that have \>1 entry are still here.
 
 
 ```r
@@ -424,6 +436,7 @@ valid_ped %>%
 #> 4 IITA-TMS-IBA961632 IITA-TMS-IBA030055A     3
 #> 5 IITA-TMS-IBA972205 TMEB1937                5
 ```
+
 Though only 5 families have more than 2...
 
 ### Write validated pedigree
@@ -435,12 +448,17 @@ saveRDS(valid_ped,here::here("output","verified_ped.rds"))
 
 ## Parent-wise cross-validation
 
-Refer to the following: 
+Refer to the following:
 
-1. [genomicMateSelectR::runParentWiseCrossVal() documentation](https://wolfemd.github.io/genomicMateSelectR/reference/runParentWiseCrossVal.html)
-2. Example of [IITA_2021GS Cross-validation](https://wolfemd.github.io/IITA_2021GS/05-CrossValidation.html#Parent-wise_cross-validation)
+1.  [genomicMateSelectR::runParentWiseCrossVal() documentation](https://wolfemd.github.io/genomicMateSelectR/reference/runParentWiseCrossVal.html)
+2.  Example of [IITA_2021GS Cross-validation](https://wolfemd.github.io/IITA_2021GS/05-CrossValidation.html#Parent-wise_cross-validation)
+
+### Process Map
+
+![](images/parentwise_crossval_process_map.png){width=100%}
 
 ### Load inputs and set-up
+
 
 ```r
 # Load verified ped
@@ -491,7 +509,7 @@ SIwts<-c(DM=15,
          logDYLD=20)
 ```
 
-In the [genotype data processing stage](Prepare genotypic data), specifically in one of the last steps, we [created a recombination frequency matrix](recomb-freq-mat). To do this, we accessed a genetic map, interpolated it to the markers in our dataset and then used helper functions provided by `genomicMateSelectR`. We finally need that matrix. 
+In the [genotype data processing stage](Prepare%20genotypic%20data), specifically in one of the last steps, we [created a recombination frequency matrix](recomb-freq-mat). To do this, we accessed a genetic map, interpolated it to the markers in our dataset and then used helper functions provided by `genomicMateSelectR`. We finally need that matrix.
 
 
 ```r
@@ -516,15 +534,18 @@ parentWiseCV<-runParentWiseCrossVal(nrepeats=2,nfolds=5,seed=121212,
                                     selInd = TRUE, SIwts = SIwts)
 elapsed<-proc.time()[3]-starttime; elapsed/60
 ```
+
 Took about 3.5 minutes using 10 cores on my 16 core - 64 GB RAM machine. Memory usagage wasn't bad.
 
 ### Save results
+
 
 ```r
 saveRDS(parentWiseCV,file = here::here("output","parentWiseCV.rds"))
 ```
 
 ### Plot results
+
 
 ```r
 parentWiseCV<-readRDS(here::here("output","parentWiseCV.rds"))
@@ -533,6 +554,7 @@ parentWiseCV<-readRDS(here::here("output","parentWiseCV.rds"))
 You will find the output of `runParentWiseCrossVal` is a list with two elements: "meanPredAccuracy" and "varPredAccuracy"
 
 Take a peak at both to see how it's formatted:
+
 
 ```r
 parentWiseCV$meanPredAccuracy %>% head
@@ -546,6 +568,7 @@ parentWiseCV$meanPredAccuracy %>% head
 #> 5 Repeat1 Fold2 A         MeanBV SELI… <tibble …     NaN    
 #> 6 Repeat1 Fold2 A         MeanBV DM    <tibble …     NaN
 ```
+
 
 ```r
 parentWiseCV$varPredAccuracy %>% head
@@ -588,10 +611,4 @@ parentWiseCV$varPredAccuracy %>%
 
 <img src="10-parentWiseCrossVal_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 
-Surprising the variance accuracy actually appears _much_ better than the mean accuracy... should definitely take this with equal skepticism to the result for the mean, for the same reasons!
-
-
-
-
-
-
+Surprising the variance accuracy actually appears *much* better than the mean accuracy... should definitely take this with equal skepticism to the result for the mean, for the same reasons!

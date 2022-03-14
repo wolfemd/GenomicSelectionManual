@@ -1,4 +1,5 @@
 # Prepare phenotype data
+
 ```{r setup, include=F, echo=F}
 library(tidyverse); library(genomicMateSelectR)
 ```
@@ -8,6 +9,10 @@ library(tidyverse); library(genomicMateSelectR)
 -   **Downstream:** pretty much everything
 -   **Inputs:** "Raw" field trial data
 -   **Expected outputs:** "Cleaned" field trial data
+
+## Process Map
+
+![](images/prepare_phenos_process_map.png){width=100%}
 
 ## Read DB data
 
@@ -30,17 +35,18 @@ dbdata<-readDBdata(phenotypeFile = here::here("data","phenotype.csv"),
 dbdata %>% count(observationLevel)
 # table(dbdata$observationLevel)
 ```
+
 Only plot-basis in this case.
 
-**Checklist:** What experimental designs are present? How are they represented by the variables in the dataset? Are all designs consistent with your expectations, for example relative to the reported “`trialType`”, “`studyName`” and/or “`studyDesign`”?
+**Checklist:** What experimental designs are present? How are they represented by the variables in the dataset? Are all designs consistent with your expectations, for example relative to the reported "`trialType`", "`studyName`" and/or "`studyDesign`"?
 
 In this step, in the past, I have not been certain of the experimental designs of the trials I had downloaded. I was also not certain how the designs were represented in the column-names. For this reason, I developed an *ad hoc* custom code to "detect" the designs. I built the `genomicMateSelectR` function `detectExptDesigns()`. See an example [here](https://wolfemd.github.io/IITA_2021GS/01-cleanTPdata.html#Detect_experimental_designs).
 
 **RECOMMENDATION:** Each analyst needs to use exploratory data anlaysis, making summary statistics and plots as necessary to determine how the data should be modelled downstream. If there are missing or incorrectly represented trial design variables, ***get it corrected on the database (contact breeding program data manager, as necessary)***.
 
-Because I have a small example dataset, it is possible to look at 9 trials and evaluate. 
+Because I have a small example dataset, it is possible to look at 9 trials and evaluate.
 
-Often, _many_ more trials are part of a genomic prediction. This is why it is essential that trial designs be consistent, and clear to the analyst. You may need to derive a strategy similar to the `detectExptDesigns()` function to semi-automate the process.
+Often, *many* more trials are part of a genomic prediction. This is why it is essential that trial designs be consistent, and clear to the analyst. You may need to derive a strategy similar to the `detectExptDesigns()` function to semi-automate the process.
 
 ```{r}
 library(gt)
@@ -53,9 +59,9 @@ dbdata %>%
 
 Summary table above shows:
 
-1) **trialType** and **studyDesign** cannot be 100% relied upon, at least not here. 
-2) The only trial actually listed as having `studyDesign=="Augmented"` does not have "check" vs. "test" distinguished in the "entryType".
-3) A `trialType=="Clonal Evaluation"` with `studyDesign=="RCBD"` but actually only 1 replication.
+1)  **trialType** and **studyDesign** cannot be 100% relied upon, at least not here.
+2)  The only trial actually listed as having `studyDesign=="Augmented"` does not have "check" vs. "test" distinguished in the "entryType".
+3)  A `trialType=="Clonal Evaluation"` with `studyDesign=="RCBD"` but actually only 1 replication.
 
 Next, I'll check if the **replicate** and **blockNumber** columns reliably distinguish complete and incomplete blocks in the data.
 
@@ -67,7 +73,7 @@ dbdata %>%
      gt() %>% tab_options(table.font.size = pct(75))
 ```
 
-Here, I notice that except 1 trial (**19.GS.C1.C2.C3.AYT.42.UB**) has the same number of reps and blocks. 
+Here, I notice that except 1 trial (**19.GS.C1.C2.C3.AYT.42.UB**) has the same number of reps and blocks.
 
 The question is, are complete replications of the experiment indicated by **replicate** and incomplete sub-blocks represented by **blockNumber**
 
@@ -80,10 +86,10 @@ dbdata %>%
      gt() %>% tab_options(table.font.size = pct(75))
 ```
 
-So for 1 trial, there are 3 complete blocks, no sub-blocks. For 6 trials, there are 2 complete replications and nested sub-blocks represented by the **blockNumber** variable. For 2 trials, there are only incomplete blocks. 
+So for 1 trial, there are 3 complete blocks, no sub-blocks. For 6 trials, there are 2 complete replications and nested sub-blocks represented by the **blockNumber** variable. For 2 trials, there are only incomplete blocks.
 
+Next, I decided to check that the **replicate** column definitely means complete blocks. The below might look a bit complicated, but I basically merge two summaries: (1) he overall number of accessions per trial, and (2) the average number of accessions per replicate per trial.
 
-Next, I decided to check that the **replicate** column definitely means complete blocks. The below might look a bit complicated, but I basically merge two summaries: (1) he overall number of accessions per trial, and (2) the average number of accessions per replicate per trial. 
 ```{r}
 # the overall number of accessions per trial
 dbdata %>% 
@@ -97,9 +103,11 @@ dbdata %>%
                     summarize(avgAccessionsPerReplicate=ceiling(mean(N_accession)))) %>% 
      gt() %>% tab_options(table.font.size = pct(75))
 ```
-The numbers are very similar for all trials, indicating complete blocks. 
+
+The numbers are very similar for all trials, indicating complete blocks.
 
 One more: look at the min, mean and max number of accessions per **blockNumber**.
+
 ```{r}
 # the overall number of accessions per trial
 dbdata %>% 
@@ -114,13 +122,14 @@ dbdata %>%
                maxAccessionsPerBlock=ceiling(max(N_accession)))) %>% 
      gt() %>% tab_options(table.font.size = pct(60))
 ```
-From this, you can see that except for `studyName=="19.GS.C1.C2.C3.AYT.42.UB"` the sub-blocks represented by **blockNumber** have only subsets of the total number of accessions in the trial, as expected. 
+
+From this, you can see that except for `studyName=="19.GS.C1.C2.C3.AYT.42.UB"` the sub-blocks represented by **blockNumber** have only subsets of the total number of accessions in the trial, as expected.
 
 Further, except for `studyName=="19geneticgainUB"` all trials have pretty consistently sized sub-blocks.
 
-Now I will _ad hoc_ create two variables (**CompleteBlocks** and **IncompleteBlocks**), indicating (`TRUE/FALSE`) whether to model using the **replicate** and/or **blockNumber** variable. 
+Now I will *ad hoc* create two variables (**CompleteBlocks** and **IncompleteBlocks**), indicating (`TRUE/FALSE`) whether to model using the **replicate** and/or **blockNumber** variable.
 
-I _also_ like to create _explicitly nested_ design variables (**yearInLoc**, **trialInLocYr**, **repInTrial**, **blockInRep**). 
+I *also* like to create *explicitly nested* design variables (**yearInLoc**, **trialInLocYr**, **repInTrial**, **blockInRep**).
 
 ```{r}
 dbdata %<>% 
@@ -139,6 +148,7 @@ dbdata %<>%
 ```
 
 Just to check:
+
 ```{r}
 dbdata %>% 
      count(studyName,CompleteBlocks,IncompleteBlocks) %>% 
@@ -148,6 +158,7 @@ dbdata %>%
                               nBlockInRep=length(unique(blockInRep)))) %>% 
      gt() %>% tab_options(table.font.size = pct(67))
 ```
+
 ## Traits and Trait Abbreviations
 
 Cassavabase downloads use very long column-names corresponding to the [full trait-ontology name](https://cropontology.org/ontology/CO_334). For convenience, I replace these names with abbreviations, documented here. For eventual upload of analysis results, names will need to be restored to ontology terms.
@@ -182,7 +193,7 @@ dbdata<-renameAndSelectCols(traitabbrevs,
 
 At this point in the pipeline, we should check the all trait values are in allowable ranges. Different ways to approach this. Feel free to make some plots of your data!
 
-The database also has mechanisms to ensure trait values are only within allowable ranges. 
+The database also has mechanisms to ensure trait values are only within allowable ranges.
 
 Nevertheless, as a habit, I have an simple *ad hoc* approach to this:
 
@@ -237,8 +248,7 @@ dbdata<-dbdata %>%
 
 **RTWT** (fresh root weight per plot in kg) --> **FYLD** (fresh root yield in tons per hectare)
 
-$$FYLD = \frac{RTWT_{kg / plot}}{MaxHarvestedPlantsPerPlot \times PlantSpacing}\times10$$
-**NOTE:** *MaxHarvestedPlantsPerPlot* in formula above is to distinguish from the *plantsPerPlot* meta-data field, in case that a net-plot harvest is used. In other words, the value should be the total number of plants intended for harvest in a plot, assuming there were no missing plants in the plot.
+$$FYLD = \frac{RTWT_{kg / plot}}{MaxHarvestedPlantsPerPlot \times PlantSpacing}\times10$$ **NOTE:** *MaxHarvestedPlantsPerPlot* in formula above is to distinguish from the *plantsPerPlot* meta-data field, in case that a net-plot harvest is used. In other words, the value should be the total number of plants intended for harvest in a plot, assuming there were no missing plants in the plot.
 
 *PlantSpacing* is the area in $m^2$ per plant.
 
@@ -248,21 +258,24 @@ dbdata %>%
      mutate(plotArea=plotWidth*plotLength) %>% 
      gt() %>% tab_options(table.font.size = pct(67))
 ```
-In the example trial data, the **`plantsPerPlot`** meta-data field is empty. To my knowledge, no meta-data field is available in BreedBase to represent a net-plot harvest. 
 
-***RECOMMEND INPUTING plantsPerPlot meta-data to cassavabase for _your_ breeding program!***
+In the example trial data, the **`plantsPerPlot`** meta-data field is empty. To my knowledge, no meta-data field is available in BreedBase to represent a net-plot harvest.
+
+***RECOMMEND INPUTING plantsPerPlot meta-data to cassavabase for your*** **breeding program!**
 
 Luckily, since there are only 9 trials and this is a tutorial, we will decisions manually.
 
-Firstly noting that the trial **19geneticgainUB** actually _does not_ have phenotypes (for any trait). It will be excluded downstream. (*~~I might find a substitute genetic gain trial, from an earlier year, for the sake of this example~~*)
+Firstly noting that the trial **19geneticgainUB** actually *does not* have phenotypes (for any trait). It will be excluded downstream. (~~*I might find a substitute genetic gain trial, from an earlier year, for the sake of this example*~~)
 
-To decide what the real **MaxHarvestedPlantsPerPlot** and **plantsPerPlot** were likely to have been, I make two plots below and also compute the maximum NOHAV for each trial. 
+To decide what the real **MaxHarvestedPlantsPerPlot** and **plantsPerPlot** were likely to have been, I make two plots below and also compute the maximum NOHAV for each trial.
 
 ```{r}
 dbdata %>% 
      ggplot(.,aes(x=NOHAV, fill=studyName)) + geom_density(alpha=0.75)
 ```
+
 Maybe clearer to make a boxplot?
+
 ```{r}
 dbdata %>% 
      # plot area in meters squared
@@ -288,7 +301,7 @@ plantsPerPlot_choices<-dbdata %>%
 plantsPerPlot_choices %>% gt() #%>% tab_options(table.font.size = pct(67))
 ```
 
-For the sake of this example, it is 'ok' to make choices on the basis I have just done. 
+For the sake of this example, it is 'ok' to make choices on the basis I have just done.
 
 ***As a data generator, in-house at each breeding program, no reason not to get the correct answer and repair the metadata on the database!***
 
@@ -325,7 +338,7 @@ dbdata %>% ggplot(.,aes(x=logFYLD,fill=studyName)) + geom_density(alpha=0.75)
 
 Debatable whether this is better. Let's not dwell on it. Onward!
 
-**SUGGESTION:** For individuals working this manual, consider making different, or no transformations as you see fit, with your own data. Even better, set-up a direct comparison of results with- vs. without-transformation.*
+**SUGGESTION:** For individuals working this manual, consider making different, or no transformations as you see fit, with your own data. Even better, set-up a direct comparison of results with- vs. without-transformation.\*
 
 ## Save "cleaned" phenotypes {#save_cleaned_phenos}
 

@@ -6,14 +6,6 @@
 
 ### Code chunks
 
-## Hotkeys
-
-Pretty critical to learn a few of these, especially these:
-
-- `CMD+Option+I` = create chunk
-- `Shift+CMD+M` = `%>%` pipe operator
-- `CMD+Enter` = submit (run) lines of code in your Rmd or R script to the console. 
-
 ## Tidyverse functions
 
 There are _lots_ of great resources online for learning the basic "tidyverse" functions. 
