@@ -54,7 +54,7 @@
 <li><a class="" href="standard-k-fold-cross-validation.html"><span class="header-section-number">11</span> Standard K-fold Cross-validation</a></li>
 <li><a class="" href="predict-parental-breeding-values.html"><span class="header-section-number">12</span> Predict parental breeding values</a></li>
 <li><a class="" href="intro-to-genomic-cross-prediction.html"><span class="header-section-number">13</span> Intro to Genomic Cross Prediction</a></li>
-<li><a class="" href="accuracy-of-cross-prediction.html"><span class="header-section-number">14</span> Accuracy of cross prediction?</a></li>
+<li><a class="" href="parentwise_cross_val.html"><span class="header-section-number">14</span> Accuracy of cross prediction?</a></li>
 <li><a class="" href="predict-crosses.html"><span class="header-section-number">15</span> Predict crosses</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
@@ -125,6 +125,10 @@
 <h2>
 <span class="header-section-number">3.3</span> Install software and packages<a class="anchor" aria-label="anchor" href="#install-software-and-packages"><i class="fas fa-link"></i></a>
 </h2>
+<div id="r-rstudio-r-packages" class="section level3" number="3.3.1">
+<h3>
+<span class="header-section-number">3.3.1</span> R, Rstudio, R packages<a class="anchor" aria-label="anchor" href="#r-rstudio-r-packages"><i class="fas fa-link"></i></a>
+</h3>
 <ul>
 <li>
 <p>Install R and Rstudio</p>
@@ -133,7 +137,7 @@
 <li><p><a href="https://rstudio-education.github.io/hopr/starting.html">Installing R and RStudio</a></p></li>
 </ul>
 </li>
-<li><p>Rstudio</p></li>
+<li><p><a href="https://www.rstudio.com/">Rstudio</a></p></li>
 <li>
 <p>Install packages</p>
 <ul>
@@ -148,16 +152,48 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tidyverse"</span>,<span class="st">"workflowr"</span>, <span class="st">"sommer"</span>, <span class="st">"lme4"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"wolfemd/genomicMateSelectR"</span>, ref <span class="op">=</span> <span class="st">'master'</span><span class="op">)</span> </code></pre></div>
+</div>
+<div id="command-line-programs" class="section level3" number="3.3.2">
+<h3>
+<span class="header-section-number">3.3.2</span> Command-line Programs<a class="anchor" aria-label="anchor" href="#command-line-programs"><i class="fas fa-link"></i></a>
+</h3>
+<p>Using Cassavabase-derived data mostly, but not entirely removes the need for command-line informatics tools. However, I was not able to totally avoid it in the example. Furthermore, this will be a valuable skill / experience to learn.</p>
+<p>For the section on <a href="prepare-genotypic-data">“preparing genotype data”</a> and further downstream when we do some steps to <a href="verify-pedigree-relationships">check the validity of the pedigree</a> we end up needing some bioinformatics tools.</p>
+<div id="windows" class="section level4" number="3.3.2.1">
+<h4>
+<span class="header-section-number">3.3.2.1</span> Windows<a class="anchor" aria-label="anchor" href="#windows"><i class="fas fa-link"></i></a>
+</h4>
+<p>The three possible Linux-emulator applications that colleagues have recommended to me for Windows users:</p>
+<p>1. Windows Subsystem for Linux: <a href="https://docs.microsoft.com/en-us/windows/wsl/install" class="uri">https://docs.microsoft.com/en-us/windows/wsl/install</a></p>
+<p>2. Git BASH for Windows: <a href="https://gitforwindows.org/" class="uri">https://gitforwindows.org/</a></p>
+<p>3. Cygwin: <a href="https://www.cygwin.com/" class="uri">https://www.cygwin.com/</a></p>
+<p>I can’t give you much advice beyond those links. <strong>Get googling for solutions!</strong></p>
+<p>I found this open-access google doc: <a href="http://bit.ly/2FSSjH6" class="uri">http://bit.ly/2FSSjH6</a> which <em>might</em> provide guidance for Windows users.</p>
+<p><strong>BACK-UP PLAN:</strong> We might explore setting up a Cornell-based BioHPC node and allowing everyone to log-in to it remotely. The BioHPC has all the programs we could possibly want and gives access to more memory/compute cores than any single laptop.</p>
+</div>
+<div id="mac" class="section level4" number="3.3.2.2">
+<h4>
+<span class="header-section-number">3.3.2.2</span> Mac<a class="anchor" aria-label="anchor" href="#mac"><i class="fas fa-link"></i></a>
+</h4>
+<p>You’ll already have access to most of the commands I’ll demonstrate, e.g. <code>grep</code>, <code>cut</code>. I recommend installing “<a href="https://brew.sh/">Homebrew</a>” which will enable you to easily install e.g. <code>vcftools</code> and <code>bcftools</code> by doing e.g. <code>brew install vcftools</code> in the terminal.</p>
+</div>
+<div id="programs-we-might-use" class="section level4" number="3.3.2.3">
+<h4>
+<span class="header-section-number">3.3.2.3</span> Programs we might use<a class="anchor" aria-label="anchor" href="#programs-we-might-use"><i class="fas fa-link"></i></a>
+</h4>
 <ul>
 <li>
 <p>Bioinformatics command-line software tools:</p>
 <ul>
 <li><p><a href="https://vcftools.github.io/man_latest.html"><code>vcftools</code></a></p></li>
 <li><p><a href="https://samtools.github.io/bcftools/bcftools.html"><code>bcftools</code></a></p></li>
-<li><p><a href="https://www.cog-genomics.org/plink/"><code>plink1.9</code></a></p></li>
+<li><p><a href="https://www.cog-genomics.org/plink/"><code>plink1.9</code></a>: When it comes up late in the pipeline, I actually describe the process of getting it working on a (my) Mac laptop. In a pinch, you can download and unzip the pre-complied plink program on your machine and then use <code>./plink</code> to run the program.</p></li>
 </ul>
 </li>
+<li><p>There are some other commands we might encounter, that should come pre-available, at least in the Mac and Linux command lines.</p></li>
 </ul>
+</div>
+</div>
 </div>
 <div id="learning-r-and-more" class="section level2" number="3.4">
 <h2>
@@ -165,7 +201,7 @@
 </h2>
 <ul>
 <li><p><strong>R for Data Science (<a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a>)</strong>:<br>
-As the Rstudio / Tidyverse team recommends here (<a href="https://www.tidyverse.org/learn/" class="uri">https://www.tidyverse.org/learn/</a>), this book is “the best place to start learning the tidyverse.” Just about anyone should be able to (1) read the brief introduction and (2) look over the table of contents and quickly find a starting point that meets their level / interest. </p></li>
+As the Rstudio / Tidyverse team recommends here (<a href="https://www.tidyverse.org/learn/" class="uri">https://www.tidyverse.org/learn/</a>), this book is “the best place to start learning the tidyverse.” Just about anyone should be able to (1) read the brief introduction and (2) look over the table of contents and quickly find a starting point that meets their level / interest.</p></li>
 <li>
 <p><strong>Data Challenge Lab (<a href="https://datalab.stanford.edu/challenge-lab" class="uri">https://datalab.stanford.edu/challenge-lab</a>)<br></strong>Where students develop their data skills by solving a progression of increasingly difficult challenges. I just discovered this. There is much here that I think is useful. Especially amongst the “Open Content” (<a href="https://dcl-docs.stanford.edu/home/" class="uri">https://dcl-docs.stanford.edu/home/</a>). For example:</p>
 <ul>
@@ -243,7 +279,12 @@ Has some useful intro sections on the very basics of R and Rstudio, seems to hav
 <li><a class="nav-link" href="#using-this-manual"><span class="header-section-number">3</span> Using this manual</a></li>
 <li><a class="nav-link" href="#suggested-workflow"><span class="header-section-number">3.1</span> Suggested workflow</a></li>
 <li><a class="nav-link" href="#prerequisites"><span class="header-section-number">3.2</span> Prerequisites</a></li>
-<li><a class="nav-link" href="#install-software-and-packages"><span class="header-section-number">3.3</span> Install software and packages</a></li>
+<li>
+<a class="nav-link" href="#install-software-and-packages"><span class="header-section-number">3.3</span> Install software and packages</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#r-rstudio-r-packages"><span class="header-section-number">3.3.1</span> R, Rstudio, R packages</a></li>
+<li><a class="nav-link" href="#command-line-programs"><span class="header-section-number">3.3.2</span> Command-line Programs</a></li>
+</ul>
+</li>
 <li>
 <a class="nav-link" href="#learning-r-and-more"><span class="header-section-number">3.4</span> Learning R and more</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#rmarkdown-and-workflowr"><span class="header-section-number">3.4.1</span> Rmarkdown and workflowR</a></li>
@@ -270,7 +311,7 @@ Has some useful intro sections on the very basics of R and Rstudio, seems to hav
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-14.</p>
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-15.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

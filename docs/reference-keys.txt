@@ -4,6 +4,11 @@ using-this-manual
 suggested-workflow
 prerequisites
 install-software-and-packages
+r-rstudio-r-packages
+command-line-programs
+windows
+mac
+programs-we-might-use
 learning-r-and-more
 rmarkdown-and-workflowr
 piping-code
@@ -119,7 +124,7 @@ non-additive-effects
 literature-1
 tutorial-1
 parent-wise-cross-validation
-accuracy-of-cross-prediction
+parentwise_cross_val
 pedigree
 read-pedigree
 fully-genotyped-trios

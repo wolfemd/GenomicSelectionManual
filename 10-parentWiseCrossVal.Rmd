@@ -1,4 +1,4 @@
-# Accuracy of cross prediction?
+# Accuracy of cross prediction? {#parentwise_cross_val}
 
 ```{r setup, include=F, echo=F}
 library(tidyverse); library(genomicMateSelectR); library(sommer); library(gt)

@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 14 Accuracy of cross prediction? | Genomic Prediction and Selection Manual</title>
+<meta name="author" content="Marnin Wolfe">
+<meta name="description" content="Context and Purpose: Upstream: Section @ref() - Downstream: Inputs: Expected outputs: Before proceeding, one note: the steps below may be hard for some breeding programs, especially when...">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="Chapter 14 Accuracy of cross prediction? | Genomic Prediction and Selection Manual">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://wolfemd.github.io/GenomicSelectionManual/parentwise_cross_val.html">
+<meta property="og:description" content="Context and Purpose: Upstream: Section @ref() - Downstream: Inputs: Expected outputs: Before proceeding, one note: the steps below may be hard for some breeding programs, especially when...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 14 Accuracy of cross prediction? | Genomic Prediction and Selection Manual">
+<meta name="twitter:description" content="Context and Purpose: Upstream: Section @ref() - Downstream: Inputs: Expected outputs: Before proceeding, one note: the steps below may be hard for some breeding programs, especially when...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Genomic Prediction and Selection Manual</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Preamble</a></li>
+<li><a class="" href="overview-process-map.html"><span class="header-section-number">2</span> Overview Process Map</a></li>
+<li><a class="" href="using-this-manual.html"><span class="header-section-number">3</span> Using this manual</a></li>
+<li><a class="" href="process-maps.html"><span class="header-section-number">4</span> Process maps</a></li>
+<li><a class="" href="create_project.html"><span class="header-section-number">5</span> Create a project</a></li>
+<li><a class="" href="download-training-data.html"><span class="header-section-number">6</span> Download training data</a></li>
+<li><a class="" href="prepare-phenotype-data.html"><span class="header-section-number">7</span> Prepare phenotype data</a></li>
+<li><a class="" href="prepare-genotypic-data.html"><span class="header-section-number">8</span> Prepare genotypic data</a></li>
+<li><a class="" href="preliminary-field-trial-analysis.html"><span class="header-section-number">9</span> Preliminary field trial analysis</a></li>
+<li><a class="" href="intro-to-genomic-prediction.html"><span class="header-section-number">10</span> Intro to Genomic Prediction</a></li>
+<li><a class="" href="standard-k-fold-cross-validation.html"><span class="header-section-number">11</span> Standard K-fold Cross-validation</a></li>
+<li><a class="" href="predict-parental-breeding-values.html"><span class="header-section-number">12</span> Predict parental breeding values</a></li>
+<li><a class="" href="intro-to-genomic-cross-prediction.html"><span class="header-section-number">13</span> Intro to Genomic Cross Prediction</a></li>
+<li><a class="active" href="parentwise_cross_val.html"><span class="header-section-number">14</span> Accuracy of cross prediction?</a></li>
+<li><a class="" href="predict-crosses.html"><span class="header-section-number">15</span> Predict crosses</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/wolfemd/GenomicSelectionManual">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="parentwise_cross_val" class="section level1" number="14">
+<h1>
+<span class="header-section-number">14</span> Accuracy of cross prediction?<a class="anchor" aria-label="anchor" href="#parentwise_cross_val"><i class="fas fa-link"></i></a>
+</h1>
+<ul>
+<li><p><strong>Context and Purpose:</strong></p></li>
+<li><p><strong>Upstream:</strong> Section @ref() -</p></li>
+<li><p><strong>Downstream:</strong></p></li>
+<li><p><strong>Inputs:</strong></p></li>
+<li><p><strong>Expected outputs:</strong></p></li>
+</ul>
+<p>Before proceeding, one note: the steps below may be hard for some breeding programs, especially when open-pollination is used, most families are small, both parents are not genotyped. If this is the case, or your attempt to implement the steps below fail, do not despair. The k-fold cross-validation accuracy should (hopefully) be related to the accuracy of predicting cross-variances. Therefore, these steps are not 100% necessary for implementing mate selection. Furthermore, mate selection can be done simply on the basis of predicted family-means, whose prediction accuracy should definitely be forecast based on the k-fold cross-validation accuracy. Predicting the usefulness of crosses (remember <span class="math inline">\(\hat{UC} = \hat{\mu} + i \times \hat{\sigma}\)</span>) requires the prediction of cross-variance (the <span class="math inline">\(\hat{\sigma}\)</span> part), which requires accurate phasing information for non-inbred lines.</p>
+<div id="pedigree" class="section level2" number="14.1">
+<h2>
+<span class="header-section-number">14.1</span> Pedigree<a class="anchor" aria-label="anchor" href="#pedigree"><i class="fas fa-link"></i></a>
+</h2>
+<p>We <a href="download-pedigree">downloaded a pedigree</a> in the last section of the <a href="download-training-data">“download training data”</a> chapter.</p>
+<div id="read-pedigree" class="section level3" number="14.1.1">
+<h3>
+<span class="header-section-number">14.1.1</span> Read pedigree<a class="anchor" aria-label="anchor" href="#read-pedigree"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># read.table() throws an error, some aspect of the formatting from the database download</span>
+<span class="co">## read.table(here::here("data","pedigree.txt"), </span>
+<span class="co">##            stringsAsFactors = F, header = T)</span>
+
+<span class="co"># use read_delim instead</span>
+<span class="va">ped</span><span class="op">&lt;-</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_delim</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"pedigree.txt"</span><span class="op">)</span>,delim <span class="op">=</span> <span class="st">"\t"</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 963 Columns: 4</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────</span>
+<span class="co">#&gt; Delimiter: "\t"</span>
+<span class="co">#&gt; chr (4): Accession, Female_Parent, Male_Parent, Cross_Type</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></code></pre></div>
+<p>Filter: Keep only complete pedigree records.</p>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ped</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/compound.html">%&lt;&gt;%</a></span> 
+     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Cross_Type</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Female_Parent</span><span class="op">)</span>,
+            <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Male_Parent</span><span class="op">)</span>,
+            <span class="va">Female_Parent</span><span class="op">!=</span><span class="st">"?"</span>,
+            <span class="va">Male_Parent</span><span class="op">!=</span><span class="st">"?"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="va">distinct</span></code></pre></div>
+<p>Number of full-sib families?</p>
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">Female_Parent</span>,<span class="va">Male_Parent</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] 462</span></code></pre></div>
+<p>462 in this set.</p>
+<p>Summarize distribution of full-sib family sizes</p>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span>   
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">Female_Parent</span>,<span class="va">Male_Parent</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>  <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">n</span><span class="op">)</span>
+<span class="co">#&gt;  Female_Parent      Male_Parent              n        </span>
+<span class="co">#&gt;  Length:462         Length:462         Min.   :1.000  </span>
+<span class="co">#&gt;  Class :character   Class :character   1st Qu.:1.000  </span>
+<span class="co">#&gt;  Mode  :character   Mode  :character   Median :1.000  </span>
+<span class="co">#&gt;                                        Mean   :1.294  </span>
+<span class="co">#&gt;                                        3rd Qu.:1.000  </span>
+<span class="co">#&gt;                                        Max.   :7.000</span></code></pre></div>
+<p>Less than 1/3 families have more than 1 member. We need &gt;&gt;2 members for this analysis.</p>
+</div>
+<div id="fully-genotyped-trios" class="section level3" number="14.1.2">
+<h3>
+<span class="header-section-number">14.1.2</span> Fully genotyped trios?<a class="anchor" aria-label="anchor" href="#fully-genotyped-trios"><i class="fas fa-link"></i></a>
+</h3>
+<p>For the parent-wise cross-validation, we need pedigree entrees where not both of the 2 parents <em>and</em> the accession itself are in our genotyped dataset. We don’t need them to necessarily be phenotyped though.</p>
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dosages</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"dosages.rds"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">genotyped_gids</span><span class="op">&lt;-</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">dosages</span><span class="op">)</span></code></pre></div>
+<p>Are all of the entrees themselves genotyped?</p>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="va">ped</span><span class="op">$</span><span class="va">Accession</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">genotyped_gids</span><span class="op">)</span>
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
+<p>Yes. That was pretty much assured by the way we set-up the download originally.</p>
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="va">ped</span><span class="op">$</span><span class="va">Female_Parent</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">genotyped_gids</span><span class="op">)</span>
+<span class="co">#&gt; [1] FALSE</span></code></pre></div>
+<p>There is no guarantee on the parents though…</p>
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">ped</span><span class="op">$</span><span class="va">Female_Parent</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">genotyped_gids</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; FALSE  TRUE </span>
+<span class="co">#&gt;   367   231</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">ped</span><span class="op">$</span><span class="va">Male_Parent</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">genotyped_gids</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; FALSE  TRUE </span>
+<span class="co">#&gt;   333   265</span></code></pre></div>
+<p>Indeed, only portions of the parents are present in our SNP data.</p>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">genotyped_ped</span><span class="op">&lt;-</span><span class="va">ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Accession</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">genotyped_gids</span>,
+            <span class="va">Female_Parent</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">genotyped_gids</span>,
+            <span class="va">Male_Parent</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">genotyped_gids</span><span class="op">)</span>
+<span class="va">genotyped_ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] 135</span></code></pre></div>
+<p>That leaves us with a very small set of complete trios (accession + male parent + female parent).</p>
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">genotyped_ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">Female_Parent</span>,<span class="va">Male_Parent</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>  <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">n</span><span class="op">)</span>
+<span class="co">#&gt;  Female_Parent      Male_Parent              n        </span>
+<span class="co">#&gt;  Length:104         Length:104         Min.   :1.000  </span>
+<span class="co">#&gt;  Class :character   Class :character   1st Qu.:1.000  </span>
+<span class="co">#&gt;  Mode  :character   Mode  :character   Median :1.000  </span>
+<span class="co">#&gt;                                        Mean   :1.298  </span>
+<span class="co">#&gt;                                        3rd Qu.:1.000  </span>
+<span class="co">#&gt;                                        Max.   :7.000</span></code></pre></div>
+<p>Looks like 104 full-sib families.</p>
+<p>How many families have &gt;1 offspring?</p>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">genotyped_ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">Female_Parent</span>,<span class="va">Male_Parent</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">n</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 18 × 3</span>
+<span class="co">#&gt;    Female_Parent        Male_Parent             n</span>
+<span class="co">#&gt;    &lt;chr&gt;                &lt;chr&gt;               &lt;int&gt;</span>
+<span class="co">#&gt;  1 IITA-TMS-IBA011371   IITA-TMS-IBA011371      4</span>
+<span class="co">#&gt;  2 IITA-TMS-IBA020431   IITA-TMS-IBA030055A     2</span>
+<span class="co">#&gt;  3 IITA-TMS-IBA030060   IITA-TMS-IBA010903      2</span>
+<span class="co">#&gt;  4 IITA-TMS-IBA030060   IITA-TMS-MM970043       3</span>
+<span class="co">#&gt;  5 IITA-TMS-IBA30555    TMEB1                   2</span>
+<span class="co">#&gt;  6 IITA-TMS-IBA4(2)1425 TMEB1                   2</span>
+<span class="co">#&gt;  7 IITA-TMS-IBA8902195  IITA-TMS-IBA950379      2</span>
+<span class="co">#&gt;  8 IITA-TMS-IBA9001554  IITA-TMS-IBA011659      2</span>
+<span class="co">#&gt;  9 IITA-TMS-IBA91934    TMEB1                   7</span>
+<span class="co">#&gt; 10 IITA-TMS-IBA940330   IITA-TMS-IBA011224      3</span>
+<span class="co">#&gt; 11 IITA-TMS-IBA961089A  IITA-TMS-IBA961089A     2</span>
+<span class="co">#&gt; 12 IITA-TMS-IBA961632   IITA-TMS-IBA000070      2</span>
+<span class="co">#&gt; 13 IITA-TMS-IBA961632   IITA-TMS-IBA030055A     3</span>
+<span class="co">#&gt; 14 IITA-TMS-IBA972205   TMEB1937                5</span>
+<span class="co">#&gt; 15 IITA-TMS-ZAR930151   IITA-TMS-MM970043       2</span>
+<span class="co">#&gt; 16 TMS13F1307P0004      TMS13F1343P0044         2</span>
+<span class="co">#&gt; 17 TMS14F1016P0006      TMS14F1035P0004         2</span>
+<span class="co">#&gt; 18 TMS14F1255P0005      TMS13F1343P0044         2</span></code></pre></div>
+<p>In the end, our small example dataset has only 18 families with &gt;1 offspring.</p>
+<p><strong>Remember that:</strong> (1) This is a small, example dataset, and (2) our goal is to estimate the accuracy of predicting the genetic-variance in a family.</p>
+<p><strong>For reference sake:</strong> In a previous analysis for IITA’s large training population, I had ~6200 entries in the pedigree, 196 full-sib families with &gt;=10 members, and the average family size was ~5.</p>
+<p>It is unlikely this is sufficient for a good estimate, it’s possible this won’t even work in the analysis, but we will try!</p>
+</div>
+</div>
+<div id="verify-pedigree-relationships" class="section level2" number="14.2">
+<h2>
+<span class="header-section-number">14.2</span> Verify pedigree relationships<a class="anchor" aria-label="anchor" href="#verify-pedigree-relationships"><i class="fas fa-link"></i></a>
+</h2>
+<p>There is one additional step I highly recommend and will demonstrate here.</p>
+<p>Plant breeding pedigrees can often have errors, esp. for the male (pollen) parent. For that reason, I recommend using the genomic data to check the pedigree. We do not want our estimate of family-genetic variance prediction accuracy further detrimated by the presence of incorrect pedigree entrees.</p>
+<p>There are various software options to do this, probably an R package or two.</p>
+<p>My approach uses the <code>--genome</code> IBD calculator in the command-line program <a href="https://www.cog-genomics.org/plink/1.9/"><strong>PLINK v1.9</strong>, click here</a> for the PLINK1.9 manual and to download/install the program.</p>
+<p>See an example implementation done in 2021 here: <a href="https://wolfemd.github.io/IITA_2021GS/03-validatePedigree.html" class="uri">https://wolfemd.github.io/IITA_2021GS/03-validatePedigree.html</a></p>
+<p><strong>PLINK1.9 pipeline to use:</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Convert the VCF file to binary plink format</p></li>
+<li>
+<p><strong>For a full dataset / “official anlaysis”:</strong></p>
+<ul>
+<li>2a: Subset whole-pop. binary plink files to only lines in the pedigree.</li>
+<li>2b: LD-prune <code>--indep-pairwise 100 25 0.25</code> stringent, but somewhat arbitrary</li>
+<li>
+<strong><em>Skip this step in the example dataset:</em></strong> population is small and we already randomly sampled a small number of markers to make compute faster in the example meaning that LD is probably low.</li>
+</ul>
+</li>
+<li><p>Compute IBD-relationships <code>--genome</code></p></li>
+<li><p>Parent-offspring relationships determination (see below)</p></li>
+</ol>
+<p><strong>Determine parent-offspring relationship status based on <code>plink</code> IBD:</strong></p>
+<ul>
+<li><p>should have a kinship <span class="math inline">\(\hat{\pi} \approx 0.5\)</span>.</p></li>
+<li><p>Three standard IBD probabilities are defined for each pair; the probability of sharing zero (Z0), one (Z1) or two (Z2) alleles at a randomly chosen locus IBD.</p></li>
+<li><p>The expectation for siblings in terms of these probabilities is Z0=0.25, Z1=0.5 and Z2=0.25.</p></li>
+<li><p>The expectation for parent-offspring pairs is Z0=0, Z1=1 and Z2=0.</p></li>
+<li><p>Based on work I did in <em>2016</em> (never published), declare a parent-offspring pair where: Z0&lt;0.313 and Z1&gt;0.668.</p></li>
+</ul>
+<div id="process-map-6" class="section level3" number="14.2.1">
+<h3>
+<span class="header-section-number">14.2.1</span> Process Map<a class="anchor" aria-label="anchor" href="#process-map-6"><i class="fas fa-link"></i></a>
+</h3>
+<div class="inline-figure"><img src="images/validate_pedigree_process_map.png" style="width:100.0%"></div>
+</div>
+<div id="install-plink1.9-mac" class="section level3" number="14.2.2">
+<h3>
+<span class="header-section-number">14.2.2</span> Install plink1.9 (Mac)<a class="anchor" aria-label="anchor" href="#install-plink1.9-mac"><i class="fas fa-link"></i></a>
+</h3>
+<p>Your results will vary. Here is how I got it installed on my mac laptop.</p>
+<ol style="list-style-type: decimal">
+<li>Downloaded it to my <code>~/Downloads/</code> folder and unzipped (double-click the <strong>.zip</strong> file)</li>
+<li>At the terminal: <code>cd ~/Downloads/plink_mac_20220305</code>
+</li>
+<li>Move the binary file (<code>plink</code>) to my command-line path: <code>cp ~/Downloads/plink_mac_20220305/plink /usr/local/bin/</code>
+</li>
+<li>Now typing <code>plink</code> at the command line will always engage the program</li>
+<li>However, I had to convince MacOS that it was safe by following this instruction: <a href="https://zaiste.net/os/macos/howtos/resolve-macos-cannot-be-opened-because-the-developer-cannot-be-verified-error/" class="uri">https://zaiste.net/os/macos/howtos/resolve-macos-cannot-be-opened-because-the-developer-cannot-be-verified-error/</a>
+</li>
+</ol>
+</div>
+<div id="make-binary-plink-from-vcf" class="section level3" number="14.2.3">
+<h3>
+<span class="header-section-number">14.2.3</span> Make binary plink from VCF<a class="anchor" aria-label="anchor" href="#make-binary-plink-from-vcf"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb148"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb148-1"><a href="parentwise_cross_val.html#cb148-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in the terminal change directory</span></span>
+<span id="cb148-2"><a href="parentwise_cross_val.html#cb148-2" aria-hidden="true" tabindex="-1"></a><span class="co"># go to the data/ directory where the VCF file is located</span></span>
+<span id="cb148-3"><a href="parentwise_cross_val.html#cb148-3" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--vcf</span> BreedBaseGenotypes_subset.vcf.gz <span class="dt">\</span></span>
+<span id="cb148-4"><a href="parentwise_cross_val.html#cb148-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">--make-bed</span> <span class="at">--const-fid</span> <span class="at">--keep-allele-order</span> <span class="dt">\</span></span>
+<span id="cb148-5"><a href="parentwise_cross_val.html#cb148-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">--out</span> BreedBaseGenotypes_subset</span></code></pre></div>
+</div>
+<div id="run-plink-ibd" class="section level3" number="14.2.4">
+<h3>
+<span class="header-section-number">14.2.4</span> Run plink IBD<a class="anchor" aria-label="anchor" href="#run-plink-ibd"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb149"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb149-1"><a href="parentwise_cross_val.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="ex">plink</span> <span class="at">--bfile</span> BreedBaseGenotypes_subset <span class="dt">\</span></span>
+<span id="cb149-2"><a href="parentwise_cross_val.html#cb149-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--genome</span> <span class="dt">\</span></span>
+<span id="cb149-3"><a href="parentwise_cross_val.html#cb149-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--out</span> ../output/BreedBaseGenotypes_subset<span class="kw">;</span></span></code></pre></div>
+<p>This creates an output file with extension <code>*.genome</code> in the <code>output</code> directory. For our 963 individual dataset, the file size is only 60M… beware, it could get huge if you have many samples.</p>
+<p>See the plink1.9 manual here: <a href="https://www.cog-genomics.org/plink/1.9/ibd" class="uri">https://www.cog-genomics.org/plink/1.9/ibd</a> for details on what this does and what the output means.</p>
+</div>
+<div id="verify-parent-offspring-relationships" class="section level3" number="14.2.5">
+<h3>
+<span class="header-section-number">14.2.5</span> Verify parent-offspring relationships<a class="anchor" aria-label="anchor" href="#verify-parent-offspring-relationships"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">genome</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output/"</span>,<span class="st">"BreedBaseGenotypes_subset.genome"</span><span class="op">)</span>,
+                   stringsAsFactors <span class="op">=</span> <span class="cn">F</span>,header <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="va">as_tibble</span>
+<span class="va">genome</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="va">head</span>
+<span class="co">#&gt; # A tibble: 6 × 14</span>
+<span class="co">#&gt;    FID1 IID1     FID2 IID2    RT       EZ    Z0     Z1    Z2</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt; &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     0 IITA-T…     0 IITA-T… OT        0 0.616 0.384  0    </span>
+<span class="co">#&gt; 2     0 IITA-T…     0 IITA-T… OT        0 0.663 0.337  0    </span>
+<span class="co">#&gt; 3     0 IITA-T…     0 IITA-T… OT        0 0.607 0.283  0.110</span>
+<span class="co">#&gt; 4     0 IITA-T…     0 IITA-T… OT        0 0     0.0612 0.939</span>
+<span class="co">#&gt; 5     0 IITA-T…     0 IITA-T… OT        0 0     0.0526 0.947</span>
+<span class="co">#&gt; 6     0 IITA-T…     0 IITA-T… OT        0 0     1      0    </span>
+<span class="co">#&gt; # … with 5 more variables: PI_HAT &lt;dbl&gt;, PHE &lt;int&gt;,</span>
+<span class="co">#&gt; #   DST &lt;dbl&gt;, PPC &lt;dbl&gt;, RATIO &lt;dbl&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">genome</span><span class="op">)</span>
+<span class="co">#&gt; [1] 463203     14</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">genome</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Accession<span class="op">=</span><span class="va">IID1</span>,Female_Parent<span class="op">=</span><span class="va">IID2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">genome</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Accession<span class="op">=</span><span class="va">IID1</span>,Female_Parent<span class="op">=</span><span class="va">IID2</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Joining, by = c("Accession", "Female_Parent")</span>
+<span class="co">#&gt; Joining, by = c("Accession", "Female_Parent")</span>
+<span class="co">#&gt; # A tibble: 4 × 15</span>
+<span class="co">#&gt;   Accession   Female_Parent   Male_Parent   FID1  FID2 RT   </span>
+<span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;           &lt;chr&gt;        &lt;int&gt; &lt;int&gt; &lt;chr&gt;</span>
+<span class="co">#&gt; 1 IITA-TMS-B… TMEB1           IITA-TMS-IB…     0     0 OT   </span>
+<span class="co">#&gt; 2 IITA-TMS-I… IITA-TMS-IBA90… IITA-TMS-IB…     0     0 OT   </span>
+<span class="co">#&gt; 3 IITA-TMS-I… TMEB1           IITA-TMS-IB…     0     0 OT   </span>
+<span class="co">#&gt; 4 IITA-TMS-I… IITA-TMS-IBA91… IITA-TMS-IB…     0     0 OT   </span>
+<span class="co">#&gt; # … with 9 more variables: EZ &lt;int&gt;, Z0 &lt;dbl&gt;, Z1 &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   Z2 &lt;dbl&gt;, PI_HAT &lt;dbl&gt;, PHE &lt;int&gt;, DST &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   PPC &lt;dbl&gt;, RATIO &lt;dbl&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Confirm Female_Parent - Offspring Relationship</span>
+<span class="co">## In the plink genome file</span>
+<span class="co">## IID1 or IID2 could be the Accession or the Female_Parent</span>
+<span class="va">conf_female_ped</span><span class="op">&lt;-</span><span class="va">genotyped_ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">genome</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Accession<span class="op">=</span><span class="va">IID1</span>,Female_Parent<span class="op">=</span><span class="va">IID2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">genotyped_ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">genome</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Accession<span class="op">=</span><span class="va">IID2</span>,Female_Parent<span class="op">=</span><span class="va">IID1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># Declare confirm-reject Accession-Female_Parent</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>ConfirmFemaleParent<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">Z0</span><span class="op">&lt;</span><span class="fl">0.32</span> <span class="op">&amp;</span> <span class="va">Z1</span><span class="op">&gt;</span><span class="fl">0.67</span><span class="op">~</span><span class="st">"Confirm"</span>, 
+                                          <span class="co"># Relatedness coeff differ if the Accession is the result of a self-cross</span>
+                                          <span class="va">Male_Parent</span><span class="op">==</span><span class="va">Female_Parent</span> <span class="op">&amp;</span> <span class="va">PI_HAT</span><span class="op">&gt;</span><span class="fl">0.6</span> <span class="op">&amp;</span> <span class="va">Z0</span><span class="op">&lt;</span><span class="fl">0.3</span> <span class="op">&amp;</span> <span class="va">Z2</span><span class="op">&gt;</span><span class="fl">0.32</span><span class="op">~</span><span class="st">"Confirm"</span>,
+                                          <span class="cn">TRUE</span><span class="op">~</span><span class="st">"Reject"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Accession</span>,<span class="va">Female_Parent</span>,<span class="va">ConfirmFemaleParent</span><span class="op">)</span>
+<span class="co">#&gt; Joining, by = c("Accession", "Female_Parent")</span>
+<span class="co">#&gt; Joining, by = c("Accession", "Female_Parent")</span>
+<span class="co">## Now do the same for the Accession-Male_Parent relationships</span>
+<span class="va">conf_male_ped</span><span class="op">&lt;-</span><span class="va">genotyped_ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">genome</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Accession<span class="op">=</span><span class="va">IID1</span>,Male_Parent<span class="op">=</span><span class="va">IID2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">genotyped_ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">genome</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Accession<span class="op">=</span><span class="va">IID2</span>,Male_Parent<span class="op">=</span><span class="va">IID1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># Declare confirm-reject Accession-Female_Parent</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>ConfirmMaleParent<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">Z0</span><span class="op">&lt;</span><span class="fl">0.32</span> <span class="op">&amp;</span> <span class="va">Z1</span><span class="op">&gt;</span><span class="fl">0.67</span><span class="op">~</span><span class="st">"Confirm"</span>, 
+                                          <span class="co"># Relatedness coeff differ if the Accession is the result of a self-cross</span>
+                                          <span class="va">Male_Parent</span><span class="op">==</span><span class="va">Female_Parent</span> <span class="op">&amp;</span> <span class="va">PI_HAT</span><span class="op">&gt;</span><span class="fl">0.6</span> <span class="op">&amp;</span> <span class="va">Z0</span><span class="op">&lt;</span><span class="fl">0.3</span> <span class="op">&amp;</span> <span class="va">Z2</span><span class="op">&gt;</span><span class="fl">0.32</span><span class="op">~</span><span class="st">"Confirm"</span>,
+                                          <span class="cn">TRUE</span><span class="op">~</span><span class="st">"Reject"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Accession</span>,<span class="va">Male_Parent</span>,<span class="va">ConfirmMaleParent</span><span class="op">)</span>
+<span class="co">#&gt; Joining, by = c("Accession", "Male_Parent")</span>
+<span class="co">#&gt; Joining, by = c("Accession", "Male_Parent")</span>
+<span class="co"># Now join the confirmed female and male relationships</span>
+<span class="co"># This regenerates the original "genotyped_ped" with two added columns</span>
+<span class="va">confirmed_ped</span><span class="op">&lt;-</span><span class="va">conf_female_ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">conf_male_ped</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html">relocate</a></span><span class="op">(</span><span class="va">Male_Parent</span>,.before <span class="op">=</span> <span class="st">"ConfirmFemaleParent"</span><span class="op">)</span>
+<span class="co">#&gt; Joining, by = "Accession"</span></code></pre></div>
+<p>So, how well supported are the pedigree relationships according to my approach?</p>
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">confirmed_ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">ConfirmFemaleParent</span>,<span class="va">ConfirmMaleParent</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Prop<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">n</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 4 × 4</span>
+<span class="co">#&gt;   ConfirmFemaleParent ConfirmMaleParent     n  Prop</span>
+<span class="co">#&gt;   &lt;chr&gt;               &lt;chr&gt;             &lt;int&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 Confirm             Confirm             105  0.78</span>
+<span class="co">#&gt; 2 Confirm             Reject               10  0.07</span>
+<span class="co">#&gt; 3 Reject              Confirm               5  0.04</span>
+<span class="co">#&gt; 4 Reject              Reject               15  0.11</span></code></pre></div>
+<ul>
+<li>78% of Accessions had both parents correct.</li>
+<li>7% had the female but not the male correct.</li>
+<li>4% had the male but not the female</li>
+</ul>
+</div>
+<div id="subset-to-fully-validated-trios" class="section level3" number="14.2.6">
+<h3>
+<span class="header-section-number">14.2.6</span> Subset to fully-validated trios<a class="anchor" aria-label="anchor" href="#subset-to-fully-validated-trios"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can only run the cross-validation using a pedigree where the full trio (Accession’s relationship to both parents) is validated.</p>
+<p>Remove any without both parents confirmed.</p>
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">valid_ped</span><span class="op">&lt;-</span><span class="va">confirmed_ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">ConfirmFemaleParent</span><span class="op">==</span><span class="st">"Confirm"</span>,
+         <span class="va">ConfirmMaleParent</span><span class="op">==</span><span class="st">"Confirm"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"Confirm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">valid_ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] 105</span></code></pre></div>
+<p>Leaves us with 105 validated entries in the pedigree</p>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">valid_ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">Female_Parent</span>,<span class="va">Male_Parent</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">n</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 16 × 3</span>
+<span class="co">#&gt;    Female_Parent        Male_Parent             n</span>
+<span class="co">#&gt;    &lt;chr&gt;                &lt;chr&gt;               &lt;int&gt;</span>
+<span class="co">#&gt;  1 IITA-TMS-IBA011371   IITA-TMS-IBA011371      4</span>
+<span class="co">#&gt;  2 IITA-TMS-IBA020431   IITA-TMS-IBA030055A     2</span>
+<span class="co">#&gt;  3 IITA-TMS-IBA030060   IITA-TMS-IBA010903      2</span>
+<span class="co">#&gt;  4 IITA-TMS-IBA030060   IITA-TMS-MM970043       3</span>
+<span class="co">#&gt;  5 IITA-TMS-IBA4(2)1425 TMEB1                   2</span>
+<span class="co">#&gt;  6 IITA-TMS-IBA8902195  IITA-TMS-IBA950379      2</span>
+<span class="co">#&gt;  7 IITA-TMS-IBA9001554  IITA-TMS-IBA011659      2</span>
+<span class="co">#&gt;  8 IITA-TMS-IBA91934    TMEB1                   6</span>
+<span class="co">#&gt;  9 IITA-TMS-IBA961089A  IITA-TMS-IBA961089A     2</span>
+<span class="co">#&gt; 10 IITA-TMS-IBA961632   IITA-TMS-IBA000070      2</span>
+<span class="co">#&gt; 11 IITA-TMS-IBA961632   IITA-TMS-IBA030055A     3</span>
+<span class="co">#&gt; 12 IITA-TMS-IBA972205   TMEB1937                5</span>
+<span class="co">#&gt; 13 IITA-TMS-ZAR930151   IITA-TMS-MM970043       2</span>
+<span class="co">#&gt; 14 TMS13F1307P0004      TMS13F1343P0044         2</span>
+<span class="co">#&gt; 15 TMS14F1016P0006      TMS14F1035P0004         2</span>
+<span class="co">#&gt; 16 TMS14F1255P0005      TMS13F1343P0044         2</span></code></pre></div>
+<p>Luckily, 16 of the 18 full-sib families that have &gt;1 entry are still here.</p>
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">valid_ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">Female_Parent</span>,<span class="va">Male_Parent</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">n</span><span class="op">&gt;</span><span class="fl">2</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 5 × 3</span>
+<span class="co">#&gt;   Female_Parent      Male_Parent             n</span>
+<span class="co">#&gt;   &lt;chr&gt;              &lt;chr&gt;               &lt;int&gt;</span>
+<span class="co">#&gt; 1 IITA-TMS-IBA011371 IITA-TMS-IBA011371      4</span>
+<span class="co">#&gt; 2 IITA-TMS-IBA030060 IITA-TMS-MM970043       3</span>
+<span class="co">#&gt; 3 IITA-TMS-IBA91934  TMEB1                   6</span>
+<span class="co">#&gt; 4 IITA-TMS-IBA961632 IITA-TMS-IBA030055A     3</span>
+<span class="co">#&gt; 5 IITA-TMS-IBA972205 TMEB1937                5</span></code></pre></div>
+<p>Though only 5 families have more than 2…</p>
+</div>
+<div id="write-validated-pedigree" class="section level3" number="14.2.7">
+<h3>
+<span class="header-section-number">14.2.7</span> Write validated pedigree<a class="anchor" aria-label="anchor" href="#write-validated-pedigree"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">valid_ped</span>,<span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"verified_ped.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+</div>
+<div id="parent-wise-cross-validation-1" class="section level2" number="14.3">
+<h2>
+<span class="header-section-number">14.3</span> Parent-wise cross-validation<a class="anchor" aria-label="anchor" href="#parent-wise-cross-validation-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Refer to the following:</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://wolfemd.github.io/genomicMateSelectR/reference/runParentWiseCrossVal.html">genomicMateSelectR::runParentWiseCrossVal() documentation</a></li>
+<li>Example of <a href="https://wolfemd.github.io/IITA_2021GS/05-CrossValidation.html#Parent-wise_cross-validation">IITA_2021GS Cross-validation</a>
+</li>
+</ol>
+<div id="process-map-7" class="section level3" number="14.3.1">
+<h3>
+<span class="header-section-number">14.3.1</span> Process Map<a class="anchor" aria-label="anchor" href="#process-map-7"><i class="fas fa-link"></i></a>
+</h3>
+<div class="inline-figure"><img src="images/parentwise_crossval_process_map.png" style="width:100.0%"></div>
+</div>
+<div id="load-inputs-and-set-up" class="section level3" number="14.3.2">
+<h3>
+<span class="header-section-number">14.3.2</span> Load inputs and set-up<a class="anchor" aria-label="anchor" href="#load-inputs-and-set-up"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Load verified ped</span>
+<span class="va">ped</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"verified_ped.rds"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># Rename things to match genomicMateSelectR::runParentWiseCrossVal()</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>GID<span class="op">=</span><span class="va">Accession</span>,
+            sireID<span class="op">=</span><span class="va">Male_Parent</span>,
+            damID<span class="op">=</span><span class="va">Female_Parent</span><span class="op">)</span>
+<span class="co"># Keep only families with _at least_ 2 offspring</span>
+<span class="va">ped</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/compound.html">%&lt;&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">ped</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">sireID</span>,<span class="va">damID</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">n</span><span class="op">&gt;</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># GENOMIC RELATIONSHIP MATRIX</span>
+<span class="va">grms</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>A<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span>file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"kinship_add.rds"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># BLUPs</span>
+<span class="va">blups</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"blups.rds"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># based on cross-validation, decided to exclude MCMDS from this analysis</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Trait</span> <span class="op">!=</span> <span class="st">"MCMDS"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># need to rename the "blups" list to comply with the runCrossVal function</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>TrainingData<span class="op">=</span><span class="va">blups</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Trait</span>,<span class="va">TrainingData</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># need also to remove phenotyped-but-not-genotyped lines</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>TrainingData<span class="op">=</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">TrainingData</span>,
+                             <span class="op">~</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">.</span>,<span class="va">germplasmName</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">grms</span><span class="op">$</span><span class="va">A</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                                  <span class="co"># rename the germplasmName column to GID</span>
+                                  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>GID<span class="op">=</span><span class="va">germplasmName</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># It seems actually that runParentWiseCrossVal() wnats this column named "blups"</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>blups<span class="op">=</span><span class="va">TrainingData</span><span class="op">)</span>
+
+<span class="co"># DOSAGE MATRIX</span>
+<span class="co">## Dosages are also needed inside the runParentWiseCrossVal() function</span>
+<span class="co">## Reason is that they are used to extra SNP effects from GBLUP models</span>
+<span class="va">dosages</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"dosages.rds"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># HAPLOTYPE MATRIX</span>
+<span class="co">## keep only haplos for parents-in-the-pedigree</span>
+<span class="co">## those which will be used in prediction, saves memory</span>
+<span class="va">haploMat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span>file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"haplotypes.rds"</span><span class="op">)</span><span class="op">)</span>
+<span class="va">parents</span><span class="op">&lt;-</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setops.html">union</a></span><span class="op">(</span><span class="va">ped</span><span class="op">$</span><span class="va">sireID</span>,<span class="va">ped</span><span class="op">$</span><span class="va">damID</span><span class="op">)</span> 
+<span class="va">parenthaps</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">parents</span>,<span class="st">"_HapA"</span><span class="op">)</span>,
+                   <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">parents</span>,<span class="st">"_HapB"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">haploMat</span><span class="op">&lt;-</span><span class="va">haploMat</span><span class="op">[</span><span class="va">parenthaps</span>,<span class="op">]</span>
+
+<span class="co"># SELECTION INDEX</span>
+<span class="va">SIwts</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>DM<span class="op">=</span><span class="fl">15</span>,
+         logFYLD<span class="op">=</span><span class="fl">20</span>,
+         logDYLD<span class="op">=</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
+<p>In the <a href="Prepare%20genotypic%20data">genotype data processing stage</a>, specifically in one of the last steps, we <a href="recomb-freq-mat">created a recombination frequency matrix</a>. To do this, we accessed a genetic map, interpolated it to the markers in our dataset and then used helper functions provided by <code>genomicMateSelectR</code>. We finally need that matrix.</p>
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># RECOMBINATION FREQUENCY MATRIX</span>
+<span class="va">recombFreqMat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span>file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"recombFreqMat_1minus2c.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="run-cross-validation" class="section level3" number="14.3.3">
+<h3>
+<span class="header-section-number">14.3.3</span> Run cross-validation<a class="anchor" aria-label="anchor" href="#run-cross-validation"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">starttime</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>
+<span class="va">parentWiseCV</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/runParentWiseCrossVal.html">runParentWiseCrossVal</a></span><span class="op">(</span>nrepeats<span class="op">=</span><span class="fl">2</span>,nfolds<span class="op">=</span><span class="fl">5</span>,seed<span class="op">=</span><span class="fl">121212</span>,
+                                    modelType<span class="op">=</span><span class="st">"A"</span>,
+                                    ncores<span class="op">=</span><span class="fl">10</span>,
+                                    ped<span class="op">=</span><span class="va">ped</span>,
+                                    blups<span class="op">=</span><span class="va">blups</span>,
+                                    dosages<span class="op">=</span><span class="va">dosages</span>,
+                                    haploMat<span class="op">=</span><span class="va">haploMat</span>,
+                                    grms<span class="op">=</span><span class="va">grms</span>,
+                                    recombFreqMat <span class="op">=</span> <span class="va">recombFreqMat</span>,
+                                    selInd <span class="op">=</span> <span class="cn">TRUE</span>, SIwts <span class="op">=</span> <span class="va">SIwts</span><span class="op">)</span>
+<span class="va">elapsed</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">-</span><span class="va">starttime</span>; <span class="va">elapsed</span><span class="op">/</span><span class="fl">60</span></code></pre></div>
+<p>Took about 3.5 minutes using 10 cores on my 16 core - 64 GB RAM machine. Memory usagage wasn’t bad.</p>
+</div>
+<div id="save-results" class="section level3" number="14.3.4">
+<h3>
+<span class="header-section-number">14.3.4</span> Save results<a class="anchor" aria-label="anchor" href="#save-results"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">parentWiseCV</span>,file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"parentWiseCV.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="plot-results-1" class="section level3" number="14.3.5">
+<h3>
+<span class="header-section-number">14.3.5</span> Plot results<a class="anchor" aria-label="anchor" href="#plot-results-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">parentWiseCV</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"parentWiseCV.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>You will find the output of <code>runParentWiseCrossVal</code> is a list with two elements: “meanPredAccuracy” and “varPredAccuracy”</p>
+<p>Take a peak at both to see how it’s formatted:</p>
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">parentWiseCV</span><span class="op">$</span><span class="va">meanPredAccuracy</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="va">head</span>
+<span class="co">#&gt; # A tibble: 6 × 7</span>
+<span class="co">#&gt;   Repeat  Fold  modelType predOf Trait predVSobs AccuracyEst</span>
+<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;list&gt;          &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 Repeat1 Fold1 A         MeanBV SELI… &lt;tibble …      -0.229</span>
+<span class="co">#&gt; 2 Repeat1 Fold1 A         MeanBV DM    &lt;tibble …      -0.385</span>
+<span class="co">#&gt; 3 Repeat1 Fold1 A         MeanBV logD… &lt;tibble …     NaN    </span>
+<span class="co">#&gt; 4 Repeat1 Fold1 A         MeanBV logF… &lt;tibble …      -0.771</span>
+<span class="co">#&gt; 5 Repeat1 Fold2 A         MeanBV SELI… &lt;tibble …     NaN    </span>
+<span class="co">#&gt; 6 Repeat1 Fold2 A         MeanBV DM    &lt;tibble …     NaN</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">parentWiseCV</span><span class="op">$</span><span class="va">varPredAccuracy</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="va">head</span>
+<span class="co">#&gt; # A tibble: 6 × 8</span>
+<span class="co">#&gt;   Repeat  Fold  modelType predOf Trait1  Trait2  predVSobs  </span>
+<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;list&gt;     </span>
+<span class="co">#&gt; 1 Repeat1 Fold1 A         VarBV  SELIND  SELIND  &lt;tibble [6…</span>
+<span class="co">#&gt; 2 Repeat1 Fold1 A         VarBV  DM      DM      &lt;tibble [6…</span>
+<span class="co">#&gt; 3 Repeat1 Fold1 A         VarBV  DM      logDYLD &lt;tibble [6…</span>
+<span class="co">#&gt; 4 Repeat1 Fold1 A         VarBV  DM      logFYLD &lt;tibble [6…</span>
+<span class="co">#&gt; 5 Repeat1 Fold1 A         VarBV  logDYLD logDYLD &lt;tibble [6…</span>
+<span class="co">#&gt; 6 Repeat1 Fold1 A         VarBV  logDYLD logFYLD &lt;tibble [6…</span>
+<span class="co">#&gt; # … with 1 more variable: AccuracyEst &lt;dbl&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">parentWiseCV</span><span class="op">$</span><span class="va">meanPredAccuracy</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Trait</span>,y<span class="op">=</span><span class="va">AccuracyEst</span>,fill<span class="op">=</span><span class="va">Trait</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Accuracy Predicting Family Means"</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 29 rows containing non-finite values</span>
+<span class="co">#&gt; (stat_boxplot).</span></code></pre></div>
+<div class="inline-figure"><img src="10-parentWiseCrossVal_files/figure-html/unnamed-chunk-32-1.png" width="672"></div>
+<p>Obviously not a good result, must have to do with the tiny dataset both for training prediction models (to get marker effects) and in terms of the small number of family-members in the small number of families available.</p>
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">parentWiseCV</span><span class="op">$</span><span class="va">varPredAccuracy</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="co"># this will format the two column information </span>
+     <span class="co"># indicating variances and covariances</span>
+     <span class="co"># into a single variable for the plot</span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>VarParam<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">Trait1</span>,<span class="st">"\n"</span>,<span class="va">Trait2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">VarParam</span>,y<span class="op">=</span><span class="va">AccuracyEst</span>,fill<span class="op">=</span><span class="va">VarParam</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Removed 57 rows containing non-finite values</span>
+<span class="co">#&gt; (stat_boxplot).</span></code></pre></div>
+<div class="inline-figure"><img src="10-parentWiseCrossVal_files/figure-html/unnamed-chunk-33-1.png" width="672"></div>
+<p>Surprising the variance accuracy actually appears <em>much</em> better than the mean accuracy… should definitely take this with equal skepticism to the result for the mean, for the same reasons!</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="intro-to-genomic-cross-prediction.html"><span class="header-section-number">13</span> Intro to Genomic Cross Prediction</a></div>
+<div class="next"><a href="predict-crosses.html"><span class="header-section-number">15</span> Predict crosses</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#parentwise_cross_val"><span class="header-section-number">14</span> Accuracy of cross prediction?</a></li>
+<li>
+<a class="nav-link" href="#pedigree"><span class="header-section-number">14.1</span> Pedigree</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#read-pedigree"><span class="header-section-number">14.1.1</span> Read pedigree</a></li>
+<li><a class="nav-link" href="#fully-genotyped-trios"><span class="header-section-number">14.1.2</span> Fully genotyped trios?</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#verify-pedigree-relationships"><span class="header-section-number">14.2</span> Verify pedigree relationships</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#process-map-6"><span class="header-section-number">14.2.1</span> Process Map</a></li>
+<li><a class="nav-link" href="#install-plink1.9-mac"><span class="header-section-number">14.2.2</span> Install plink1.9 (Mac)</a></li>
+<li><a class="nav-link" href="#make-binary-plink-from-vcf"><span class="header-section-number">14.2.3</span> Make binary plink from VCF</a></li>
+<li><a class="nav-link" href="#run-plink-ibd"><span class="header-section-number">14.2.4</span> Run plink IBD</a></li>
+<li><a class="nav-link" href="#verify-parent-offspring-relationships"><span class="header-section-number">14.2.5</span> Verify parent-offspring relationships</a></li>
+<li><a class="nav-link" href="#subset-to-fully-validated-trios"><span class="header-section-number">14.2.6</span> Subset to fully-validated trios</a></li>
+<li><a class="nav-link" href="#write-validated-pedigree"><span class="header-section-number">14.2.7</span> Write validated pedigree</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#parent-wise-cross-validation-1"><span class="header-section-number">14.3</span> Parent-wise cross-validation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#process-map-7"><span class="header-section-number">14.3.1</span> Process Map</a></li>
+<li><a class="nav-link" href="#load-inputs-and-set-up"><span class="header-section-number">14.3.2</span> Load inputs and set-up</a></li>
+<li><a class="nav-link" href="#run-cross-validation"><span class="header-section-number">14.3.3</span> Run cross-validation</a></li>
+<li><a class="nav-link" href="#save-results"><span class="header-section-number">14.3.4</span> Save results</a></li>
+<li><a class="nav-link" href="#plot-results-1"><span class="header-section-number">14.3.5</span> Plot results</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/wolfemd/GenomicSelectionManual/blob/master/10-parentWiseCrossVal.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/wolfemd/GenomicSelectionManual/edit/master/10-parentWiseCrossVal.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-15.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

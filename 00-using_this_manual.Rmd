@@ -50,13 +50,15 @@
 
 ## Install software and packages
 
+### R, Rstudio, R packages
+
 -   Install R and Rstudio
 
     -   [How to Install R on Windows, Mac OS X, and Ubuntu Tutorial](https://www.datacamp.com/community/tutorials/installing-R-windows-mac-ubuntu)
 
     -   [Installing R and RStudio](https://rstudio-education.github.io/hopr/starting.html)
 
--   Rstudio
+-   [Rstudio](https://www.rstudio.com/)
 
 -   Install packages
 
@@ -72,18 +74,48 @@ install.packages(c("tidyverse","workflowr", "sommer", "lme4"))
 devtools::install_github("wolfemd/genomicMateSelectR", ref = 'master') 
 ```
 
+### Command-line Programs
+
+Using Cassavabase-derived data mostly, but not entirely removes the need for command-line informatics tools. However, I was not able to totally avoid it in the example. Furthermore, this will be a valuable skill / experience to learn.
+
+For the section on ["preparing genotype data"](prepare-genotypic-data) and further downstream when we do some steps to [check the validity of the pedigree](verify-pedigree-relationships) we end up needing some bioinformatics tools.
+
+#### Windows
+
+The three possible Linux-emulator applications that colleagues have recommended to me for Windows users:
+
+1\. Windows Subsystem for Linux: <https://docs.microsoft.com/en-us/windows/wsl/install>
+
+2\. Git BASH for Windows: <https://gitforwindows.org/>
+
+3\. Cygwin: <https://www.cygwin.com/>
+
+I can't give you much advice beyond those links. **Get googling for solutions!**
+
+I found this open-access google doc: <http://bit.ly/2FSSjH6> which *might* provide guidance for Windows users.
+
+**BACK-UP PLAN:** We might explore setting up a Cornell-based BioHPC node and allowing everyone to log-in to it remotely. The BioHPC has all the programs we could possibly want and gives access to more memory/compute cores than any single laptop.
+
+#### Mac
+
+You'll already have access to most of the commands I'll demonstrate, e.g. `grep`, `cut`. I recommend installing "[Homebrew](https://brew.sh/)" which will enable you to easily install e.g. `vcftools` and `bcftools` by doing e.g. `brew install vcftools` in the terminal.
+
+#### Programs we might use
+
 -   Bioinformatics command-line software tools:
 
     -   [`vcftools`](https://vcftools.github.io/man_latest.html)
 
     -   [`bcftools`](https://samtools.github.io/bcftools/bcftools.html)
 
-    -   [`plink1.9`](https://www.cog-genomics.org/plink/)
+    -   [`plink1.9`](https://www.cog-genomics.org/plink/): When it comes up late in the pipeline, I actually describe the process of getting it working on a (my) Mac laptop. In a pinch, you can download and unzip the pre-complied plink program on your machine and then use `./plink` to run the program.
+
+-   There are some other commands we might encounter, that should come pre-available, at least in the Mac and Linux command lines.
 
 ## Learning R and more
 
 -   **R for Data Science (<https://r4ds.had.co.nz/>)**:\
-    As the Rstudio / Tidyverse team recommends here (<https://www.tidyverse.org/learn/>), this book is "the best place to start learning the tidyverse". Just about anyone should be able to (1) read the brief introduction and (2) look over the table of contents and quickly find a starting point that meets their level / interest. 
+    As the Rstudio / Tidyverse team recommends here (<https://www.tidyverse.org/learn/>), this book is "the best place to start learning the tidyverse". Just about anyone should be able to (1) read the brief introduction and (2) look over the table of contents and quickly find a starting point that meets their level / interest.
 
 -   **Data Challenge Lab (<https://datalab.stanford.edu/challenge-lab>)\
     **Where students develop their data skills by solving a progression of increasingly difficult challenges. I just discovered this. There is much here that I think is useful. Especially amongst the "Open Content" (<https://dcl-docs.stanford.edu/home/>). For example:
@@ -153,16 +185,16 @@ At some point, perhaps at the end of the pipeline run-through we will want to co
 
 ## Overview Process Map
 
-![](images/OverviewProcessMap.png){width=100%}
+![](images/OverviewProcessMap.png){width="100%"}
 
 ## Data Download and Preparation Process Map
 
-![](images/DownloadAndPrepareDataProcessMap.png){width=100%}
+![](images/DownloadAndPrepareDataProcessMap.png){width="100%"}
 
 ## Preliminary Analysis and Cross-validation Process Map
 
-![](images/PrelimAnalysisAndCrossValProcessMap.png){width=100%}
+![](images/PrelimAnalysisAndCrossValProcessMap.png){width="100%"}
 
 ## Genomic Mate Selection Process Map
 
-![](images/GenomicMateSelectionProcessMap.png){width=100%}
+![](images/GenomicMateSelectionProcessMap.png){width="100%"}
