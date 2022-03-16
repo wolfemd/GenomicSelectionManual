@@ -154,15 +154,22 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"wolfemd/genomicMateSelectR"</span>, ref <span class="op">=</span> <span class="st">'master'</span><span class="op">)</span> </code></pre></div>
 </div>
-<div id="command-line-programs" class="section level3" number="3.3.2">
+<div id="create-a-github-account" class="section level3" number="3.3.2">
 <h3>
-<span class="header-section-number">3.3.2</span> Command-line Programs<a class="anchor" aria-label="anchor" href="#command-line-programs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3.2</span> Create a GitHub account<a class="anchor" aria-label="anchor" href="#create-a-github-account"><i class="fas fa-link"></i></a>
+</h3>
+<p>We would like to teach you a reproducible, open-access approach to data science and genomic selection.</p>
+<p>To start, please go to <a href="https://github.com/" class="uri">https://github.com/</a> and create a free account, if you don’t already have one. We will show you how to create web-based reports, like <a href="https://wolfemd.github.io/IITA_2021GS/">this</a>, from your analyses!</p>
+</div>
+<div id="command-line-programs" class="section level3" number="3.3.3">
+<h3>
+<span class="header-section-number">3.3.3</span> Command-line Programs<a class="anchor" aria-label="anchor" href="#command-line-programs"><i class="fas fa-link"></i></a>
 </h3>
 <p>Using Cassavabase-derived data mostly, but not entirely removes the need for command-line informatics tools. However, I was not able to totally avoid it in the example. Furthermore, this will be a valuable skill / experience to learn.</p>
 <p>For the section on <a href="prepare-genotypic-data">“preparing genotype data”</a> and further downstream when we do some steps to <a href="verify-pedigree-relationships">check the validity of the pedigree</a> we end up needing some bioinformatics tools.</p>
-<div id="windows" class="section level4" number="3.3.2.1">
+<div id="windows" class="section level4" number="3.3.3.1">
 <h4>
-<span class="header-section-number">3.3.2.1</span> Windows<a class="anchor" aria-label="anchor" href="#windows"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3.3.1</span> Windows<a class="anchor" aria-label="anchor" href="#windows"><i class="fas fa-link"></i></a>
 </h4>
 <p>The three possible Linux-emulator applications that colleagues have recommended to me for Windows users:</p>
 <p>1. Windows Subsystem for Linux: <a href="https://docs.microsoft.com/en-us/windows/wsl/install" class="uri">https://docs.microsoft.com/en-us/windows/wsl/install</a></p>
@@ -172,15 +179,15 @@
 <p>I found this open-access google doc: <a href="http://bit.ly/2FSSjH6" class="uri">http://bit.ly/2FSSjH6</a> which <em>might</em> provide guidance for Windows users.</p>
 <p><strong>BACK-UP PLAN:</strong> We might explore setting up a Cornell-based BioHPC node and allowing everyone to log-in to it remotely. The BioHPC has all the programs we could possibly want and gives access to more memory/compute cores than any single laptop.</p>
 </div>
-<div id="mac" class="section level4" number="3.3.2.2">
+<div id="mac" class="section level4" number="3.3.3.2">
 <h4>
-<span class="header-section-number">3.3.2.2</span> Mac<a class="anchor" aria-label="anchor" href="#mac"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3.3.2</span> Mac<a class="anchor" aria-label="anchor" href="#mac"><i class="fas fa-link"></i></a>
 </h4>
 <p>You’ll already have access to most of the commands I’ll demonstrate, e.g. <code>grep</code>, <code>cut</code>. I recommend installing “<a href="https://brew.sh/">Homebrew</a>” which will enable you to easily install e.g. <code>vcftools</code> and <code>bcftools</code> by doing e.g. <code>brew install vcftools</code> in the terminal.</p>
 </div>
-<div id="programs-we-might-use" class="section level4" number="3.3.2.3">
+<div id="programs-we-might-use" class="section level4" number="3.3.3.3">
 <h4>
-<span class="header-section-number">3.3.2.3</span> Programs we might use<a class="anchor" aria-label="anchor" href="#programs-we-might-use"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3.3.3</span> Programs we might use<a class="anchor" aria-label="anchor" href="#programs-we-might-use"><i class="fas fa-link"></i></a>
 </h4>
 <ul>
 <li>
@@ -283,7 +290,8 @@ Has some useful intro sections on the very basics of R and Rstudio, seems to hav
 <li>
 <a class="nav-link" href="#install-software-and-packages"><span class="header-section-number">3.3</span> Install software and packages</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#r-rstudio-r-packages"><span class="header-section-number">3.3.1</span> R, Rstudio, R packages</a></li>
-<li><a class="nav-link" href="#command-line-programs"><span class="header-section-number">3.3.2</span> Command-line Programs</a></li>
+<li><a class="nav-link" href="#create-a-github-account"><span class="header-section-number">3.3.2</span> Create a GitHub account</a></li>
+<li><a class="nav-link" href="#command-line-programs"><span class="header-section-number">3.3.3</span> Command-line Programs</a></li>
 </ul>
 </li>
 <li>

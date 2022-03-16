@@ -5,6 +5,7 @@ suggested-workflow
 prerequisites
 install-software-and-packages
 r-rstudio-r-packages
+create-a-github-account
 command-line-programs
 windows
 mac

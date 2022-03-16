@@ -74,6 +74,12 @@ install.packages(c("tidyverse","workflowr", "sommer", "lme4"))
 devtools::install_github("wolfemd/genomicMateSelectR", ref = 'master') 
 ```
 
+### Create a GitHub account 
+
+We would like to teach you a reproducible, open-access approach to data science and genomic selection.
+
+To start, please go to <https://github.com/> and create a free account, if you don't already have one. We will show you how to create web-based reports, like [this](https://wolfemd.github.io/IITA_2021GS/), from your analyses!
+
 ### Command-line Programs
 
 Using Cassavabase-derived data mostly, but not entirely removes the need for command-line informatics tools. However, I was not able to totally avoid it in the example. Furthermore, this will be a valuable skill / experience to learn.
