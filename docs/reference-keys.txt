@@ -151,3 +151,17 @@ run-predictcrosses
 save-results-1
 select-crosses-to-make
 non-additive-effects-models
+cover-image-path-to-the-social-sharing-image-like-imagescover.jpg
+create-a-github-repository
+starting-your-workflowr-project
+hotkeys-1
+using-workflowr
+using-git-to-save-your-updates-at-github
+git-in-rstudio
+workflowr-example
+principal-components-analysis-with-iris-data
+collecting-data
+preparing-data-for-the-principal-components-analysis-pca
+principal-component-analysis-pca
+saving-results
+figures
