@@ -48,13 +48,13 @@ let's prepare this prepare this data to plot some boxplot of all the four traits
 install.packages("reshape2", repos = "https://cloud.r-project.org")
 #> 
 #> The downloaded binary packages are in
-#> 	/var/folders/33/g0c9br3d0rx_bvhf9jsc0t9mcdw1j5/T//Rtmph2yyHE/downloaded_packages
+#> 	/var/folders/65/v_glyd192hj9hmnr5118vy0m0000gp/T//RtmpfXzyLM/downloaded_packages
 library(reshape2); library(tidyverse)
 #> ── Attaching packages ─────────────────── tidyverse 1.3.1 ──
 #> ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-#> ✓ tibble  3.1.6     ✓ dplyr   1.0.8
-#> ✓ tidyr   1.2.0     ✓ stringr 1.4.0
-#> ✓ readr   2.1.2     ✓ forcats 0.5.1
+#> ✓ tibble  3.1.6     ✓ dplyr   1.0.7
+#> ✓ tidyr   1.1.4     ✓ stringr 1.4.0
+#> ✓ readr   2.1.1     ✓ forcats 0.5.1
 #> ── Conflicts ────────────────────── tidyverse_conflicts() ──
 #> x dplyr::filter() masks stats::filter()
 #> x dplyr::lag()    masks stats::lag()
@@ -208,6 +208,8 @@ ggplot(data = ScoresSpecies, aes(x = PC1, y = PC2, color = Species)) +
 <img src="WorkFlowRExample_files/figure-html/Scatter plot PCA-1.png" width="672" />
 
 This is the final results of the PC. Mostly of the variance explained by the 1˚PC is due to the between species `Setosa` Vs `Versicolor` and `Virginica`. The 2˚PC just explain variance within the species. Also the traits `Petal Length`, `Petal Width` and `Sepal Length` could be used to discriminate the species.
+
+[Back to home](docs/index.html)
 
 
 Now you just have to commit these new updates, follow the steps at this [link](01-create_repo.Rmd).

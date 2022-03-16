@@ -57,6 +57,7 @@
 <li><a class="" href="parentwise_cross_val.html"><span class="header-section-number">14</span> Accuracy of cross prediction?</a></li>
 <li><a class="" href="predict-crosses.html"><span class="header-section-number">15</span> Predict crosses</a></li>
 <li><a class="" href="references.html">References</a></li>
+<li><a class="" href="workflowr-example.html"><span class="header-section-number">16</span> WorkflowR example</a></li>
 </ul>
 
         <div class="book-extra">
@@ -128,25 +129,25 @@
 <ul>
 <li>Are the number of samples and sites what you expected?</li>
 </ul>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="prepare-genotypic-data.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--vcf</span> data/BreedBaseGenotypesDownload.vcf</span>
-<span id="cb24-2"><a href="prepare-genotypic-data.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># VCFtools - 0.1.16</span></span>
-<span id="cb24-3"><a href="prepare-genotypic-data.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (C) Adam Auton and Anthony Marcketta 2009</span></span>
-<span id="cb24-4"><a href="prepare-genotypic-data.html#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb24-5"><a href="prepare-genotypic-data.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters as interpreted:</span></span>
-<span id="cb24-6"><a href="prepare-genotypic-data.html#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   --vcf data/BreedBaseGenotypesDownload.vcf</span></span>
-<span id="cb24-7"><a href="prepare-genotypic-data.html#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb24-8"><a href="prepare-genotypic-data.html#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 1207 out of 1207 Individuals</span></span>
-<span id="cb24-9"><a href="prepare-genotypic-data.html#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 61239 out of a possible 61239 Sites</span></span>
-<span id="cb24-10"><a href="prepare-genotypic-data.html#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Time = 16.00 seconds</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="prepare-genotypic-data.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--vcf</span> data/BreedBaseGenotypesDownload.vcf</span>
+<span id="cb39-2"><a href="prepare-genotypic-data.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># VCFtools - 0.1.16</span></span>
+<span id="cb39-3"><a href="prepare-genotypic-data.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># (C) Adam Auton and Anthony Marcketta 2009</span></span>
+<span id="cb39-4"><a href="prepare-genotypic-data.html#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb39-5"><a href="prepare-genotypic-data.html#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters as interpreted:</span></span>
+<span id="cb39-6"><a href="prepare-genotypic-data.html#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   --vcf data/BreedBaseGenotypesDownload.vcf</span></span>
+<span id="cb39-7"><a href="prepare-genotypic-data.html#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb39-8"><a href="prepare-genotypic-data.html#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 1207 out of 1207 Individuals</span></span>
+<span id="cb39-9"><a href="prepare-genotypic-data.html#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 61239 out of a possible 61239 Sites</span></span>
+<span id="cb39-10"><a href="prepare-genotypic-data.html#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Time = 16.00 seconds</span></span></code></pre></div>
 <ul>
 <li>Are the data phased?</li>
 <li>What FORMAT fields are present? At a minimum, should include GT field.</li>
 <li>Do the column-names after FORMAT (should be sample names) look right / make sense?</li>
 <li>Do the SNP IDs in the “ID” field make sense?</li>
 </ul>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="prepare-genotypic-data.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the header of the VCF file</span></span>
-<span id="cb25-2"><a href="prepare-genotypic-data.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co"># print the "top-left" corner of the file</span></span>
-<span id="cb25-3"><a href="prepare-genotypic-data.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> data/BreedBaseGenotypesDownload.vcf <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n50</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-c1-100</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="prepare-genotypic-data.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the header of the VCF file</span></span>
+<span id="cb40-2"><a href="prepare-genotypic-data.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># print the "top-left" corner of the file</span></span>
+<span id="cb40-3"><a href="prepare-genotypic-data.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> data/BreedBaseGenotypesDownload.vcf <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n50</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-c1-100</span></span></code></pre></div>
 </div>
 <div id="subset-vcf" class="section level2" number="8.4">
 <h2>
@@ -165,10 +166,10 @@
 <p>Cassavabase returned multiple columns in the VCF file with the same column-name, because of multiple tissue_samples per germplasmName. This prevents using certain tools, e.g. <code>bcftools</code> which errors.</p>
 <p><strong>Manual solution required:</strong></p>
 <p>Write just the column-names of the VCF to disk. Here’s a one-liner:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="prepare-genotypic-data.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">egrep</span> <span class="st">"^#CHROM"</span> data/BreedBaseGenotypesDownload.vcf <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n1</span> <span class="op">&gt;</span> data/vcf_colnames.txt</span>
-<span id="cb26-2"><a href="prepare-genotypic-data.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># egrep "^##SynonymsOfAccessions=" data/BreedBaseGenotypesDownload.vcf | head -n1 &gt; data/vcf_synonyms.txt</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="prepare-genotypic-data.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">egrep</span> <span class="st">"^#CHROM"</span> data/BreedBaseGenotypesDownload.vcf <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n1</span> <span class="op">&gt;</span> data/vcf_colnames.txt</span>
+<span id="cb41-2"><a href="prepare-genotypic-data.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># egrep "^##SynonymsOfAccessions=" data/BreedBaseGenotypesDownload.vcf | head -n1 &gt; data/vcf_synonyms.txt</span></span></code></pre></div>
 <p>Read the column-names-file to R. Exclude the first 9 elements as they are standard VCF columns, not “germplasmName”</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">vcf_sample_names</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readLines.html">readLines</a></span><span class="op">(</span><span class="st">"data/vcf_colnames.txt"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html">strsplit</a></span><span class="op">(</span><span class="va">.</span>,<span class="st">"\t"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="va">.</span><span class="op">[</span><span class="fl">10</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">]</span>
@@ -180,7 +181,7 @@
 <p>Quite a few duplicates.</p>
 <p>Next, I (1) create unique names for each sample column in the VCF file, (2) write the “unique_names_for_vcf.txt” to disk and (3) use it to replace the current sample column names in the VCF. Finally, I (4) subset the VCF to only one unique instance of each name.</p>
 <p>First, manipulate names using <strong>R</strong>.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create unique names for each VCF</span>
 <span class="va">unique_names_for_vcf</span><span class="op">&lt;-</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>vcfName<span class="op">=</span><span class="va">vcf_sample_names</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="co"># create an overall index to ensure I can recover the original column order</span>
@@ -208,25 +209,25 @@
             row.names <span class="op">=</span> <span class="cn">F</span>, col.names <span class="op">=</span> <span class="cn">F</span>, quote <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
 <p>Now in the command line:</p>
 <p><code>bcftools reheader</code> to replace the sample names in the VCF with the unique ones.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="prepare-genotypic-data.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace sample names in original VCF with unique ones (creates a new VCF)</span></span>
-<span id="cb29-2"><a href="prepare-genotypic-data.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> reheader <span class="at">--samples</span> data/unique_names_for_vcf.txt data/BreedBaseGenotypesDownload.vcf <span class="op">&gt;</span> data/BreedBaseGenotypesDownload_1.vcf<span class="kw">;</span> </span>
-<span id="cb29-3"><a href="prepare-genotypic-data.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># overwrite the original VCF with the new  that has unique names</span></span>
-<span id="cb29-4"><a href="prepare-genotypic-data.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> data/BreedBaseGenotypesDownload_1.vcf data/BreedBaseGenotypesDownload.vcf<span class="kw">;</span></span>
-<span id="cb29-5"><a href="prepare-genotypic-data.html#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># check that the names are now unique by printing sample list</span></span>
-<span id="cb29-6"><a href="prepare-genotypic-data.html#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> query <span class="at">--list-samples</span> data/BreedBaseGenotypesDownload.vcf</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="prepare-genotypic-data.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># replace sample names in original VCF with unique ones (creates a new VCF)</span></span>
+<span id="cb44-2"><a href="prepare-genotypic-data.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> reheader <span class="at">--samples</span> data/unique_names_for_vcf.txt data/BreedBaseGenotypesDownload.vcf <span class="op">&gt;</span> data/BreedBaseGenotypesDownload_1.vcf<span class="kw">;</span> </span>
+<span id="cb44-3"><a href="prepare-genotypic-data.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co"># overwrite the original VCF with the new  that has unique names</span></span>
+<span id="cb44-4"><a href="prepare-genotypic-data.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> data/BreedBaseGenotypesDownload_1.vcf data/BreedBaseGenotypesDownload.vcf<span class="kw">;</span></span>
+<span id="cb44-5"><a href="prepare-genotypic-data.html#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co"># check that the names are now unique by printing sample list</span></span>
+<span id="cb44-6"><a href="prepare-genotypic-data.html#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> query <span class="at">--list-samples</span> data/BreedBaseGenotypesDownload.vcf</span></code></pre></div>
 <p>Now subset the VCF to only a single instance of each “germplasmName” with <code>vcftools</code>.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="prepare-genotypic-data.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--vcf</span> data/BreedBaseGenotypesDownload.vcf <span class="at">--keep</span> data/subset_unique_names_for_vcf.txt <span class="at">--recode</span> <span class="at">--stdout</span> <span class="kw">|</span> <span class="ex">bgzip</span> <span class="at">-c</span> <span class="op">&gt;</span> data/BreedBaseGenotypes_subset.vcf.gz</span>
-<span id="cb30-2"><a href="prepare-genotypic-data.html#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># uses stdout and bgzip to output a gzipped vcf file; saves disk space!</span></span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="prepare-genotypic-data.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--gzvcf</span> data/BreedBaseGenotypes_subset.vcf.gz</span>
-<span id="cb31-2"><a href="prepare-genotypic-data.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#VCFtools - 0.1.16</span></span>
-<span id="cb31-3"><a href="prepare-genotypic-data.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#(C) Adam Auton and Anthony Marcketta 2009</span></span>
-<span id="cb31-4"><a href="prepare-genotypic-data.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters as interpreted:</span></span>
-<span id="cb31-5"><a href="prepare-genotypic-data.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   --gzvcf data/BreedBaseGenotypes_subset.vcf.gz</span></span>
-<span id="cb31-6"><a href="prepare-genotypic-data.html#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb31-7"><a href="prepare-genotypic-data.html#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Using zlib version: 1.2.11</span></span>
-<span id="cb31-8"><a href="prepare-genotypic-data.html#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 963 out of 963 Individuals</span></span>
-<span id="cb31-9"><a href="prepare-genotypic-data.html#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 61239 out of a possible 61239 Sites</span></span>
-<span id="cb31-10"><a href="prepare-genotypic-data.html#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Time = 2.00 seconds</span></span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="prepare-genotypic-data.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--vcf</span> data/BreedBaseGenotypesDownload.vcf <span class="at">--keep</span> data/subset_unique_names_for_vcf.txt <span class="at">--recode</span> <span class="at">--stdout</span> <span class="kw">|</span> <span class="ex">bgzip</span> <span class="at">-c</span> <span class="op">&gt;</span> data/BreedBaseGenotypes_subset.vcf.gz</span>
+<span id="cb45-2"><a href="prepare-genotypic-data.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># uses stdout and bgzip to output a gzipped vcf file; saves disk space!</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="prepare-genotypic-data.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--gzvcf</span> data/BreedBaseGenotypes_subset.vcf.gz</span>
+<span id="cb46-2"><a href="prepare-genotypic-data.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="co">#VCFtools - 0.1.16</span></span>
+<span id="cb46-3"><a href="prepare-genotypic-data.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="co">#(C) Adam Auton and Anthony Marcketta 2009</span></span>
+<span id="cb46-4"><a href="prepare-genotypic-data.html#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters as interpreted:</span></span>
+<span id="cb46-5"><a href="prepare-genotypic-data.html#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   --gzvcf data/BreedBaseGenotypes_subset.vcf.gz</span></span>
+<span id="cb46-6"><a href="prepare-genotypic-data.html#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb46-7"><a href="prepare-genotypic-data.html#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Using zlib version: 1.2.11</span></span>
+<span id="cb46-8"><a href="prepare-genotypic-data.html#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 963 out of 963 Individuals</span></span>
+<span id="cb46-9"><a href="prepare-genotypic-data.html#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 61239 out of a possible 61239 Sites</span></span>
+<span id="cb46-10"><a href="prepare-genotypic-data.html#cb46-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Time = 2.00 seconds</span></span></code></pre></div>
 </div>
 <div id="check-genotype-to-phenotype-matches" class="section level3" number="8.4.2">
 <h3>
@@ -235,22 +236,22 @@
 <ul>
 <li>Do the number of unique <strong>germplasmName</strong> (in the <span class="math display">\[cleaned phenos from the previous step\]</span><span class="math display">\[save_cleaned_phenos\]</span>) matching samples in the VCF make sense? Are there as many as expected? If not, you will need to figure out why not.</li>
 </ul>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">phenos</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"phenotypes_cleaned.rds"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># vector of the unique germplasmName in the field trial data</span>
 <span class="va">germplasm_with_phenos</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">phenos</span><span class="op">$</span><span class="va">germplasmName</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">germplasm_with_phenos</span><span class="op">)</span> 
-<span class="co">#&gt; [1] 1002</span></code></pre></div>
+<span class="co">#&gt; [1] 1428</span></code></pre></div>
 <p>How many matches to the VCF?</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">germplasm_with_phenos</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">subset_unique_names_for_vcf</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; FALSE  TRUE </span>
-<span class="co">#&gt;   652   350</span></code></pre></div>
+<span class="co">#&gt;   857   571</span></code></pre></div>
 <p>350 matches. Does that make sense? Yes. We ended up excluding the “genetic gain” trial from the phenotypes b/c actually there were no trait scores.</p>
 <p>To be sure, I look at the names of: (1) the genotyped <em>and</em> phenotyped, (2) the genotyped <em>but not</em> phenotyped, (3) the phenotyped <em>but not</em> genotyped.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># geno and pheno</span>
 <span class="va">subset_unique_names_for_vcf</span><span class="op">[</span><span class="va">subset_unique_names_for_vcf</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">germplasm_with_phenos</span><span class="op">]</span>
 <span class="co"># pheno not geno</span>
@@ -267,12 +268,12 @@
 <span class="header-section-number">8.4.3</span> Subset SNPs (for tutorial purposes)<a class="anchor" aria-label="anchor" href="#subset-snps-for-tutorial-purposes"><i class="fas fa-link"></i></a>
 </h3>
 <p><strong>For example / tutorial purposes ONLY:</strong> randomly sample and subset the number of SNPs to only a few thousand, for quick, local computations.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="prepare-genotypic-data.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write the positions list</span></span>
-<span id="cb35-2"><a href="prepare-genotypic-data.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># first two columns (chrom. and position) of the VCF </span></span>
-<span id="cb35-3"><a href="prepare-genotypic-data.html#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ignoring the header rows</span></span>
-<span id="cb35-4"><a href="prepare-genotypic-data.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> data/BreedBaseGenotypesDownload.vcf <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">"^#"</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f1-2</span> <span class="op">&gt;</span> data/BreedBaseGenotypesDownload.positions</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb50-1"><a href="prepare-genotypic-data.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write the positions list</span></span>
+<span id="cb50-2"><a href="prepare-genotypic-data.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># first two columns (chrom. and position) of the VCF </span></span>
+<span id="cb50-3"><a href="prepare-genotypic-data.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ignoring the header rows</span></span>
+<span id="cb50-4"><a href="prepare-genotypic-data.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> data/BreedBaseGenotypesDownload.vcf <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-v</span> <span class="st">"^#"</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f1-2</span> <span class="op">&gt;</span> data/BreedBaseGenotypesDownload.positions</span></code></pre></div>
 <p>Read into R, sample 4000 at random</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"BreedBaseGenotypesDownload.positions"</span><span class="op">)</span>, 
            header <span class="op">=</span> <span class="cn">F</span>, stringsAsFactors <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
@@ -281,25 +282,25 @@
      <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">.</span>,file <span class="op">=</span> <span class="st">"data/BreedBaseGenotypes_subset.positions"</span>,
                  row.names <span class="op">=</span> <span class="cn">F</span>, col.names <span class="op">=</span> <span class="cn">F</span>, quote <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
 <p>Subset the VCF using the randomly sampled list of positions.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="prepare-genotypic-data.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--vcf</span> data/BreedBaseGenotypesDownload.vcf <span class="dt">\</span></span>
-<span id="cb37-2"><a href="prepare-genotypic-data.html#cb37-2" aria-hidden="true" tabindex="-1"></a>--keep data/subset_unique_names_for_vcf.txt <span class="dt">\</span></span>
-<span id="cb37-3"><a href="prepare-genotypic-data.html#cb37-3" aria-hidden="true" tabindex="-1"></a>--positions data/BreedBaseGenotypes_subset.positions <span class="dt">\</span></span>
-<span id="cb37-4"><a href="prepare-genotypic-data.html#cb37-4" aria-hidden="true" tabindex="-1"></a>--recode <span class="at">--stdout</span> <span class="kw">|</span> <span class="ex">bgzip</span> <span class="at">-c</span> <span class="op">&gt;</span> data/BreedBaseGenotypes_subset.vcf.gz</span>
-<span id="cb37-5"><a href="prepare-genotypic-data.html#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co"># VCFtools - 0.1.16</span></span>
-<span id="cb37-6"><a href="prepare-genotypic-data.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co"># (C) Adam Auton and Anthony Marcketta 2009</span></span>
-<span id="cb37-7"><a href="prepare-genotypic-data.html#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb37-8"><a href="prepare-genotypic-data.html#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters as interpreted:</span></span>
-<span id="cb37-9"><a href="prepare-genotypic-data.html#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   --vcf data/BreedBaseGenotypesDownload.vcf</span></span>
-<span id="cb37-10"><a href="prepare-genotypic-data.html#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   --keep data/subset_unique_names_for_vcf.txt</span></span>
-<span id="cb37-11"><a href="prepare-genotypic-data.html#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   --positions data/BreedBaseGenotypes_subset.positions</span></span>
-<span id="cb37-12"><a href="prepare-genotypic-data.html#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   --recode</span></span>
-<span id="cb37-13"><a href="prepare-genotypic-data.html#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   --stdout</span></span>
-<span id="cb37-14"><a href="prepare-genotypic-data.html#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb37-15"><a href="prepare-genotypic-data.html#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Keeping individuals in 'keep' list</span></span>
-<span id="cb37-16"><a href="prepare-genotypic-data.html#cb37-16" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 963 out of 1207 Individuals</span></span>
-<span id="cb37-17"><a href="prepare-genotypic-data.html#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputting VCF file...</span></span>
-<span id="cb37-18"><a href="prepare-genotypic-data.html#cb37-18" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 4000 out of a possible 61239 Sites</span></span>
-<span id="cb37-19"><a href="prepare-genotypic-data.html#cb37-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Time = 8.00 seconds</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="prepare-genotypic-data.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcftools</span> <span class="at">--vcf</span> data/BreedBaseGenotypesDownload.vcf <span class="dt">\</span></span>
+<span id="cb52-2"><a href="prepare-genotypic-data.html#cb52-2" aria-hidden="true" tabindex="-1"></a>--keep data/subset_unique_names_for_vcf.txt <span class="dt">\</span></span>
+<span id="cb52-3"><a href="prepare-genotypic-data.html#cb52-3" aria-hidden="true" tabindex="-1"></a>--positions data/BreedBaseGenotypes_subset.positions <span class="dt">\</span></span>
+<span id="cb52-4"><a href="prepare-genotypic-data.html#cb52-4" aria-hidden="true" tabindex="-1"></a>--recode <span class="at">--stdout</span> <span class="kw">|</span> <span class="ex">bgzip</span> <span class="at">-c</span> <span class="op">&gt;</span> data/BreedBaseGenotypes_subset.vcf.gz</span>
+<span id="cb52-5"><a href="prepare-genotypic-data.html#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="co"># VCFtools - 0.1.16</span></span>
+<span id="cb52-6"><a href="prepare-genotypic-data.html#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="co"># (C) Adam Auton and Anthony Marcketta 2009</span></span>
+<span id="cb52-7"><a href="prepare-genotypic-data.html#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb52-8"><a href="prepare-genotypic-data.html#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters as interpreted:</span></span>
+<span id="cb52-9"><a href="prepare-genotypic-data.html#cb52-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   --vcf data/BreedBaseGenotypesDownload.vcf</span></span>
+<span id="cb52-10"><a href="prepare-genotypic-data.html#cb52-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   --keep data/subset_unique_names_for_vcf.txt</span></span>
+<span id="cb52-11"><a href="prepare-genotypic-data.html#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   --positions data/BreedBaseGenotypes_subset.positions</span></span>
+<span id="cb52-12"><a href="prepare-genotypic-data.html#cb52-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   --recode</span></span>
+<span id="cb52-13"><a href="prepare-genotypic-data.html#cb52-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   --stdout</span></span>
+<span id="cb52-14"><a href="prepare-genotypic-data.html#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb52-15"><a href="prepare-genotypic-data.html#cb52-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Keeping individuals in 'keep' list</span></span>
+<span id="cb52-16"><a href="prepare-genotypic-data.html#cb52-16" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 963 out of 1207 Individuals</span></span>
+<span id="cb52-17"><a href="prepare-genotypic-data.html#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputting VCF file...</span></span>
+<span id="cb52-18"><a href="prepare-genotypic-data.html#cb52-18" aria-hidden="true" tabindex="-1"></a><span class="co"># After filtering, kept 4000 out of a possible 61239 Sites</span></span>
+<span id="cb52-19"><a href="prepare-genotypic-data.html#cb52-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Run Time = 8.00 seconds</span></span></code></pre></div>
 </div>
 <div id="ld-prunning-snps-for-computational-savings" class="section level3" number="8.4.4">
 <h3>
@@ -313,13 +314,13 @@
 <span class="header-section-number">8.5</span> Haplotype matrix from VCF<a class="anchor" aria-label="anchor" href="#haplotype-matrix-from-vcf"><i class="fas fa-link"></i></a>
 </h2>
 <p>Extract haplotypes from VCF with <code>bcftools convert --hapsample</code></p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="prepare-genotypic-data.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> convert <span class="at">--hapsample</span> data/BreedBaseGenotypes_subset data/BreedBaseGenotypes_subset.vcf.gz</span>
-<span id="cb38-2"><a href="prepare-genotypic-data.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Hap file: data/BreedBaseGenotypes_subset.hap.gz</span></span>
-<span id="cb38-3"><a href="prepare-genotypic-data.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample file: data/BreedBaseGenotypes_subset.samples</span></span>
-<span id="cb38-4"><a href="prepare-genotypic-data.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># [W::vcf_parse_format] FORMAT 'NT' at 1:652699 is not defined in the header, assuming Type=String</span></span>
-<span id="cb38-5"><a href="prepare-genotypic-data.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 4000 records written, 0 skipped: 0/0/0 no-ALT/non-biallelic/filtered</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb53-1"><a href="prepare-genotypic-data.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bcftools</span> convert <span class="at">--hapsample</span> data/BreedBaseGenotypes_subset data/BreedBaseGenotypes_subset.vcf.gz</span>
+<span id="cb53-2"><a href="prepare-genotypic-data.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Hap file: data/BreedBaseGenotypes_subset.hap.gz</span></span>
+<span id="cb53-3"><a href="prepare-genotypic-data.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample file: data/BreedBaseGenotypes_subset.samples</span></span>
+<span id="cb53-4"><a href="prepare-genotypic-data.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co"># [W::vcf_parse_format] FORMAT 'NT' at 1:652699 is not defined in the header, assuming Type=String</span></span>
+<span id="cb53-5"><a href="prepare-genotypic-data.html#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 4000 records written, 0 skipped: 0/0/0 no-ALT/non-biallelic/filtered</span></span></code></pre></div>
 <p>Read haps to R and format them.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'data.table'</span>
@@ -337,7 +338,7 @@
                  stringsAsFactors <span class="op">=</span> <span class="cn">F</span>,header <span class="op">=</span> <span class="cn">F</span>,skip <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
   <span class="va">as.data.frame</span></code></pre></div>
 <p>Add sample ID’s.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hapids</span><span class="op">&lt;-</span><span class="va">sampleids</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">V1</span>,<span class="va">V2</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>SampleIndex<span class="op">=</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
@@ -350,7 +351,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">haps</span><span class="op">)</span>
 <span class="co">#&gt; [1] 4000 1931</span></code></pre></div>
 <p>Format, transpose, convert to matrix.</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">haps</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/compound.html">%&lt;&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>HAP_ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">":"</span>,<span class="st">"_"</span>,<span class="va">HAP_ID</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"HAP_ID"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
@@ -366,7 +367,7 @@
 <p>The counted allele in the dosage matrix, which will be used downstream to construct kinship matrices and estimate marker effects, should be the ALT allele. This will ensure a match to the haplotype matrix, where a “1” indicates the presence of the ALT allele.</p>
 <p>The BreedBase system currently (as of Jan. 2022) gives dosages that count the REF allele and we need to fix this.</p>
 <p>Here’s my tidyverse-based approach, using <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> plus <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise()</a></code> to sum the two haplotypes for each individual across all loci.</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dosages</span><span class="op">&lt;-</span><span class="va">haps</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span>
      <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"GID"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
@@ -396,7 +397,7 @@
 <span class="co">#&gt; IITA-TMS-IBA961642             2             0</span>
 <span class="co">#&gt; IITA-TMS-ONN920168             0             0</span>
 <span class="co">#&gt; IITA-TMS-WAR4080               1             0</span></code></pre></div>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">haps</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>
 <span class="co">#&gt;                         1_652699_G_C 1_868970_G_T</span>
 <span class="co">#&gt; IITA-TMS-IBA30572_HapA             1            0</span>
@@ -437,7 +438,7 @@
 <span class="header-section-number">8.7</span> Variant filters<a class="anchor" aria-label="anchor" href="#filter-variants"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this case, simple: keep only positions with &gt;1% minor allele frequency.</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># use function built into genomicMateSelectR</span>
 <span class="va">dosages</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/maf_filter.html">maf_filter</a></span><span class="op">(</span><span class="va">dosages</span>,thresh <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">dosages</span><span class="op">)</span>
@@ -448,7 +449,7 @@
 <h3>
 <span class="header-section-number">8.7.1</span> Save dosages and haps<a class="anchor" aria-label="anchor" href="#save-dosages-and-haps"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">dosages</span>,file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"dosages.rds"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">haps</span>,file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"haplotypes.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
@@ -458,7 +459,7 @@
 <span class="header-section-number">8.8</span> Genomic Relationship Matrices (GRMs)<a class="anchor" aria-label="anchor" href="#construct-grms"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the example below, I use the <code>genomicMateSelectR</code> function <code><a href="https://rdrr.io/pkg/genomicMateSelectR/man/kinship.html">kinship()</a></code> to construct <strong>additive</strong> (A) and <strong>dominance</strong> (D) relationship matrices.</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">A</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/kinship.html">kinship</a></span><span class="op">(</span><span class="va">dosages</span>,type<span class="op">=</span><span class="st">"add"</span><span class="op">)</span>
 <span class="va">D</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/kinship.html">kinship</a></span><span class="op">(</span><span class="va">dosages</span>,type<span class="op">=</span><span class="st">"domGenotypic"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">A</span>,file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"kinship_add.rds"</span><span class="op">)</span><span class="op">)</span>
@@ -479,7 +480,7 @@
 <li>Not necessarily the exact markerset, but overlap is ideal</li>
 </ul>
 <p>I source a single genome-wide file representing the ICGMC concensus genetic map on the V6 Cassava Reference genome. The file is on the Cassavabase FTP-archive, <a href="https://cassavabase.org/ftp/marnin_datasets/NGC_BigData/CassavaGeneticMap/cassava_cM_pred.v6.allchr.txt">here</a>.</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">genmap</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="st">"https://cassavabase.org/ftp/marnin_datasets/NGC_BigData/CassavaGeneticMap/cassava_cM_pred.v6.allchr.txt"</span>,
                    header <span class="op">=</span> <span class="cn">F</span>, sep<span class="op">=</span><span class="st">';'</span>, stringsAsFactors <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>SNP_ID<span class="op">=</span><span class="va">V1</span>,Pos<span class="op">=</span><span class="va">V2</span>,cM<span class="op">=</span><span class="va">V3</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
@@ -487,7 +488,7 @@
 <span class="va">genmap</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="va">dim</span>
 <span class="co">#&gt; [1] 120979      3</span></code></pre></div>
 <p>120K positions.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">genmap</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="va">head</span>
 <span class="co">#&gt; # A tibble: 6 × 3</span>
 <span class="co">#&gt;   SNP_ID     Pos    cM</span>
@@ -498,7 +499,7 @@
 <span class="co">#&gt; 4 S1_27720 27720   2.7</span>
 <span class="co">#&gt; 5 S1_27739 27739   2.7</span>
 <span class="co">#&gt; 6 S1_27746 27746   2.7</span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">snps_genmap</span><span class="op">&lt;-</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>DoseSNP_ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dosages</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">DoseSNP_ID</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Chr"</span>,<span class="st">"Pos"</span>,<span class="st">"Ref"</span>,<span class="st">"Alt"</span><span class="op">)</span>,remove <span class="op">=</span> <span class="cn">F</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>SNP_ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"S"</span>,<span class="va">Chr</span>,<span class="st">"_"</span>,<span class="va">Pos</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
@@ -521,7 +522,7 @@
 <h3>
 <span class="header-section-number">8.9.2</span> Interpolate genetic map<a class="anchor" aria-label="anchor" href="#interpolate-genetic-map"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">interpolate_genmap</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">{</span>
   <span class="co"># for each chromosome map</span>
   <span class="co"># find and _decrements_ in the genetic map distance</span>
@@ -548,7 +549,7 @@
   
   <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">splinemap</span><span class="op">)</span> 
 <span class="op">}</span></code></pre></div>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">splined_snps_genmap</span><span class="op">&lt;-</span><span class="va">snps_genmap</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">cM</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Pos<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">Pos</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
@@ -562,10 +563,10 @@
 <span class="co">#&gt; Warning: All elements of `...` must be named.</span>
 <span class="co">#&gt; Did you want `data = c(DoseSNP_ID, Pos, Ref, Alt, SNP_ID, cM)`?</span>
 <span class="co">#&gt; Joining, by = c("Chr", "Pos")</span></code></pre></div>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dosages</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">splined_snps_genmap</span><span class="op">$</span><span class="va">DoseSNP_ID</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">splined_snps_genmap</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">DoseSNP_ID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dosages</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Map<span class="op">=</span><span class="st">"Spline"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
@@ -579,7 +580,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">Chr</span><span class="op">)</span>, scales<span class="op">=</span><span class="st">'free_x'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="04-prep_genos_files/figure-html/unnamed-chunk-30-1.png" width="672"></div>
 <p>Save the interpolated map, just for the marker loci to-be-used downstream.</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">splined_snps_genmap</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">DoseSNP_ID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">dosages</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">.</span>,file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"interpolated_genmap.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -588,7 +589,7 @@
 <h3>
 <span class="header-section-number">8.9.3</span> Recomb. freq. matrix<a class="anchor" aria-label="anchor" href="#recomb.-freq.-matrix"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">genmap</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span>file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"interpolated_genmap.rds"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">m</span><span class="op">&lt;-</span><span class="va">genmap</span><span class="op">$</span><span class="va">cM</span>;
 <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span><span class="op">&lt;-</span><span class="va">genmap</span><span class="op">$</span><span class="va">DoseSNP_ID</span>
@@ -647,7 +648,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-15.</p>
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

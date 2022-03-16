@@ -6,26 +6,37 @@ To avoid any conflict between RStudio and GitHub let's create your repository fi
 
 Go to your [GitHub page](https://github.com/new) to create a new repository.
 
-![GitHubNewRepo](images/GitHubNewRepo.png)
+![](images/GitHubNewRepo.png){width="100%"}
+
+<br>
 
 Add a creative name and a description to your repository, please leave as a public option, that will allow you to create a GitHub page to share your work with all of us.  
 
 After that we are going to copy the `https link` of your repository to clone it with RStudio. Just click at the red button.
 
-![CloneGHRepo](images/HttpsLink2CloneGHRepo.png)
+![](images/HttpsLink2CloneGHRepo.png){width="100%"}
+
+<br>
 
 Then let's move to RStudio.
 
 To clone (Download) your repository from GitHub, click at the `Project` button on the top right of RStudio `(1˚)` then at `New Project...`.  
-![CloneRepo1](images/CloneRepo1.png)
+![](images/CloneRepo1.png){width="100%"}
+
+<br>
 
 A window named `New Project Wizard` will appear, select `Version Control`, then `Git`.  
-![CloneGHRepo2](images/CloneRepo2.png)
+![](images/CloneRepo2.png){width="100%"}
+
+<br>
 
 This will open a window with the `Clone Git Repository`. Here you will just paste that link that I asked you to copy long time ago at the `Repository URL:` window. At the `Create project as subdirectory of:` select a directory of easy access for you, that will make it easier for you to locate it later.  
 
 *I suggest you to create a folder at your `Documents` to keep your `workflowr` projects organized.*  
-![CloneGHRepo3](images/CloneRepo3.png)
+![](images/CloneRepo3.png){width="100%"}
+
+<br>
+<br>
 
 ## Create a `workflowr` project
 
@@ -35,6 +46,8 @@ So let's start installing the `workflowr` package
 ```{r Install workflowR, eval = FALSE}
 install.packages("workflowr")
 ```
+
+<br>
 
 ### Starting your workflowr project
 
@@ -46,8 +59,11 @@ wflow_git_config(user.name = "YourGitHubUserName", user.email = "YourGitHubEmail
 
 ```
 
+<br>
+
 `wflow_git_config` function will save the yours information of username and email linked to your GitHub account. That will be required to allow you to push all your changes at your project. *This configuration will only be necessary once per computer.*
 
+<br>
 Then we are going to create the `workflowr` directory structure with the `wflow_start` function. *Just pay attention that you already have a main directory for your project, but if you follow my steps everything will be fine.*
 
 ```{r Start the project, eval = FALSE}
@@ -56,6 +72,7 @@ wflow_start(directory = ".",
           git = TRUE,
           existing = TRUE)
 ```
+<br>
 
 >Obs.:  
 >
@@ -64,7 +81,9 @@ wflow_start(directory = ".",
 >2.  Use the same `name` for your project as for your GitHub repository.  
 >
 >3.  `git` and `existing` arguments inform for `workflowr` that you will use git as version control and that the folder already exists, respectively.
->
+
+<br>
+
 `wflow_start` will provide the following template of sub directories:  
 ```
 myproject/
@@ -99,11 +118,16 @@ myproject/
 |-- README.md
 ```
 
+<br>
 
 `workflowr` also provide an template format for your Rmd files that could be used to create yours GitHub pages websites like this one!!!  
-![IndexTemplate](images/IndexTemplate.png)  
+![](images/IndexTemplate.png){width="100%"} 
+
+<br>
 
 You can look more ideas of how to customize the theme and layout of your project website [here](https://workflowr.github.io/workflowr/articles/wflow-02-customization.html).  
+
+<br>
 
 ## Tidyverse functions
 
@@ -147,6 +171,8 @@ Pretty critical to learn a few of these, especially these:
  
 `magrittr` package has several operators very useful for managing data.
 
+<br>
+
 ## Using Rmarkdown
 
 Here is some guides to improve your Rmd writing.
@@ -154,6 +180,8 @@ You can use headers, give emphasis, create tables, call a figure, add links of u
 
 * [Markdown Basic Syntax](https://www.markdownguide.org/basic-syntax/)  
 * [R Markdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf?_ga=2.257912457.388466084.1647312703-2093965637.1647091994) - From RStudio.
+
+<br>
 
 ## Using `workflowr`
 
@@ -163,6 +191,8 @@ We will open the `index.Rmd` file using `wflow_open` function
 wflow_open("analysis/index.Rmd")
 ```
 
+<br>
+
 At this file you can update the title of the index page, and start writing the main objectives of this repository. Like:
 
 ```
@@ -171,30 +201,36 @@ This repository was created to assist my learning experience with GitHub and wor
 My first R code at this project will be at this [git hub page](PCA.html)
 ```
 
-That's great, but we still do not have the `PCA.html` file, so let's create it with the `wflow_open` function.
+<br>
+
+That's great, but we still do not have the `PCA.hmtl` file, so let's create it with the `wflow_open` function.
 
 ```{r Create a new Rmd file, eval = FALSE}
 wflow_open("analysis/PCA.Rmd")
 ```
 
 That should create the PCA.Rmd file, you should be looking for it now.  
-![PCA.Rmd](images/PCARmd.png)
+![](images/PCARmd.png){width="100%"}
+
+<br>
 
 You can update the name to replacing the abbreviation for `Principal Components Analysis`, and add a new intro for the analysis that we are going to do at this R markdown file.
 
-You can go on with this example at this [link](WorkFlowRExample.html).  
+You can follow the example of this website [WorkFlowRExample](https://lucianorogerio.github.io/WorkFlowRExample/).  
+
+<br>
 
 As we already have some changes at our project, we can update our repository in GitHub running the `wflow_status` and `wflow_publish`.
 
-`wflow_status` will check if there is any changes at the files of the `analysis` folder that requires to create the html pages again, and verify any new/delete/modified files at your repository. Always comparing with the last version (commit).
+* `wflow_status` will check if there is any changes at the files of the `analysis` folder that requires to create the html pages again, and verify any new/delete/modified files at your repository. Always comparing with the last version (commit).
 
-`wflow_publish` will commit (save, take a snapshot) the changes at the Rmd files at the `analysis` folder. Then create or update the html files and figures, and commit these new html files and figures again.
+* `wflow_publish` will commit (save, take a snapshot) the changes at the Rmd files at the `analysis` folder. Then create or update the html files and figures, and commit these new html files and figures again.
 
 ```{r Workflow Status, eval = FALSE}
 wflow_status()
 ```
 
-You should see something like the following.
+You should see something like this.
 ```
 Status of 4 Rmd files
 
@@ -213,12 +249,14 @@ Key: Unp = Unpublished, Scr = Scratch (Untracked)
 
 The current Git status is:
 
-    status substatus                                                         file
- untracked untracked                                                    .DS_Store
- untracked untracked                                       2.1 Script Var BLUPs.R
- untracked untracked                               Data_Crosses_Density_chart.txt
- untracked untracked                                  Parentais selecionados.xlsx
+    status substatus                                          file
+ untracked untracked                                     .DS_Store
+ untracked untracked                        2.1 Script Var BLUPs.R
+ untracked untracked                Data_Crosses_Density_chart.txt
+ untracked untracked                   Parentais selecionados.xlsx
 ```
+
+<br>
 
 To publish your html website using `wflow_publish` you will need to provide a small message that will be linked to the `git commit` function.
 
@@ -270,13 +308,19 @@ docs/index.html
 docs/license.html
 ```
 
+<br>
+
 However, I prefer to create/update the html files using the Knit button, then commit myself. This strategy reduces the number of commits in your repository, which makes easier to find an older version of it. Also the Knit button allows you to see if your website has the configuration that you expected without requiring to commit each time you recreate your website.
 
 You can ask for `RStudio` to create your html website pressing the button `knit`, as showed below.
 
-![KnitButton](images/KnitRmdFile.png)
+![](images/KnitRmdFile.png){width="100%"}
+
+<br>
 
 `RStudio` will create/update your html file and save it at the `docs` folder. After you repeat this step for all your Rmd files and checking if all of them are as you expected, you can commit this changes to GitHub. See next section.
+
+<br>
 
 ## Using Git to save your updates at GitHub
 
@@ -292,10 +336,14 @@ For a good commiting practice, just commit your updates after you finish your wo
 ### Git in RStudio
 
 Git has it own menu to make easier the interaction between GitHub and RStudio.
-![GitMenu](images/GitRStudio.png)
+![](images/GitRStudio.png){width="100%"}
+
+<br>
 
 To commit your updates just click at the commit button at this menu. This will open a window called `Rstudio: Review Changes`.
-![RStudioReviewWindow](images/RStudioReview.png)
+![](images/RStudioReview.png){width="100%"}
+
+<br>
 
 At this window, you will be allowed to `stage` (confirm) the changes that you made in all the files. You can make this decision per chunk, you just have to decide if you `stage chunk` (keep the changes) or `discard chunk` (keep the file as it was at the last commit).  
 
@@ -306,19 +354,27 @@ If it is your first time push a commit to GitHub in your computer, RStudio will 
 
 >*Remember to save this token in a safe place, it might be used another time*.
 
+<br>
+
 ## Publishing on GitHub (Pages)
 
 Ok, your project is already at the GitHub, but now we need to give instructions to build your website to GitHub, so let's go to your GitHub repository. [GitHub link](https://github.com/)
 
 At your repository website, click in `settings`
-![GitHubPages1](images/GitPage1.png)
+![](images/GitPage1.png){width="100%"}
+
+<br>
 
 Then select the `Pages` section at the sidebar menu
-![GitHubPages2](images/GitPage2.png)
+![](images/GitPage2.png){width="100%"}
+
+<br>
 
 You will see a section about `Source`, GitHub need to know which branch and which folder inside this branch is yours html files. So click at the `None` button and select `Branch: main`, then at the new windows with a folder symbol select `/docs` folder, and save.
 
-![GitHubPages3](images/GitPage3.png)
+![](images/GitPage3.png){width="100%"}
+
+<br>
 
 Congratulations your website will be created, just wait some minutes. The link will appear in a window similar to this one.
 

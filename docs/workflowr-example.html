@@ -4,21 +4,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 14 WorkflowR example | Genomic Prediction and Selection Manual</title>
+<title>Chapter 16 WorkflowR example | Genomic Prediction and Selection Manual</title>
 <meta name="author" content="Marnin Wolfe">
 <meta name="description" content='In this example we will open the index.Rmd file using wflow_open function wflow_open("analysis/index.Rmd") At this file you can update the title of the index page, and start writing the main...'>
 <meta name="generator" content="bookdown 0.24 with bs4_book()">
-<meta property="og:title" content="Chapter 14 WorkflowR example | Genomic Prediction and Selection Manual">
+<meta property="og:title" content="Chapter 16 WorkflowR example | Genomic Prediction and Selection Manual">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://wolfemd.github.io/GenomicSelectionManual/workflowr-example.html">
 <meta property="og:description" content='In this example we will open the index.Rmd file using wflow_open function wflow_open("analysis/index.Rmd") At this file you can update the title of the index page, and start writing the main...'>
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 14 WorkflowR example | Genomic Prediction and Selection Manual">
+<meta name="twitter:title" content="Chapter 16 WorkflowR example | Genomic Prediction and Selection Manual">
 <meta name="twitter:description" content='In this example we will open the index.Rmd file using wflow_open function wflow_open("analysis/index.Rmd") At this file you can update the title of the index page, and start writing the main...'>
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><link rel="stylesheet" href="bs4_style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -39,58 +40,76 @@
 </form>
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled"><li><a class="" href="index.html"><span class="header-section-number">Chapter 14</span> WorkflowR example</a></li></ul>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Preamble</a></li>
+<li><a class="" href="overview-process-map.html"><span class="header-section-number">2</span> Overview Process Map</a></li>
+<li><a class="" href="using-this-manual.html"><span class="header-section-number">3</span> Using this manual</a></li>
+<li><a class="" href="process-maps.html"><span class="header-section-number">4</span> Process maps</a></li>
+<li><a class="" href="create_project.html"><span class="header-section-number">5</span> Create a project</a></li>
+<li><a class="" href="download-training-data.html"><span class="header-section-number">6</span> Download training data</a></li>
+<li><a class="" href="prepare-phenotype-data.html"><span class="header-section-number">7</span> Prepare phenotype data</a></li>
+<li><a class="" href="prepare-genotypic-data.html"><span class="header-section-number">8</span> Prepare genotypic data</a></li>
+<li><a class="" href="preliminary-field-trial-analysis.html"><span class="header-section-number">9</span> Preliminary field trial analysis</a></li>
+<li><a class="" href="intro-to-genomic-prediction.html"><span class="header-section-number">10</span> Intro to Genomic Prediction</a></li>
+<li><a class="" href="standard-k-fold-cross-validation.html"><span class="header-section-number">11</span> Standard K-fold Cross-validation</a></li>
+<li><a class="" href="predict-parental-breeding-values.html"><span class="header-section-number">12</span> Predict parental breeding values</a></li>
+<li><a class="" href="intro-to-genomic-cross-prediction.html"><span class="header-section-number">13</span> Intro to Genomic Cross Prediction</a></li>
+<li><a class="" href="parentwise_cross_val.html"><span class="header-section-number">14</span> Accuracy of cross prediction?</a></li>
+<li><a class="" href="predict-crosses.html"><span class="header-section-number">15</span> Predict crosses</a></li>
+<li><a class="" href="references.html">References</a></li>
+<li><a class="active" href="workflowr-example.html"><span class="header-section-number">16</span> WorkflowR example</a></li>
+</ul>
 
         <div class="book-extra">
           <p><a id="book-repo" href="https://github.com/wolfemd/GenomicSelectionManual">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="workflowr-example" class="section level1" number="14">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="workflowr-example" class="section level1" number="16">
 <h1>
-<span class="header-section-number">14</span> WorkflowR example<a class="anchor" aria-label="anchor" href="#workflowr-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16</span> WorkflowR example<a class="anchor" aria-label="anchor" href="#workflowr-example"><i class="fas fa-link"></i></a>
 </h1>
 <p>In this example we will open the <code>index.Rmd</code> file using <code>wflow_open</code> function</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">wflow_open</span><span class="op">(</span><span class="st">"analysis/index.Rmd"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/workflowr/man/wflow_open.html">wflow_open</a></span><span class="op">(</span><span class="st">"analysis/index.Rmd"</span><span class="op">)</span></code></pre></div>
 <p>At this file you can update the title of the index page, and start writing the main objectives of this repository. Like:</p>
 <pre><code>This repository was created to assist my learning experience with Git Hub and workflowr.
 
 My first R code at this project will be at this [git hub page](PCA.html)</code></pre>
 <p>That’s great, but we still do not have the <code>PCA.html</code> file, so let’s create it with the <code>wflow_open</code> function.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">wflow_open</span><span class="op">(</span><span class="st">"analysis/PCA.Rmd"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/workflowr/man/wflow_open.html">wflow_open</a></span><span class="op">(</span><span class="st">"analysis/PCA.Rmd"</span><span class="op">)</span></code></pre></div>
 <p>That should create the PCA.Rmd file, you should be looking for it now.<br><img src="images/PCARmd.png" alt="PCA.Rmd"></p>
 <p>You can update the name to replacing the abbreviation for <code>Principal Components Analysis</code>, and add a new intro for the analysis that we are going to do at this R markdown file.</p>
 <p>In PCA.Rmd we will make a Principal components analysis of the famous iris data from Ronald Fisher. So fell free to start your R markdown file.</p>
-<div id="principal-components-analysis-with-iris-data" class="section level2" number="14.1">
+<div id="principal-components-analysis-with-iris-data" class="section level2" number="16.1">
 <h2>
-<span class="header-section-number">14.1</span> Principal Components analysis with Iris data<a class="anchor" aria-label="anchor" href="#principal-components-analysis-with-iris-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1</span> Principal Components analysis with Iris data<a class="anchor" aria-label="anchor" href="#principal-components-analysis-with-iris-data"><i class="fas fa-link"></i></a>
 </h2>
-<div id="collecting-data" class="section level3" number="14.1.1">
+<div id="collecting-data" class="section level3" number="16.1.1">
 <h3>
-<span class="header-section-number">14.1.1</span> Collecting data<a class="anchor" aria-label="anchor" href="#collecting-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1.1</span> Collecting data<a class="anchor" aria-label="anchor" href="#collecting-data"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">iris</span></code></pre></div>
 </div>
 </div>
-<div id="preparing-data-for-the-principal-components-analysis-pca" class="section level2" number="14.2">
+<div id="preparing-data-for-the-principal-components-analysis-pca" class="section level2" number="16.2">
 <h2>
-<span class="header-section-number">14.2</span> Preparing data for the principal components analysis (PCA)<a class="anchor" aria-label="anchor" href="#preparing-data-for-the-principal-components-analysis-pca"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2</span> Preparing data for the principal components analysis (PCA)<a class="anchor" aria-label="anchor" href="#preparing-data-for-the-principal-components-analysis-pca"><i class="fas fa-link"></i></a>
 </h2>
 <p>let’s prepare this prepare this data to plot some boxplot of all the four traits, for that you will need the function <code>melt</code> of the <code>reshape2</code> package and the tidyverse package.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"reshape2"</span>, repos <span class="op">=</span> <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; The downloaded binary packages are in</span>
-<span class="co">#&gt;  /var/folders/33/g0c9br3d0rx_bvhf9jsc0t9mcdw1j5/T//Rtmph2yyHE/downloaded_packages</span>
+<span class="co">#&gt;  /var/folders/65/v_glyd192hj9hmnr5118vy0m0000gp/T//RtmpfXzyLM/downloaded_packages</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hadley/reshape">reshape2</a></span><span class="op">)</span>; <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="co">#&gt; ── Attaching packages ─────────────────── tidyverse 1.3.1 ──</span>
 <span class="co">#&gt; ✓ ggplot2 3.3.5     ✓ purrr   0.3.4</span>
-<span class="co">#&gt; ✓ tibble  3.1.6     ✓ dplyr   1.0.8</span>
-<span class="co">#&gt; ✓ tidyr   1.2.0     ✓ stringr 1.4.0</span>
-<span class="co">#&gt; ✓ readr   2.1.2     ✓ forcats 0.5.1</span>
+<span class="co">#&gt; ✓ tibble  3.1.6     ✓ dplyr   1.0.7</span>
+<span class="co">#&gt; ✓ tidyr   1.1.4     ✓ stringr 1.4.0</span>
+<span class="co">#&gt; ✓ readr   2.1.1     ✓ forcats 0.5.1</span>
 <span class="co">#&gt; ── Conflicts ────────────────────── tidyverse_conflicts() ──</span>
 <span class="co">#&gt; x dplyr::filter() masks stats::filter()</span>
 <span class="co">#&gt; x dplyr::lag()    masks stats::lag()</span>
@@ -108,14 +127,14 @@ My first R code at this project will be at this [git hub page](PCA.html)</code><
 <span class="co">#&gt; 5  setosa Sepal.Length 5.0</span>
 <span class="co">#&gt; 6  setosa Sepal.Length 5.4</span></code></pre></div>
 <p>great, now we have the data at the format to make boxplot from all traits at the same code line. so lets keep moving. For that we will use <code>ggplot2</code> package.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dataMelted</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>, y <span class="op">=</span> <span class="va">y</span>, fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">trait</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span>
      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="WorkFlowRExample_files/figure-html/Iris%20traits%20Box%20plots-1.png" width="672"></div>
 <p>Great data, we can see a lot of differences between the <code>Species</code> for these traits.
 It seems that we may have some correlation between <code>Petal Length</code> and <code>Width</code>. We also have different amplitude for these traits this will certainly results in different <code>phenotypic variance</code> between the traits, so we need to <code>scale</code> these traits before the PCA.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">DataSc</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
      <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">.</span>, center <span class="op">=</span> <span class="cn">TRUE</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
      <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
@@ -128,21 +147,21 @@ It seems that we may have some correlation between <code>Petal Length</code> and
 <span class="co">#&gt; 4   -1.5014904  0.09788935    -1.279104   -1.311052  setosa</span>
 <span class="co">#&gt; 5   -1.0184372  1.24503015    -1.335752   -1.311052  setosa</span>
 <span class="co">#&gt; 6   -0.5353840  1.93331463    -1.165809   -1.048667  setosa</span></code></pre></div>
-<div id="principal-component-analysis-pca" class="section level3" number="14.2.1">
+<div id="principal-component-analysis-pca" class="section level3" number="16.2.1">
 <h3>
-<span class="header-section-number">14.2.1</span> Principal Component Analysis (PCA)<a class="anchor" aria-label="anchor" href="#principal-component-analysis-pca"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2.1</span> Principal Component Analysis (PCA)<a class="anchor" aria-label="anchor" href="#principal-component-analysis-pca"><i class="fas fa-link"></i></a>
 </h3>
 <p>So let’s proceed for the PCA analysis, here we will use the <code>prcomp</code> function from <code>R status</code> package, so no need to call any package.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">PCA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">DataSc</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="saving-results" class="section level3" number="14.2.2">
+<div id="saving-results" class="section level3" number="16.2.2">
 <h3>
-<span class="header-section-number">14.2.2</span> Saving results<a class="anchor" aria-label="anchor" href="#saving-results"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2.2</span> Saving results<a class="anchor" aria-label="anchor" href="#saving-results"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s save the important results in objects, so we could make some graphs with them.</p>
 <p><strong>1. Accumulate percent of the total phenotypic variance explained by the principal components (PC)</strong></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Perc</span> <span class="op">&lt;-</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">PCA</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">PCA</span><span class="op">$</span><span class="va">sdev</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>
 
 <span class="va">PercAc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">Perc</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
@@ -156,7 +175,7 @@ It seems that we may have some correlation between <code>Petal Length</code> and
 <span class="co">#&gt;  72.96245  95.81321  99.48213 100.00000</span></code></pre></div>
 <p>Oh these data are high correlated.</p>
 <p><strong>2. Correlations of the traits with the principal components (PC)</strong></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">CorTraits</span> <span class="op">&lt;-</span> <span class="va">PCA</span><span class="op">$</span><span class="va">rotation</span>
 <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">CorTraits</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SepLen"</span>, <span class="st">"SepWid"</span>, <span class="st">"PetLen"</span>, <span class="st">"PetWid"</span><span class="op">)</span>
 <span class="va">CorTraits</span>
@@ -169,7 +188,7 @@ It seems that we may have some correlation between <code>Petal Length</code> and
 <span class="va">LabelsPCA</span> <span class="op">&lt;-</span> <span class="va">CorTraits</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>PC1 <span class="op">=</span> <span class="va">PC1</span> <span class="op">+</span> <span class="fl">0.15</span>, .keep <span class="op">=</span> <span class="st">"unused"</span><span class="op">)</span></code></pre></div>
 <p><strong>3. Individuals scores for the principal components (PC)</strong></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ScoresSpecies</span> <span class="op">&lt;-</span> <span class="va">PCA</span><span class="op">$</span><span class="va">x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
      <span class="va">as.data.frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span>
@@ -184,13 +203,13 @@ It seems that we may have some correlation between <code>Petal Length</code> and
 <span class="co">#&gt; 6 -2.068701 -1.4842053 -0.02687825  0.006586116  setosa</span></code></pre></div>
 <p>Great we got what we need to create our figures.</p>
 </div>
-<div id="figures" class="section level3" number="14.2.3">
+<div id="figures" class="section level3" number="16.2.3">
 <h3>
-<span class="header-section-number">14.2.3</span> Figures<a class="anchor" aria-label="anchor" href="#figures"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2.3</span> Figures<a class="anchor" aria-label="anchor" href="#figures"><i class="fas fa-link"></i></a>
 </h3>
 <p>The first figure will be a barplot of the accumulated variances explained by the <code>PC</code>.
 We will use the color red the PC selected to use at the next figures.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="va">PercAc</span>, main <span class="op">=</span> <span class="st">"Variance explained by PCA"</span>,
         ylab <span class="op">=</span> <span class="st">"Cumulative variance (%)"</span>, xlab <span class="op">=</span> <span class="st">"Number of retained PCs"</span>,
         col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"red"</span>, <span class="st">"gray"</span>, <span class="st">"gray"</span>, <span class="st">"gray"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -198,7 +217,7 @@ We will use the color red the PC selected to use at the next figures.</p>
 <p>R markdown allows us to hide the code that create the figure, this could be done adding the argument <code>echo = FALSE</code> inside the curly brackets at the chunk. Using <code>echo</code> argument will print just the result of you chunk, link below.</p>
 <div class="inline-figure"><img src="WorkFlowRExample_files/figure-html/Barplot%20PCs2-1.png" width="672"></div>
 <p>The last figure will be a scatter plot of the individuals with their score for the first two PCs with the correlation of the traits with the first two PCs.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">ScoresSpecies</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">PC1</span>, y <span class="op">=</span> <span class="va">PC2</span>, color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_rug.html">geom_rug</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.2</span>, size <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span>mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">0</span>, xend <span class="op">=</span> <span class="fl">3</span><span class="op">*</span><span class="va">PC1</span>, y <span class="op">=</span> <span class="fl">0</span>, yend <span class="op">=</span> <span class="fl">3</span><span class="op">*</span><span class="va">PC2</span><span class="op">)</span>,
@@ -213,21 +232,79 @@ We will use the color red the PC selected to use at the next figures.</p>
      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"PC2 - "</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">Perc</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, <span class="st">"%"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="WorkFlowRExample_files/figure-html/Scatter%20plot%20PCA-1.png" width="672"></div>
 <p>This is the final results of the PC. Mostly of the variance explained by the 1˚PC is due to the between species <code>Setosa</code> Vs <code>Versicolor</code> and <code>Virginica</code>. The 2˚PC just explain variance within the species. Also the traits <code>Petal Length</code>, <code>Petal Width</code> and <code>Sepal Length</code> could be used to discriminate the species.</p>
+<p><a href="docs/index.html">Back to home</a></p>
 <p>Now you just have to commit these new updates, follow the steps at this <a href="01-create_repo.Rmd">link</a>.</p>
 
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-bernardo2020breeding" class="csl-entry">
+Bernardo R. N., 2020 <em>Breeding for quantitative traits in plants</em>. Stemma Press.
+</div>
+<div id="ref-Bijma2020" class="csl-entry">
+Bijma P., Y. C. J. Wientjes, and M. P. L. Calus, 2020 Breeding Top Genotypes and Accelerating Response to Recurrent Selection by Selecting Parents with Greater Gametic Variance. Genetics 214: 91–107. <a href="https://doi.org/10.1534/genetics.119.302643">https://doi.org/10.1534/genetics.119.302643</a>
+</div>
+<div id="ref-Bonk2016" class="csl-entry">
+Bonk S., M. Reichelt, F. Teuscher, D. Segelke, and N. Reinsch, 2016 Mendelian sampling covariability of marker effects and genetic values. Genetics Selection Evolution 48. <a href="https://doi.org/10.1186/s12711-016-0214-0">https://doi.org/10.1186/s12711-016-0214-0</a>
+</div>
+<div id="ref-falconer2003introduction" class="csl-entry">
+Falconer D. S., and M. FALCONER, 2003 <em>Introduction to quantitative genetics</em>. Textbook Publishers.
+</div>
+<div id="ref-Garrick2009" class="csl-entry">
+Garrick D. J., J. F. Taylor, and R. L. Fernando, 2009 Deregressing estimated breeding values and weighting information for genomic regression analyses. Genetics Selection Evolution 41. <a href="https://doi.org/10.1186/1297-9686-41-55">https://doi.org/10.1186/1297-9686-41-55</a>
+</div>
+<div id="ref-isik2017genetic" class="csl-entry">
+Isik F., J. Holland, and C. Maltecca, 2017 <em>Genetic data analysis for plant and animal breeding</em>. Springer International Publishing.
+</div>
+<div id="ref-Lehermeier2017" class="csl-entry">
+Lehermeier C., S. Teyssèdre, and C.-C. Schön, 2017 Genetic Gain Increases by Applying the Usefulness Criterion with Improved Variance Prediction in Selection of Crosses. Genetics 207: 1651–1661. <a href="https://doi.org/10.1534/genetics.117.300403">https://doi.org/10.1534/genetics.117.300403</a>
+</div>
+<div id="ref-lynch1998genetics" class="csl-entry">
+Lynch M., and B. Walsh, 1998 <em>Genetics and analysis of quantitative traits</em>. Sinauer.
+</div>
+<div id="ref-neyhart2019" class="csl-entry">
+Neyhart J. L., and K. P. Smith, 2019 Validating Genomewide Predictions of Genetic Variance in a Contemporary Breeding Program. Crop Science 59: 1062–1072. <a href="https://doi.org/10.2135/cropsci2018.11.0716">https://doi.org/10.2135/cropsci2018.11.0716</a>
+</div>
+<div id="ref-Neyhart2019" class="csl-entry">
+Neyhart J. L., A. J. Lorenz, and K. P. Smith, 2019 Multi-trait Improvement by Predicting Genetic Correlations in Breeding Crosses. G3 Genes|Genomes|Genetics 9: 3153–3165. <a href="https://doi.org/10.1534/g3.119.400406">https://doi.org/10.1534/g3.119.400406</a>
+</div>
+<div id="ref-vanraden2008" class="csl-entry">
+VanRaden P. M., 2008 Efficient Methods to Compute Genomic Predictions. Journal of Dairy Science 91: 4414–4423. <a href="https://doi.org/10.3168/jds.2007-0980">https://doi.org/10.3168/jds.2007-0980</a>
+</div>
+<div id="ref-Vitezica2013" class="csl-entry">
+Vitezica Z. G., L. Varona, and A. Legarra, 2013 On the Additive and Dominant Variance and Covariance of Individuals Within the Genomic Selection Scope. Genetics 195: 1223–1230. <a href="https://doi.org/10.1534/genetics.113.155176">https://doi.org/10.1534/genetics.113.155176</a>
+</div>
+<div id="ref-werner2020" class="csl-entry">
+Werner C. R., R. C. Gaynor, D. J. Sargent, A. Lillo, G. Gorjanc, <em>et al.</em>, 2020 Genomic selection strategies for clonally propagated crops
+</div>
+<div id="ref-wolfe2021" class="csl-entry">
+Wolfe M. D., A. W. Chan, P. Kulakow, I. Rabbi, and J.-L. Jannink, 2021 Genomic mating in outbred species: predicting cross usefulness with additive and total genetic covariance matrices. Genetics 219. <a href="https://doi.org/10.1093/genetics/iyab122">https://doi.org/10.1093/genetics/iyab122</a>
+</div>
+</div>
 </div>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="empty"></div>
+<div class="prev"><a href="references.html">References</a></div>
 <div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <div id="book-on-this-page"></div>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#workflowr-example"><span class="header-section-number">16</span> WorkflowR example</a></li>
+<li>
+<a class="nav-link" href="#principal-components-analysis-with-iris-data"><span class="header-section-number">16.1</span> Principal Components analysis with Iris data</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#collecting-data"><span class="header-section-number">16.1.1</span> Collecting data</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#preparing-data-for-the-principal-components-analysis-pca"><span class="header-section-number">16.2</span> Preparing data for the principal components analysis (PCA)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#principal-component-analysis-pca"><span class="header-section-number">16.2.1</span> Principal Component Analysis (PCA)</a></li>
+<li><a class="nav-link" href="#saving-results"><span class="header-section-number">16.2.2</span> Saving results</a></li>
+<li><a class="nav-link" href="#figures"><span class="header-section-number">16.2.3</span> Figures</a></li>
+</ul>
+</li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-          
+<li><a id="book-source" href="https://github.com/wolfemd/GenomicSelectionManual/blob/master/WorkFlowRExample.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/wolfemd/GenomicSelectionManual/edit/master/WorkFlowRExample.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -239,7 +316,7 @@ We will use the color red the PC selected to use at the next figures.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-15.</p>
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-16.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
@@ -247,6 +324,34 @@ We will use the color red the PC selected to use at the next figures.</p>
   </div>
 
 </div></div>
-</footer>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
 </body>
 </html>

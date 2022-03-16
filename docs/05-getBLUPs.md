@@ -50,12 +50,10 @@ The pipeline version of this analysis will use the `TRUE/FALSE` values of **`Com
 phenos %>% 
      count(CompleteBlocks,IncompleteBlocks,locationName) %>% 
      spread(locationName,n)
-#> # A tibble: 3 × 4
-#>   CompleteBlocks IncompleteBlocks Ibadan Ubiaja
-#>   <lgl>          <lgl>             <int>  <int>
-#> 1 FALSE          TRUE                777     NA
-#> 2 TRUE           FALSE                NA    125
-#> 3 TRUE           TRUE                407    414
+#> # A tibble: 1 × 3
+#>   CompleteBlocks IncompleteBlocks Ibadan
+#>   <lgl>          <lgl>             <int>
+#> 1 FALSE          FALSE              1613
 ```
 
 Convert the data to "long format" . Remove missing values. "Nest" the data by Trait.
@@ -76,10 +74,10 @@ phenos %>%
 #> # A tibble: 4 × 3
 #>   Trait   METdata               N_plots
 #>   <chr>   <list>                  <dbl>
-#> 1 DM      <tibble [1,448 × 35]>    1448
-#> 2 MCMDS   <tibble [1,436 × 35]>    1436
-#> 3 logFYLD <tibble [1,590 × 35]>    1590
-#> 4 logDYLD <tibble [1,443 × 35]>    1443
+#> 1 DM      <tibble [1,344 × 35]>    1344
+#> 2 MCMDS   <tibble [1,582 × 35]>    1582
+#> 3 logFYLD <tibble [1,524 × 35]>    1524
+#> 4 logDYLD <tibble [1,343 × 35]>    1343
 ```
 
 Where previously there was one row per plot and a large number of columns, now things are simple and tidy.
@@ -95,7 +93,7 @@ phenos$METdata[[1]] %>% head %>% rmarkdown::paged_table()
 
 <div data-pagedtable="false">
   <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["studyYear"],"name":[1],"type":["int"],"align":["right"]},{"label":["programName"],"name":[2],"type":["chr"],"align":["left"]},{"label":["locationName"],"name":[3],"type":["chr"],"align":["left"]},{"label":["studyName"],"name":[4],"type":["chr"],"align":["left"]},{"label":["studyDesign"],"name":[5],"type":["chr"],"align":["left"]},{"label":["plotWidth"],"name":[6],"type":["int"],"align":["right"]},{"label":["plotLength"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["fieldSize"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["plantingDate"],"name":[9],"type":["chr"],"align":["left"]},{"label":["harvestDate"],"name":[10],"type":["chr"],"align":["left"]},{"label":["germplasmName"],"name":[11],"type":["chr"],"align":["left"]},{"label":["observationUnitDbId"],"name":[12],"type":["int"],"align":["right"]},{"label":["replicate"],"name":[13],"type":["int"],"align":["right"]},{"label":["blockNumber"],"name":[14],"type":["int"],"align":["right"]},{"label":["plotNumber"],"name":[15],"type":["int"],"align":["right"]},{"label":["rowNumber"],"name":[16],"type":["int"],"align":["right"]},{"label":["colNumber"],"name":[17],"type":["int"],"align":["right"]},{"label":["entryType"],"name":[18],"type":["chr"],"align":["left"]},{"label":["trialType"],"name":[19],"type":["chr"],"align":["left"]},{"label":["numberBlocks"],"name":[20],"type":["int"],"align":["right"]},{"label":["numberReps"],"name":[21],"type":["int"],"align":["right"]},{"label":["observationUnitName"],"name":[22],"type":["chr"],"align":["left"]},{"label":["CompleteBlocks"],"name":[23],"type":["lgl"],"align":["right"]},{"label":["IncompleteBlocks"],"name":[24],"type":["lgl"],"align":["right"]},{"label":["yearInLoc"],"name":[25],"type":["chr"],"align":["left"]},{"label":["trialInLocYr"],"name":[26],"type":["chr"],"align":["left"]},{"label":["repInTrial"],"name":[27],"type":["chr"],"align":["left"]},{"label":["blockInRep"],"name":[28],"type":["chr"],"align":["left"]},{"label":["NOHAV"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["plotArea"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["MaxNOHAV"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["plantsPerPlot"],"name":[32],"type":["dbl"],"align":["right"]},{"label":["PlantSpacing"],"name":[33],"type":["dbl"],"align":["right"]},{"label":["PropNOHAV"],"name":[34],"type":["dbl"],"align":["right"]},{"label":["Value"],"name":[35],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"IITA-TMS-IBA000070","12":"1929317","13":"1","14":"1","15":"112","16":"1","17":"12","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-IITA-TMS-IBA000070_112","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"30.7"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"IITA-TMS-IBA30572","12":"1929280","13":"1","14":"1","15":"119","16":"1","17":"10","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-IITA-TMS-IBA30572_119","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"32.6"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"IITA-TMS-IBA980581","12":"1929212","13":"1","14":"1","15":"128","16":"1","17":"1","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-IITA-TMS-IBA980581_128","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"31.8"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"IITA-TMS-IBA982101","12":"1929309","13":"1","14":"1","15":"138","16":"1","17":"10","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-IITA-TMS-IBA982101_138","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"8","30":"16","31":"10","32":"10","33":"1.6","34":"0.8","35":"26.8"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"TMEB419","12":"1929213","13":"1","14":"1","15":"116","16":"1","17":"13","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-TMEB419_116","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"32.1"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"TMS13F1109P0009","12":"1929227","13":"1","14":"1","15":"140","16":"1","17":"12","18":"test","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-TMS13F1109P0009_140","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"28.2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["studyYear"],"name":[1],"type":["int"],"align":["right"]},{"label":["programName"],"name":[2],"type":["chr"],"align":["left"]},{"label":["locationName"],"name":[3],"type":["chr"],"align":["left"]},{"label":["studyName"],"name":[4],"type":["chr"],"align":["left"]},{"label":["studyDesign"],"name":[5],"type":["chr"],"align":["left"]},{"label":["plotWidth"],"name":[6],"type":["int"],"align":["right"]},{"label":["plotLength"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["fieldSize"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["plantingDate"],"name":[9],"type":["chr"],"align":["left"]},{"label":["harvestDate"],"name":[10],"type":["chr"],"align":["left"]},{"label":["germplasmName"],"name":[11],"type":["chr"],"align":["left"]},{"label":["observationUnitDbId"],"name":[12],"type":["int"],"align":["right"]},{"label":["replicate"],"name":[13],"type":["int"],"align":["right"]},{"label":["blockNumber"],"name":[14],"type":["int"],"align":["right"]},{"label":["plotNumber"],"name":[15],"type":["int"],"align":["right"]},{"label":["rowNumber"],"name":[16],"type":["lgl"],"align":["right"]},{"label":["colNumber"],"name":[17],"type":["lgl"],"align":["right"]},{"label":["entryType"],"name":[18],"type":["chr"],"align":["left"]},{"label":["trialType"],"name":[19],"type":["chr"],"align":["left"]},{"label":["numberBlocks"],"name":[20],"type":["int"],"align":["right"]},{"label":["numberReps"],"name":[21],"type":["int"],"align":["right"]},{"label":["observationUnitName"],"name":[22],"type":["chr"],"align":["left"]},{"label":["CompleteBlocks"],"name":[23],"type":["lgl"],"align":["right"]},{"label":["IncompleteBlocks"],"name":[24],"type":["lgl"],"align":["right"]},{"label":["yearInLoc"],"name":[25],"type":["chr"],"align":["left"]},{"label":["trialInLocYr"],"name":[26],"type":["chr"],"align":["left"]},{"label":["repInTrial"],"name":[27],"type":["chr"],"align":["left"]},{"label":["blockInRep"],"name":[28],"type":["chr"],"align":["left"]},{"label":["NOHAV"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["plotArea"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["MaxNOHAV"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["plantsPerPlot"],"name":[32],"type":["dbl"],"align":["right"]},{"label":["PlantSpacing"],"name":[33],"type":["dbl"],"align":["right"]},{"label":["PropNOHAV"],"name":[34],"type":["dbl"],"align":["right"]},{"label":["Value"],"name":[35],"type":["dbl"],"align":["right"]}],"data":[{"1":"2013","2":"IITA","3":"Ibadan","4":"13.GS.C1.CE.864.IB","5":"Augmented","6":"1","7":"2.5","8":"0.216","9":"2013-September-29","10":"2014-June-29","11":"TMS13F1047P0012","12":"87842","13":"1","14":"1","15":"100","16":"NA","17":"NA","18":"test","19":"Clonal Evaluation","20":"1","21":"1","22":"2014-NEXTgenC1IB-100-TMS13F1047P0012","23":"FALSE","24":"FALSE","25":"IITA_Ibadan_2013","26":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB","27":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB_1","28":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB_1_1","29":"4","30":"2.5","31":"13","32":"13","33":"0.1923077","34":"0.3076923","35":"28.2"},{"1":"2013","2":"IITA","3":"Ibadan","4":"13.GS.C1.CE.864.IB","5":"Augmented","6":"1","7":"2.5","8":"0.216","9":"2013-September-29","10":"2014-June-29","11":"TMS13F1047P0015","12":"87843","13":"1","14":"1","15":"101","16":"NA","17":"NA","18":"test","19":"Clonal Evaluation","20":"1","21":"1","22":"2014-NEXTgenC1IB-101-TMS13F1047P0015","23":"FALSE","24":"FALSE","25":"IITA_Ibadan_2013","26":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB","27":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB_1","28":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB_1_1","29":"5","30":"2.5","31":"13","32":"13","33":"0.1923077","34":"0.3846154","35":"34.4"},{"1":"2013","2":"IITA","3":"Ibadan","4":"13.GS.C1.CE.864.IB","5":"Augmented","6":"1","7":"2.5","8":"0.216","9":"2013-September-29","10":"2014-June-29","11":"TMS13F1050P0001","12":"87844","13":"1","14":"1","15":"102","16":"NA","17":"NA","18":"test","19":"Clonal Evaluation","20":"1","21":"1","22":"2014-NEXTgenC1IB-102-TMS13F1050P0001","23":"FALSE","24":"FALSE","25":"IITA_Ibadan_2013","26":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB","27":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB_1","28":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB_1_1","29":"4","30":"2.5","31":"13","32":"13","33":"0.1923077","34":"0.3076923","35":"37.3"},{"1":"2013","2":"IITA","3":"Ibadan","4":"13.GS.C1.CE.864.IB","5":"Augmented","6":"1","7":"2.5","8":"0.216","9":"2013-September-29","10":"2014-June-29","11":"IITA-TMS-IBA070593","12":"87845","13":"1","14":"1","15":"103","16":"NA","17":"NA","18":"check","19":"Clonal Evaluation","20":"1","21":"1","22":"2014-NEXTgenC1IB-103-IITA-TMS-IBA070593","23":"FALSE","24":"FALSE","25":"IITA_Ibadan_2013","26":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB","27":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB_1","28":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB_1_1","29":"2","30":"2.5","31":"13","32":"13","33":"0.1923077","34":"0.1538462","35":"33.5"},{"1":"2013","2":"IITA","3":"Ibadan","4":"13.GS.C1.CE.864.IB","5":"Augmented","6":"1","7":"2.5","8":"0.216","9":"2013-September-29","10":"2014-June-29","11":"IITA-TMS-IBA011368","12":"87846","13":"1","14":"1","15":"104","16":"NA","17":"NA","18":"test","19":"Clonal Evaluation","20":"1","21":"1","22":"2014-NEXTgenC1IB-104-IITA-TMS-IBA011368","23":"FALSE","24":"FALSE","25":"IITA_Ibadan_2013","26":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB","27":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB_1","28":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB_1_1","29":"5","30":"2.5","31":"13","32":"13","33":"0.1923077","34":"0.3846154","35":"20.9"},{"1":"2013","2":"IITA","3":"Ibadan","4":"13.GS.C1.CE.864.IB","5":"Augmented","6":"1","7":"2.5","8":"0.216","9":"2013-September-29","10":"2014-June-29","11":"IITA-TMS-IBA960619","12":"87847","13":"1","14":"1","15":"105","16":"NA","17":"NA","18":"test","19":"Clonal Evaluation","20":"1","21":"1","22":"2014-NEXTgenC1IB-105-IITA-TMS-IBA960619","23":"FALSE","24":"FALSE","25":"IITA_Ibadan_2013","26":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB","27":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB_1","28":"IITA_Ibadan_2013_13.GS.C1.CE.864.IB_1_1","29":"2","30":"2.5","31":"13","32":"13","33":"0.1923077","34":"0.1538462","35":"33.6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 
@@ -261,12 +259,12 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
 ```
 
 ```{=html}
-<div id="iykzihreit" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="kjtxuucskd" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#iykzihreit .gt_table {
+#kjtxuucskd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -291,7 +289,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-left-color: #D3D3D3;
 }
 
-#iykzihreit .gt_heading {
+#kjtxuucskd .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -303,7 +301,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-right-color: #D3D3D3;
 }
 
-#iykzihreit .gt_title {
+#kjtxuucskd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -313,7 +311,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-bottom-width: 0;
 }
 
-#iykzihreit .gt_subtitle {
+#kjtxuucskd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -323,13 +321,13 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-top-width: 0;
 }
 
-#iykzihreit .gt_bottom_border {
+#kjtxuucskd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#iykzihreit .gt_col_headings {
+#kjtxuucskd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -344,7 +342,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-right-color: #D3D3D3;
 }
 
-#iykzihreit .gt_col_heading {
+#kjtxuucskd .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -364,7 +362,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   overflow-x: hidden;
 }
 
-#iykzihreit .gt_column_spanner_outer {
+#kjtxuucskd .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -376,15 +374,15 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   padding-right: 4px;
 }
 
-#iykzihreit .gt_column_spanner_outer:first-child {
+#kjtxuucskd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#iykzihreit .gt_column_spanner_outer:last-child {
+#kjtxuucskd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#iykzihreit .gt_column_spanner {
+#kjtxuucskd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -396,7 +394,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   width: 100%;
 }
 
-#iykzihreit .gt_group_heading {
+#kjtxuucskd .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -418,7 +416,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   vertical-align: middle;
 }
 
-#iykzihreit .gt_empty_group_heading {
+#kjtxuucskd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -433,15 +431,15 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   vertical-align: middle;
 }
 
-#iykzihreit .gt_from_md > :first-child {
+#kjtxuucskd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#iykzihreit .gt_from_md > :last-child {
+#kjtxuucskd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#iykzihreit .gt_row {
+#kjtxuucskd .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -460,7 +458,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   overflow-x: hidden;
 }
 
-#iykzihreit .gt_stub {
+#kjtxuucskd .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -472,7 +470,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   padding-left: 12px;
 }
 
-#iykzihreit .gt_summary_row {
+#kjtxuucskd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -482,7 +480,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   padding-right: 5px;
 }
 
-#iykzihreit .gt_first_summary_row {
+#kjtxuucskd .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -492,7 +490,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-top-color: #D3D3D3;
 }
 
-#iykzihreit .gt_grand_summary_row {
+#kjtxuucskd .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -502,7 +500,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   padding-right: 5px;
 }
 
-#iykzihreit .gt_first_grand_summary_row {
+#kjtxuucskd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -512,11 +510,11 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-top-color: #D3D3D3;
 }
 
-#iykzihreit .gt_striped {
+#kjtxuucskd .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#iykzihreit .gt_table_body {
+#kjtxuucskd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -525,7 +523,7 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-bottom-color: #D3D3D3;
 }
 
-#iykzihreit .gt_footnotes {
+#kjtxuucskd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -539,13 +537,13 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-right-color: #D3D3D3;
 }
 
-#iykzihreit .gt_footnote {
+#kjtxuucskd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#iykzihreit .gt_sourcenotes {
+#kjtxuucskd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -559,41 +557,41 @@ tibble(Model=c("conv_model","conv_het_error_model","simple_model","simple_het_er
   border-right-color: #D3D3D3;
 }
 
-#iykzihreit .gt_sourcenote {
+#kjtxuucskd .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#iykzihreit .gt_left {
+#kjtxuucskd .gt_left {
   text-align: left;
 }
 
-#iykzihreit .gt_center {
+#kjtxuucskd .gt_center {
   text-align: center;
 }
 
-#iykzihreit .gt_right {
+#kjtxuucskd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#iykzihreit .gt_font_normal {
+#kjtxuucskd .gt_font_normal {
   font-weight: normal;
 }
 
-#iykzihreit .gt_font_bold {
+#kjtxuucskd .gt_font_bold {
   font-weight: bold;
 }
 
-#iykzihreit .gt_font_italic {
+#kjtxuucskd .gt_font_italic {
   font-style: italic;
 }
 
-#iykzihreit .gt_super {
+#kjtxuucskd .gt_super {
   font-size: 65%;
 }
 
-#iykzihreit .gt_footnote_marks {
+#kjtxuucskd .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -670,10 +668,10 @@ phenos
 #> # A tibble: 4 × 2
 #>   Trait   METdata              
 #>   <chr>   <list>               
-#> 1 DM      <tibble [1,448 × 35]>
-#> 2 MCMDS   <tibble [1,436 × 35]>
-#> 3 logFYLD <tibble [1,590 × 35]>
-#> 4 logDYLD <tibble [1,443 × 35]>
+#> 1 DM      <tibble [1,344 × 35]>
+#> 2 MCMDS   <tibble [1,582 × 35]>
+#> 3 logFYLD <tibble [1,524 × 35]>
+#> 4 logDYLD <tibble [1,343 × 35]>
 ```
 
 Let's go step-by-step to build a good understanding of a programming workflow. We'll use similar procedures in many of the analyses and data processes we do downstream.
