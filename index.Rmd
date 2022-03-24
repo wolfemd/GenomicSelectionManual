@@ -37,7 +37,7 @@ Students also may further need/want to learn the statistical and quantitative ge
 
 I created several "process maps" at varying levels of detail, to diagrammatically outline the orders of operations for genomic selection. Below is high-level overview process map:
 
-![](images/OverviewProcessMap.png){width=100%}
+![](images/OverviewProcessMap.png){width="100%"}
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages

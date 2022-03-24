@@ -1,7 +1,7 @@
 ---
 title: "Genomic Prediction and Selection Manual"
 author: "Marnin Wolfe"
-date: "2022-03-16"
+date: "2022-03-24"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [refs.bib, book.bib, packages.bib]
@@ -37,6 +37,6 @@ Students also may further need/want to learn the statistical and quantitative ge
 
 I created several "process maps" at varying levels of detail, to diagrammatically outline the orders of operations for genomic selection. Below is high-level overview process map:
 
-![](images/OverviewProcessMap.png){width=100%}
+![](images/OverviewProcessMap.png){width="100%"}
 
 

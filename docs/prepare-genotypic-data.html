@@ -242,13 +242,13 @@
 <span class="co"># vector of the unique germplasmName in the field trial data</span>
 <span class="va">germplasm_with_phenos</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">phenos</span><span class="op">$</span><span class="va">germplasmName</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">germplasm_with_phenos</span><span class="op">)</span> 
-<span class="co">#&gt; [1] 1428</span></code></pre></div>
+<span class="co">#&gt; [1] 1002</span></code></pre></div>
 <p>How many matches to the VCF?</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">germplasm_with_phenos</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">subset_unique_names_for_vcf</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; FALSE  TRUE </span>
-<span class="co">#&gt;   857   571</span></code></pre></div>
+<span class="co">#&gt;   652   350</span></code></pre></div>
 <p>350 matches. Does that make sense? Yes. We ended up excluding the “genetic gain” trial from the phenotypes b/c actually there were no trait scores.</p>
 <p>To be sure, I look at the names of: (1) the genotyped <em>and</em> phenotyped, (2) the genotyped <em>but not</em> phenotyped, (3) the phenotyped <em>but not</em> genotyped.</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
@@ -648,7 +648,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-16.</p>
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

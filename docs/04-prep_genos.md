@@ -193,7 +193,7 @@ phenos<-readRDS(here::here("output","phenotypes_cleaned.rds"))
 # vector of the unique germplasmName in the field trial data
 germplasm_with_phenos<-unique(phenos$germplasmName)
 length(germplasm_with_phenos) 
-#> [1] 1428
+#> [1] 1002
 ```
 
 How many matches to the VCF?
@@ -203,7 +203,7 @@ How many matches to the VCF?
 table(germplasm_with_phenos %in% subset_unique_names_for_vcf)
 #> 
 #> FALSE  TRUE 
-#>   857   571
+#>   652   350
 ```
 
 350 matches. Does that make sense? Yes. We ended up excluding the "genetic gain" trial from the phenotypes b/c actually there were no trait scores.
