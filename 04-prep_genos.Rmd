@@ -47,6 +47,109 @@ library(tidyverse); library(genomicMateSelectR)
 
 The following sections will exemplify the **genomic mate selection** as opposed to the somewhat simpler **genomic parent selection** pathway along the process map. This chapter can be simplified / mostly avoided if parent selection is sufficient.
 
+## Learning command line navigation
+
+- https://www.codecademy.com/learn/learn-the-command-line/modules/learn-the-command-line-navigation/cheatsheet
+- [SSH Client on Windows 10 Using the Command Prompt | SSH from Windows to Linux and Other Systems](https://www.youtube.com/watch?v=JbMgOKlj5fE&ab_channel=SavvyNik)
+- [Secure Copy Protocol (SCP) - Transfer Files using SSH & Command Line on Windows 10 to Linux / Other](https://www.youtube.com/watch?v=2u0I-U0D7Uk&ab_channel=SavvyNik)
+
+## Remote access the server
+
+These steps will vary a bit depending on your system. 
+
+Instructions for BioHPC access are here: https://biohpc.cornell.edu/lab/doc/BioHPCLabexternal.pdf
+
+First, remote login, using `ssh`
+
+`ssh userid@serverid.biohpc.cornell.edu`
+
+For example:
+
+```{bash, eval=F}
+ssh mw489@cbsumm21.biohpc.cornell.edu
+```
+
+Input your password when prompted.
+
+```{bash, eval=F}
+pwd
+```
+
+Should show something like `/home/mw489/` (but your userid)
+
+## Set-up directories and transfer data
+
+### Create a sub-folder for your analysis
+
+Create a sub-folder for your analysis. I created one with same name as my example GitHub repository for this workshop, like so:
+
+```{bash, eval=F}
+mkdir GSexample2022; 
+cd GSexample2022; 
+mkdir data;
+mkdir output;
+```
+
+### [INSTRUCTOR'S STEP]: Transfer VCF to CBSU
+Now, on my local computer, navigate in the command line to the `data/` subdirectory.
+
+Use `scp` to transfer the VCF file downloaded from Cassavabase to the server.
+
+Also copy the "cleaned_phenos.rds" from last week, which is in the `output/`:
+```{bash, eval=F}
+scp BreedBaseGenotypesDownload.vcf mw489@cbsulogin.biohpc.cornell.edu:GSexample2022/data/
+cd ../output;
+scp phenotypes_cleaned.rds mw489@cbsulogin.biohpc.cornell.edu:GSexample2022/output/
+```
+
+### Copy data to `/workdir/`
+
+Create a folder on the `/workdir/` directory of the CBSU server you've reserved with your username. 
+Then copy the `GSexample2022` directory and its contents into that sub-folder.
+
+**Here is my step, don't do this:**
+```{bash, eval=F}
+mkdir /workdir/mw489/;
+cd /workdir/mw489/;
+cp -r ~/GSexample2022 .; 
+```
+
+**Here is your step, copy from my directory:**
+
+Navigate into your subdirectory (empty now).
+```{bash, eval=F}
+cd /workdir/userid/
+```
+
+Copy the VCF from my `data/` sub-dir. to yours.
+```{bash, eval=F}
+cp /workdir/mw489/GSexample2022/data/BreedBaseGenotypesDownload.vcf data/
+cp /workdir/mw489/GSexample2022/output/phenotypes_cleaned.rds output/
+```
+
+Check that its there.
+```{bash, eval=F}
+ls data/
+```
+
+Now you should be ready to go.
+
+## Introducing VCF files
+
+Some links:
+
+- https://en.wikipedia.org/wiki/Variant_Call_Format
+- Detailed specifications: https://samtools.github.io/hts-specs/VCFv4.2.pdf
+- VCF poster: http://vcftools.sourceforge.net/VCF-poster.pdf
+
+Let's take a look at _our_ VCF file:
+
+```{bash, eval=F}
+cat data/BreedBaseGenotypesDownload.vcf | head -n50 | cut -c1-100
+```
+
+
+
 ## Check the VCF
 
 Check the VCF 'manually'.

@@ -56,6 +56,13 @@ save_cleaned_phenos
 prepare-genotypic-data
 process-map-2
 parent-vs.-mate-selection
+learning-command-line-navigation
+remote-access-the-server
+set-up-directories-and-transfer-data
+create-a-sub-folder-for-your-analysis
+instructors-step-transfer-vcf-to-cbsu
+copy-data-to-workdir
+introducing-vcf-files
 check-the-vcf
 subset-vcf
 remove-duplicate-samples

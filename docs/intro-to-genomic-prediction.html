@@ -106,7 +106,7 @@
 <span class="header-section-number">10.2.1</span> Getting started<a class="anchor" aria-label="anchor" href="#getting-started"><i class="fas fa-link"></i></a>
 </h3>
 <p>Start with BLUPs from the <a href="preliminary-field-trial-analysis">previous step</a>.</p>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">blups</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"blups.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="kinship-matrix" class="section level3" number="10.2.2">
@@ -114,10 +114,10 @@
 <span class="header-section-number">10.2.2</span> Kinship matrix<a class="anchor" aria-label="anchor" href="#kinship-matrix"><i class="fas fa-link"></i></a>
 </h3>
 <p>In the chapter on <a href="prepare-genotypic-data">preparing genotypic data</a>, we used database-sourced genotype data and the <code>genomicMateSelectR</code> function <code><a href="https://rdrr.io/pkg/genomicMateSelectR/man/kinship.html">kinship()</a></code> to create an additive genomic relationship matrix.</p>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">A</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span>file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"kinship_add.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Let’s take a look at the contents of the matrix:</p>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">A</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>
 <span class="co">#&gt;                    IITA-TMS-IBA30572 IITA-TMS-IBA940237</span>
 <span class="co">#&gt; IITA-TMS-IBA30572         0.86194941        -0.09134081</span>
@@ -137,16 +137,16 @@
 <span class="co">#&gt; IITA-TMS-IBA961642      -0.19569202</span>
 <span class="co">#&gt; IITA-TMS-ONN920168       0.15481065</span>
 <span class="co">#&gt; IITA-TMS-WAR4080         0.85217903</span></code></pre></div>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>
 <span class="co">#&gt; [1] 963 963</span></code></pre></div>
 <p>Notice that it is square (same number rows and columns) and symmetrix around the diagonal values.</p>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">A</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lower.tri.html">lower.tri</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">]</span>, main<span class="op">=</span><span class="st">'Off-diagonal values (lower-triangle) of the kinship matrix'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="06-intro_to_gp_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
 <p>The off-diagonals express the genomic relatedness between different individuals in the dataset.</p>
 <p>This formulation has a mean-value of zero, such that &gt;0 kinship means “more than the average population level of relatedness” while &lt;0 values mean “greater than average.”</p>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span>, main<span class="op">=</span><span class="st">'Diagonals of the kinship'</span>, breaks<span class="op">=</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="06-intro_to_gp_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
 <p>The diagonal values express the relatedness of each individual to itself, which should be interpreted as the level of inbreeding (homozygosity).</p>
@@ -163,7 +163,7 @@
 <h3>
 <span class="header-section-number">10.2.3</span> Genomic prediction<a class="anchor" aria-label="anchor" href="#genomic-prediction"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># pull out one trait (DM) BLUPs</span>
 <span class="va">dm_blups</span><span class="op">&lt;-</span><span class="va">blups</span><span class="op">$</span><span class="va">blups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
 <span class="va">dm_blups</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="va">head</span>
@@ -178,13 +178,13 @@
 <span class="co">#&gt; 6 TMEB419             1.59  0.240 0.949   1.68   4.73</span></code></pre></div>
 <p>Now we have all we need to implement a GBLUP model using <code>mmer()</code>.</p>
 <p>One thing to note:</p>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">dm_blups</span><span class="op">$</span><span class="va">germplasmName</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; FALSE  TRUE </span>
 <span class="co">#&gt;   463   346</span></code></pre></div>
 <p>If you go back to the chapter on <a href="prepare-genotypic-data">preparing genotypic data</a> you will recall that in this dataset, there are phenotyped-but-not-genotyped lines.</p>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">dm_blups</span><span class="op">$</span><span class="va">germplasmName</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; FALSE  TRUE </span>
@@ -192,11 +192,11 @@
 <p>There are also genotyped-but-not-phenotyped lines.</p>
 <p>It is always important to check this and to verify that the result you are getting makes sense. Are there accessions that are not appearing genotyped (or phenotyped), which you were expecting? If so, you need to trace it. There may be names that didn’t match, which could require fixing <em>preferably in the database to ensure long-term improvement in the ease and correctness of your analyses</em>.</p>
 <p>Phenotyped-but-not-genotyped lines need to be excluded from the analysis. Genotyped-but-not-phenotyped lines, as discussed above are accepted and can be predicted.</p>
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dm_blups</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/compound.html">%&lt;&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">germplasmName</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>This time, the de-regressed BLUPs (<strong>drgBLUP</strong>) from the previous step are the response data. We will use the weights (<strong>WT</strong>) computed previously in the <code>weights=</code> argument of <code>mmer()</code>.</p>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gblup_all</span><span class="op">&lt;-</span><span class="fu">mmer</span><span class="op">(</span>fixed <span class="op">=</span> <span class="va">drgBLUP</span><span class="op">~</span><span class="fl">1</span>,
                 <span class="co"># here we specify a random-effect for the "germplasmName" variable</span>
                 <span class="co"># and supply the kinship matrix "A" as follows:</span>
@@ -205,24 +205,24 @@
                 data<span class="op">=</span><span class="va">dm_blups</span><span class="op">)</span>
 <span class="co">#&gt; Adding additional levels of Gu in the model matrix of 'germplasmName' </span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -187.325   14:2:5      1           0</span>
-<span class="co">#&gt;     2      -187.167   14:2:5      1           0</span>
-<span class="co">#&gt;     3      -187.095   14:2:5      1           0</span>
-<span class="co">#&gt;     4      -187.077   14:2:5      1           0</span>
-<span class="co">#&gt;     5      -187.075   14:2:5      1           0</span>
-<span class="co">#&gt;     6      -187.075   14:2:5      1           0</span></code></pre></div>
+<span class="co">#&gt;     1      -187.325   11:30:6      0           0</span>
+<span class="co">#&gt;     2      -187.167   11:30:6      0           0</span>
+<span class="co">#&gt;     3      -187.095   11:30:7      1           0</span>
+<span class="co">#&gt;     4      -187.077   11:30:7      1           0</span>
+<span class="co">#&gt;     5      -187.075   11:30:7      1           0</span>
+<span class="co">#&gt;     6      -187.075   11:30:7      1           0</span></code></pre></div>
 <p>Here’s how to get out the <strong>GEBV</strong> from the <code>mmer()</code> output:</p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gebv</span><span class="op">&lt;-</span><span class="va">gblup_all</span><span class="op">$</span><span class="va">U</span><span class="op">$</span><span class="va">`u:germplasmName`</span><span class="op">$</span><span class="va">drgBLUP</span>
 <span class="co"># Notice the "germplasmName" and "drgBLUP" references in this call </span>
 <span class="co">## are specific to the analysis/dataset in question. </span>
 <span class="co">## See the sommer manual on CRAN. </span></code></pre></div>
 <p>Things to notice:</p>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">gebv</span><span class="op">)</span>
 <span class="co">#&gt; [1] 963</span></code></pre></div>
 <p>Only 346 phenotyped lines were included. 963 genotyped lines in the kinship matrix. 963 GEBV predicted!</p>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">gebv</span><span class="op">)</span>
 <span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
 <span class="co">#&gt; -2.9475 -0.3902  0.0270  0.0000  0.4331  1.6265</span></code></pre></div>
@@ -236,15 +236,15 @@
 <p>There are many scenarios and styles for doing this.</p>
 <p>Let’s start <em>super</em> simple.</p>
 <p>Of the 346 phenotyped lines, I randomly sample approx. 1/5 (20%) or 70 lines.</p>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1212</span><span class="op">)</span>
 <span class="va">test_set</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">dm_blups</span><span class="op">$</span><span class="va">germplasmName</span>,size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fl">346</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span>, replace <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
 <p>Remove the lines chosen (<strong>test_set</strong>) from the training dataset:</p>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">training_blups</span><span class="op">&lt;-</span><span class="va">dm_blups</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">germplasmName</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">test_set</span><span class="op">)</span></code></pre></div>
 <p>Fit the prediction model:</p>
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gblup_train</span><span class="op">&lt;-</span><span class="fu">mmer</span><span class="op">(</span>fixed <span class="op">=</span> <span class="va">drgBLUP</span><span class="op">~</span><span class="fl">1</span>,
                   <span class="co"># here we specify a random-effect for the "germplasmName" variable</span>
                   <span class="co"># and supply the kinship matrix "A" as follows:</span>
@@ -253,17 +253,17 @@
                   data<span class="op">=</span><span class="va">training_blups</span><span class="op">)</span>
 <span class="co">#&gt; Adding additional levels of Gu in the model matrix of 'germplasmName' </span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -151.68   14:2:6      0           0</span>
-<span class="co">#&gt;     2      -151.327   14:2:6      0           0</span>
-<span class="co">#&gt;     3      -151.132   14:2:6      0           0</span>
-<span class="co">#&gt;     4      -151.062   14:2:6      0           0</span>
-<span class="co">#&gt;     5      -151.049   14:2:6      0           0</span>
-<span class="co">#&gt;     6      -151.046   14:2:6      0           0</span>
-<span class="co">#&gt;     7      -151.046   14:2:6      0           0</span></code></pre></div>
+<span class="co">#&gt;     1      -151.68   11:30:8      0           0</span>
+<span class="co">#&gt;     2      -151.327   11:30:8      0           0</span>
+<span class="co">#&gt;     3      -151.132   11:30:8      0           0</span>
+<span class="co">#&gt;     4      -151.062   11:30:8      0           0</span>
+<span class="co">#&gt;     5      -151.049   11:30:8      0           0</span>
+<span class="co">#&gt;     6      -151.046   11:30:8      0           0</span>
+<span class="co">#&gt;     7      -151.046   11:30:8      0           0</span></code></pre></div>
 <p>Again, all 963 lines in the kinship matrix get GEBV output.</p>
 <p>Now we can compare (correlate) the GEBV predicted for the held-out <strong>test_set</strong> lines to the BLUPs for those lines.</p>
 <p>This is considered an estimate of <strong>“prediction accuracy”</strong>.</p>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># grab the gebv only for the test_set lines</span>
 <span class="va">gebv_test</span><span class="op">&lt;-</span><span class="va">gblup_train</span><span class="op">$</span><span class="va">U</span><span class="op">$</span><span class="va">`u:germplasmName`</span><span class="op">$</span><span class="va">drgBLUP</span><span class="op">[</span><span class="va">test_set</span><span class="op">]</span>
 <span class="co"># merge the original BLUPs (for the test set only) to the corresponding GEBV</span>
@@ -273,7 +273,7 @@
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>germplasmName<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gebv_test</span><span class="op">)</span>,GEBV<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">gebv_test</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Joining, by = "germplasmName"</span></code></pre></div>
 <p>Correlate the GEBV with the BLUP for the test_set.</p>
-<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gebv_vs_blups_testset</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/exposition.html">%$%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">BLUP</span>,<span class="va">GEBV</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.09310568</span></code></pre></div>
 <p>This correlation represents an estimate of accuracy predicting lines that aren’t phenotyped, based only on their genetic relatedness and the phenotypes of their relatives.</p>
@@ -293,7 +293,7 @@
 <p>Below, I use it on only 1 trait, additive-only model.</p>
 <p><strong>NOTES:</strong> - doesn’t work properly <em>unless</em> <code>gid="GID"</code>. - It also requires you to remove any phenotyped lines that aren’t genotyped.</p>
 <p>Following chunk does both of those:</p>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">blups_forRunCrossValFunc</span><span class="op">&lt;-</span><span class="va">blups</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
      <span class="co"># just one trait</span>
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
@@ -306,7 +306,7 @@
                              <span class="op">~</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">.</span>,<span class="va">germplasmName</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">A</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
                                   <span class="co"># rename the germplasmName column to GID</span>
                                   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>GID<span class="op">=</span><span class="va">germplasmName</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">standardCV</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/runCrossVal.html">runCrossVal</a></span><span class="op">(</span>blups<span class="op">=</span><span class="va">blups_forRunCrossValFunc</span>,
                         modelType<span class="op">=</span><span class="st">"A"</span>,
                         selInd<span class="op">=</span><span class="cn">FALSE</span>,
@@ -318,99 +318,99 @@
 <span class="co">#&gt; Loading required package: furrr</span>
 <span class="co">#&gt; Loading required package: future</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -144.984   14:2:9      0           0</span>
-<span class="co">#&gt;     2      -144.923   14:2:10      1           0</span>
-<span class="co">#&gt;     3      -144.908   14:2:10      1           0</span>
-<span class="co">#&gt;     4      -144.907   14:2:10      1           0</span>
-<span class="co">#&gt;     5      -144.907   14:2:10      1           0</span>
+<span class="co">#&gt;     1      -144.984   11:30:12      1           0</span>
+<span class="co">#&gt;     2      -144.923   11:30:12      1           0</span>
+<span class="co">#&gt;     3      -144.908   11:30:12      1           0</span>
+<span class="co">#&gt;     4      -144.907   11:30:12      1           0</span>
+<span class="co">#&gt;     5      -144.907   11:30:12      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -153.227   14:2:10      0           0</span>
-<span class="co">#&gt;     2      -152.232   14:2:10      0           0</span>
-<span class="co">#&gt;     3      -151.805   14:2:11      1           0</span>
-<span class="co">#&gt;     4      -151.687   14:2:11      1           0</span>
-<span class="co">#&gt;     5      -151.669   14:2:11      1           0</span>
-<span class="co">#&gt;     6      -151.666   14:2:11      1           0</span>
-<span class="co">#&gt;     7      -151.666   14:2:11      1           0</span>
-<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
-<span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -151.026   14:2:10      0           0</span>
-<span class="co">#&gt;     2      -150.948   14:2:10      0           0</span>
-<span class="co">#&gt;     3      -150.911   14:2:10      0           0</span>
-<span class="co">#&gt;     4      -150.901   14:2:10      0           0</span>
-<span class="co">#&gt;     5      -150.899   14:2:10      0           0</span>
-<span class="co">#&gt;     6      -150.899   14:2:10      0           0</span>
-<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
-<span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
-<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -149.818   14:2:11      0           0</span>
-<span class="co">#&gt;     2      -149.812   14:2:11      0           0</span>
-<span class="co">#&gt;     3      -149.809   14:2:11      0           0</span>
-<span class="co">#&gt;     4      -149.808   14:2:11      0           0</span>
+<span class="co">#&gt;     1      -153.227   11:30:13      1           0</span>
+<span class="co">#&gt;     2      -152.232   11:30:13      1           0</span>
+<span class="co">#&gt;     3      -151.805   11:30:13      1           0</span>
+<span class="co">#&gt;     4      -151.687   11:30:13      1           0</span>
+<span class="co">#&gt;     5      -151.669   11:30:13      1           0</span>
+<span class="co">#&gt;     6      -151.666   11:30:13      1           0</span>
+<span class="co">#&gt;     7      -151.666   11:30:13      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -151.038   14:2:11      1           0</span>
-<span class="co">#&gt;     2      -150.851   14:2:11      1           0</span>
-<span class="co">#&gt;     3      -150.757   14:2:11      1           0</span>
-<span class="co">#&gt;     4      -150.728   14:2:11      1           0</span>
-<span class="co">#&gt;     5      -150.723   14:2:11      1           0</span>
-<span class="co">#&gt;     6      -150.722   14:2:11      1           0</span>
+<span class="co">#&gt;     1      -151.026   11:30:12      0           0</span>
+<span class="co">#&gt;     2      -150.948   11:30:12      0           0</span>
+<span class="co">#&gt;     3      -150.911   11:30:12      0           0</span>
+<span class="co">#&gt;     4      -150.901   11:30:12      0           0</span>
+<span class="co">#&gt;     5      -150.899   11:30:13      1           0</span>
+<span class="co">#&gt;     6      -150.899   11:30:13      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -151.393   14:2:12      0           0</span>
-<span class="co">#&gt;     2      -151.304   14:2:12      0           0</span>
-<span class="co">#&gt;     3      -151.258   14:2:12      0           0</span>
-<span class="co">#&gt;     4      -151.245   14:2:12      0           0</span>
-<span class="co">#&gt;     5      -151.243   14:2:12      0           0</span>
-<span class="co">#&gt;     6      -151.243   14:2:12      0           0</span>
-<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
-<span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -151.902   14:2:11      0           0</span>
-<span class="co">#&gt;     2      -151.609   14:2:11      0           0</span>
-<span class="co">#&gt;     3      -151.464   14:2:11      0           0</span>
-<span class="co">#&gt;     4      -151.417   14:2:11      0           0</span>
-<span class="co">#&gt;     5      -151.409   14:2:11      0           0</span>
-<span class="co">#&gt;     6      -151.407   14:2:12      1           0</span>
-<span class="co">#&gt;     7      -151.407   14:2:12      1           0</span>
-<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
-<span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
-<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -149.63   14:2:12      0           0</span>
-<span class="co">#&gt;     2      -149.534   14:2:13      1           0</span>
-<span class="co">#&gt;     3      -149.48   14:2:13      1           0</span>
-<span class="co">#&gt;     4      -149.46   14:2:13      1           0</span>
-<span class="co">#&gt;     5      -149.457   14:2:13      1           0</span>
-<span class="co">#&gt;     6      -149.456   14:2:13      1           0</span>
+<span class="co">#&gt;     1      -149.818   11:30:13      0           0</span>
+<span class="co">#&gt;     2      -149.812   11:30:13      0           0</span>
+<span class="co">#&gt;     3      -149.809   11:30:13      0           0</span>
+<span class="co">#&gt;     4      -149.808   11:30:14      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -150.381   14:2:12      0           0</span>
-<span class="co">#&gt;     2      -150.129   14:2:12      0           0</span>
-<span class="co">#&gt;     3      -150.014   14:2:12      0           0</span>
-<span class="co">#&gt;     4      -149.984   14:2:12      0           0</span>
-<span class="co">#&gt;     5      -149.98   14:2:12      0           0</span>
-<span class="co">#&gt;     6      -149.98   14:2:12      0           0</span>
+<span class="co">#&gt;     1      -151.038   11:30:13      0           0</span>
+<span class="co">#&gt;     2      -150.851   11:30:13      0           0</span>
+<span class="co">#&gt;     3      -150.757   11:30:13      0           0</span>
+<span class="co">#&gt;     4      -150.728   11:30:13      0           0</span>
+<span class="co">#&gt;     5      -150.723   11:30:13      0           0</span>
+<span class="co">#&gt;     6      -150.722   11:30:13      0           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -144.924   14:2:13      0           0</span>
-<span class="co">#&gt;     2      -144.405   14:2:13      0           0</span>
-<span class="co">#&gt;     3      -144.256   14:2:13      0           0</span>
-<span class="co">#&gt;     4      -144.235   14:2:13      0           0</span>
-<span class="co">#&gt;     5      -144.234   14:2:13      0           0</span>
+<span class="co">#&gt;     1      -151.393   11:30:14      0           0</span>
+<span class="co">#&gt;     2      -151.304   11:30:14      0           0</span>
+<span class="co">#&gt;     3      -151.258   11:30:14      0           0</span>
+<span class="co">#&gt;     4      -151.245   11:30:14      0           0</span>
+<span class="co">#&gt;     5      -151.243   11:30:14      0           0</span>
+<span class="co">#&gt;     6      -151.243   11:30:14      0           0</span>
+<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
+<span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
+<span class="co">#&gt;     1      -151.902   11:30:13      0           0</span>
+<span class="co">#&gt;     2      -151.609   11:30:14      1           0</span>
+<span class="co">#&gt;     3      -151.464   11:30:14      1           0</span>
+<span class="co">#&gt;     4      -151.417   11:30:14      1           0</span>
+<span class="co">#&gt;     5      -151.409   11:30:14      1           0</span>
+<span class="co">#&gt;     6      -151.407   11:30:14      1           0</span>
+<span class="co">#&gt;     7      -151.407   11:30:14      1           0</span>
+<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
+<span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
+<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
+<span class="co">#&gt;     1      -149.63   11:30:15      1           0</span>
+<span class="co">#&gt;     2      -149.534   11:30:15      1           0</span>
+<span class="co">#&gt;     3      -149.48   11:30:15      1           0</span>
+<span class="co">#&gt;     4      -149.46   11:30:15      1           0</span>
+<span class="co">#&gt;     5      -149.457   11:30:15      1           0</span>
+<span class="co">#&gt;     6      -149.456   11:30:15      1           0</span>
+<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
+<span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
+<span class="co">#&gt;     1      -150.381   11:30:14      0           0</span>
+<span class="co">#&gt;     2      -150.129   11:30:14      0           0</span>
+<span class="co">#&gt;     3      -150.014   11:30:14      0           0</span>
+<span class="co">#&gt;     4      -149.984   11:30:14      0           0</span>
+<span class="co">#&gt;     5      -149.98   11:30:14      0           0</span>
+<span class="co">#&gt;     6      -149.98   11:30:14      0           0</span>
+<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
+<span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
+<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
+<span class="co">#&gt;     1      -144.924   11:30:15      0           0</span>
+<span class="co">#&gt;     2      -144.405   11:30:15      0           0</span>
+<span class="co">#&gt;     3      -144.256   11:30:15      0           0</span>
+<span class="co">#&gt;     4      -144.235   11:30:15      0           0</span>
+<span class="co">#&gt;     5      -144.234   11:30:15      0           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
@@ -432,7 +432,7 @@
 <span class="co">#&gt; # … with 2 more variables: Accuracy &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   NcompleteTestPairs &lt;dbl&gt;</span></code></pre></div>
 <p><strong>NOTE:</strong> Ignore the <code>NcompleteTestPairs</code> variable. It’s broken, but unimportant and I haven’t have time yet to fix it. I checked carefully and the actual prediction accuracy is correct.</p>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Run this code to prove it, if you are interested :)</span>
 <span class="co"># just checking the number of paired GEBV-BLUPs per test-set:</span>
 <span class="co"># standardCV %&gt;% </span>
@@ -459,7 +459,7 @@
 <p>The equivalence of RRBLUP and GBLUP come when the matrix of predictors, <span class="math inline">\(\boldsymbol{Z}\)</span> is centered in the same way as in the genomic relationshp matrix.</p>
 <p><a href="https://htmlpreview.github.io/?https://github.com/lfelipe-ferrao/lfelipe-ferrao.github.io/blob/master/class/quantGenetic/week12.html"><strong>Click here</strong></a> and go to section 1.2.1 “VanRaden’s first genomic relationship matrix” for an explanation of the formula used for the kinship matrix.</p>
 <p>Below, I’ll demonstrate:</p>
-<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load the dosage matrix</span>
 <span class="va">M</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span>file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"dosages.rds"</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># re-load and extract the blups for just 1 trait</span>
@@ -475,20 +475,20 @@
 <span class="co"># Now create a centered dosage matrix, to use as predictors for rr-BLUP</span>
 <span class="va">Z</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/centerDosage.html">centerDosage</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span></code></pre></div>
 <p>Fit the GBLUP model</p>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gblup</span><span class="op">&lt;-</span><span class="fu">mmer</span><span class="op">(</span>fixed <span class="op">=</span> <span class="va">drgBLUP</span><span class="op">~</span><span class="fl">1</span>,
             random <span class="op">=</span> <span class="op">~</span><span class="fu">vs</span><span class="op">(</span><span class="va">germplasmName</span>,Gu <span class="op">=</span> <span class="va">K</span><span class="op">)</span>,
             weights <span class="op">=</span> <span class="va">WT</span>,
             data<span class="op">=</span><span class="va">dm_blups</span><span class="op">)</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -187.324   14:2:14      0           0</span>
-<span class="co">#&gt;     2      -187.166   14:2:14      0           0</span>
-<span class="co">#&gt;     3      -187.095   14:2:14      0           0</span>
-<span class="co">#&gt;     4      -187.077   14:2:14      0           0</span>
-<span class="co">#&gt;     5      -187.075   14:2:14      0           0</span>
-<span class="co">#&gt;     6      -187.075   14:2:14      0           0</span></code></pre></div>
+<span class="co">#&gt;     1      -187.324   11:30:16      0           0</span>
+<span class="co">#&gt;     2      -187.166   11:30:16      0           0</span>
+<span class="co">#&gt;     3      -187.095   11:30:16      0           0</span>
+<span class="co">#&gt;     4      -187.077   11:30:16      0           0</span>
+<span class="co">#&gt;     5      -187.075   11:30:17      1           0</span>
+<span class="co">#&gt;     6      -187.075   11:30:17      1           0</span></code></pre></div>
 <p>Now fit the RRBLUP model</p>
-<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># one catch</span>
 <span class="co"># the rows of the centered dosage matrix must be matched</span>
 <span class="co">## to the rows of data.frame with the blups</span>
@@ -505,21 +505,21 @@
              weights <span class="op">=</span> <span class="va">WT</span>,
              data<span class="op">=</span><span class="va">dm_blups</span><span class="op">)</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -269.814   14:2:17      2           0</span>
-<span class="co">#&gt;     2      -195.427   14:2:17      2           0</span>
-<span class="co">#&gt;     3      -190.328   14:2:17      2           0</span>
-<span class="co">#&gt;     4      -187.801   14:2:17      2           0</span>
-<span class="co">#&gt;     5      -187.201   14:2:17      2           0</span>
-<span class="co">#&gt;     6      -187.093   14:2:17      2           0</span>
-<span class="co">#&gt;     7      -187.077   14:2:17      2           0</span>
-<span class="co">#&gt;     8      -187.075   14:2:18      3           0</span>
-<span class="co">#&gt;     9      -187.075   14:2:18      3           0</span></code></pre></div>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<span class="co">#&gt;     1      -269.814   11:30:19      2           0</span>
+<span class="co">#&gt;     2      -195.427   11:30:19      2           0</span>
+<span class="co">#&gt;     3      -190.328   11:30:19      2           0</span>
+<span class="co">#&gt;     4      -187.801   11:30:20      3           0</span>
+<span class="co">#&gt;     5      -187.201   11:30:20      3           0</span>
+<span class="co">#&gt;     6      -187.093   11:30:20      3           0</span>
+<span class="co">#&gt;     7      -187.077   11:30:20      3           0</span>
+<span class="co">#&gt;     8      -187.075   11:30:20      3           0</span>
+<span class="co">#&gt;     9      -187.075   11:30:20      3           0</span></code></pre></div>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># extract the SNP-BLUPs</span>
 <span class="va">u</span><span class="op">&lt;-</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/as.matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">rrblup</span><span class="op">$</span><span class="va">U</span><span class="op">$</span><span class="va">`u:Z`</span><span class="op">$</span><span class="va">drgBLUP</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">u</span><span class="op">)</span><span class="op">==</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">u</span><span class="op">)</span>
 <span class="co">#&gt;        V1            </span>
 <span class="co">#&gt;  Min.   :-0.0163276  </span>
@@ -528,32 +528,32 @@
 <span class="co">#&gt;  Mean   :-0.0002119  </span>
 <span class="co">#&gt;  3rd Qu.: 0.0020687  </span>
 <span class="co">#&gt;  Max.   : 0.0151979</span></code></pre></div>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">u</span>,breaks<span class="op">=</span><span class="fl">20</span>,main <span class="op">=</span> <span class="st">'Distribution of SNP effects'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="06-intro_to_gp_files/figure-html/unnamed-chunk-28-1.png" width="672"></div>
-<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># extract the G-BLUPs (GEBVs)</span>
 <span class="va">g</span><span class="op">&lt;-</span><span class="va">gblup</span><span class="op">$</span><span class="va">U</span><span class="op">$</span><span class="va">`u:germplasmName`</span><span class="op">$</span><span class="va">drgBLUP</span>
 <span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">Z</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># calculate the GEBVs using the SNP-effects (SNP-BLUPs)</span>
 <span class="va">g_rr</span><span class="op">&lt;-</span><span class="va">Z</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>,<span class="op">]</span><span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span><span class="va">u</span>
 <span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">g_rr</span><span class="op">)</span><span class="op">==</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
-<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">g_rr</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="op">]</span>
 <span class="co">#&gt; IITA-TMS-IBA000070 IITA-TMS-IBA070593  IITA-TMS-IBA30572 </span>
 <span class="co">#&gt;         -0.1260352         -2.0363146         -0.7000067 </span>
 <span class="co">#&gt; IITA-TMS-IBA980581 IITA-TMS-IBA982101 </span>
 <span class="co">#&gt;         -0.9159732         -1.5152420</span></code></pre></div>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">g</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>
 <span class="co">#&gt; IITA-TMS-IBA000070 IITA-TMS-IBA070593  IITA-TMS-IBA30572 </span>
 <span class="co">#&gt;         -0.1254919         -2.0334329         -0.6996188 </span>
 <span class="co">#&gt; IITA-TMS-IBA980581 IITA-TMS-IBA982101 </span>
 <span class="co">#&gt;         -0.9151958         -1.5134661</span></code></pre></div>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># cor(g,g_rr) # [1,] 0.9999997</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">g</span>,y<span class="op">=</span><span class="va">g_rr</span>, main <span class="op">=</span> <span class="st">'Proof that GEBV from GBLUP and RRBLUP are the equal!'</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>a<span class="op">=</span><span class="fl">0</span>,b<span class="op">=</span><span class="fl">1</span>,col<span class="op">=</span><span class="st">'red'</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="06-intro_to_gp_files/figure-html/unnamed-chunk-33-1.png" width="672"></div>
@@ -651,7 +651,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-24.</p>
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

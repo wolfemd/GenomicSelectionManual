@@ -1,7 +1,7 @@
 ---
 title: "Genomic Prediction and Selection Manual"
 author: "Marnin Wolfe"
-date: "2022-03-24"
+date: "2022-03-28"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [refs.bib, book.bib, packages.bib]
