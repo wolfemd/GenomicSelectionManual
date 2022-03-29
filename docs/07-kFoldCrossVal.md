@@ -121,51 +121,25 @@ standardCV<-runCrossVal(blups=blups %>% filter(Trait != "MCMDS"),
 #> Loading required package: furrr
 #> Loading required package: future
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -150.932   11:30:31      0           0
-#>     2      -150.587   11:30:31      0           0
-#>     3      -150.456   11:30:31      0           0
-#>     4      -150.431   11:30:31      0           0
-#>     5      -150.429   11:30:31      0           0
-#>     6      -150.429   11:30:32      1           0
+#>     1      -150.932   6:58:10      0           0
+#>     2      -150.587   6:58:10      0           0
+#>     3      -150.456   6:58:10      0           0
+#>     4      -150.431   6:58:11      1           0
+#>     5      -150.429   6:58:11      1           0
+#>     6      -150.429   6:58:11      1           0
 #> [1] "GBLUP model complete - one trait"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -109.584   11:30:32      0           0
-#>     2      -109.57   11:30:32      0           0
-#>     3      -109.562   11:30:32      0           0
-#>     4      -109.56   11:30:32      0           0
-#>     5      -109.559   11:30:32      0           0
+#>     1      -109.584   6:58:11      0           0
+#>     2      -109.57   6:58:11      0           0
+#>     3      -109.562   6:58:11      0           0
+#>     4      -109.56   6:58:11      0           0
+#>     5      -109.559   6:58:11      0           0
 #> [1] "GBLUP model complete - one trait"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -115.829   11:30:32      0           0
-#>     2      -115.829   11:30:32      0           0
-#>     3      -115.828   11:30:33      1           0
-#>     4      -115.828   11:30:33      1           0
-#> [1] "GBLUP model complete - one trait"
-#> [1] "Genomic predictions done for all traits in one repeat-fold"
-#> Joining, by = "GID"
-#> Joining, by = "GID"
-#> Joining, by = "GID"
-#> Joining, by = "GID"
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -153.247   11:30:32      0           0
-#>     2      -153.244   11:30:32      0           0
-#>     3      -153.243   11:30:32      0           0
-#>     4      -153.243   11:30:32      0           0
-#> [1] "GBLUP model complete - one trait"
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -108.226   11:30:32      0           0
-#>     2      -108.147   11:30:32      0           0
-#>     3      -108.101   11:30:32      0           0
-#>     4      -108.087   11:30:32      0           0
-#>     5      -108.085   11:30:33      1           0
-#>     6      -108.085   11:30:33      1           0
-#> [1] "GBLUP model complete - one trait"
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -117.592   11:30:33      0           0
-#>     2      -117.537   11:30:33      0           0
-#>     3      -117.513   11:30:33      0           0
-#>     4      -117.509   11:30:33      0           0
-#>     5      -117.508   11:30:33      0           0
+#>     1      -115.829   6:58:12      0           0
+#>     2      -115.829   6:58:12      0           0
+#>     3      -115.828   6:58:12      0           0
+#>     4      -115.828   6:58:12      0           0
 #> [1] "GBLUP model complete - one trait"
 #> [1] "Genomic predictions done for all traits in one repeat-fold"
 #> Joining, by = "GID"
@@ -173,33 +147,25 @@ standardCV<-runCrossVal(blups=blups %>% filter(Trait != "MCMDS"),
 #> Joining, by = "GID"
 #> Joining, by = "GID"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -150.198   11:30:32      0           0
-#>     2      -149.363   11:30:32      0           0
-#>     3      -148.987   11:30:32      0           0
-#>     4      -148.881   11:30:33      1           0
-#>     5      -148.865   11:30:33      1           0
-#>     6      -148.863   11:30:33      1           0
-#>     7      -148.862   11:30:33      1           0
+#>     1      -153.247   6:58:11      0           0
+#>     2      -153.244   6:58:11      0           0
+#>     3      -153.243   6:58:11      0           0
+#>     4      -153.243   6:58:11      0           0
 #> [1] "GBLUP model complete - one trait"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -106.107   11:30:33      0           0
-#>     2      -105.581   11:30:33      0           0
-#>     3      -105.152   11:30:33      0           0
-#>     4      -104.92   11:30:33      0           0
-#>     5      -104.852   11:30:33      0           0
-#>     6      -104.832   11:30:33      0           0
-#>     7      -104.827   11:30:34      1           0
-#>     8      -104.825   11:30:34      1           0
-#>     9      -104.825   11:30:34      1           0
+#>     1      -108.226   6:58:11      0           0
+#>     2      -108.147   6:58:12      1           0
+#>     3      -108.101   6:58:12      1           0
+#>     4      -108.087   6:58:12      1           0
+#>     5      -108.085   6:58:12      1           0
+#>     6      -108.085   6:58:12      1           0
 #> [1] "GBLUP model complete - one trait"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -118.481   11:30:34      0           0
-#>     2      -118.255   11:30:34      0           0
-#>     3      -118.106   11:30:34      0           0
-#>     4      -118.047   11:30:34      0           0
-#>     5      -118.035   11:30:34      0           0
-#>     6      -118.032   11:30:34      0           0
-#>     7      -118.032   11:30:34      0           0
+#>     1      -117.592   6:58:12      0           0
+#>     2      -117.537   6:58:12      0           0
+#>     3      -117.513   6:58:12      0           0
+#>     4      -117.509   6:58:12      0           0
+#>     5      -117.508   6:58:12      0           0
 #> [1] "GBLUP model complete - one trait"
 #> [1] "Genomic predictions done for all traits in one repeat-fold"
 #> Joining, by = "GID"
@@ -207,54 +173,33 @@ standardCV<-runCrossVal(blups=blups %>% filter(Trait != "MCMDS"),
 #> Joining, by = "GID"
 #> Joining, by = "GID"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -144.958   11:30:33      0           0
-#>     2      -144.946   11:30:33      0           0
-#>     3      -144.94   11:30:33      0           0
-#>     4      -144.939   11:30:33      0           0
-#>     5      -144.939   11:30:33      0           0
+#>     1      -150.198   6:58:12      1           0
+#>     2      -149.363   6:58:12      1           0
+#>     3      -148.987   6:58:12      1           0
+#>     4      -148.881   6:58:12      1           0
+#>     5      -148.865   6:58:12      1           0
+#>     6      -148.863   6:58:12      1           0
+#>     7      -148.862   6:58:12      1           0
 #> [1] "GBLUP model complete - one trait"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -107.241   11:30:33      0           0
-#>     2      -107.24   11:30:34      1           0
-#>     3      -107.24   11:30:34      1           0
-#>     4      -107.24   11:30:34      1           0
+#>     1      -106.107   6:58:12      0           0
+#>     2      -105.581   6:58:12      0           0
+#>     3      -105.152   6:58:12      0           0
+#>     4      -104.92   6:58:12      0           0
+#>     5      -104.852   6:58:12      0           0
+#>     6      -104.832   6:58:13      1           0
+#>     7      -104.827   6:58:13      1           0
+#>     8      -104.825   6:58:13      1           0
+#>     9      -104.825   6:58:13      1           0
 #> [1] "GBLUP model complete - one trait"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -114.776   11:30:34      0           0
-#>     2      -114.775   11:30:34      0           0
-#>     3      -114.775   11:30:34      0           0
-#>     4      -114.775   11:30:34      0           0
-#> [1] "GBLUP model complete - one trait"
-#> [1] "Genomic predictions done for all traits in one repeat-fold"
-#> Joining, by = "GID"
-#> Joining, by = "GID"
-#> Joining, by = "GID"
-#> Joining, by = "GID"
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -150.502   11:30:33      0           0
-#>     2      -150.404   11:30:34      1           0
-#>     3      -150.354   11:30:34      1           0
-#>     4      -150.339   11:30:34      1           0
-#>     5      -150.336   11:30:34      1           0
-#>     6      -150.336   11:30:34      1           0
-#> [1] "GBLUP model complete - one trait"
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -112.48   11:30:34      0           0
-#>     2      -112.42   11:30:34      0           0
-#>     3      -112.38   11:30:34      0           0
-#>     4      -112.364   11:30:34      0           0
-#>     5      -112.36   11:30:34      0           0
-#>     6      -112.358   11:30:35      1           0
-#>     7      -112.358   11:30:35      1           0
-#> [1] "GBLUP model complete - one trait"
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -118.347   11:30:35      0           0
-#>     2      -118.041   11:30:35      0           0
-#>     3      -117.869   11:30:35      0           0
-#>     4      -117.803   11:30:35      0           0
-#>     5      -117.787   11:30:35      0           0
-#>     6      -117.784   11:30:35      0           0
-#>     7      -117.783   11:30:35      0           0
+#>     1      -118.481   6:58:13      0           0
+#>     2      -118.255   6:58:13      0           0
+#>     3      -118.106   6:58:13      0           0
+#>     4      -118.047   6:58:13      0           0
+#>     5      -118.035   6:58:13      0           0
+#>     6      -118.032   6:58:13      0           0
+#>     7      -118.032   6:58:13      0           0
 #> [1] "GBLUP model complete - one trait"
 #> [1] "Genomic predictions done for all traits in one repeat-fold"
 #> Joining, by = "GID"
@@ -262,27 +207,23 @@ standardCV<-runCrossVal(blups=blups %>% filter(Trait != "MCMDS"),
 #> Joining, by = "GID"
 #> Joining, by = "GID"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -150.226   11:30:34      0           0
-#>     2      -149.466   11:30:34      0           0
-#>     3      -149.138   11:30:34      0           0
-#>     4      -149.063   11:30:34      0           0
-#>     5      -149.056   11:30:34      0           0
-#>     6      -149.055   11:30:34      0           0
+#>     1      -144.958   6:58:12      0           0
+#>     2      -144.946   6:58:12      0           0
+#>     3      -144.94   6:58:12      0           0
+#>     4      -144.939   6:58:12      0           0
+#>     5      -144.939   6:58:12      0           0
 #> [1] "GBLUP model complete - one trait"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -111.205   11:30:35      0           0
-#>     2      -111.2   11:30:35      0           0
-#>     3      -111.196   11:30:35      0           0
-#>     4      -111.193   11:30:35      0           0
-#>     5      -111.193   11:30:35      0           0
+#>     1      -107.241   6:58:13      1           0
+#>     2      -107.24   6:58:13      1           0
+#>     3      -107.24   6:58:13      1           0
+#>     4      -107.24   6:58:13      1           0
 #> [1] "GBLUP model complete - one trait"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -115.15   11:30:35      0           0
-#>     2      -115.132   11:30:35      0           0
-#>     3      -115.119   11:30:35      0           0
-#>     4      -115.114   11:30:36      1           0
-#>     5      -115.113   11:30:36      1           0
-#>     6      -115.112   11:30:36      1           0
+#>     1      -114.776   6:58:13      0           0
+#>     2      -114.775   6:58:13      0           0
+#>     3      -114.775   6:58:13      0           0
+#>     4      -114.775   6:58:13      0           0
 #> [1] "GBLUP model complete - one trait"
 #> [1] "Genomic predictions done for all traits in one repeat-fold"
 #> Joining, by = "GID"
@@ -290,52 +231,30 @@ standardCV<-runCrossVal(blups=blups %>% filter(Trait != "MCMDS"),
 #> Joining, by = "GID"
 #> Joining, by = "GID"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -150.983   11:30:35      0           0
-#>     2      -150.511   11:30:35      0           0
-#>     3      -150.265   11:30:35      0           0
-#>     4      -150.179   11:30:35      0           0
-#>     5      -150.162   11:30:35      0           0
-#>     6      -150.158   11:30:35      0           0
-#>     7      -150.157   11:30:35      0           0
+#>     1      -150.502   6:58:13      1           0
+#>     2      -150.404   6:58:13      1           0
+#>     3      -150.354   6:58:13      1           0
+#>     4      -150.339   6:58:13      1           0
+#>     5      -150.336   6:58:13      1           0
+#>     6      -150.336   6:58:13      1           0
 #> [1] "GBLUP model complete - one trait"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -109.264   11:30:35      0           0
-#>     2      -109.264   11:30:35      0           0
-#>     3      -109.264   11:30:36      1           0
-#>     4      -109.263   11:30:36      1           0
+#>     1      -112.48   6:58:13      0           0
+#>     2      -112.42   6:58:13      0           0
+#>     3      -112.38   6:58:13      0           0
+#>     4      -112.364   6:58:13      0           0
+#>     5      -112.36   6:58:13      0           0
+#>     6      -112.358   6:58:13      0           0
+#>     7      -112.358   6:58:14      1           0
 #> [1] "GBLUP model complete - one trait"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -116.271   11:30:36      0           0
-#>     2      -116.238   11:30:36      0           0
-#>     3      -116.225   11:30:36      0           0
-#>     4      -116.223   11:30:36      0           0
-#>     5      -116.223   11:30:36      0           0
-#> [1] "GBLUP model complete - one trait"
-#> [1] "Genomic predictions done for all traits in one repeat-fold"
-#> Joining, by = "GID"
-#> Joining, by = "GID"
-#> Joining, by = "GID"
-#> Joining, by = "GID"
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -146.729   11:30:35      0           0
-#>     2      -146.707   11:30:35      0           0
-#>     3      -146.695   11:30:35      0           0
-#>     4      -146.691   11:30:35      0           0
-#>     5      -146.691   11:30:36      1           0
-#> [1] "GBLUP model complete - one trait"
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -105.14   11:30:36      0           0
-#>     2      -105.116   11:30:36      0           0
-#>     3      -105.101   11:30:36      0           0
-#>     4      -105.095   11:30:36      0           0
-#>     5      -105.095   11:30:36      0           0
-#> [1] "GBLUP model complete - one trait"
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -116.469   11:30:36      0           0
-#>     2      -116.439   11:30:36      0           0
-#>     3      -116.428   11:30:36      0           0
-#>     4      -116.426   11:30:37      1           0
-#>     5      -116.426   11:30:37      1           0
+#>     1      -118.347   6:58:14      0           0
+#>     2      -118.041   6:58:14      0           0
+#>     3      -117.869   6:58:14      0           0
+#>     4      -117.803   6:58:14      0           0
+#>     5      -117.787   6:58:14      0           0
+#>     6      -117.784   6:58:14      0           0
+#>     7      -117.783   6:58:14      0           0
 #> [1] "GBLUP model complete - one trait"
 #> [1] "Genomic predictions done for all traits in one repeat-fold"
 #> Joining, by = "GID"
@@ -343,27 +262,27 @@ standardCV<-runCrossVal(blups=blups %>% filter(Trait != "MCMDS"),
 #> Joining, by = "GID"
 #> Joining, by = "GID"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -146.167   11:30:36      0           0
-#>     2      -145.784   11:30:36      0           0
-#>     3      -145.645   11:30:36      0           0
-#>     4      -145.618   11:30:36      0           0
-#>     5      -145.616   11:30:36      0           0
-#>     6      -145.616   11:30:36      0           0
+#>     1      -150.226   6:58:13      0           0
+#>     2      -149.466   6:58:13      0           0
+#>     3      -149.138   6:58:13      0           0
+#>     4      -149.063   6:58:13      0           0
+#>     5      -149.056   6:58:13      0           0
+#>     6      -149.055   6:58:13      0           0
 #> [1] "GBLUP model complete - one trait"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -108.335   11:30:36      0           0
-#>     2      -108.255   11:30:37      1           0
-#>     3      -108.205   11:30:37      1           0
-#>     4      -108.187   11:30:37      1           0
-#>     5      -108.184   11:30:37      1           0
-#>     6      -108.184   11:30:37      1           0
+#>     1      -111.205   6:58:14      0           0
+#>     2      -111.2   6:58:14      0           0
+#>     3      -111.196   6:58:14      0           0
+#>     4      -111.193   6:58:14      0           0
+#>     5      -111.193   6:58:14      0           0
 #> [1] "GBLUP model complete - one trait"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -115.606   11:30:37      0           0
-#>     2      -115.563   11:30:37      0           0
-#>     3      -115.541   11:30:37      0           0
-#>     4      -115.535   11:30:37      0           0
-#>     5      -115.534   11:30:37      0           0
+#>     1      -115.15   6:58:14      0           0
+#>     2      -115.132   6:58:14      0           0
+#>     3      -115.119   6:58:14      0           0
+#>     4      -115.114   6:58:14      0           0
+#>     5      -115.113   6:58:14      0           0
+#>     6      -115.112   6:58:14      0           0
 #> [1] "GBLUP model complete - one trait"
 #> [1] "Genomic predictions done for all traits in one repeat-fold"
 #> Joining, by = "GID"
@@ -371,25 +290,106 @@ standardCV<-runCrossVal(blups=blups %>% filter(Trait != "MCMDS"),
 #> Joining, by = "GID"
 #> Joining, by = "GID"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -152   11:30:36      0           0
-#>     2      -151.698   11:30:36      0           0
-#>     3      -151.579   11:30:37      1           0
-#>     4      -151.555   11:30:37      1           0
-#>     5      -151.554   11:30:37      1           0
-#>     6      -151.553   11:30:37      1           0
+#>     1      -150.983   6:58:14      1           0
+#>     2      -150.511   6:58:14      1           0
+#>     3      -150.265   6:58:14      1           0
+#>     4      -150.179   6:58:14      1           0
+#>     5      -150.162   6:58:14      1           0
+#>     6      -150.158   6:58:14      1           0
+#>     7      -150.157   6:58:14      1           0
 #> [1] "GBLUP model complete - one trait"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -107.98   11:30:37      0           0
-#>     2      -107.972   11:30:37      0           0
-#>     3      -107.968   11:30:37      0           0
-#>     4      -107.967   11:30:37      0           0
+#>     1      -109.264   6:58:14      0           0
+#>     2      -109.264   6:58:14      0           0
+#>     3      -109.264   6:58:14      0           0
+#>     4      -109.263   6:58:14      0           0
 #> [1] "GBLUP model complete - one trait"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -119.501   11:30:37      0           0
-#>     2      -119.452   11:30:38      1           0
-#>     3      -119.431   11:30:38      1           0
-#>     4      -119.426   11:30:38      1           0
-#>     5      -119.425   11:30:38      1           0
+#>     1      -116.271   6:58:15      0           0
+#>     2      -116.238   6:58:15      0           0
+#>     3      -116.225   6:58:15      0           0
+#>     4      -116.223   6:58:15      0           0
+#>     5      -116.223   6:58:15      0           0
+#> [1] "GBLUP model complete - one trait"
+#> [1] "Genomic predictions done for all traits in one repeat-fold"
+#> Joining, by = "GID"
+#> Joining, by = "GID"
+#> Joining, by = "GID"
+#> Joining, by = "GID"
+#> iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -146.729   6:58:14      0           0
+#>     2      -146.707   6:58:14      0           0
+#>     3      -146.695   6:58:14      0           0
+#>     4      -146.691   6:58:14      0           0
+#>     5      -146.691   6:58:14      0           0
+#> [1] "GBLUP model complete - one trait"
+#> iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -105.14   6:58:15      0           0
+#>     2      -105.116   6:58:15      0           0
+#>     3      -105.101   6:58:15      0           0
+#>     4      -105.095   6:58:15      0           0
+#>     5      -105.095   6:58:15      0           0
+#> [1] "GBLUP model complete - one trait"
+#> iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -116.469   6:58:15      0           0
+#>     2      -116.439   6:58:15      0           0
+#>     3      -116.428   6:58:15      0           0
+#>     4      -116.426   6:58:15      0           0
+#>     5      -116.426   6:58:15      0           0
+#> [1] "GBLUP model complete - one trait"
+#> [1] "Genomic predictions done for all traits in one repeat-fold"
+#> Joining, by = "GID"
+#> Joining, by = "GID"
+#> Joining, by = "GID"
+#> Joining, by = "GID"
+#> iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -146.167   6:58:15      0           0
+#>     2      -145.784   6:58:15      0           0
+#>     3      -145.645   6:58:15      0           0
+#>     4      -145.618   6:58:15      0           0
+#>     5      -145.616   6:58:15      0           0
+#>     6      -145.616   6:58:15      0           0
+#> [1] "GBLUP model complete - one trait"
+#> iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -108.335   6:58:15      0           0
+#>     2      -108.255   6:58:15      0           0
+#>     3      -108.205   6:58:15      0           0
+#>     4      -108.187   6:58:15      0           0
+#>     5      -108.184   6:58:15      0           0
+#>     6      -108.184   6:58:15      0           0
+#> [1] "GBLUP model complete - one trait"
+#> iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -115.606   6:58:16      0           0
+#>     2      -115.563   6:58:16      0           0
+#>     3      -115.541   6:58:16      0           0
+#>     4      -115.535   6:58:16      0           0
+#>     5      -115.534   6:58:16      0           0
+#> [1] "GBLUP model complete - one trait"
+#> [1] "Genomic predictions done for all traits in one repeat-fold"
+#> Joining, by = "GID"
+#> Joining, by = "GID"
+#> Joining, by = "GID"
+#> Joining, by = "GID"
+#> iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -152   6:58:15      0           0
+#>     2      -151.698   6:58:15      0           0
+#>     3      -151.579   6:58:15      0           0
+#>     4      -151.555   6:58:15      0           0
+#>     5      -151.554   6:58:15      0           0
+#>     6      -151.553   6:58:15      0           0
+#> [1] "GBLUP model complete - one trait"
+#> iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -107.98   6:58:16      0           0
+#>     2      -107.972   6:58:16      0           0
+#>     3      -107.968   6:58:16      0           0
+#>     4      -107.967   6:58:16      0           0
+#> [1] "GBLUP model complete - one trait"
+#> iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -119.501   6:58:16      0           0
+#>     2      -119.452   6:58:16      0           0
+#>     3      -119.431   6:58:16      0           0
+#>     4      -119.426   6:58:16      0           0
+#>     5      -119.425   6:58:16      0           0
 #> [1] "GBLUP model complete - one trait"
 #> [1] "Genomic predictions done for all traits in one repeat-fold"
 #> Joining, by = "GID"
@@ -398,8 +398,8 @@ standardCV<-runCrossVal(blups=blups %>% filter(Trait != "MCMDS"),
 #> Joining, by = "GID"
 timeelapsed<-proc.time()[3]-starttime; 
 timeelapsed/60
-#> elapsed 
-#> 0.15735
+#>   elapsed 
+#> 0.1421833
 ```
 
 Save the results

@@ -108,6 +108,7 @@ Create a folder on the `/workdir/` directory of the CBSU server you've reserved 
 Then copy the `GSexample2022` directory and its contents into that sub-folder.
 
 **Here is my step, don't do this:**
+
 ```{bash, eval=F}
 mkdir /workdir/mw489/;
 cd /workdir/mw489/;

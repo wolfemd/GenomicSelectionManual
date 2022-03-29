@@ -111,6 +111,7 @@ Then copy the `GSexample2022` directory and its contents into that sub-folder.
 
 **Here is my step, don't do this:**
 
+
 ```bash
 mkdir /workdir/mw489/;
 cd /workdir/mw489/;
