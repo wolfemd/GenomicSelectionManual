@@ -39,7 +39,7 @@
 
 ## Process Map
 
-![](images/prepare_genotypic_data_process_map.png){width=100%}
+![](images/prepare_genotypic_data_process_map.png){width="100%"}
 
 ## Parent vs. Mate Selection?
 
@@ -47,15 +47,21 @@ The following sections will exemplify the **genomic mate selection** as opposed 
 
 ## Learning command line navigation
 
-- https://www.codecademy.com/learn/learn-the-command-line/modules/learn-the-command-line-navigation/cheatsheet
-- [SSH Client on Windows 10 Using the Command Prompt | SSH from Windows to Linux and Other Systems](https://www.youtube.com/watch?v=JbMgOKlj5fE&ab_channel=SavvyNik)
-- [Secure Copy Protocol (SCP) - Transfer Files using SSH & Command Line on Windows 10 to Linux / Other](https://www.youtube.com/watch?v=2u0I-U0D7Uk&ab_channel=SavvyNik)
+-   <https://www.codecademy.com/learn/learn-the-command-line/modules/learn-the-command-line-navigation/cheatsheet>
+-   [SSH Client on Windows 10 Using the Command Prompt \| SSH from Windows to Linux and Other Systems](https://www.youtube.com/watch?v=JbMgOKlj5fE&ab_channel=SavvyNik)
+-   [Secure Copy Protocol (SCP) - Transfer Files using SSH & Command Line on Windows 10 to Linux / Other](https://www.youtube.com/watch?v=2u0I-U0D7Uk&ab_channel=SavvyNik)
+
+## vcftools and bcftools manuals
+
+[`vcftools`](https://vcftools.github.io/man_latest.html)
+
+[`bcftools`](https://samtools.github.io/bcftools/bcftools.html)
 
 ## Remote access the server
 
-These steps will vary a bit depending on your system. 
+These steps will vary a bit depending on your system.
 
-Instructions for BioHPC access are here: https://biohpc.cornell.edu/lab/doc/BioHPCLabexternal.pdf
+Instructions for BioHPC access are here: <https://biohpc.cornell.edu/lab/doc/BioHPCLabexternal.pdf>
 
 First, remote login, using `ssh`
 
@@ -77,11 +83,15 @@ pwd
 
 Should show something like `/home/mw489/` (but your userid)
 
-## Set-up directories and transfer data
+## [INSTRUCTOR'S STEPs]
 
-### Create a sub-folder for your analysis
+**DON'T DO THESE STEPS, UNLESS YOU ARE ME, WHICH YOU ARE NOT \^\_\~!!**
 
-Create a sub-folder for your analysis. I created one with same name as my example GitHub repository for this workshop, like so:
+**Create a sub-folder for analysis**
+
+I create a sub-folder for the analysis.
+
+I created one with same name as my example GitHub repository for this workshop, like so:
 
 
 ```bash
@@ -91,12 +101,14 @@ mkdir data;
 mkdir output;
 ```
 
-### [INSTRUCTOR'S STEP]: Transfer VCF to CBSU
-Now, on my local computer, navigate in the command line to the `data/` subdirectory.
+**Transfer data to CBSU**
+
+Now, on my local computer, navigate in the command line to `data/`
 
 Use `scp` to transfer the VCF file downloaded from Cassavabase to the server.
 
 Also copy the "cleaned_phenos.rds" from last week, which is in the `output/`:
+
 
 ```bash
 scp BreedBaseGenotypesDownload.vcf mw489@cbsulogin.biohpc.cornell.edu:GSexample2022/data/
@@ -104,59 +116,86 @@ cd ../output;
 scp phenotypes_cleaned.rds mw489@cbsulogin.biohpc.cornell.edu:GSexample2022/output/
 ```
 
-### Copy data to `/workdir/`
-
-Create a folder on the `/workdir/` directory of the CBSU server you've reserved with your username. 
-Then copy the `GSexample2022` directory and its contents into that sub-folder.
-
-**Here is my step, don't do this:**
+**Copy data to reserved servers `/workdir/`**
 
 
 ```bash
 mkdir /workdir/mw489/;
-cd /workdir/mw489/;
-cp -r ~/GSexample2022 .; 
 ```
 
-**Here is your step, copy from my directory:**
+Then I copy my `GSexample2022` directory and its contents into that sub-folder.
 
-Navigate into your subdirectory (empty now).
 
 ```bash
-cd /workdir/userid/
+cp -r ~/GSexample2022 /workdir/mw489/; 
 ```
 
-Copy the VCF from my `data/` sub-dir. to yours.
+## [EVERYONE'S STEPS]
+
+### Create a directory on `/workdir/`
+
+Go to `/workdir/`
+
 
 ```bash
-cp /workdir/mw489/GSexample2022/data/BreedBaseGenotypesDownload.vcf data/
-cp /workdir/mw489/GSexample2022/output/phenotypes_cleaned.rds output/
+cd /workdir/
 ```
 
-Check that its there.
+Create a directory with *your* username:
+
+Example:
+
 
 ```bash
-ls data/
+mkdir youruserid/;
+```
+
+Create a sub-directory for *this* analysis.
+
+Example:
+
+
+```bash
+mkdir /workdir/youruserid/yourprojectname
+```
+
+Navigate into your subdirectory on `/workdir/` (empty now).
+
+Example:
+
+
+```bash
+cd /workdir/youruserid/yourprojectname
+```
+
+Copy the `data/` and `output/` from *my* `/workdir/mw489/GSexample2022/` location, into yours.
+
+Example:
+
+
+```bash
+cp -r /workdir/mw489/GSexample2022/data /workdir/youruserid/yourprojectname/
+cp -r /workdir/mw489/GSexample2022/output /workdir/youruserid/yourprojectname/
+```
+
+Check that its there. Example:
+
+
+```bash
+ls /workdir/youruserid/yourprojectname/data/
 ```
 
 Now you should be ready to go.
+
+Do all remaining steps *within* the directory you just created.
 
 ## Introducing VCF files
 
 Some links:
 
-- https://en.wikipedia.org/wiki/Variant_Call_Format
-- Detailed specifications: https://samtools.github.io/hts-specs/VCFv4.2.pdf
-- VCF poster: http://vcftools.sourceforge.net/VCF-poster.pdf
-
-Let's take a look at _our_ VCF file:
-
-
-```bash
-cat data/BreedBaseGenotypesDownload.vcf | head -n50 | cut -c1-100
-```
-
-
+-   <https://en.wikipedia.org/wiki/Variant_Call_Format>
+-   Detailed specifications: <https://samtools.github.io/hts-specs/VCFv4.2.pdf>
+-   VCF poster: <http://vcftools.sourceforge.net/VCF-poster.pdf>
 
 ## Check the VCF
 
@@ -183,6 +222,8 @@ vcftools --vcf data/BreedBaseGenotypesDownload.vcf
 -   Do the column-names after FORMAT (should be sample names) look right / make sense?
 -   Do the SNP IDs in the "ID" field make sense?
 
+Let's take a look at *our* VCF file:
+
 
 ```bash
 # look at the header of the VCF file
@@ -200,6 +241,13 @@ cat data/BreedBaseGenotypesDownload.vcf | head -n50 | cut -c1-100
 
 Cassavabase returned multiple columns in the VCF file with the same column-name, because of multiple tissue_samples per germplasmName. This prevents using certain tools, e.g. `bcftools` which errors.
 
+Try this and you'll see:
+
+
+```bash
+bcftools query --list-samples data/BreedBaseGenotypesDownload.vcf
+```
+
 **Manual solution required:**
 
 Write just the column-names of the VCF to disk. Here's a one-liner:
@@ -207,13 +255,14 @@ Write just the column-names of the VCF to disk. Here's a one-liner:
 
 ```bash
 egrep "^#CHROM" data/BreedBaseGenotypesDownload.vcf | head -n1 > data/vcf_colnames.txt
-# egrep "^##SynonymsOfAccessions=" data/BreedBaseGenotypesDownload.vcf | head -n1 > data/vcf_synonyms.txt
 ```
 
 Read the column-names-file to R. Exclude the first 9 elements as they are standard VCF columns, not "germplasmName"
 
 
 ```r
+library(genomicMateSelectR) # to get the %>% loaded
+
 vcf_sample_names<-readLines("data/vcf_colnames.txt") %>% 
      strsplit(.,"\t") %>% unlist() %>% 
      .[10:length(.)]
@@ -297,7 +346,7 @@ vcftools --gzvcf data/BreedBaseGenotypes_subset.vcf.gz
 
 ### Check genotype-to-phenotype matches
 
--   Do the number of unique **germplasmName** (in the \[cleaned phenos from the previous step\]\[save_cleaned_phenos\]) matching samples in the VCF make sense? Are there as many as expected? If not, you will need to figure out why not.
+-   Do the number of unique **germplasmName** (in the "cleaned phenos" from the previous step) matching samples in the VCF make sense? Are there as many as expected? If not, you will need to figure out why not.
 
 
 ```r
@@ -313,6 +362,9 @@ How many matches to the VCF?
 
 
 ```r
+subset_unique_names_for_vcf<-read.table(file = "data/subset_unique_names_for_vcf.txt", 
+                                        stringsAsFactors = F)$V1
+
 table(germplasm_with_phenos %in% subset_unique_names_for_vcf)
 #> 
 #> FALSE  TRUE 
@@ -357,6 +409,7 @@ Read into R, sample 4000 at random
 
 
 ```r
+library(genomicMateSelectR)
 set.seed(1234)
 read.table(here::here("data","BreedBaseGenotypesDownload.positions"), 
            header = F, stringsAsFactors = F) %>% 
@@ -391,6 +444,11 @@ vcftools --vcf data/BreedBaseGenotypesDownload.vcf \
 # Run Time = 8.00 seconds
 ```
 
+
+```bash
+vcftools --gzvcf data/BreedBaseGenotypes_subset.vcf.gz
+```
+
 ### LD-prunning SNPs (for computational savings)
 
 **NOT DEMONSTRATED HERE, YET.** In practice, when predicting cross-variances, it can still be very computationally intensive with large numbers of markers. [Previously](https://wolfemd.github.io/IITA_2021GS/04-PreprocessDataFiles.html#Variant_filters), I used `plink --indep-pairwise` to prune markers based on linkage disequilibrium. I [found an LD-prunned subset that had similar accuracy to the full set](https://wolfemd.github.io/IITA_2021GS/07-Results.html#Prediction_accuracy_estimates), but less than half the markers. Subsequently, I used the full set to predict cross means, but the LD-pruned marker subset for the cross variances [predictions of \>250K crosses of 719 candidate parents in IITA's 2021 crossing block](https://wolfemd.github.io/IITA_2021GS/07-Results.html#Genomic_Predictions).
@@ -412,6 +470,7 @@ Read haps to R and format them.
 
 
 ```r
+library(genomicMateSelectR)
 library(data.table)
 #> 
 #> Attaching package: 'data.table'
@@ -457,6 +516,8 @@ haps %<>%
      select(-Chr,-Pos,-REF,-ALT) %>% 
      t(.) %>% 
      as.matrix(.)
+dim(haps)
+#> [1] 1926 4000
 ```
 
 ## Dosage matrix from haps
@@ -485,7 +546,6 @@ dosages<-haps %>%
      .[sampleids$V1,]
 dim(dosages)
 #> [1]  963 4000
-# [1]  963 4000
 
 dosages[1:5,1:5]
 #>                    1_652699_G_C 1_868970_G_T 1_943129_T_A
@@ -633,7 +693,7 @@ snps_genmap %>%
 #> (geom_point).
 ```
 
-<img src="04-prep_genos_files/figure-html/unnamed-chunk-35-1.png" width="672" />
+<img src="04-prep_genos_files/figure-html/unnamed-chunk-40-1.png" width="672" />
 
 ### Interpolate genetic map
 
@@ -705,7 +765,7 @@ splined_snps_genmap %>%
   theme_bw() + facet_wrap(~as.integer(Chr), scales='free_x')
 ```
 
-<img src="04-prep_genos_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+<img src="04-prep_genos_files/figure-html/unnamed-chunk-44-1.png" width="672" />
 
 Save the interpolated map, just for the marker loci to-be-used downstream.
 
@@ -728,3 +788,26 @@ saveRDS(recombFreqMat,file=here::here("output","recombFreqMat_1minus2c.rds"))
 ```
 
 See also, [**genomicMateSelectR** vignette](https://wolfemd.github.io/genomicMateSelectR/articles/start_here.html#recombination-frequency-matrix-1).
+
+## Copy files back to your computer
+
+Option 1) FileZilla
+
+Option 2) Command line:
+
+On my local computer, on your command line.
+
+Navigate to the project directory containing the `data/` and `output/` directories.
+
+
+```bash
+scp mw489@cbsumm21.biohpc.cornell.edu:/workdir/youruserid/yourprojectname/data/BreedBaseGenotypes_subset.vcf.gz data/
+scp mw489@cbsumm21.biohpc.cornell.edu:/workdir/youruserid/yourprojectname/data/dosages.rds data/
+scp mw489@cbsumm21.biohpc.cornell.edu:/workdir/youruserid/yourprojectname/data/haplotypes.rds data/
+scp mw489@cbsumm21.biohpc.cornell.edu:/workdir/youruserid/yourprojectname/output/kinship_add.rds output/
+scp mw489@cbsumm21.biohpc.cornell.edu:/workdir/youruserid/yourprojectname/output/kinship_dom.rds output/
+scp mw489@cbsumm21.biohpc.cornell.edu:/workdir/youruserid/yourprojectname/output/recombFreqMat_1minus2c.rds output/
+scp mw489@cbsumm21.biohpc.cornell.edu:/workdir/youruserid/yourprojectname/output/interpolated_genmap.rds output/
+```
+
+Option 3) I'll provide Google Drive links to download the big files, and post the small ones to my GitHub repo

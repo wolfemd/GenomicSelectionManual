@@ -104,12 +104,12 @@
 <h2>
 <span class="header-section-number">9.3</span> Set-up training datasets<a class="anchor" aria-label="anchor" href="#set-up-training-datasets"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">phenos</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"phenotypes_cleaned.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The pipeline version of this analysis will use the <code>TRUE/FALSE</code> values of <strong><code>CompleteBlocks</code></strong> and <strong><code>IncompleteBlocks</code></strong> (<a href="prepare-phenotype-data.html#detect_designs">Preliminary analysis of trial data</a> ).</p>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">phenos</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">CompleteBlocks</span>,<span class="va">IncompleteBlocks</span>,<span class="va">locationName</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">phenos</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">CompleteBlocks</span>,<span class="va">IncompleteBlocks</span>,<span class="va">locationName</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://tidyr.tidyverse.org/reference/spread.html">spread</a></span><span class="op">(</span><span class="va">locationName</span>,<span class="va">n</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 3 × 4</span>
 <span class="co">#&gt;   CompleteBlocks IncompleteBlocks Ibadan Ubiaja</span>
@@ -118,17 +118,17 @@
 <span class="co">#&gt; 2 TRUE           FALSE                NA    125</span>
 <span class="co">#&gt; 3 TRUE           TRUE                407    414</span></code></pre></div>
 <p>Convert the data to “long format” . Remove missing values. “Nest” the data by Trait.</p>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">traits</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DM"</span>,<span class="st">"MCMDS"</span>,<span class="st">"logFYLD"</span>,<span class="st">"logDYLD"</span><span class="op">)</span>
-<span class="va">phenos</span><span class="op">&lt;-</span><span class="va">phenos</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">phenos</span><span class="op">&lt;-</span><span class="va">phenos</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="co"># Convert the data to "long format" </span>
      <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">traits</span><span class="op">)</span>, 
-                  names_to <span class="op">=</span> <span class="st">"Trait"</span>, values_to <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span>
+                  names_to <span class="op">=</span> <span class="st">"Trait"</span>, values_to <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span>
      <span class="co"># Remove missing values</span>
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">Value</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span>
      <span class="co"># Nest the MultiEnvironmentTrial data by trait</span>
      <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span><span class="op">(</span>METdata<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="va">Trait</span><span class="op">)</span><span class="op">)</span>
-<span class="va">phenos</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">phenos</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>N_plots<span class="op">=</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">METdata</span>,<span class="va">nrow</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 × 3</span>
 <span class="co">#&gt;   Trait   METdata               N_plots</span>
@@ -140,8 +140,8 @@
 <p>Where previously there was one row per plot and a large number of columns, now things are simple and tidy.</p>
 <p>One row per trait. The actual plot-basis data are now contained within <strong>METdata</strong>, a list-type column, each element containing a <code>tibble</code>.</p>
 <p>To demonstrate, check the contents of row 1 of the <strong>METdata</strong> column:</p>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">phenos</span><span class="op">$</span><span class="va">METdata</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="va">head</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html">paged_table</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">phenos</span><span class="op">$</span><span class="va">METdata</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> <span class="va">head</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html">paged_table</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["studyYear"],"name":[1],"type":["int"],"align":["right"]},{"label":["programName"],"name":[2],"type":["chr"],"align":["left"]},{"label":["locationName"],"name":[3],"type":["chr"],"align":["left"]},{"label":["studyName"],"name":[4],"type":["chr"],"align":["left"]},{"label":["studyDesign"],"name":[5],"type":["chr"],"align":["left"]},{"label":["plotWidth"],"name":[6],"type":["int"],"align":["right"]},{"label":["plotLength"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["fieldSize"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["plantingDate"],"name":[9],"type":["chr"],"align":["left"]},{"label":["harvestDate"],"name":[10],"type":["chr"],"align":["left"]},{"label":["germplasmName"],"name":[11],"type":["chr"],"align":["left"]},{"label":["observationUnitDbId"],"name":[12],"type":["int"],"align":["right"]},{"label":["replicate"],"name":[13],"type":["int"],"align":["right"]},{"label":["blockNumber"],"name":[14],"type":["int"],"align":["right"]},{"label":["plotNumber"],"name":[15],"type":["int"],"align":["right"]},{"label":["rowNumber"],"name":[16],"type":["int"],"align":["right"]},{"label":["colNumber"],"name":[17],"type":["int"],"align":["right"]},{"label":["entryType"],"name":[18],"type":["chr"],"align":["left"]},{"label":["trialType"],"name":[19],"type":["chr"],"align":["left"]},{"label":["numberBlocks"],"name":[20],"type":["int"],"align":["right"]},{"label":["numberReps"],"name":[21],"type":["int"],"align":["right"]},{"label":["observationUnitName"],"name":[22],"type":["chr"],"align":["left"]},{"label":["CompleteBlocks"],"name":[23],"type":["lgl"],"align":["right"]},{"label":["IncompleteBlocks"],"name":[24],"type":["lgl"],"align":["right"]},{"label":["yearInLoc"],"name":[25],"type":["chr"],"align":["left"]},{"label":["trialInLocYr"],"name":[26],"type":["chr"],"align":["left"]},{"label":["repInTrial"],"name":[27],"type":["chr"],"align":["left"]},{"label":["blockInRep"],"name":[28],"type":["chr"],"align":["left"]},{"label":["NOHAV"],"name":[29],"type":["dbl"],"align":["right"]},{"label":["plotArea"],"name":[30],"type":["dbl"],"align":["right"]},{"label":["MaxNOHAV"],"name":[31],"type":["dbl"],"align":["right"]},{"label":["plantsPerPlot"],"name":[32],"type":["dbl"],"align":["right"]},{"label":["PlantSpacing"],"name":[33],"type":["dbl"],"align":["right"]},{"label":["PropNOHAV"],"name":[34],"type":["dbl"],"align":["right"]},{"label":["Value"],"name":[35],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"IITA-TMS-IBA000070","12":"1929317","13":"1","14":"1","15":"112","16":"1","17":"12","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-IITA-TMS-IBA000070_112","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"30.7"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"IITA-TMS-IBA30572","12":"1929280","13":"1","14":"1","15":"119","16":"1","17":"10","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-IITA-TMS-IBA30572_119","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"32.6"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"IITA-TMS-IBA980581","12":"1929212","13":"1","14":"1","15":"128","16":"1","17":"1","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-IITA-TMS-IBA980581_128","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"31.8"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"IITA-TMS-IBA982101","12":"1929309","13":"1","14":"1","15":"138","16":"1","17":"10","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-IITA-TMS-IBA982101_138","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"8","30":"16","31":"10","32":"10","33":"1.6","34":"0.8","35":"26.8"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"TMEB419","12":"1929213","13":"1","14":"1","15":"116","16":"1","17":"13","18":"check","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-TMEB419_116","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"32.1"},{"1":"2019","2":"IITA","3":"Ubiaja","4":"19.GS.C1.C2.C3.AYT.42.UB","5":"Alpha","6":"4","7":"4","8":"0.202","9":"2019-July-09","10":"2020-July-20","11":"TMS13F1109P0009","12":"1929227","13":"1","14":"1","15":"140","16":"1","17":"12","18":"test","19":"NA","20":"NA","21":"NA","22":"2020-19.GS.C1.C2.C3.AYT.42.UB-rep1-TMS13F1109P0009_140","23":"TRUE","24":"FALSE","25":"IITA_Ubiaja_2019","26":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB","27":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1","28":"IITA_Ubiaja_2019_19.GS.C1.C2.C3.AYT.42.UB_1_1","29":"10","30":"16","31":"10","32":"10","33":"1.6","34":"1.0","35":"28.2"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -214,9 +214,9 @@
 </h2>
 <p>What follows is a demonstration, not a complete evaluation of the options, but it shows a strategy to compare models.</p>
 <p>Pick out the first chunk of <strong><code>METdata</code></strong>.</p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># grab just one chunk of the data to "experiment" on</span>
-<span class="va">METdata</span><span class="op">&lt;-</span><span class="va">phenos</span><span class="op">$</span><span class="va">METdata</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">METdata</span><span class="op">&lt;-</span><span class="va">phenos</span><span class="op">$</span><span class="va">METdata</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="co"># sommer doesn't recognize logical T/F variables</span>
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>CompleteBlocks<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">CompleteBlocks</span><span class="op">)</span>, 
             IncompleteBlocks<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">IncompleteBlocks</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -233,7 +233,7 @@
 <span class="header-section-number">9.5.1</span> Fit models<a class="anchor" aria-label="anchor" href="#fit-models"><i class="fas fa-link"></i></a>
 </h3>
 <p>The following code block implements 4 different models, each will execute in the background and at the same time.</p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://future.futureverse.org">future</a></span><span class="op">)</span>;
 <span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="va">multisession</span><span class="op">)</span>
 
@@ -263,7 +263,7 @@
                                    rcov<span class="op">=</span><span class="op">~</span><span class="fu">vs</span><span class="op">(</span><span class="fu">ds</span><span class="op">(</span><span class="va">studyName</span><span class="op">)</span>,<span class="va">units</span><span class="op">)</span>,
                                    data<span class="op">=</span><span class="va">METdata</span>, 
                                    verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">}</span></code></pre></div>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Save output of above so the above models don't need to be re-run</span>
 <span class="co">## if and when I reformat or otherwise re-knit this doc to HTML</span>
 <span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">conv_model</span>,<span class="va">conv_het_error_model</span>,<span class="va">simple_model</span>,<span class="va">simple_het_error_model</span>,
@@ -273,12 +273,12 @@
 <h3>
 <span class="header-section-number">9.5.2</span> Model comparisons<a class="anchor" aria-label="anchor" href="#model-comparisons"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load the output from the models from where I stored it</span>
 <span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"models_compared.Rdata"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Which model fits best? How to compare?</p>
 <p><code>sommer</code> provides <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> for pairwise comparisons of models using a likelihood ratio test <em>and</em> by AIC, BIC.</p>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">conv_model</span>,<span class="va">conv_het_error_model</span><span class="op">)</span>
 <span class="co">#&gt; Likelihood ratio test for mixed models</span>
 <span class="co">#&gt; ==============================================================</span>
@@ -297,16 +297,16 @@
 <span class="co">#&gt; mod2                        </span>
 <span class="co">#&gt; mod1 2.0273987089018e-08 ***</span></code></pre></div>
 <p>Here’s a very not-pretty not-high-throughput way to set-up a table comparing the AIC for all 4 models.</p>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Model<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"conv_model"</span>,<span class="st">"conv_het_error_model"</span>,<span class="st">"simple_model"</span>,<span class="st">"simple_het_error_model"</span><span class="op">)</span>,
-       AIC<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">conv_model</span><span class="op">$</span><span class="va">AIC</span>,<span class="va">conv_het_error_model</span><span class="op">$</span><span class="va">AIC</span>,<span class="va">simple_model</span><span class="op">$</span><span class="va">AIC</span>,<span class="va">simple_het_error_model</span><span class="op">$</span><span class="va">AIC</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">AIC</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div id="ratomrhinu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+       AIC<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">conv_model</span><span class="op">$</span><span class="va">AIC</span>,<span class="va">conv_het_error_model</span><span class="op">$</span><span class="va">AIC</span>,<span class="va">simple_model</span><span class="op">$</span><span class="va">AIC</span>,<span class="va">simple_het_error_model</span><span class="op">$</span><span class="va">AIC</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">AIC</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div id="czmmfcfmrk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ratomrhinu .gt_table {
+#czmmfcfmrk .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -331,7 +331,7 @@
   border-left-color: #D3D3D3;
 }
 
-#ratomrhinu .gt_heading {
+#czmmfcfmrk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -343,7 +343,7 @@
   border-right-color: #D3D3D3;
 }
 
-#ratomrhinu .gt_title {
+#czmmfcfmrk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -353,7 +353,7 @@
   border-bottom-width: 0;
 }
 
-#ratomrhinu .gt_subtitle {
+#czmmfcfmrk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -363,13 +363,13 @@
   border-top-width: 0;
 }
 
-#ratomrhinu .gt_bottom_border {
+#czmmfcfmrk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ratomrhinu .gt_col_headings {
+#czmmfcfmrk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -384,7 +384,7 @@
   border-right-color: #D3D3D3;
 }
 
-#ratomrhinu .gt_col_heading {
+#czmmfcfmrk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -404,7 +404,7 @@
   overflow-x: hidden;
 }
 
-#ratomrhinu .gt_column_spanner_outer {
+#czmmfcfmrk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -416,15 +416,15 @@
   padding-right: 4px;
 }
 
-#ratomrhinu .gt_column_spanner_outer:first-child {
+#czmmfcfmrk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ratomrhinu .gt_column_spanner_outer:last-child {
+#czmmfcfmrk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ratomrhinu .gt_column_spanner {
+#czmmfcfmrk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -436,7 +436,7 @@
   width: 100%;
 }
 
-#ratomrhinu .gt_group_heading {
+#czmmfcfmrk .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -458,7 +458,7 @@
   vertical-align: middle;
 }
 
-#ratomrhinu .gt_empty_group_heading {
+#czmmfcfmrk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -473,15 +473,15 @@
   vertical-align: middle;
 }
 
-#ratomrhinu .gt_from_md > :first-child {
+#czmmfcfmrk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ratomrhinu .gt_from_md > :last-child {
+#czmmfcfmrk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ratomrhinu .gt_row {
+#czmmfcfmrk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -500,7 +500,7 @@
   overflow-x: hidden;
 }
 
-#ratomrhinu .gt_stub {
+#czmmfcfmrk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -512,7 +512,7 @@
   padding-left: 12px;
 }
 
-#ratomrhinu .gt_summary_row {
+#czmmfcfmrk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -522,7 +522,7 @@
   padding-right: 5px;
 }
 
-#ratomrhinu .gt_first_summary_row {
+#czmmfcfmrk .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -532,7 +532,7 @@
   border-top-color: #D3D3D3;
 }
 
-#ratomrhinu .gt_grand_summary_row {
+#czmmfcfmrk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -542,7 +542,7 @@
   padding-right: 5px;
 }
 
-#ratomrhinu .gt_first_grand_summary_row {
+#czmmfcfmrk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -552,11 +552,11 @@
   border-top-color: #D3D3D3;
 }
 
-#ratomrhinu .gt_striped {
+#czmmfcfmrk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ratomrhinu .gt_table_body {
+#czmmfcfmrk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -565,7 +565,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#ratomrhinu .gt_footnotes {
+#czmmfcfmrk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -579,13 +579,13 @@
   border-right-color: #D3D3D3;
 }
 
-#ratomrhinu .gt_footnote {
+#czmmfcfmrk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ratomrhinu .gt_sourcenotes {
+#czmmfcfmrk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -599,41 +599,41 @@
   border-right-color: #D3D3D3;
 }
 
-#ratomrhinu .gt_sourcenote {
+#czmmfcfmrk .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ratomrhinu .gt_left {
+#czmmfcfmrk .gt_left {
   text-align: left;
 }
 
-#ratomrhinu .gt_center {
+#czmmfcfmrk .gt_center {
   text-align: center;
 }
 
-#ratomrhinu .gt_right {
+#czmmfcfmrk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ratomrhinu .gt_font_normal {
+#czmmfcfmrk .gt_font_normal {
   font-weight: normal;
 }
 
-#ratomrhinu .gt_font_bold {
+#czmmfcfmrk .gt_font_bold {
   font-weight: bold;
 }
 
-#ratomrhinu .gt_font_italic {
+#czmmfcfmrk .gt_font_italic {
   font-style: italic;
 }
 
-#ratomrhinu .gt_super {
+#czmmfcfmrk .gt_super {
   font-size: 65%;
 }
 
-#ratomrhinu .gt_footnote_marks {
+#czmmfcfmrk .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -704,7 +704,7 @@
 <p>Next, we will fit the “best” model from the previous step, but to all traits.</p>
 <p>Below, I’ll take the time to illustrate a tidy way to set-up and then execute the model, processing traits in parallel.</p>
 <p>In short, we have four data chunks set-up in the tibble <code>phenos</code></p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">phenos</span>
 <span class="co">#&gt; # A tibble: 4 × 2</span>
 <span class="co">#&gt;   Trait   METdata              </span>
@@ -723,7 +723,7 @@
 <span class="header-section-number">9.7.1</span> Test code for function<a class="anchor" aria-label="anchor" href="#test-code-for-function"><i class="fas fa-link"></i></a>
 </h3>
 <p>Here’s how we want our call to <code>mmer()</code> to fit the mixed-model to look like:</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># DON"T RUN</span>
 <span class="va">simple_het_error_model</span><span class="op">&lt;-</span><span class="fu">mmer</span><span class="op">(</span>fixed <span class="op">=</span> <span class="va">Value</span><span class="op">~</span><span class="va">yearInLoc</span>,
                              random<span class="op">=</span><span class="op">~</span><span class="va">germplasmName</span> <span class="op">+</span> <span class="va">repInTrial</span> <span class="op">+</span> <span class="va">blockInRep</span>,
@@ -731,7 +731,7 @@
                              data<span class="op">=</span><span class="va">METdata</span>, getPEV <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p>To build a function around this, we want to be able to input different values ofthe arguments to <code>mmer()</code>, namely: <code>data=</code>, <code>fixed=</code>, <code>random=</code> and <code>rcov=</code>.</p>
 <p>Note that in this case, the only actual difference among traits in our example is going to be an added fixed effect for the yield traits, the <strong><code>PropNOHAV</code></strong>.</p>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Input arguments for the function:</span>
 <span class="va">Trait</span><span class="op">&lt;-</span><span class="va">phenos</span><span class="op">$</span><span class="va">Trait</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> 
 <span class="co"># input for "data="</span>
@@ -745,7 +745,7 @@
 <span class="co"># input for "rcov="</span>
 <span class="va">rcovFormula</span><span class="op">=</span><span class="st">"~vs(ds(studyName),units)"</span></code></pre></div>
 <p>Here’s how we can call <code>mmer()</code> inside another function, using the variables in the above code chunk as input arguments:</p>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">starttime</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>
 <span class="va">mmer_output</span><span class="op">&lt;-</span><span class="fu">mmer</span><span class="op">(</span>fixed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span><span class="op">(</span><span class="va">fixedFormula</span><span class="op">)</span>,
                   random <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span><span class="op">(</span><span class="va">randFormula</span><span class="op">)</span>,
@@ -769,12 +769,12 @@
 <p>Took 5 whole minutes to fit that, yikes.</p>
 <p><strong>Outlier Detection and Removal:</strong> My standard pipeline includes outlier detection and removal. (1) Fit the model. (2) Define outliers as observations where the absolute-value of the standardized residuals &gt;3.3. (3) Remove outliers and re-fit the model. (4) Check for and remove residuals again. (5) If more residuals were detected and removed, re-fit a final time.</p>
 <p>For the sake of a simple, quick example, the demonstration below, will just do one round removing outliers.</p>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># index observations that are defined as outliers</span>
 <span class="va">outliers</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">mmer_output</span><span class="op">$</span><span class="va">residuals</span><span class="op">)</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">3.3</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">outliers</span><span class="op">)</span> <span class="co"># How many?</span>
 <span class="co"># [1] 6</span></code></pre></div>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># remove outliers, if any</span>
 <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">outliers</span><span class="op">)</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span><span class="op">{</span> 
      <span class="va">x</span><span class="op">&lt;-</span><span class="va">METdata</span><span class="op">[</span><span class="op">-</span><span class="va">outliers</span>,<span class="op">]</span> 
@@ -808,7 +808,7 @@
 </li>
 </ol>
 <p>In a few sections (<a href="preliminary-field-trial-analysis.html#de-regression-explained">see here</a>), I’ll break down what these are and how they are used.</p>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"mmer_output_example_during_stage1.Rdata"</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># summary(mmer_output)</span>
@@ -821,23 +821,23 @@
 <span class="va">varcomp</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mmer_output</span><span class="op">)</span><span class="op">$</span><span class="va">varcomp</span>
 
 <span class="co"># genotypic variance</span>
-<span class="va">Vg</span><span class="op">&lt;-</span><span class="va">mmer_output</span><span class="op">$</span><span class="va">sigma</span><span class="op">$</span><span class="va">germplasmName</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">Vg</span><span class="op">&lt;-</span><span class="va">mmer_output</span><span class="op">$</span><span class="va">sigma</span><span class="op">$</span><span class="va">germplasmName</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">as.vector</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co"># Mean error-variance across trials </span>
 <span class="co">## across heterogeneous error variance estimates</span>
-<span class="va">meanHetVarE</span><span class="op">&lt;-</span><span class="va">mmer_output</span><span class="op">$</span><span class="va">sigma</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-     <span class="va">.</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">":units"</span>,<span class="va">.</span>,value<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-     <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">meanHetVarE</span><span class="op">&lt;-</span><span class="va">mmer_output</span><span class="op">$</span><span class="va">sigma</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+     <span class="va">.</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">":units"</span>,<span class="va">.</span>,value<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co"># Mean number of reps per accession</span>
-<span class="va">meanNreps</span><span class="op">&lt;-</span><span class="va">METdata</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span>
+<span class="va">meanNreps</span><span class="op">&lt;-</span><span class="va">METdata</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span>
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">germplasmName</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/exposition.html">%$%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
 <span class="co"># Broad-sense heritability</span>
 <span class="va">H2</span><span class="op">&lt;-</span><span class="va">Vg</span><span class="op">/</span><span class="op">(</span><span class="va">Vg</span><span class="op">+</span><span class="op">(</span><span class="va">meanHetVarE</span><span class="op">/</span><span class="va">meanNreps</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Extract the BLUPs and PEVs, compute Reliability (REL), </span>
 <span class="co"># de-regressed BLUPs and weights for downstream analysis</span>
-<span class="va">blups</span><span class="op">&lt;-</span><span class="va">mmer_output</span><span class="op">$</span><span class="va">U</span><span class="op">$</span><span class="va">germplasmName</span><span class="op">$</span><span class="va">Value</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-     <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>germplasmName<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,BLUP<span class="op">=</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">blups</span><span class="op">&lt;-</span><span class="va">mmer_output</span><span class="op">$</span><span class="va">U</span><span class="op">$</span><span class="va">germplasmName</span><span class="op">$</span><span class="va">Value</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>germplasmName<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,BLUP<span class="op">=</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>germplasmName<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"germplasmName"</span>,<span class="st">""</span>,<span class="va">germplasmName</span><span class="op">)</span>,
             <span class="co"># prediction error variance</span>
             PEV<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="va">mmer_output</span><span class="op">$</span><span class="va">PevU</span><span class="op">$</span><span class="va">germplasmName</span><span class="op">$</span><span class="va">Value</span><span class="op">)</span>, 
@@ -866,7 +866,7 @@
 <span class="header-section-number">9.7.3</span> Run the full analysis<a class="anchor" aria-label="anchor" href="#run-the-full-analysis"><i class="fas fa-link"></i></a>
 </h3>
 <p>Finally, we are ready to source the function we built and execute the full analysis on all traits with it.</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"code"</span>,<span class="st">"get_blups.R"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">phenos</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/compound.html">%&lt;&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>fixedFormula<span class="op">=</span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Trait</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"logDYLD"</span>,<span class="st">"logFYLD"</span>,<span class="st">"logRTNO"</span>,<span class="st">"logTOPYLD"</span><span class="op">)</span>,
@@ -875,11 +875,11 @@
             randFormula<span class="op">=</span><span class="st">"~germplasmName + repInTrial + blockInRep"</span>,
             rcovFormula<span class="op">=</span><span class="st">"~vs(ds(studyName),units)"</span><span class="op">)</span></code></pre></div>
 <p>The next chunk uses the function <code><a href="https://rdrr.io/pkg/furrr/man/future_map2.html">future_pmap()</a></code> from the <code>furrr</code> package to exectute the <code>get_blups()</code> function across all four traits in parallel.</p>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">starttime</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/DavisVaughan/furrr">furrr</a></span><span class="op">)</span>; <span class="fu"><a href="https://future.futureverse.org/reference/plan.html">plan</a></span><span class="op">(</span><span class="va">multisession</span>, workers <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
-<span class="va">blups</span><span class="op">&lt;-</span><span class="va">phenos</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span>
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>modelOut<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/furrr/man/future_map2.html">future_pmap</a></span><span class="op">(</span><span class="va">.</span>,<span class="va">get_blups</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">blups</span><span class="op">&lt;-</span><span class="va">phenos</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>modelOut<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/furrr/man/future_map2.html">future_pmap</a></span><span class="op">(</span><span class="va">.</span>,<span class="va">get_blups</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="va">modelOut</span><span class="op">)</span>
 <span class="va">stoptime</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>; <span class="va">elapsed</span><span class="op">&lt;-</span><span class="va">stoptime</span><span class="op">-</span><span class="va">starttime</span>; <span class="va">elapsed</span><span class="op">/</span><span class="fl">60</span>
 <span class="co">#  elapsed </span>
@@ -892,14 +892,14 @@
 <h3>
 <span class="header-section-number">9.7.4</span> Why is MCMDS heritability 0?<a class="anchor" aria-label="anchor" href="#why-is-mcmds-heritability-0"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">blups</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"blups.rds"</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># blups %&gt;% rmarkdown::paged_table()</span>
-<span class="va">blups</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Trait</span>,<span class="va">H2</span>,<span class="va">meanHetVarE</span>,<span class="va">meanNreps</span>,<span class="va">outliers</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">blups</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Trait</span>,<span class="va">H2</span>,<span class="va">meanHetVarE</span>,<span class="va">meanNreps</span>,<span class="va">outliers</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>H2<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">H2</span>,<span class="fl">3</span><span class="op">)</span>,
             meanNreps<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">meanNreps</span>,<span class="fl">3</span><span class="op">)</span>,
-            outliers<span class="op">=</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">outliers</span>,<span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+            outliers<span class="op">=</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">outliers</span>,<span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html">paged_table</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -910,42 +910,42 @@
 <p>The heritablity of <strong>DM</strong>, <strong>logFYLD</strong> and <strong>logDYLD</strong> are both pretty much in line with “typical” results, <em>but</em> MCMDS in most cassava populations is a pretty heritable trait.</p>
 <p>I notice there were 33 outliers for MCMDS.</p>
 <p>Let’s look at the distribution of MCMDS in the raw data:</p>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">blups</span><span class="op">$</span><span class="va">METdata</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">blups</span><span class="op">$</span><span class="va">METdata</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="05-getBLUPs_files/figure-html/unnamed-chunk-16-1.png" width="672"></div>
 <p>This is actually often how MCMDS scores look like.</p>
 <p>Which are the observations that were removed as outliers?</p>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">blups</span><span class="op">$</span><span class="va">METdata</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="va">blups</span><span class="op">$</span><span class="va">outliers</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span>,<span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/exposition.html">%$%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">Value</span><span class="op">)</span>
 <span class="co">#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
 <span class="co">#&gt;    3.50    4.00    4.00    4.03    4.00    5.00</span></code></pre></div>
 <p>They are exclusively high scores.</p>
 <p>I wonder if removing them was a mistake:</p>
 <p>To find out, let’s re-run the analysis just for MCMDS, this time turning outlier removal off. I actually added an <code>removeOutliers=T/F</code> argument and a few lines of code to the <code>get_blups()</code> function to make this happen:</p>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"code"</span>,<span class="st">"get_blups.R"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">blups_mcmds_noRemoveOut</span><span class="op">&lt;-</span><span class="va">phenos</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span>
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Trait</span><span class="op">==</span><span class="st">"MCMDS"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>modelOut<span class="op">=</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">pmap</a></span><span class="op">(</span><span class="va">.</span>,<span class="va">get_blups</span>,removeOutliers <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">blups_mcmds_noRemoveOut</span><span class="op">&lt;-</span><span class="va">phenos</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Trait</span><span class="op">==</span><span class="st">"MCMDS"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>modelOut<span class="op">=</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">pmap</a></span><span class="op">(</span><span class="va">.</span>,<span class="va">get_blups</span>,removeOutliers <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="va">modelOut</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/save.html">save</a></span><span class="op">(</span><span class="va">blups_mcmds_noRemoveOut</span>,
      file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"blups_mcmds_noRemoveOut.Rdata"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"blups_mcmds_noRemoveOut.Rdata"</span><span class="op">)</span><span class="op">)</span>
-<span class="va">blups_mcmds_noRemoveOut</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Trait</span>,<span class="va">H2</span>,<span class="va">meanHetVarE</span>,<span class="va">meanNreps</span>,<span class="va">outliers</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">blups_mcmds_noRemoveOut</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Trait</span>,<span class="va">H2</span>,<span class="va">meanHetVarE</span>,<span class="va">meanNreps</span>,<span class="va">outliers</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>H2<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">H2</span>,<span class="fl">3</span><span class="op">)</span>,
             meanNreps<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">meanNreps</span>,<span class="fl">3</span><span class="op">)</span>,
-            outliers<span class="op">=</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">outliers</span>,<span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+            outliers<span class="op">=</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">outliers</span>,<span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/paged_table.html">paged_table</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Trait"],"name":[1],"type":["chr"],"align":["left"]},{"label":["H2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["meanHetVarE"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["meanNreps"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["outliers"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"MCMDS","2":"0","3":"0.7744563","4":"1.52","5":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">blups_mcmds_noRemoveOut</span><span class="op">$</span><span class="va">blups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">blups_mcmds_noRemoveOut</span><span class="op">$</span><span class="va">blups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;  germplasmName           BLUP           </span>
 <span class="co">#&gt;  Length:945         Min.   :-3.112e-26  </span>
@@ -989,29 +989,29 @@
 <p>Thus reliability ranges from 0 to 1 and measures the <em>certainty</em> surrounding each <strong><code>BLUP</code></strong> value; or rather, the probability the <strong><code>BLUP</code></strong> would change if anothe experiment (data point) were added. So if <span class="math inline">\(r^{2}=1\)</span>, then we have essentially zero expected error for a BLUP. For example, check varieties often have so many observations in a dataset that they will have high reliability.</p>
 <p>So if a de-regressed BLUP is defined as <span class="math inline">\(\frac{BLUP}{r^{2}}\)</span> you can see that for clones with high reliability, the BLUP will stay essentially the same, but if the reliability is low, the <strong><code>BLUP</code></strong> will be <em>un-shrink</em> or <em>de-regress</em> strongly. This is going to happen because genotypes with few observations and thus low reliability will be more strongly shrunken to zero during the first step.</p>
 <p>Below is a density plot showing the distribution of the original data compared to the <strong><code>BLUP</code></strong> and the <strong><code>drgBLUP</code></strong>. This is meant to show how shrinkage and unshrinkage effect the data. Since BLUPs and drgBLUPs are centered on the mean, I added back the grand mean for comparison to the original data.</p>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">popMean</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">blups</span><span class="op">$</span><span class="va">METdata</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">Value</span><span class="op">)</span>
-<span class="va">blups</span><span class="op">$</span><span class="va">METdata</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">observationUnitDbId</span>,<span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Data<span class="op">=</span><span class="st">"Original Data"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">blups</span><span class="op">$</span><span class="va">blups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-                    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">germplasmName</span>,<span class="va">BLUP</span>,<span class="va">drgBLUP</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">blups</span><span class="op">$</span><span class="va">METdata</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">observationUnitDbId</span>,<span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Data<span class="op">=</span><span class="st">"Original Data"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">blups</span><span class="op">$</span><span class="va">blups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+                    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">germplasmName</span>,<span class="va">BLUP</span>,<span class="va">drgBLUP</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
                     <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BLUP"</span>,<span class="st">"drgBLUP"</span><span class="op">)</span>,
-                                 names_to <span class="op">=</span> <span class="st">"Data"</span>, values_to <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Value<span class="op">=</span><span class="va">Value</span><span class="op">+</span><span class="va">popMean</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                                 names_to <span class="op">=</span> <span class="st">"Data"</span>, values_to <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Value<span class="op">=</span><span class="va">Value</span><span class="op">+</span><span class="va">popMean</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Value</span>,fill<span class="op">=</span><span class="va">Data</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">0.75</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">popMean</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="05-getBLUPs_files/figure-html/unnamed-chunk-21-1.png" width="672"></div>
 <p>Next, I grab the blups from only the <strong>germplasmName</strong> with the two highest and the two lowest <strong>REL</strong>. In all cases, the de-regressed BLUP should shift away from the mean, but proportional to the reliability. Below, I devised a plot to show that:</p>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/slowkow/ggrepel">ggrepel</a></span><span class="op">)</span>
-<span class="va">blups</span><span class="op">$</span><span class="va">blups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max</a></span><span class="op">(</span>order_by <span class="op">=</span> <span class="va">REL</span>,n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span>
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">blups</span><span class="op">$</span><span class="va">blups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_min</a></span><span class="op">(</span>order_by <span class="op">=</span> <span class="va">REL</span>,n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">germplasmName</span>,<span class="va">REL</span>,<span class="va">BLUP</span>,<span class="va">drgBLUP</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<span class="va">blups</span><span class="op">$</span><span class="va">blups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max</a></span><span class="op">(</span>order_by <span class="op">=</span> <span class="va">REL</span>,n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span>
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">blups</span><span class="op">$</span><span class="va">blups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_min</a></span><span class="op">(</span>order_by <span class="op">=</span> <span class="va">REL</span>,n <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">germplasmName</span>,<span class="va">REL</span>,<span class="va">BLUP</span>,<span class="va">drgBLUP</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BLUP"</span>,<span class="st">"drgBLUP"</span><span class="op">)</span>,
-                  names_to <span class="op">=</span> <span class="st">"Data"</span>,values_to <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+                  names_to <span class="op">=</span> <span class="st">"Data"</span>,values_to <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Value</span>,y<span class="op">=</span><span class="va">germplasmName</span>,
                   color<span class="op">=</span><span class="va">REL</span>,group<span class="op">=</span><span class="va">germplasmName</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
@@ -1029,26 +1029,26 @@
 <li>
 <span class="math inline">\(r^{2}\)</span> is reliability (REL).</li>
 </ul>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">REL</span><span class="op">&lt;-</span><span class="va">H2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from<span class="op">=</span><span class="fl">0.1</span>,to<span class="op">=</span><span class="fl">0.9</span>,by<span class="op">=</span><span class="fl">0.05</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span>REL<span class="op">=</span><span class="va">REL</span>,H2<span class="op">=</span><span class="va">H2</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>WT<span class="op">=</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">H2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="op">(</span><span class="fl">0.1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">REL</span><span class="op">)</span><span class="op">/</span><span class="va">REL</span><span class="op">)</span><span class="op">*</span><span class="va">H2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span>REL<span class="op">=</span><span class="va">REL</span>,H2<span class="op">=</span><span class="va">H2</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>WT<span class="op">=</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">H2</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="op">(</span><span class="fl">0.1</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">REL</span><span class="op">)</span><span class="op">/</span><span class="va">REL</span><span class="op">)</span><span class="op">*</span><span class="va">H2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">REL</span>,y<span class="op">=</span><span class="va">WT</span>,color<span class="op">=</span><span class="va">H2</span>, group<span class="op">=</span><span class="va">H2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> </code></pre></div>
 <div class="inline-figure"><img src="05-getBLUPs_files/figure-html/unnamed-chunk-23-1.png" width="672"></div>
 <p>I made a plot showing how <strong><code>WT</code></strong> varies across a range of <strong><code>H2</code></strong> and <strong><code>REL</code></strong>. This is to show how the weighting behaves. As we see, <strong><code>WT</code></strong> scales with <strong><code>REL</code></strong> and <strong><code>H2</code></strong>. <strong><code>H2</code></strong> conditions the overall variability among individuals in their weight in the analysis. This works such that if heritability is low, there is a greater relative premium (weight) placed on individuals with high quality data (high <strong><code>REL</code></strong>), usually those with high numbers of observations, e.g. check-genotypes. If heritability is high, <strong><code>WT</code></strong>s are low and there isn’t much difference between low and high <strong><code>REL</code></strong>.</p>
 <p>Here’s a plot that shows from the actual <code>blups</code>, how the <strong><code>WT</code></strong> scales with the number of observations-per-genotype.</p>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">blups</span><span class="op">$</span><span class="va">blups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">blups</span><span class="op">$</span><span class="va">blups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="co"># Count the number of plots per clone in the raw data and merge to the BlUPs</span>
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">blups</span><span class="op">$</span><span class="va">METdata</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">germplasmName</span>,name <span class="op">=</span> <span class="st">"Nplots"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">blups</span><span class="op">$</span><span class="va">METdata</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">germplasmName</span>,name <span class="op">=</span> <span class="st">"Nplots"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Nplots</span>,y<span class="op">=</span><span class="va">WT</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Joining, by = "germplasmName"</span></code></pre></div>
 <div class="inline-figure"><img src="05-getBLUPs_files/figure-html/unnamed-chunk-24-1.png" width="672"></div>
 <p>Next, I plot the <strong><code>BLUP</code></strong>s again the de-regressed BLUPs and scale point-size (<strong><code>WT</code></strong>) and color (<strong><code>REL</code></strong>). The red line has a slope of 1. You can see clearly how high reliability predictions don’t change much (close to the red line). You can also see that the farther the <strong><code>BLUP</code></strong> from the mean, the more the de-regression (the more the original shrinkage).</p>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">blups</span><span class="op">$</span><span class="va">blups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">blups</span><span class="op">$</span><span class="va">blups</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="co"># Count the number of plots per clone in the raw data and merge to the BlUPs</span>
-     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">blups</span><span class="op">$</span><span class="va">METdata</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">germplasmName</span>,name <span class="op">=</span> <span class="st">"Nplots"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://gt.rstudio.com/reference/pipe.html">%&gt;%</a></span> 
+     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">blups</span><span class="op">$</span><span class="va">METdata</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">germplasmName</span>,name <span class="op">=</span> <span class="st">"Nplots"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">.</span>,<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">BLUP</span>,y<span class="op">=</span><span class="va">drgBLUP</span>,color<span class="op">=</span><span class="va">REL</span>,size<span class="op">=</span><span class="va">WT</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">+</span>
      <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>slope<span class="op">=</span><span class="fl">1</span>, color<span class="op">=</span><span class="st">'darkred'</span><span class="op">)</span>
@@ -1153,7 +1153,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-29.</p>
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

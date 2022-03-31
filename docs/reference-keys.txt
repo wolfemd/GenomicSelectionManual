@@ -57,11 +57,11 @@ prepare-genotypic-data
 process-map-2
 parent-vs.-mate-selection
 learning-command-line-navigation
+vcftools-and-bcftools-manuals
 remote-access-the-server
-set-up-directories-and-transfer-data
-create-a-sub-folder-for-your-analysis
-instructors-step-transfer-vcf-to-cbsu
-copy-data-to-workdir
+instructors-steps
+everyones-steps
+create-a-directory-on-workdir
 introducing-vcf-files
 check-the-vcf
 subset-vcf
@@ -78,6 +78,7 @@ recomb-freq-mat
 source-a-genetic-map
 interpolate-genetic-map
 recomb.-freq.-matrix
+copy-files-back-to-your-computer
 preliminary-field-trial-analysis
 process-map-3
 one-stage-or-multi-stage
