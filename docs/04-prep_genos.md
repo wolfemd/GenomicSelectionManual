@@ -189,6 +189,22 @@ Now you should be ready to go.
 
 Do all remaining steps *within* the directory you just created.
 
+### Install R packages to server
+
+First time on the server and using R there?
+
+Type `R` and then press "enter" to start R. (Later type `q() + enter` to quit R)...
+
+Then install packages like so:
+
+
+```r
+install.packages(c("tidyverse","workflowr", "sommer", "lme4", "devtools"))
+devtools::install_github("wolfemd/genomicMateSelectR", ref = 'master')
+```
+
+If asked "do you want to install dependencies" and given a long list, type "1" + Enter to install _ALL_ packages it asks. This will ensure you have everything you need.
+
 ## Introducing VCF files
 
 Some links:
@@ -693,7 +709,7 @@ snps_genmap %>%
 #> (geom_point).
 ```
 
-<img src="04-prep_genos_files/figure-html/unnamed-chunk-40-1.png" width="672" />
+<img src="04-prep_genos_files/figure-html/unnamed-chunk-41-1.png" width="672" />
 
 ### Interpolate genetic map
 
@@ -765,7 +781,7 @@ splined_snps_genmap %>%
   theme_bw() + facet_wrap(~as.integer(Chr), scales='free_x')
 ```
 
-<img src="04-prep_genos_files/figure-html/unnamed-chunk-44-1.png" width="672" />
+<img src="04-prep_genos_files/figure-html/unnamed-chunk-45-1.png" width="672" />
 
 Save the interpolated map, just for the marker loci to-be-used downstream.
 

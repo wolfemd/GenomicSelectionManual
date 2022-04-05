@@ -194,14 +194,16 @@ gblup_all<-mmer(fixed = drgBLUP~1,
                 random = ~vs(germplasmName,Gu=A),
                 weights = WT,
                 data=dm_blups)
-#> Adding additional levels of Gu in the model matrix of 'germplasmName' 
+#> Version out of date. Please update sommer to the newest version using:
+#> install.packages('sommer') in a new session
+#>  Use the 'date.warning' argument to disable the warning message.Adding additional levels of Gu in the model matrix of 'germplasmName' 
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -187.325   16:33:10      0           0
-#>     2      -187.167   16:33:10      0           0
-#>     3      -187.095   16:33:11      1           0
-#>     4      -187.077   16:33:11      1           0
-#>     5      -187.075   16:33:11      1           0
-#>     6      -187.075   16:33:11      1           0
+#>     1      -187.325   9:29:18      0           0
+#>     2      -187.167   9:29:18      0           0
+#>     3      -187.095   9:29:19      1           0
+#>     4      -187.077   9:29:19      1           0
+#>     5      -187.075   9:29:19      1           0
+#>     6      -187.075   9:29:19      1           0
 ```
 
 Here's how to get out the **GEBV** from the `mmer()` output:
@@ -267,15 +269,17 @@ gblup_train<-mmer(fixed = drgBLUP~1,
                   random = ~vs(germplasmName,Gu=A),
                   weights = WT,
                   data=training_blups)
-#> Adding additional levels of Gu in the model matrix of 'germplasmName' 
+#> Version out of date. Please update sommer to the newest version using:
+#> install.packages('sommer') in a new session
+#>  Use the 'date.warning' argument to disable the warning message.Adding additional levels of Gu in the model matrix of 'germplasmName' 
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -151.68   16:33:12      0           0
-#>     2      -151.327   16:33:12      0           0
-#>     3      -151.132   16:33:12      0           0
-#>     4      -151.062   16:33:12      0           0
-#>     5      -151.049   16:33:12      0           0
-#>     6      -151.046   16:33:12      0           0
-#>     7      -151.046   16:33:12      0           0
+#>     1      -151.68   9:29:20      0           0
+#>     2      -151.327   9:29:20      0           0
+#>     3      -151.132   9:29:20      0           0
+#>     4      -151.062   9:29:20      0           0
+#>     5      -151.049   9:29:20      0           0
+#>     6      -151.046   9:29:20      0           0
+#>     7      -151.046   9:29:20      0           0
 ```
 
 Again, all 963 lines in the kinship matrix get GEBV output.
@@ -357,99 +361,99 @@ standardCV<-runCrossVal(blups=blups_forRunCrossValFunc,
 #> Loading required package: furrr
 #> Loading required package: future
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -144.984   16:33:16      1           0
-#>     2      -144.923   16:33:16      1           0
-#>     3      -144.908   16:33:16      1           0
-#>     4      -144.907   16:33:16      1           0
-#>     5      -144.907   16:33:16      1           0
+#>     1      -144.984   9:29:24      0           0
+#>     2      -144.923   9:29:24      0           0
+#>     3      -144.908   9:29:24      0           0
+#>     4      -144.907   9:29:24      0           0
+#>     5      -144.907   9:29:24      0           0
 #> [1] "GBLUP model complete - one trait"
 #> [1] "Genomic predictions done for all traits in one repeat-fold"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -153.227   16:33:17      0           0
-#>     2      -152.232   16:33:17      0           0
-#>     3      -151.805   16:33:17      0           0
-#>     4      -151.687   16:33:17      0           0
-#>     5      -151.669   16:33:17      0           0
-#>     6      -151.666   16:33:17      0           0
-#>     7      -151.666   16:33:17      0           0
-#> [1] "GBLUP model complete - one trait"
-#> [1] "Genomic predictions done for all traits in one repeat-fold"
-#> Joining, by = "GID"
-#> Joining, by = "GID"
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -151.026   16:33:17      1           0
-#>     2      -150.948   16:33:17      1           0
-#>     3      -150.911   16:33:17      1           0
-#>     4      -150.901   16:33:17      1           0
-#>     5      -150.899   16:33:17      1           0
-#>     6      -150.899   16:33:17      1           0
-#> [1] "GBLUP model complete - one trait"
-#> [1] "Genomic predictions done for all traits in one repeat-fold"
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -149.818   16:33:18      0           0
-#>     2      -149.812   16:33:18      0           0
-#>     3      -149.809   16:33:18      0           0
-#>     4      -149.808   16:33:18      0           0
+#>     1      -153.227   9:29:25      0           0
+#>     2      -152.232   9:29:25      0           0
+#>     3      -151.805   9:29:25      0           0
+#>     4      -151.687   9:29:25      0           0
+#>     5      -151.669   9:29:25      0           0
+#>     6      -151.666   9:29:25      0           0
+#>     7      -151.666   9:29:26      1           0
 #> [1] "GBLUP model complete - one trait"
 #> [1] "Genomic predictions done for all traits in one repeat-fold"
 #> Joining, by = "GID"
 #> Joining, by = "GID"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -151.038   16:33:17      0           0
-#>     2      -150.851   16:33:17      0           0
-#>     3      -150.757   16:33:17      0           0
-#>     4      -150.728   16:33:17      0           0
-#>     5      -150.723   16:33:17      0           0
-#>     6      -150.722   16:33:18      1           0
+#>     1      -151.026   9:29:25      0           0
+#>     2      -150.948   9:29:25      0           0
+#>     3      -150.911   9:29:25      0           0
+#>     4      -150.901   9:29:25      0           0
+#>     5      -150.899   9:29:25      0           0
+#>     6      -150.899   9:29:25      0           0
 #> [1] "GBLUP model complete - one trait"
 #> [1] "Genomic predictions done for all traits in one repeat-fold"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -151.393   16:33:18      0           0
-#>     2      -151.304   16:33:18      0           0
-#>     3      -151.258   16:33:18      0           0
-#>     4      -151.245   16:33:18      0           0
-#>     5      -151.243   16:33:19      1           0
-#>     6      -151.243   16:33:19      1           0
-#> [1] "GBLUP model complete - one trait"
-#> [1] "Genomic predictions done for all traits in one repeat-fold"
-#> Joining, by = "GID"
-#> Joining, by = "GID"
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -151.902   16:33:18      0           0
-#>     2      -151.609   16:33:18      0           0
-#>     3      -151.464   16:33:18      0           0
-#>     4      -151.417   16:33:18      0           0
-#>     5      -151.409   16:33:18      0           0
-#>     6      -151.407   16:33:18      0           0
-#>     7      -151.407   16:33:18      0           0
-#> [1] "GBLUP model complete - one trait"
-#> [1] "Genomic predictions done for all traits in one repeat-fold"
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -149.63   16:33:19      0           0
-#>     2      -149.534   16:33:19      0           0
-#>     3      -149.48   16:33:19      0           0
-#>     4      -149.46   16:33:19      0           0
-#>     5      -149.457   16:33:19      0           0
-#>     6      -149.456   16:33:19      0           0
+#>     1      -149.818   9:29:26      0           0
+#>     2      -149.812   9:29:26      0           0
+#>     3      -149.809   9:29:26      0           0
+#>     4      -149.808   9:29:26      0           0
 #> [1] "GBLUP model complete - one trait"
 #> [1] "Genomic predictions done for all traits in one repeat-fold"
 #> Joining, by = "GID"
 #> Joining, by = "GID"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -150.381   16:33:18      0           0
-#>     2      -150.129   16:33:18      0           0
-#>     3      -150.014   16:33:19      1           0
-#>     4      -149.984   16:33:19      1           0
-#>     5      -149.98   16:33:19      1           0
-#>     6      -149.98   16:33:19      1           0
+#>     1      -151.038   9:29:25      0           0
+#>     2      -150.851   9:29:25      0           0
+#>     3      -150.757   9:29:25      0           0
+#>     4      -150.728   9:29:26      1           0
+#>     5      -150.723   9:29:26      1           0
+#>     6      -150.722   9:29:26      1           0
 #> [1] "GBLUP model complete - one trait"
 #> [1] "Genomic predictions done for all traits in one repeat-fold"
 #> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -144.924   16:33:19      0           0
-#>     2      -144.405   16:33:19      0           0
-#>     3      -144.256   16:33:20      1           0
-#>     4      -144.235   16:33:20      1           0
-#>     5      -144.234   16:33:20      1           0
+#>     1      -151.393   9:29:26      0           0
+#>     2      -151.304   9:29:26      0           0
+#>     3      -151.258   9:29:27      1           0
+#>     4      -151.245   9:29:27      1           0
+#>     5      -151.243   9:29:27      1           0
+#>     6      -151.243   9:29:27      1           0
+#> [1] "GBLUP model complete - one trait"
+#> [1] "Genomic predictions done for all traits in one repeat-fold"
+#> Joining, by = "GID"
+#> Joining, by = "GID"
+#> iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -151.902   9:29:26      0           0
+#>     2      -151.609   9:29:26      0           0
+#>     3      -151.464   9:29:26      0           0
+#>     4      -151.417   9:29:26      0           0
+#>     5      -151.409   9:29:26      0           0
+#>     6      -151.407   9:29:26      0           0
+#>     7      -151.407   9:29:26      0           0
+#> [1] "GBLUP model complete - one trait"
+#> [1] "Genomic predictions done for all traits in one repeat-fold"
+#> iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -149.63   9:29:27      0           0
+#>     2      -149.534   9:29:27      0           0
+#>     3      -149.48   9:29:27      0           0
+#>     4      -149.46   9:29:27      0           0
+#>     5      -149.457   9:29:27      0           0
+#>     6      -149.456   9:29:27      0           0
+#> [1] "GBLUP model complete - one trait"
+#> [1] "Genomic predictions done for all traits in one repeat-fold"
+#> Joining, by = "GID"
+#> Joining, by = "GID"
+#> iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -150.381   9:29:27      1           0
+#>     2      -150.129   9:29:27      1           0
+#>     3      -150.014   9:29:27      1           0
+#>     4      -149.984   9:29:27      1           0
+#>     5      -149.98   9:29:27      1           0
+#>     6      -149.98   9:29:27      1           0
+#> [1] "GBLUP model complete - one trait"
+#> [1] "Genomic predictions done for all traits in one repeat-fold"
+#> iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -144.924   9:29:28      1           0
+#>     2      -144.405   9:29:28      1           0
+#>     3      -144.256   9:29:28      1           0
+#>     4      -144.235   9:29:28      1           0
+#>     5      -144.234   9:29:28      1           0
 #> [1] "GBLUP model complete - one trait"
 #> [1] "Genomic predictions done for all traits in one repeat-fold"
 #> Joining, by = "GID"
@@ -535,13 +539,15 @@ gblup<-mmer(fixed = drgBLUP~1,
             random = ~vs(germplasmName,Gu = K),
             weights = WT,
             data=dm_blups)
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -187.324   16:33:21      1           0
-#>     2      -187.166   16:33:21      1           0
-#>     3      -187.095   16:33:21      1           0
-#>     4      -187.077   16:33:21      1           0
-#>     5      -187.075   16:33:21      1           0
-#>     6      -187.075   16:33:21      1           0
+#> Version out of date. Please update sommer to the newest version using:
+#> install.packages('sommer') in a new session
+#>  Use the 'date.warning' argument to disable the warning message.iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -187.324   9:29:29      1           0
+#>     2      -187.166   9:29:29      1           0
+#>     3      -187.095   9:29:29      1           0
+#>     4      -187.077   9:29:29      1           0
+#>     5      -187.075   9:29:29      1           0
+#>     6      -187.075   9:29:29      1           0
 ```
 Now fit the RRBLUP model
 
@@ -561,16 +567,18 @@ rrblup<-mmer(fixed = drgBLUP~1,
              random = ~vs(list(ZincMat%*%Z),buildGu = FALSE),
              weights = WT,
              data=dm_blups)
-#> iteration    LogLik     wall    cpu(sec)   restrained
-#>     1      -269.814   16:33:24      2           0
-#>     2      -195.427   16:33:24      2           0
-#>     3      -190.328   16:33:24      2           0
-#>     4      -187.801   16:33:24      2           0
-#>     5      -187.201   16:33:24      2           0
-#>     6      -187.093   16:33:24      2           0
-#>     7      -187.077   16:33:24      2           0
-#>     8      -187.075   16:33:24      2           0
-#>     9      -187.075   16:33:25      3           0
+#> Version out of date. Please update sommer to the newest version using:
+#> install.packages('sommer') in a new session
+#>  Use the 'date.warning' argument to disable the warning message.iteration    LogLik     wall    cpu(sec)   restrained
+#>     1      -269.814   9:29:32      2           0
+#>     2      -195.427   9:29:32      2           0
+#>     3      -190.328   9:29:32      2           0
+#>     4      -187.801   9:29:32      2           0
+#>     5      -187.201   9:29:32      2           0
+#>     6      -187.093   9:29:33      3           0
+#>     7      -187.077   9:29:33      3           0
+#>     8      -187.075   9:29:33      3           0
+#>     9      -187.075   9:29:33      3           0
 ```
 
 ```r

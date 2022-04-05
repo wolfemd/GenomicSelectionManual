@@ -62,6 +62,7 @@ remote-access-the-server
 instructors-steps
 everyones-steps
 create-a-directory-on-workdir
+install-r-packages-to-server
 introducing-vcf-files
 check-the-vcf
 subset-vcf

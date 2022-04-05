@@ -96,10 +96,10 @@
 <h2>
 <span class="header-section-number">11.2</span> Set-up for the cross-validation<a class="anchor" aria-label="anchor" href="#set-up-for-the-cross-validation"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">blups</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"blups.rds"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">A</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span>file<span class="op">=</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"kinship_add.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">blups</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/compound.html">%&lt;&gt;%</a></span> 
      <span class="co"># need to rename the "blups" list to comply with the runCrossVal function</span>
      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>TrainingData<span class="op">=</span><span class="va">blups</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
@@ -120,7 +120,7 @@
 <span class="co">#&gt; 3 logFYLD &lt;tibble [350 × 6]&gt;</span>
 <span class="co">#&gt; 4 logDYLD &lt;tibble [348 × 6]&gt;</span></code></pre></div>
 <p>The steps above set-us up almost all the way.</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># For fastest, lightest compute of accuracy, remove non-phenotyped from kinship</span>
 
 <span class="va">gids</span><span class="op">&lt;-</span><span class="va">blups</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
@@ -139,7 +139,7 @@
 <p><span class="math inline">\(SI\)</span> is the selection index, dimension <span class="math inline">\([n \times 1]\)</span>. <span class="math inline">\(b\)</span> is a <span class="math inline">\([t \times 1]\)</span> vector of selection index “economic weights” designed to value each trait relative to its impact on the economic potential of changing the corresponding trait by one unit. Finally, <span class="math inline">\(\boldsymbol{\hat{g}\)</span> is a matrix <span class="math inline">\([n \times t]\)</span> with the (in this case) <strong>GEBV</strong> for each trait on the columns.</p>
 <p><code><a href="https://rdrr.io/pkg/genomicMateSelectR/man/runCrossVal.html">runCrossVal()</a></code> will accept a named vector of selection index weights where names must match the “Trait” variable in <code>blups</code> using the <code>SIwts=</code> argument and setting <code>selInd=TRUE</code>.</p>
 <p>Here are example weights, I’ll use. These are <em>not</em> to be taken as canonical. <em>Weights should be determined for each target population of environments and product profile!</em></p>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># I chose to remove MCMDS </span>
 <span class="co">## our preliminary analysis showed it to have ~0 heritability in this dataset</span>
 <span class="co">## initial test of cross-val. showed the models do not fit</span>
@@ -156,7 +156,7 @@
 <h2>
 <span class="header-section-number">11.4</span> Execute cross-validation<a class="anchor" aria-label="anchor" href="#execute-cross-validation"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">starttime</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>
 <span class="va">standardCV</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/runCrossVal.html">runCrossVal</a></span><span class="op">(</span>blups<span class="op">=</span><span class="va">blups</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Trait</span> <span class="op">!=</span> <span class="st">"MCMDS"</span><span class="op">)</span>,
                         modelType<span class="op">=</span><span class="st">"A"</span>,
@@ -169,51 +169,25 @@
 <span class="co">#&gt; Loading required package: furrr</span>
 <span class="co">#&gt; Loading required package: future</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -150.932   16:33:35      0           0</span>
-<span class="co">#&gt;     2      -150.587   16:33:35      0           0</span>
-<span class="co">#&gt;     3      -150.456   16:33:35      0           0</span>
-<span class="co">#&gt;     4      -150.431   16:33:36      1           0</span>
-<span class="co">#&gt;     5      -150.429   16:33:36      1           0</span>
-<span class="co">#&gt;     6      -150.429   16:33:36      1           0</span>
+<span class="co">#&gt;     1      -150.932   9:29:44      0           0</span>
+<span class="co">#&gt;     2      -150.587   9:29:44      0           0</span>
+<span class="co">#&gt;     3      -150.456   9:29:44      0           0</span>
+<span class="co">#&gt;     4      -150.431   9:29:44      0           0</span>
+<span class="co">#&gt;     5      -150.429   9:29:45      1           0</span>
+<span class="co">#&gt;     6      -150.429   9:29:45      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -109.584   16:33:36      0           0</span>
-<span class="co">#&gt;     2      -109.57   16:33:36      0           0</span>
-<span class="co">#&gt;     3      -109.562   16:33:36      0           0</span>
-<span class="co">#&gt;     4      -109.56   16:33:36      0           0</span>
-<span class="co">#&gt;     5      -109.559   16:33:36      0           0</span>
+<span class="co">#&gt;     1      -109.584   9:29:45      0           0</span>
+<span class="co">#&gt;     2      -109.57   9:29:45      0           0</span>
+<span class="co">#&gt;     3      -109.562   9:29:45      0           0</span>
+<span class="co">#&gt;     4      -109.56   9:29:45      0           0</span>
+<span class="co">#&gt;     5      -109.559   9:29:45      0           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -115.829   16:33:37      1           0</span>
-<span class="co">#&gt;     2      -115.829   16:33:37      1           0</span>
-<span class="co">#&gt;     3      -115.828   16:33:37      1           0</span>
-<span class="co">#&gt;     4      -115.828   16:33:37      1           0</span>
-<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
-<span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -153.247   16:33:36      0           0</span>
-<span class="co">#&gt;     2      -153.244   16:33:36      0           0</span>
-<span class="co">#&gt;     3      -153.243   16:33:36      0           0</span>
-<span class="co">#&gt;     4      -153.243   16:33:36      0           0</span>
-<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
-<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -108.226   16:33:36      0           0</span>
-<span class="co">#&gt;     2      -108.147   16:33:36      0           0</span>
-<span class="co">#&gt;     3      -108.101   16:33:37      1           0</span>
-<span class="co">#&gt;     4      -108.087   16:33:37      1           0</span>
-<span class="co">#&gt;     5      -108.085   16:33:37      1           0</span>
-<span class="co">#&gt;     6      -108.085   16:33:37      1           0</span>
-<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
-<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -117.592   16:33:37      0           0</span>
-<span class="co">#&gt;     2      -117.537   16:33:37      0           0</span>
-<span class="co">#&gt;     3      -117.513   16:33:37      0           0</span>
-<span class="co">#&gt;     4      -117.509   16:33:37      0           0</span>
-<span class="co">#&gt;     5      -117.508   16:33:37      0           0</span>
+<span class="co">#&gt;     1      -115.829   9:29:45      0           0</span>
+<span class="co">#&gt;     2      -115.829   9:29:46      1           0</span>
+<span class="co">#&gt;     3      -115.828   9:29:46      1           0</span>
+<span class="co">#&gt;     4      -115.828   9:29:46      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
@@ -221,33 +195,25 @@
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -150.198   16:33:36      0           0</span>
-<span class="co">#&gt;     2      -149.363   16:33:37      1           0</span>
-<span class="co">#&gt;     3      -148.987   16:33:37      1           0</span>
-<span class="co">#&gt;     4      -148.881   16:33:37      1           0</span>
-<span class="co">#&gt;     5      -148.865   16:33:37      1           0</span>
-<span class="co">#&gt;     6      -148.863   16:33:37      1           0</span>
-<span class="co">#&gt;     7      -148.862   16:33:37      1           0</span>
+<span class="co">#&gt;     1      -153.247   9:29:45      0           0</span>
+<span class="co">#&gt;     2      -153.244   9:29:45      0           0</span>
+<span class="co">#&gt;     3      -153.243   9:29:45      0           0</span>
+<span class="co">#&gt;     4      -153.243   9:29:45      0           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -106.107   16:33:37      0           0</span>
-<span class="co">#&gt;     2      -105.581   16:33:37      0           0</span>
-<span class="co">#&gt;     3      -105.152   16:33:37      0           0</span>
-<span class="co">#&gt;     4      -104.92   16:33:37      0           0</span>
-<span class="co">#&gt;     5      -104.852   16:33:38      1           0</span>
-<span class="co">#&gt;     6      -104.832   16:33:38      1           0</span>
-<span class="co">#&gt;     7      -104.827   16:33:38      1           0</span>
-<span class="co">#&gt;     8      -104.825   16:33:38      1           0</span>
-<span class="co">#&gt;     9      -104.825   16:33:38      1           0</span>
+<span class="co">#&gt;     1      -108.226   9:29:45      0           0</span>
+<span class="co">#&gt;     2      -108.147   9:29:45      0           0</span>
+<span class="co">#&gt;     3      -108.101   9:29:45      0           0</span>
+<span class="co">#&gt;     4      -108.087   9:29:46      1           0</span>
+<span class="co">#&gt;     5      -108.085   9:29:46      1           0</span>
+<span class="co">#&gt;     6      -108.085   9:29:46      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -118.481   16:33:38      0           0</span>
-<span class="co">#&gt;     2      -118.255   16:33:38      0           0</span>
-<span class="co">#&gt;     3      -118.106   16:33:38      0           0</span>
-<span class="co">#&gt;     4      -118.047   16:33:38      0           0</span>
-<span class="co">#&gt;     5      -118.035   16:33:38      0           0</span>
-<span class="co">#&gt;     6      -118.032   16:33:38      0           0</span>
-<span class="co">#&gt;     7      -118.032   16:33:39      1           0</span>
+<span class="co">#&gt;     1      -117.592   9:29:46      0           0</span>
+<span class="co">#&gt;     2      -117.537   9:29:46      0           0</span>
+<span class="co">#&gt;     3      -117.513   9:29:46      0           0</span>
+<span class="co">#&gt;     4      -117.509   9:29:46      0           0</span>
+<span class="co">#&gt;     5      -117.508   9:29:46      0           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
@@ -255,54 +221,33 @@
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -144.958   16:33:37      0           0</span>
-<span class="co">#&gt;     2      -144.946   16:33:37      0           0</span>
-<span class="co">#&gt;     3      -144.94   16:33:37      0           0</span>
-<span class="co">#&gt;     4      -144.939   16:33:37      0           0</span>
-<span class="co">#&gt;     5      -144.939   16:33:37      0           0</span>
+<span class="co">#&gt;     1      -150.198   9:29:45      0           0</span>
+<span class="co">#&gt;     2      -149.363   9:29:45      0           0</span>
+<span class="co">#&gt;     3      -148.987   9:29:46      1           0</span>
+<span class="co">#&gt;     4      -148.881   9:29:46      1           0</span>
+<span class="co">#&gt;     5      -148.865   9:29:46      1           0</span>
+<span class="co">#&gt;     6      -148.863   9:29:46      1           0</span>
+<span class="co">#&gt;     7      -148.862   9:29:46      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -107.241   16:33:38      0           0</span>
-<span class="co">#&gt;     2      -107.24   16:33:38      0           0</span>
-<span class="co">#&gt;     3      -107.24   16:33:38      0           0</span>
-<span class="co">#&gt;     4      -107.24   16:33:38      0           0</span>
+<span class="co">#&gt;     1      -106.107   9:29:46      0           0</span>
+<span class="co">#&gt;     2      -105.581   9:29:46      0           0</span>
+<span class="co">#&gt;     3      -105.152   9:29:46      0           0</span>
+<span class="co">#&gt;     4      -104.92   9:29:46      0           0</span>
+<span class="co">#&gt;     5      -104.852   9:29:46      0           0</span>
+<span class="co">#&gt;     6      -104.832   9:29:47      1           0</span>
+<span class="co">#&gt;     7      -104.827   9:29:47      1           0</span>
+<span class="co">#&gt;     8      -104.825   9:29:47      1           0</span>
+<span class="co">#&gt;     9      -104.825   9:29:47      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -114.776   16:33:38      0           0</span>
-<span class="co">#&gt;     2      -114.775   16:33:38      0           0</span>
-<span class="co">#&gt;     3      -114.775   16:33:38      0           0</span>
-<span class="co">#&gt;     4      -114.775   16:33:38      0           0</span>
-<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
-<span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -150.502   16:33:38      1           0</span>
-<span class="co">#&gt;     2      -150.404   16:33:38      1           0</span>
-<span class="co">#&gt;     3      -150.354   16:33:38      1           0</span>
-<span class="co">#&gt;     4      -150.339   16:33:38      1           0</span>
-<span class="co">#&gt;     5      -150.336   16:33:38      1           0</span>
-<span class="co">#&gt;     6      -150.336   16:33:38      1           0</span>
-<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
-<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -112.48   16:33:38      0           0</span>
-<span class="co">#&gt;     2      -112.42   16:33:38      0           0</span>
-<span class="co">#&gt;     3      -112.38   16:33:38      0           0</span>
-<span class="co">#&gt;     4      -112.364   16:33:39      1           0</span>
-<span class="co">#&gt;     5      -112.36   16:33:39      1           0</span>
-<span class="co">#&gt;     6      -112.358   16:33:39      1           0</span>
-<span class="co">#&gt;     7      -112.358   16:33:39      1           0</span>
-<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
-<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -118.347   16:33:39      0           0</span>
-<span class="co">#&gt;     2      -118.041   16:33:39      0           0</span>
-<span class="co">#&gt;     3      -117.869   16:33:39      0           0</span>
-<span class="co">#&gt;     4      -117.803   16:33:39      0           0</span>
-<span class="co">#&gt;     5      -117.787   16:33:39      0           0</span>
-<span class="co">#&gt;     6      -117.784   16:33:39      0           0</span>
-<span class="co">#&gt;     7      -117.783   16:33:39      0           0</span>
+<span class="co">#&gt;     1      -118.481   9:29:47      0           0</span>
+<span class="co">#&gt;     2      -118.255   9:29:47      0           0</span>
+<span class="co">#&gt;     3      -118.106   9:29:47      0           0</span>
+<span class="co">#&gt;     4      -118.047   9:29:47      0           0</span>
+<span class="co">#&gt;     5      -118.035   9:29:47      0           0</span>
+<span class="co">#&gt;     6      -118.032   9:29:47      0           0</span>
+<span class="co">#&gt;     7      -118.032   9:29:47      0           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
@@ -310,27 +255,23 @@
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -150.226   16:33:38      0           0</span>
-<span class="co">#&gt;     2      -149.466   16:33:38      0           0</span>
-<span class="co">#&gt;     3      -149.138   16:33:38      0           0</span>
-<span class="co">#&gt;     4      -149.063   16:33:38      0           0</span>
-<span class="co">#&gt;     5      -149.056   16:33:38      0           0</span>
-<span class="co">#&gt;     6      -149.055   16:33:39      1           0</span>
+<span class="co">#&gt;     1      -144.958   9:29:46      0           0</span>
+<span class="co">#&gt;     2      -144.946   9:29:46      0           0</span>
+<span class="co">#&gt;     3      -144.94   9:29:46      0           0</span>
+<span class="co">#&gt;     4      -144.939   9:29:46      0           0</span>
+<span class="co">#&gt;     5      -144.939   9:29:46      0           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -111.205   16:33:39      0           0</span>
-<span class="co">#&gt;     2      -111.2   16:33:39      0           0</span>
-<span class="co">#&gt;     3      -111.196   16:33:39      0           0</span>
-<span class="co">#&gt;     4      -111.193   16:33:39      0           0</span>
-<span class="co">#&gt;     5      -111.193   16:33:39      0           0</span>
+<span class="co">#&gt;     1      -107.241   9:29:47      1           0</span>
+<span class="co">#&gt;     2      -107.24   9:29:47      1           0</span>
+<span class="co">#&gt;     3      -107.24   9:29:47      1           0</span>
+<span class="co">#&gt;     4      -107.24   9:29:47      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -115.15   16:33:39      0           0</span>
-<span class="co">#&gt;     2      -115.132   16:33:39      0           0</span>
-<span class="co">#&gt;     3      -115.119   16:33:40      1           0</span>
-<span class="co">#&gt;     4      -115.114   16:33:40      1           0</span>
-<span class="co">#&gt;     5      -115.113   16:33:40      1           0</span>
-<span class="co">#&gt;     6      -115.112   16:33:40      1           0</span>
+<span class="co">#&gt;     1      -114.776   9:29:47      0           0</span>
+<span class="co">#&gt;     2      -114.775   9:29:47      0           0</span>
+<span class="co">#&gt;     3      -114.775   9:29:47      0           0</span>
+<span class="co">#&gt;     4      -114.775   9:29:47      0           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
@@ -338,52 +279,30 @@
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -150.983   16:33:39      0           0</span>
-<span class="co">#&gt;     2      -150.511   16:33:39      0           0</span>
-<span class="co">#&gt;     3      -150.265   16:33:39      0           0</span>
-<span class="co">#&gt;     4      -150.179   16:33:39      0           0</span>
-<span class="co">#&gt;     5      -150.162   16:33:39      0           0</span>
-<span class="co">#&gt;     6      -150.158   16:33:39      0           0</span>
-<span class="co">#&gt;     7      -150.157   16:33:39      0           0</span>
+<span class="co">#&gt;     1      -150.502   9:29:47      1           0</span>
+<span class="co">#&gt;     2      -150.404   9:29:47      1           0</span>
+<span class="co">#&gt;     3      -150.354   9:29:47      1           0</span>
+<span class="co">#&gt;     4      -150.339   9:29:47      1           0</span>
+<span class="co">#&gt;     5      -150.336   9:29:47      1           0</span>
+<span class="co">#&gt;     6      -150.336   9:29:47      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -109.264   16:33:39      0           0</span>
-<span class="co">#&gt;     2      -109.264   16:33:40      1           0</span>
-<span class="co">#&gt;     3      -109.264   16:33:40      1           0</span>
-<span class="co">#&gt;     4      -109.263   16:33:40      1           0</span>
+<span class="co">#&gt;     1      -112.48   9:29:47      0           0</span>
+<span class="co">#&gt;     2      -112.42   9:29:47      0           0</span>
+<span class="co">#&gt;     3      -112.38   9:29:47      0           0</span>
+<span class="co">#&gt;     4      -112.364   9:29:47      0           0</span>
+<span class="co">#&gt;     5      -112.36   9:29:48      1           0</span>
+<span class="co">#&gt;     6      -112.358   9:29:48      1           0</span>
+<span class="co">#&gt;     7      -112.358   9:29:48      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -116.271   16:33:40      0           0</span>
-<span class="co">#&gt;     2      -116.238   16:33:40      0           0</span>
-<span class="co">#&gt;     3      -116.225   16:33:40      0           0</span>
-<span class="co">#&gt;     4      -116.223   16:33:40      0           0</span>
-<span class="co">#&gt;     5      -116.223   16:33:40      0           0</span>
-<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
-<span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; Joining, by = "GID"</span>
-<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -146.729   16:33:39      0           0</span>
-<span class="co">#&gt;     2      -146.707   16:33:39      0           0</span>
-<span class="co">#&gt;     3      -146.695   16:33:39      0           0</span>
-<span class="co">#&gt;     4      -146.691   16:33:40      1           0</span>
-<span class="co">#&gt;     5      -146.691   16:33:40      1           0</span>
-<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
-<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -105.14   16:33:40      0           0</span>
-<span class="co">#&gt;     2      -105.116   16:33:40      0           0</span>
-<span class="co">#&gt;     3      -105.101   16:33:40      0           0</span>
-<span class="co">#&gt;     4      -105.095   16:33:40      0           0</span>
-<span class="co">#&gt;     5      -105.095   16:33:40      0           0</span>
-<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
-<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -116.469   16:33:40      0           0</span>
-<span class="co">#&gt;     2      -116.439   16:33:41      1           0</span>
-<span class="co">#&gt;     3      -116.428   16:33:41      1           0</span>
-<span class="co">#&gt;     4      -116.426   16:33:41      1           0</span>
-<span class="co">#&gt;     5      -116.426   16:33:41      1           0</span>
+<span class="co">#&gt;     1      -118.347   9:29:48      0           0</span>
+<span class="co">#&gt;     2      -118.041   9:29:48      0           0</span>
+<span class="co">#&gt;     3      -117.869   9:29:48      0           0</span>
+<span class="co">#&gt;     4      -117.803   9:29:48      0           0</span>
+<span class="co">#&gt;     5      -117.787   9:29:48      0           0</span>
+<span class="co">#&gt;     6      -117.784   9:29:48      0           0</span>
+<span class="co">#&gt;     7      -117.783   9:29:48      0           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
@@ -391,27 +310,27 @@
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -146.167   16:33:40      0           0</span>
-<span class="co">#&gt;     2      -145.784   16:33:40      0           0</span>
-<span class="co">#&gt;     3      -145.645   16:33:40      0           0</span>
-<span class="co">#&gt;     4      -145.618   16:33:40      0           0</span>
-<span class="co">#&gt;     5      -145.616   16:33:40      0           0</span>
-<span class="co">#&gt;     6      -145.616   16:33:40      0           0</span>
+<span class="co">#&gt;     1      -150.226   9:29:47      0           0</span>
+<span class="co">#&gt;     2      -149.466   9:29:47      0           0</span>
+<span class="co">#&gt;     3      -149.138   9:29:47      0           0</span>
+<span class="co">#&gt;     4      -149.063   9:29:47      0           0</span>
+<span class="co">#&gt;     5      -149.056   9:29:47      0           0</span>
+<span class="co">#&gt;     6      -149.055   9:29:47      0           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -108.335   16:33:41      1           0</span>
-<span class="co">#&gt;     2      -108.255   16:33:41      1           0</span>
-<span class="co">#&gt;     3      -108.205   16:33:41      1           0</span>
-<span class="co">#&gt;     4      -108.187   16:33:41      1           0</span>
-<span class="co">#&gt;     5      -108.184   16:33:41      1           0</span>
-<span class="co">#&gt;     6      -108.184   16:33:41      1           0</span>
+<span class="co">#&gt;     1      -111.205   9:29:48      0           0</span>
+<span class="co">#&gt;     2      -111.2   9:29:48      0           0</span>
+<span class="co">#&gt;     3      -111.196   9:29:48      0           0</span>
+<span class="co">#&gt;     4      -111.193   9:29:48      0           0</span>
+<span class="co">#&gt;     5      -111.193   9:29:48      0           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -115.606   16:33:41      0           0</span>
-<span class="co">#&gt;     2      -115.563   16:33:41      0           0</span>
-<span class="co">#&gt;     3      -115.541   16:33:41      0           0</span>
-<span class="co">#&gt;     4      -115.535   16:33:41      0           0</span>
-<span class="co">#&gt;     5      -115.534   16:33:41      0           0</span>
+<span class="co">#&gt;     1      -115.15   9:29:48      0           0</span>
+<span class="co">#&gt;     2      -115.132   9:29:48      0           0</span>
+<span class="co">#&gt;     3      -115.119   9:29:48      0           0</span>
+<span class="co">#&gt;     4      -115.114   9:29:49      1           0</span>
+<span class="co">#&gt;     5      -115.113   9:29:49      1           0</span>
+<span class="co">#&gt;     6      -115.112   9:29:49      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
@@ -419,25 +338,106 @@
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -152   16:33:40      0           0</span>
-<span class="co">#&gt;     2      -151.698   16:33:41      1           0</span>
-<span class="co">#&gt;     3      -151.579   16:33:41      1           0</span>
-<span class="co">#&gt;     4      -151.555   16:33:41      1           0</span>
-<span class="co">#&gt;     5      -151.554   16:33:41      1           0</span>
-<span class="co">#&gt;     6      -151.553   16:33:41      1           0</span>
+<span class="co">#&gt;     1      -150.983   9:29:48      0           0</span>
+<span class="co">#&gt;     2      -150.511   9:29:48      0           0</span>
+<span class="co">#&gt;     3      -150.265   9:29:48      0           0</span>
+<span class="co">#&gt;     4      -150.179   9:29:48      0           0</span>
+<span class="co">#&gt;     5      -150.162   9:29:48      0           0</span>
+<span class="co">#&gt;     6      -150.158   9:29:48      0           0</span>
+<span class="co">#&gt;     7      -150.157   9:29:48      0           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -107.98   16:33:41      0           0</span>
-<span class="co">#&gt;     2      -107.972   16:33:41      0           0</span>
-<span class="co">#&gt;     3      -107.968   16:33:41      0           0</span>
-<span class="co">#&gt;     4      -107.967   16:33:41      0           0</span>
+<span class="co">#&gt;     1      -109.264   9:29:48      0           0</span>
+<span class="co">#&gt;     2      -109.264   9:29:48      0           0</span>
+<span class="co">#&gt;     3      -109.264   9:29:49      1           0</span>
+<span class="co">#&gt;     4      -109.263   9:29:49      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
-<span class="co">#&gt;     1      -119.501   16:33:42      1           0</span>
-<span class="co">#&gt;     2      -119.452   16:33:42      1           0</span>
-<span class="co">#&gt;     3      -119.431   16:33:42      1           0</span>
-<span class="co">#&gt;     4      -119.426   16:33:42      1           0</span>
-<span class="co">#&gt;     5      -119.425   16:33:42      1           0</span>
+<span class="co">#&gt;     1      -116.271   9:29:49      0           0</span>
+<span class="co">#&gt;     2      -116.238   9:29:49      0           0</span>
+<span class="co">#&gt;     3      -116.225   9:29:49      0           0</span>
+<span class="co">#&gt;     4      -116.223   9:29:49      0           0</span>
+<span class="co">#&gt;     5      -116.223   9:29:49      0           0</span>
+<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
+<span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
+<span class="co">#&gt;     1      -146.729   9:29:48      0           0</span>
+<span class="co">#&gt;     2      -146.707   9:29:48      0           0</span>
+<span class="co">#&gt;     3      -146.695   9:29:48      0           0</span>
+<span class="co">#&gt;     4      -146.691   9:29:48      0           0</span>
+<span class="co">#&gt;     5      -146.691   9:29:49      1           0</span>
+<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
+<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
+<span class="co">#&gt;     1      -105.14   9:29:49      0           0</span>
+<span class="co">#&gt;     2      -105.116   9:29:49      0           0</span>
+<span class="co">#&gt;     3      -105.101   9:29:49      0           0</span>
+<span class="co">#&gt;     4      -105.095   9:29:49      0           0</span>
+<span class="co">#&gt;     5      -105.095   9:29:49      0           0</span>
+<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
+<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
+<span class="co">#&gt;     1      -116.469   9:29:49      0           0</span>
+<span class="co">#&gt;     2      -116.439   9:29:49      0           0</span>
+<span class="co">#&gt;     3      -116.428   9:29:49      0           0</span>
+<span class="co">#&gt;     4      -116.426   9:29:50      1           0</span>
+<span class="co">#&gt;     5      -116.426   9:29:50      1           0</span>
+<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
+<span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
+<span class="co">#&gt;     1      -146.167   9:29:49      0           0</span>
+<span class="co">#&gt;     2      -145.784   9:29:49      0           0</span>
+<span class="co">#&gt;     3      -145.645   9:29:49      0           0</span>
+<span class="co">#&gt;     4      -145.618   9:29:49      0           0</span>
+<span class="co">#&gt;     5      -145.616   9:29:49      0           0</span>
+<span class="co">#&gt;     6      -145.616   9:29:49      0           0</span>
+<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
+<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
+<span class="co">#&gt;     1      -108.335   9:29:49      0           0</span>
+<span class="co">#&gt;     2      -108.255   9:29:49      0           0</span>
+<span class="co">#&gt;     3      -108.205   9:29:50      1           0</span>
+<span class="co">#&gt;     4      -108.187   9:29:50      1           0</span>
+<span class="co">#&gt;     5      -108.184   9:29:50      1           0</span>
+<span class="co">#&gt;     6      -108.184   9:29:50      1           0</span>
+<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
+<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
+<span class="co">#&gt;     1      -115.606   9:29:50      0           0</span>
+<span class="co">#&gt;     2      -115.563   9:29:50      0           0</span>
+<span class="co">#&gt;     3      -115.541   9:29:50      0           0</span>
+<span class="co">#&gt;     4      -115.535   9:29:50      0           0</span>
+<span class="co">#&gt;     5      -115.534   9:29:50      0           0</span>
+<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
+<span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; Joining, by = "GID"</span>
+<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
+<span class="co">#&gt;     1      -152   9:29:49      0           0</span>
+<span class="co">#&gt;     2      -151.698   9:29:49      0           0</span>
+<span class="co">#&gt;     3      -151.579   9:29:49      0           0</span>
+<span class="co">#&gt;     4      -151.555   9:29:50      1           0</span>
+<span class="co">#&gt;     5      -151.554   9:29:50      1           0</span>
+<span class="co">#&gt;     6      -151.553   9:29:50      1           0</span>
+<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
+<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
+<span class="co">#&gt;     1      -107.98   9:29:50      0           0</span>
+<span class="co">#&gt;     2      -107.972   9:29:50      0           0</span>
+<span class="co">#&gt;     3      -107.968   9:29:50      0           0</span>
+<span class="co">#&gt;     4      -107.967   9:29:50      0           0</span>
+<span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
+<span class="co">#&gt; iteration    LogLik     wall    cpu(sec)   restrained</span>
+<span class="co">#&gt;     1      -119.501   9:29:50      0           0</span>
+<span class="co">#&gt;     2      -119.452   9:29:50      0           0</span>
+<span class="co">#&gt;     3      -119.431   9:29:50      0           0</span>
+<span class="co">#&gt;     4      -119.426   9:29:51      1           0</span>
+<span class="co">#&gt;     5      -119.425   9:29:51      1           0</span>
 <span class="co">#&gt; [1] "GBLUP model complete - one trait"</span>
 <span class="co">#&gt; [1] "Genomic predictions done for all traits in one repeat-fold"</span>
 <span class="co">#&gt; Joining, by = "GID"</span>
@@ -447,16 +447,16 @@
 <span class="va">timeelapsed</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">-</span><span class="va">starttime</span>; 
 <span class="va">timeelapsed</span><span class="op">/</span><span class="fl">60</span>
 <span class="co">#&gt; elapsed </span>
-<span class="co">#&gt; 0.15725</span></code></pre></div>
+<span class="co">#&gt;  0.1538</span></code></pre></div>
 <p>Save the results</p>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">standardCV</span>,file <span class="op">=</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"output"</span>,<span class="st">"standardCV.rds"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="plot-results" class="section level2" number="11.5">
 <h2>
 <span class="header-section-number">11.5</span> Plot results<a class="anchor" aria-label="anchor" href="#plot-results"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">standardCV</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="va">accuracyEstOut</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">repeats</span>,<span class="va">id</span>,<span class="va">predOf</span>,<span class="va">Trait</span>,<span class="va">Accuracy</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/genomicMateSelectR/man/pipe.html">%&gt;%</a></span> 
@@ -498,7 +498,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-03-31.</p>
+    <p>"<strong>Genomic Prediction and Selection Manual</strong>" was written by Marnin Wolfe. It was last built on 2022-04-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
